@@ -28,7 +28,15 @@ public class DatabaseManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 인자로 전달받은 UnityWebRequest 객체로 
+    /// Login
+    /// </summary>
+    private void LoginCheck(string _id, string _pw)
+    {
+        StartCoroutine(LoginCoroutine(_id, _pw));
+    }
+
+    /// <summary>
+    /// 인자로 전달받은 UnityWebRequest 객체의 연결을 체크하는 함수.
     /// </summary>
     /// <param name="_www">확인할 UnityWebRequest 객체</param>
     /// <returns></returns>
@@ -57,6 +65,28 @@ public class DatabaseManager : MonoBehaviour
             }
         }
 
+    }
+
+    private IEnumerator LoginCoroutine(string _id, string _pw)
+    {
+        WWWForm form = new WWWForm();
+
+        form.AddField("loginUser", _id);
+        form.AddField("loginPass", _pw);
+
+        using (UnityWebRequest www = UnityWebRequest.Post(loginUri, form))
+        {
+            yield return www.SendWebRequest();
+
+            if (CheckConnectError(www))
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log(www.downloadHandler.text);
+            }
+        }
     }
     #endregion
 }
