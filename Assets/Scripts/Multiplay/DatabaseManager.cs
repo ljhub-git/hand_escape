@@ -14,7 +14,7 @@ public class DatabaseManager : MonoBehaviour
 
     private void Start()
     {
-        LoginCheck();
+        ConnectToDBTest();
     }
 
 
@@ -27,9 +27,12 @@ public class DatabaseManager : MonoBehaviour
         StartCoroutine(ConnectToDBTestCoroutine());
     }
 
-    private void LoginCheck()
+    /// <summary>
+    /// Login
+    /// </summary>
+    private void LoginCheck(string _id, string _pw)
     {
-        StartCoroutine(LoginCoroutine("admin", "1234"));
+        StartCoroutine(LoginCoroutine(_id, _pw));
     }
 
     /// <summary>
