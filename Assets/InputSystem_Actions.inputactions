@@ -45,7 +45,7 @@
                     "name": "Crouch",
                     "type": "Button",
                     "id": "27c5f898-bc57-4ee1-8800-db469aca5fe3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -54,7 +54,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -219,6 +219,61 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "d4831f4d-12a7-4405-a89a-59ef75f3abc3",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "431a6cf7-4d01-490c-8bfb-d6f26c9e5975",
+                    "path": "<HandInteractionPoses>{LeftHand}/pokePose/isTracked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "71e98658-24db-4ab0-9369-680272415c0f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "8b6d727f-a31b-411b-a07c-edddccb95c37",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "9d1ccefa-9b98-48fe-aa63-3f6940ba1fce",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
