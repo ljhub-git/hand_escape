@@ -186,5 +186,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
             return base.ComputeDesiredMove(input);
         }
+
+
     }
 }
