@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Slide_puzzle : MonoBehaviour
@@ -9,7 +10,7 @@ public class Slide_puzzle : MonoBehaviour
     private void Start()
     {
         Init();
-        for(int i=0; i<99;i++)
+        for (int i = 0; i < 99; i++)
             Shuffle();
     }
 
@@ -31,6 +32,7 @@ public class Slide_puzzle : MonoBehaviour
         int dx = getDx(x, y);
         int dy = getDy(x, y);
         Swap(x,y,dx,dy);
+        CheckIfSolved();// 정답확인
     }
 
     void Swap(int x, int y, int dx, int dy)
@@ -96,7 +98,7 @@ public class Slide_puzzle : MonoBehaviour
         Vector2 pos = new Vector2();
         do
         {
-            int n = Random.Range(0, 4);
+            int n = UnityEngine.Random.Range(0, 4);
             if (n == 0)
                 pos = Vector2.left;
             else if (n == 1)
@@ -120,5 +122,31 @@ public class Slide_puzzle : MonoBehaviour
     bool isRepeatMove(Vector2 pos)
     {
         return pos * -1 == lastMove;
+    }
+
+    //퍼즐이 정답인지 확인
+    void CheckIfSolved()
+    {
+        bool isSolved = true;
+        Debug.Log("클릭시작"+isSolved);
+
+        for (int y = 3; y >= 0 ; y--)
+        {
+            for(int x = 0; x < 4; x++)
+            {
+                // 각 퍼즐 조각이 (x, y) 위치에 올바르게 있는지 확인
+                int correctIndex = (3 - y) * 4 + x + 1; // 올바른 index 계산
+                if (boxes[x, y].index != correctIndex)
+                {
+                    isSolved = false;
+                    Debug.Log("비교완료 " + isSolved);
+                    Debug.Log("x: " + x + "y:" + y);
+                    Debug.Log("현재 index: " + boxes[x, y].index);  // 퍼즐 조각의 실제 index
+                    Debug.Log("올바른 index: " + correctIndex);  // 올바른 index 계산값
+                    break; // 퍼즐이 틀린 경우 비교 중단
+                }
+            }
+            if (!isSolved) break;
+        }
     }
 }
