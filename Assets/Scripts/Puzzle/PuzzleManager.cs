@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
+    // 퍼즐 오브젝트와 퍼즐에 반응하는 오브젝트의 매핑을 위한 구조체.
     [System.Serializable]
     public struct PuzzleMapping
     {
@@ -10,6 +11,9 @@ public class PuzzleManager : MonoBehaviour
         public List<GameObject> reactiveObjects;
     }
 
+    /// <summary>
+    /// 퍼즐 오브젝트와 퍼즐에 반응하는 오브젝트들의 목록. 인스펙터 상에서 편집할 수 있음.
+    /// </summary>
     [SerializeField]
     private List<PuzzleMapping> puzzleMapping = null;
 
@@ -18,16 +22,12 @@ public class PuzzleManager : MonoBehaviour
     /// </summary>
     private Dictionary<IPuzzleObject, List<IReactToPuzzle>> puzzleMap = null;
 
-    private void Awake()
-    {
-        puzzleMap = new Dictionary<IPuzzleObject, List<IReactToPuzzle>>();
-    }
+    #region Public Func
 
-    private void Start()
-    {
-        InitializePuzzleMap(puzzleMapping);
-    }
-
+    /// <summary>
+    /// 퍼즐이 풀렸을 때 해당 오브젝트와 연결된 반응 오브젝트들에게 반응을 호출하는 함수.
+    /// </summary>
+    /// <param name="puzzleObject">퍼즐이 풀린 오브젝트.</param>
     public void OnSolvePuzzle(IPuzzleObject puzzleObject)
     {
         List<IReactToPuzzle> reactComps = puzzleMap[puzzleObject];
@@ -37,6 +37,10 @@ public class PuzzleManager : MonoBehaviour
             reactToSolve.OnPuzzleSolved();
         }
     }
+
+    #endregion
+
+    #region Private Func
 
     /// <summary>
     /// puzzleMapping 클래스 리스트의 정보에 따라서 puzzmeMap 딕셔너리를 초기화하는 함수.
@@ -64,4 +68,21 @@ public class PuzzleManager : MonoBehaviour
             }
         }
     }
+
+    #endregion
+
+    #region Unity Callback Func
+
+    private void Awake()
+    {
+        puzzleMap = new Dictionary<IPuzzleObject, List<IReactToPuzzle>>();
+    }
+
+    private void Start()
+    {
+        InitializePuzzleMap(puzzleMapping);
+    }
+
+    #endregion
+
 }
