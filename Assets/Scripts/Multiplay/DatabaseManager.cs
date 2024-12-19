@@ -84,7 +84,18 @@ public class DatabaseManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(www.downloadHandler.text);
+                // 로그인 성공
+                if(www.downloadHandler.text == "1")
+                {
+                    Debug.Log("Login Try Succed");
+                    FindAnyObjectByType<TitleSceneManager>()?.OnLoginSuccess();
+                }
+                // 로그인 실패
+                else
+                {
+                    Debug.Log("Login Try Failed");
+                    FindAnyObjectByType<TitleSceneManager>()?.OnLoginFailed();
+                }
             }
         }
     }

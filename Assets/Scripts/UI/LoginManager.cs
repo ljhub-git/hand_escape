@@ -7,6 +7,13 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private TMP_InputField passwordInput = null;
     [SerializeField] private TextMeshProUGUI loginStatus = null;
 
+    private TitleSceneManager titleSceneMng = null;
+
+    public string CurrentID
+    {
+        get { return idInput.text; }
+    }
+
     public void OnLoginButtonClicked()
     {
         Debug.Log("Button Clicked!");
@@ -14,7 +21,12 @@ public class LoginManager : MonoBehaviour
         string enteredUsername = idInput.text;
         string enteredPassword = passwordInput.text;
 
-        FindAnyObjectByType<DatabaseManager>().LoginCheck(enteredUsername, enteredPassword);
+        titleSceneMng.TryLogin(enteredUsername, enteredPassword);
+    }
+
+    private void Awake()
+    {
+        titleSceneMng = FindAnyObjectByType<TitleSceneManager>();
     }
 }
 
