@@ -3,19 +3,21 @@ using UnityEngine.Events;
 public class PlayerManager : MonoBehaviour
 {
     private float moveSpeed = 60f; // 이동 속도
-    private Vector3 HeadVector3 = Vector3.zero; // 헤드 방향
     private MovementManager movementManager; // 하위 매니저 연결
-    private Camera playerCamera; // 카메라 연결 (헤드 벡터 구하기용);
     private void Awake()
     {
         movementManager = GetComponentInChildren<MovementManager>();
-        playerCamera = GetComponentInChildren<Camera>();
     }
     #region 이동 정지
     public void MoveFoward()
     {
-        HeadVector3 = playerCamera.transform.forward;
-        movementManager.MoveFoward(HeadVector3,moveSpeed);
+
+        movementManager.MoveFoward(moveSpeed);
+    }    
+    public void MoveBack()
+    {
+
+        movementManager.MoveBack(moveSpeed);
     }
 
     public void StopMove()
@@ -23,6 +25,8 @@ public class PlayerManager : MonoBehaviour
         movementManager.Stop();
     }
     #endregion
+
+    #region 좌우 회전
     public void LeftRotate()
     {
         movementManager.L_Rotate90();
@@ -31,4 +35,5 @@ public class PlayerManager : MonoBehaviour
     {
         movementManager.R_Rotate90();
     }
+    #endregion
 }
