@@ -30,7 +30,7 @@ public class DatabaseManager : MonoBehaviour
     /// <summary>
     /// Login
     /// </summary>
-    private void LoginCheck(string _id, string _pw)
+    public void LoginCheck(string _id, string _pw)
     {
         StartCoroutine(LoginCoroutine(_id, _pw));
     }
