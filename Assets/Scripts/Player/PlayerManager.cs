@@ -23,4 +23,12 @@ public class PlayerManager : MonoBehaviour
         movementManager.Stop();
     }
     #endregion
+    public void LeftRotate()
+    {
+        movementManager.L_Rotate90();
+    }    
+    public void RightRotate()
+    {
+        movementManager.R_Rotate90();
+    }
 }

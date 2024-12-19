@@ -32,12 +32,19 @@ public class MovementManager : MonoBehaviour
 
     private IEnumerator MoveFowardCo(Vector3 _Dir, float _moveSpeed) //PlayerManager에서 신호를 받으면 실행 시킬 코루틴 정면 이동
     {
-        Vector3 foward = _Dir;
         while (true)
         {
-            characterController.SimpleMove(foward * _moveSpeed * Time.deltaTime);
+            characterController.SimpleMove(_Dir * _moveSpeed * Time.deltaTime);
             yield return null;
         }
     }
     #endregion
+    public void L_Rotate90()
+    {
+        transform.Rotate(-Vector3.up * 90f, Space.Self);
+    }
+    public void R_Rotate90()
+    {
+        transform.Rotate(Vector3.up * 90f, Space.Self);
+    }
 }
