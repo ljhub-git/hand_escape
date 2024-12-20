@@ -89,6 +89,8 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
         Debug.Log("Joined Room");
 
         // 방에 입장했으니 이제 대기실로 가면 된다.
+        // 그 전에 테스트로 게임에 입장 되는지 함 확인해봄.
+        SceneManager.LoadScene("Jeon_TestScene");
     }
 
     // 방 입장이 실패했을 때
