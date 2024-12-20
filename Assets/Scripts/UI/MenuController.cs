@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         // 게임 오디오의 초기 볼륨을 슬라이더 값에 맞게 설정
-        soundSlider.value = gameAudio.volume;
+        //soundSlider.value = gameAudio.volume;
     }
 
     // 메인 메뉴로 이동
