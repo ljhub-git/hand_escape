@@ -3,6 +3,7 @@ using UnityEngine.Events;
 public class PlayerManager : MonoBehaviour
 {
     private float moveSpeed = 60f; // 이동 속도
+    private float rocketMoveSpeed = 300f; // 로켓 이동 속도
     private MovementManager movementManager; // 하위 매니저 연결
     private void Awake()
     {
@@ -25,7 +26,6 @@ public class PlayerManager : MonoBehaviour
         movementManager.Stop();
     }
     #endregion
-
     #region 좌우 회전
     public void LeftRotate()
     {
@@ -35,5 +35,15 @@ public class PlayerManager : MonoBehaviour
     {
         movementManager.R_Rotate90();
     }
+    #endregion
+    #region 로켓펀치
+    public void RocketPunchLaunchReady()
+    {
+        movementManager.RocketPunch(rocketMoveSpeed);
+    }     
+    public void RocketPunchLaunchUnready()
+    {
+        movementManager.preparedHandCnt--;
+    }    
     #endregion
 }
