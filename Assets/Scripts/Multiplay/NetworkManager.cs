@@ -1,7 +1,9 @@
 using UnityEngine;
-using Photon.Pun;
 
-public class MultiplayManager : MonoBehaviourPun
+using Photon.Pun;
+using Photon.Realtime;
+
+public class NetworkManager : MonoBehaviour
 {
     #region Public Func
 
