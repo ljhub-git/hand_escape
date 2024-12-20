@@ -10,6 +10,7 @@ public class MovementManager : MonoBehaviour
     [SerializeField]// 로켓 펀치하면 아이템을 가져오기 위한 큐브 
     GameObject rocketCubePrefab = null;
     public int preparedHandCnt = 0;
+    private Coroutine rocketMoveCoroutine; // 코루틴을 추적할 변수
     private void Start()
     {
         if (rocketCubePrefab == null)
@@ -91,7 +92,25 @@ public class MovementManager : MonoBehaviour
         preparedHandCnt++;
         if (preparedHandCnt == 2)
         {
+            // 이미 실행 중인 코루틴이 있다면 먼저 멈추고, 새로운 코루틴 시작
+            if (moveCoroutine != null)
+            {
+                return;
+            }
 
+            rocketMoveCoroutine = StartCoroutine(RocketMoveCo(_rocketMoveSpeed));
+        }
+    }
+    public IEnumerator RocketMoveCo(float _rocketMoveSpeed)
+    {
+        HeadVector3 = playerCamera.transform.forward; // 맨처음 발사할 위치
+        GameObject ballGo = Instantiate(rocketCubePrefab, HeadVector3, Quaternion.identity, transform);
+
+
+        while (true)
+        {
+
+            yield return null;
         }
     }
     #endregion
