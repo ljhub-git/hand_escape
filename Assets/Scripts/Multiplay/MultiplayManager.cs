@@ -3,11 +3,6 @@ using Photon.Pun;
 
 public class MultiplayManager : MonoBehaviourPun
 {
-    [SerializeField]
-    private string gameVersion = "0.0.1";
-
-    private const int MaxPlayerPerRoom = 2;
-
     #region Public Func
 
     /// <summary>
@@ -31,7 +26,7 @@ public class MultiplayManager : MonoBehaviourPun
     {
         // 게임 시작 시 두 플레이어는 항상 같은 씬에 있어야 한다.
         // 씬을 자동으로 동기화하도록 설정.
-        PhotonNetwork.AutomaticallySyncScene = true;
+        // PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     #endregion
