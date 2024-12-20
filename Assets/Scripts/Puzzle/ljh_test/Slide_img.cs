@@ -13,7 +13,6 @@ public class Slide_img : MonoBehaviour
     private float y_hei = 1.12f; // 퍼즐 조각의 세로 크기
 
     private Action<int, int> swapFunc = null;
-
     private BoxCollider2D boxCollider;  // BoxCollider2D 컴포넌트
 
     private void Awake()

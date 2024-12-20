@@ -17,10 +17,10 @@ public class Slide_puzzle : MonoBehaviour
     private void Init()
     {
         int n = 0;
-        for(int y = 3; y >= 0; y--)
-            for(int x = 0; x< 4; x++)
+        for (int y = 3; y >= 0; y--)
+            for (int x = 0; x < 4; x++)
             {
-                Slide_img box = Instantiate(img_Prefab, new Vector2(x,y), Quaternion.identity);
+                Slide_img box = Instantiate(img_Prefab, new Vector2(x, y), Quaternion.identity);
                 box.Init(x, y, n + 1, sprites[n], ClickToSwap);
                 boxes[x, y] = box;
                 n++;
@@ -31,7 +31,7 @@ public class Slide_puzzle : MonoBehaviour
     {
         int dx = getDx(x, y);
         int dy = getDy(x, y);
-        Swap(x,y,dx,dy);
+        Swap(x, y, dx, dy);
         CheckIfSolved();// 정답확인
     }
 
@@ -41,7 +41,7 @@ public class Slide_puzzle : MonoBehaviour
             return;  // 교환할 필요 없음
 
         var from = boxes[x, y];
-        var target = boxes[x+dx, y+dy];
+        var target = boxes[x + dx, y + dy];
 
         boxes[x, y] = target;
         boxes[x + dx, y + dy] = from;
@@ -52,7 +52,7 @@ public class Slide_puzzle : MonoBehaviour
 
     int getDx(int x, int y)
     {
-        if(x < 3 && boxes[x+1, y].IsEmpty())
+        if (x < 3 && boxes[x + 1, y].IsEmpty())
         {
             return 1;
         }
@@ -65,11 +65,11 @@ public class Slide_puzzle : MonoBehaviour
 
     int getDy(int x, int y)
     {
-        if (y < 3 && boxes[x, y+1].IsEmpty())
+        if (y < 3 && boxes[x, y + 1].IsEmpty())
         {
             return 1;
         }
-        if (y > 0 && boxes[x, y-1].IsEmpty())
+        if (y > 0 && boxes[x, y - 1].IsEmpty())
         {
             return -1;
         }
@@ -78,14 +78,14 @@ public class Slide_puzzle : MonoBehaviour
 
     void Shuffle()
     {
-        for(int i=0; i<4; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             for (int j = 0; j < 4; ++j)
             {
-                if(boxes[i, j].IsEmpty())
+                if (boxes[i, j].IsEmpty())
                 {
                     Vector2 pos = getValidMove(i, j);
-                    Swap(i,j, (int)pos.x, (int)pos.y);
+                    Swap(i, j, (int)pos.x, (int)pos.y);
                 }
             }
         }
@@ -128,21 +128,17 @@ public class Slide_puzzle : MonoBehaviour
     void CheckIfSolved()
     {
         bool isSolved = true;
-        Debug.Log("클릭시작"+isSolved);
+        Debug.Log("클릭시작" + isSolved);
 
-        for (int y = 3; y >= 0 ; y--)
+        for (int y = 3; y >= 0; y--)
         {
-            for(int x = 0; x < 4; x++)
+            for (int x = 0; x < 4; x++)
             {
                 // 각 퍼즐 조각이 (x, y) 위치에 올바르게 있는지 확인
                 int correctIndex = (3 - y) * 4 + x + 1; // 올바른 index 계산
                 if (boxes[x, y].index != correctIndex)
                 {
                     isSolved = false;
-                    Debug.Log("비교완료 " + isSolved);
-                    Debug.Log("x: " + x + "y:" + y);
-                    Debug.Log("현재 index: " + boxes[x, y].index);  // 퍼즐 조각의 실제 index
-                    Debug.Log("올바른 index: " + correctIndex);  // 올바른 index 계산값
                     break; // 퍼즐이 틀린 경우 비교 중단
                 }
             }
