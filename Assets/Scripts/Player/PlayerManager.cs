@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
     private MovementManager movementManager; // 하위 매니저 연결
     private void Awake()
     {
-        movementManager = GetComponentInChildren<MovementManager>();
+        movementManager = GetComponent<MovementManager>();
     }
     #region 이동 정지
     public void MoveFoward()
