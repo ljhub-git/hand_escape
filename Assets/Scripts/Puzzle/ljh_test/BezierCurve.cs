@@ -31,7 +31,7 @@ public class BezierCurve
         float ni;
         float a1 = Factorial[n];
         float a2 = Factorial[i];
-        float a3 = Factorial[n-1];
+        float a3 = Factorial[n-i];
         ni = a1 / (a2 * a3);
         return ni;
     }
@@ -69,7 +69,7 @@ public class BezierCurve
         return p;
     }
 
-    public static List<Vector2> PointList2(List<Vector3> controlPoints, float interval = 0.01f) 
+    public static List<Vector2> PointList2(List<Vector2> controlPoints, float interval = 0.01f) 
     {
         int N = controlPoints.Count - 1;
         if (N > 18)

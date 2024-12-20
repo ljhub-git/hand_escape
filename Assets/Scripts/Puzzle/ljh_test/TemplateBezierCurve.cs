@@ -1,21 +1,33 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bezier_viz : MonoBehaviour
+public class TemplateBezierCurve : MonoBehaviour
 {
-    public List<Vector2> controlPoints = new List<Vector2>()
+    public static readonly List<Vector2> templateControlPoints = new List<Vector2>()
     {
-        new Vector2(-0.5f, -0.5f),
-        new Vector2(0.0f, 2.0f),
-        new Vector2(5.0f, -2.0f)
+        new Vector2(0, 0),
+        new Vector2(35, 15),
+        new Vector2(47, 13),
+        new Vector2(45, 5),
+        new Vector2(48, 0),
+        new Vector2(25, -5),
+        new Vector2(15, -18),
+        new Vector2(36, -20),
+        new Vector2(64, -20),
+        new Vector2(85, -18),
+        new Vector2(75, -5),
+        new Vector2(52, 0),
+        new Vector2(55, 5),
+        new Vector2(53, 13),
+        new Vector2(65, 15),
+        new Vector2(100, 0)
     };
 
     public GameObject PointPrefab;
 
     LineRenderer[] mLineRenderers = null;
 
-    List<GameObject>mPointGameObjects = new List<GameObject>();
+    List<GameObject> mPointGameObjects = new List<GameObject>();
 
     public float LineWidth;
     public float LineWidthBezier;
@@ -44,9 +56,9 @@ public class Bezier_viz : MonoBehaviour
         mLineRenderers[0].gameObject.name = "LineRenderer_obj_0";
         mLineRenderers[1].gameObject.name = "LineRenderer_obj_1";
 
-        for (int i = 0; i < controlPoints.Count; i++)
+        for (int i = 0; i < templateControlPoints.Count; i++)
         {
-            GameObject obj = Instantiate(PointPrefab, controlPoints[i], Quaternion.identity);
+            GameObject obj = Instantiate(PointPrefab, templateControlPoints[i], Quaternion.identity);
             obj.name = "ControlPoint_" + i.ToString();
             mPointGameObjects.Add(obj);
         }
@@ -59,13 +71,13 @@ public class Bezier_viz : MonoBehaviour
         LineRenderer curveRenderer = mLineRenderers[1];
 
         List<Vector2> pts = new List<Vector2>();
-        for(int i = 0; i < mPointGameObjects.Count; i++)
+        for (int i = 0; i < mPointGameObjects.Count; i++)
         {
             pts.Add(mPointGameObjects[i].transform.position);
         }
 
         lineRenderer.positionCount = pts.Count;
-        for(int i = 0; i < pts.Count; i++)
+        for (int i = 0; i < pts.Count; i++)
         {
             lineRenderer.SetPosition(i, pts[i]);
         }
@@ -77,38 +89,9 @@ public class Bezier_viz : MonoBehaviour
         curveRenderer.startWidth = LineWidthBezier;
         curveRenderer.endWidth = LineWidthBezier;
 
-        for (int i = 0; i < curve.Count; i++) 
+        for (int i = 0; i < curve.Count; i++)
         {
             curveRenderer.SetPosition(i, curve[i]);
         }
-    }
-
-    private void OnGUI()
-    {
-        Event e = Event.current;
-        if(e.isMouse)
-        {
-            if(e.clickCount == 2 && e.button == 0)
-            {
-                Vector2 rayPos = new Vector2(
-                    Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
-                    Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-
-                InsertNewControlPoint(rayPos);
-            }
-        }
-    }
-
-    void InsertNewControlPoint(Vector2 p)
-    {
-        if(mPointGameObjects.Count >= 18)
-        {
-            Debug.Log("Max18");
-            return;
-        }
-
-        GameObject obj = Instantiate(PointPrefab, p, Quaternion.identity);
-        obj.name = "ControlPoint_" + mPointGameObjects.Count.ToString();
-        mPointGameObjects.Add(obj);
     }
 }
