@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro.Examples;
 using UnityEngine;
 
 public class Tile
@@ -22,6 +23,64 @@ public class Tile
         = new Dictionary<(Direction, PosNegType), LineRenderer> ();
 
     public static List<Vector2> BezCurve = BezierCurve.PointList2(TemplateBezierCurve.templateControlPoints, 0.001f);
+
+    private Texture2D mOriginalTexture;
+
+    public Texture2D finalCut { get; private set; }
+
+    public static readonly Color TransparentColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+
+    private PosNegType[] mCurveTypes = new PosNegType[4]
+    {
+        PosNegType.NONE,
+        PosNegType.NONE,
+        PosNegType.NONE,
+        PosNegType.NONE
+    };
+
+    public void SetCurveType(Direction dir, PosNegType type)
+    {
+        mCurveTypes[(int)dir] = type;
+    }
+
+    public PosNegType GetCurveType(Direction dir)
+    {
+        return mCurveTypes[(int)dir];
+    }
+
+    public Tile(Texture2D texture)
+    {
+        mOriginalTexture = texture;
+        int padding = mOffset.x;
+        int tileSizeWithPadding = 2 * padding + tileSize;
+
+        finalCut = new Texture2D(tileSizeWithPadding, tileSizeWithPadding, TextureFormat.ARGB32, false);
+
+        for(int i = 0; i< tileSizeWithPadding; ++i)
+        {
+            for(int j=0; i< tileSizeWithPadding; ++j)
+            {
+                finalCut.SetPixel(i,j,TransparentColor);
+            }
+        }
+    }
+
+    public void Apply()
+    {
+        FloodFillInit();
+        FloodFill();
+        finalCut.Apply();
+    }
+
+    void FloodFillInit()
+    {
+
+    }
+
+    void FloodFill()
+    {
+
+    }
 
     public static LineRenderer CreateLineRenderer(Color color, float lineWidth = 1.0f)
     {
