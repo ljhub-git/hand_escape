@@ -38,6 +38,6 @@ public class Item_Test : MonoBehaviour
     private void OnMouseUp()
     {
         isBeingDragged = false;
-        Debug.Log(isBeingDragged);
+        //Debug.Log(isBeingDragged);
     }
 }
