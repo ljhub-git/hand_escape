@@ -3,7 +3,7 @@ using UnityEngine;
 public class RocketCube : MonoBehaviour
 {
     public bool iscatched = false;
-    public Vector3 catchPosition = Vector3.zero;
+    public Vector3 catchedObjectPosition = Vector3.zero;
     private BoxCollider BoxCollider =null;
     private void Awake()
     {
@@ -16,6 +16,6 @@ public class RocketCube : MonoBehaviour
     {
         Debug.Log("Rocket Cube OnTriggerEnter");
         iscatched = true;
-        catchPosition = other.transform.position;
+        catchedObjectPosition = other.transform.position;
     }
 }

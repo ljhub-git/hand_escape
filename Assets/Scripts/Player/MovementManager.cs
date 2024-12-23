@@ -8,13 +8,14 @@ public class MovementManager : MonoBehaviour
     private Coroutine moveCoroutine; // 코루틴을 추적할 변수
     private Camera playerCamera; // 카메라 연결 (카메라 방향 벡터 구하기용);
     private Vector3 HeadVector3 = Vector3.zero; // 헤드 위치
-    private Quaternion HeadDir = Quaternion.identity; // 헤드 방향
+    private Vector3 HeadDir = Vector3.zero; // 헤드 방향 벡터
 
     [SerializeField]// 로켓 펀치하면 아이템을 가져오기 위한 큐브 
     GameObject rocketCubePrefab = null;
     RocketCube rocketCube = null; // 트리거 발생시 받아올 클래스
     public int preparedHandCnt = 0;
     private Coroutine rocketMoveCoroutine; // 코루틴을 추적할 변수
+    private GameObject rocketCubeGo = null;
     private void Start()
     {
         if (rocketCubePrefab == null) // 프리펩이 없으면 로켓큐브 로딩
@@ -96,13 +97,19 @@ public class MovementManager : MonoBehaviour
     public void RocketPunchReady(float _rocketMoveSpeed)
     {
         preparedHandCnt++;
+        if (preparedHandCnt < 0) // 2 초과로 내려가는 경우가 생겼을 시
+        {
+            preparedHandCnt = 2; // 2 으로 초기화
+        }
         //Debug.Log("로켓펀치 준비된 손 갯수 : " + preparedHandCnt);
         if (preparedHandCnt == 1) // 카운트 2개가 되면 실행
-        {
-            // 이미 실행 중인 코루틴이 있다면 실행 안함
+        {       
+            // 이미 실행 중인 코루틴이 있다면 먼저 멈추고, 새로운 코루틴 시작
             if (rocketMoveCoroutine != null)
             {
-                return;
+                StopCoroutine(rocketMoveCoroutine);
+                Destroy(rocketCubeGo);
+                rocketCubeGo = null;
             }
 
             rocketMoveCoroutine = StartCoroutine(RocketMoveCo(_rocketMoveSpeed));
@@ -111,26 +118,32 @@ public class MovementManager : MonoBehaviour
     public void RocketPunchUnready()
     {
         preparedHandCnt--;
+        if(preparedHandCnt < 0) // 0 미만으로 내려가는 경우가 생겼을 시
+        {
+            preparedHandCnt = 0; // 0 으로 초기화
+        }
+
     }
 
     public IEnumerator RocketMoveCo(float _rocketMoveSpeed)
     {
-        HeadVector3 = playerCamera.transform.position + playerCamera.transform.forward; // 맨처음 발사할 위치
-        HeadDir = Quaternion.LookRotation(HeadVector3); // 발사할 방향
-        GameObject rocketCubeGo = Instantiate(rocketCubePrefab, HeadVector3, HeadDir); // 인스턴스화 생성
+        HeadVector3 = Vector3.zero; // 발사할 위치
+        HeadDir = Vector3.zero; // 발사할 방향 벡터
+        rocketCubeGo = Instantiate(rocketCubePrefab, HeadVector3, Quaternion.identity); // 인스턴스화 생성
         rocketCube = rocketCubeGo.GetComponent<RocketCube>(); // 트리거 발생시 여기서 신호가 온다
         Vector3 curPlayerPosition = Vector3.zero; // 최종적으로 돌아와야하는 위치 지역변수
         Vector3 catchedPosition = Vector3.zero; // 물건 잡힌 위치 지역변수
-        float t = 0;
+        float t = 0; // 오브젝트에 닿은 후 돌아오는 경과 시간
 
-        while (t == 0 && 2 > preparedHandCnt) // 준비 된 손이 하나 일 경우 플레어 앞에 항상 위치
+        while (t == 0 && 2 > preparedHandCnt) //준비 된 손이 하나고 발사 경과 시간이 0 일 경우  플레어 앞에 항상 위치
         {
-            rocketCubeGo.transform.position = playerCamera.transform.position + playerCamera.transform.forward;
-            rocketCubeGo.transform.rotation = playerCamera.transform.rotation;
+            rocketCubeGo.transform.position = playerCamera.transform.position + playerCamera.transform.forward; // 매 프레임 플레이어 카메라 앞에 위치
+            rocketCubeGo.transform.rotation = playerCamera.transform.rotation; // 매 프레임 카메라 로테이션이랑 일치 시킴
+
             if (preparedHandCnt == 0)
             {
                 Destroy(rocketCubeGo); // 게임 오브젝트 파괴
-                Debug.Log("파괴");
+                Debug.Log("발사준비 해제" + preparedHandCnt);
                 rocketCubeGo = null;  // 널로 설정
                 yield break; // 코루틴 종료
             }
@@ -138,17 +151,20 @@ public class MovementManager : MonoBehaviour
         }
         if (preparedHandCnt == 2) // 준비된 손이 두개 일 경우
         {
+            HeadVector3 = playerCamera.transform.position + playerCamera.transform.forward;
+            HeadDir = Vector3.Normalize(playerCamera.transform.forward);
             while (t <= 3)
             {
                 if (!rocketCube.iscatched) // 물건이 트리거 되기 전까지
                 {
-                    //rocketCubeGo.transform.position = HeadVector3 * Time.deltaTime * _rocketMoveSpeed; // 매 프레임 헤드 정면으로 나아감
-                    rocketCubeGo.transform.Translate(HeadVector3 * Time.deltaTime * _rocketMoveSpeed); // 매 프레임 헤드 정면으로 나아감
+                    //rocketCubeGo.transform.position = HeadVector3 * Time.deltaTime * _rocketMoveSpeed; 
+
+                    rocketCubeGo.transform.position += (HeadDir * Time.deltaTime * _rocketMoveSpeed * 0.001f); // 매 프레임 헤드 정면으로 나아감
                 }
                 if (rocketCube.iscatched) // 물건이 트리거 되면 
                 {
-                    catchedPosition = rocketCube.catchPosition; //잡힌 위치 갱신
-                    curPlayerPosition = playerCamera.transform.forward; // 플레이어 위치 갱신
+                    catchedPosition = rocketCube.catchedObjectPosition; //잡힌 오브젝트 위치만 매 프레임 갱신
+                    curPlayerPosition = playerCamera.transform.position + playerCamera.transform.forward; // 플레이어 앞 위치 매 프레임 갱신
                     if (1 > t)
                     {
                         rocketCubeGo.transform.position = Vector3.Lerp(rocketCubeGo.transform.position, catchedPosition, t); // 감시된 오브젝트로 큐브 이동
@@ -159,8 +175,8 @@ public class MovementManager : MonoBehaviour
                     }
                     if (t >= 2)
                     {
-                        //rocketCubeGo.transform.position = Vector3.Lerp(HeadVector3, curPlayerPosition, t - 2); // 그 다음 플레이 최종위치로 큐브 이동
-                        rocketCubeGo.transform.position = Vector3.Lerp(curPlayerPosition, HeadVector3, 3 - t); // 그 다음 플레이 최종위치로 큐브 이동
+                        //rocketCubeGo.transform.position = Vector3.Lerp(HeadVector3, curPlayerPosition, t - 2); //
+                        rocketCubeGo.transform.position = Vector3.Lerp(curPlayerPosition, HeadVector3, 3 - t); //  그 다음 플레이 발사한 위치에서 최종위치로 큐브 이동
                     }
 
                     t += Time.deltaTime;
