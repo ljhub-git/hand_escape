@@ -3,48 +3,27 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public static InventoryUI instance;
+    public Transform invenContentTr = null;
+    public GameObject invenItemPrefab = null;
 
-    [SerializeField]
-    private Transform invenContentTr = null;
-    [SerializeField]
-    private GameObject invenItemPrefab = null;
-
-    private List<InventoryItem> inventoryItems = new List<InventoryItem>();
     [SerializeField]
     private float m_MaxScale = 1.0f;
 
     [SerializeField]
-    private float m_MinScale = 1.0f;
+    private float m_MinScale = 0.3f;
 
     [SerializeField]
     private float m_MaxDistance = 3.5f;
 
     [SerializeField]
-    private float m_MinDistance = 0.25f;
+    private float m_MinDistance = 0.5f;
 
-    private Vector3 m_StartingScale = Vector3.one;
+    private Vector3 m_StartingScale = Vector3.one * 0.01f;
 
     public float distance = 0.3f;
     public float verticalOffset = -0.2f;
 
     public Transform positionSource;
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this; // Singleton 설정
-        }
-        else
-        {
-            Destroy(gameObject); // 이미 존재하는 경우 삭제
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (instance == this) instance = null;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -53,37 +32,32 @@ public class InventoryUI : MonoBehaviour
             // 충돌한 객체에 Item_Test 컴포넌트가 있는지 확인
             Item_Test item = other.GetComponent<Item_Test>();
 
-            //if (item != null && item.isBeingDragged)
-            if (item != null && 
+            if (item != null &&
                 (item.XRGrabInteractable.isSelected || item.XRGrabInteractable.isHovered))
             {
                 // 충돌한 객체가 Item_Test를 가지고 있으면 인벤토리에 아이템을 추가
-                item.isBeingDragged = false;
-                //SpawnInvenItem(item);
-                AddItemToInventory(item);
+                InventoryManager.instance.AddItemToInventory(item);
                 other.gameObject.SetActive(false);
             }
         }
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            OpenKeyboard();
-        }
-    }
-    public void OpenKeyboard()
+    public void OpenInventory()
     {
         Vector3 direction = positionSource.forward;
         direction.y = 0;
         direction.Normalize();
-
         Vector3 targetPosition = positionSource.position + direction * distance + Vector3.up * verticalOffset;
-        RepositionKeyboard(targetPosition);
+        RepositionInventory(targetPosition);
+        gameObject.SetActive(true);
     }
 
-    public void RepositionKeyboard(Vector3 kbPos, float verticalOffset = 0.0f)
+    public void CloseInventory()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void RepositionInventory(Vector3 kbPos, float verticalOffset = 0.0f)
     {
         transform.position = kbPos;
         ScaleToSize();
@@ -106,38 +80,5 @@ public class InventoryUI : MonoBehaviour
     {
         transform.LookAt(Camera.main.transform.position);
         transform.Rotate(Vector3.up, 180.0f);
-    }
-
-    public void AddItemToInventory(Item_Test itemInfo)
-    {
-        // 아이템 UI 생성
-        GameObject invenItemGo = Instantiate(invenItemPrefab, invenContentTr);
-        InventoryItem inventoryItem = invenItemGo.GetComponent<InventoryItem>();
-
-        // 초기화
-        inventoryItem.Init(itemInfo);
-
-        // 리스트에 아이템 추가
-        inventoryItems.Add(inventoryItem);
-    }
-
-    public void RemoveItemFromInventory(InventoryItem inventoryItem)
-    {
-        if (inventoryItems.Contains(inventoryItem))
-        {
-            inventoryItems.Remove(inventoryItem);
-            Destroy(inventoryItem.gameObject); // UI에서 아이템 제거
-        }
-    }
-
-    public void SpawnItemInScene(InventoryItem inventoryItem)
-    {
-        if (inventoryItem != null && inventoryItem.ItemInfo != null)
-        {
-            // 씬으로 아이템을 배치하고, UI에서 삭제
-            inventoryItem.ItemInfo.gameObject.SetActive(true);
-            //inventoryItem.ItemInfo.transform.position = new Vector3(0, 1, 0); // 원하는 위치에 배치
-            RemoveItemFromInventory(inventoryItem); // UI에서 아이템 삭제
-        }
     }
 }

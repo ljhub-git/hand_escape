@@ -28,6 +28,6 @@ public class InventoryItem : MonoBehaviour
     private void OnItemButtonClick()
     {
         // 버튼 클릭 시 아이템을 씬에 배치하는 요청
-        InventoryUI.instance?.SpawnItemInScene(this);
+        InventoryManager.instance?.SpawnItemInScene(this);
     }
 }
