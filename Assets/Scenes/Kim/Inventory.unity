@@ -815,7 +815,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XRGrabInteractable: {fileID: 0}
-  isBeingDragged: 0
   itemColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!54 &764275002
 Rigidbody:
@@ -1317,7 +1316,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XRGrabInteractable: {fileID: 0}
-  isBeingDragged: 0
   itemColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!54 &1103159791
 Rigidbody:
@@ -1592,7 +1590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XRGrabInteractable: {fileID: 0}
-  isBeingDragged: 0
   itemColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!54 &1222370485
 Rigidbody:
@@ -2168,11 +2165,11 @@ MonoBehaviour:
   invenContentTr: {fileID: 798239207}
   invenItemPrefab: {fileID: 4976915427195130848, guid: eb1a36f1a8b2dbc44b8744fc2833efc9, type: 3}
   m_MaxScale: 1
-  m_MinScale: 0.2
+  m_MinScale: 0.1
   m_MaxDistance: 3.5
-  m_MinDistance: 0.25
+  m_MinDistance: 0.5
   distance: 0.5
-  verticalOffset: -0.2
+  verticalOffset: -0.3
   positionSource: {fileID: 135705715}
 --- !u!65 &1909176617
 BoxCollider:
