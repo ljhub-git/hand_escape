@@ -52,5 +52,5 @@ public class RocketCube : MonoBehaviour
         {
             Debug.Log("I didn't Change Use Gravity bool");
         }
-    }
+    } // 중력 해제 했었다면 중력 재가동
 }
