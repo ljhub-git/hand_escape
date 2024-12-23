@@ -26,12 +26,20 @@ public class InventoryUI : MonoBehaviour
 
     private void OnDestroy()
     {
+<<<<<<< HEAD
         if (instance == this) instance = null;
+=======
+        if(instance == this) instance = null;
+>>>>>>> 449b94cc63231e2f639b174cca4e932e7116cbcd
     }
 
     private void OnTriggerEnter(Collider other)
     {
+<<<<<<< HEAD
         if (other.CompareTag("Items"))
+=======
+        if(other.CompareTag("Items"))
+>>>>>>> 449b94cc63231e2f639b174cca4e932e7116cbcd
         {
             // 충돌한 객체에 Item_Test 컴포넌트가 있는지 확인
             Item_Test item = other.GetComponent<Item_Test>();
