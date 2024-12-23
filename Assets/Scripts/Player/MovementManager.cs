@@ -6,10 +6,22 @@ public class MovementManager : MonoBehaviour
     private Coroutine moveCoroutine; // 코루틴을 추적할 변수
     private Camera playerCamera; // 카메라 연결 (카메라 방향 벡터 구하기용);
     private Vector3 HeadVector3 = Vector3.zero; // 헤드 방향
+
+    [SerializeField]// 로켓 펀치하면 아이템을 가져오기 위한 큐브 
+    GameObject rocketCubePrefab = null;
+    public int preparedHandCnt = 0;
+    private void Start()
+    {
+        if (rocketCubePrefab == null)
+        {
+            rocketCubePrefab = (GameObject)Resources.Load("Characters\\Prefabs\\Rocket_Cube"); // 로켓큐브 로딩
+        }
+    }
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
+
     }
 
     #region 전진, 후진, 정지
@@ -71,6 +83,16 @@ public class MovementManager : MonoBehaviour
     public void R_Rotate90() // 오른쪽 90도 회전
     {
         transform.Rotate(Vector3.up * 90f, Space.Self);
+    }
+    #endregion
+    #region 로켓펀치
+    public void RocketPunch(float _rocketMoveSpeed)
+    {
+        preparedHandCnt++;
+        if (preparedHandCnt == 2)
+        {
+
+        }
     }
     #endregion
 }
