@@ -59,7 +59,7 @@ public class Tile
     public int yIndex = 0;
 
     // For tiles sorting.
-    //public static TilesSorting tilesSorting = new TilesSorting();
+    public static TilesSorting tilesSorting = new TilesSorting();
     public void SetCurveType(Direction dir, PosNegType type)
     {
         mCurveTypes[(int)dir] = type;

@@ -36,7 +36,7 @@ public class TileMovement : MonoBehaviour
           new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
 
         // For sorting of tiles.
-        //Tile.tilesSorting.BringToTop(mSpriteRenderer);
+        Tile.tilesSorting.BringToTop(mSpriteRenderer);
     }
 
     private void OnMouseDrag()
