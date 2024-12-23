@@ -39,11 +39,11 @@ public class PlayerManager : MonoBehaviour
     #region ·ÎÄÏÆÝÄ¡
     public void RocketPunchLaunchReady()
     {
-        movementManager.RocketPunch(rocketMoveSpeed);
+        movementManager.RocketPunchReady(rocketMoveSpeed);
     }     
     public void RocketPunchLaunchUnready()
     {
-        movementManager.preparedHandCnt--;
+        movementManager.RocketPunchUnready();
     }    
     #endregion
 }
