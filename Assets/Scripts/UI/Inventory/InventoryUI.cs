@@ -36,7 +36,9 @@ public class InventoryUI : MonoBehaviour
             // 충돌한 객체에 Item_Test 컴포넌트가 있는지 확인
             Item_Test item = other.GetComponent<Item_Test>();
 
-            if (item != null && item.isBeingDragged)
+            //if (item != null && item.isBeingDragged)
+            if (item != null && 
+                (item.XRGrabInteractable.isSelected || item.XRGrabInteractable.isHovered))
             {
                 // 충돌한 객체가 Item_Test를 가지고 있으면 인벤토리에 아이템을 추가
                 item.isBeingDragged = false;
