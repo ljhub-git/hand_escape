@@ -3,7 +3,7 @@ using UnityEngine.Events;
 public class PlayerManager : MonoBehaviour
 {
     private float moveSpeed = 60f; // 이동 속도
-    private float rocketMoveSpeed = 300f; // 로켓 이동 속도
+    private float rocketMoveSpeed = 180f; // 로켓 이동 속도
     private MovementManager movementManager; // 하위 매니저 연결
     private void Awake()
     {

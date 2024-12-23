@@ -108,8 +108,12 @@ public class MovementManager : MonoBehaviour
             if (rocketMoveCoroutine != null)
             {
                 StopCoroutine(rocketMoveCoroutine);
-                Destroy(rocketCubeGo);
-                rocketCubeGo = null;
+                if (rocketCube.iscatched)
+                {
+                    rocketCube.ParentNull();
+                }
+                    Destroy(rocketCubeGo);
+                    rocketCubeGo = null;
             }
 
             rocketMoveCoroutine = StartCoroutine(RocketMoveCo(_rocketMoveSpeed));
@@ -153,15 +157,17 @@ public class MovementManager : MonoBehaviour
         {
             HeadVector3 = playerCamera.transform.position + playerCamera.transform.forward;
             HeadDir = Vector3.Normalize(playerCamera.transform.forward);
-            while (t <= 3)
+            rocketCube.isFired = true;
+            while (t <= 4)
             {
+
                 if (!rocketCube.iscatched) // 물건이 트리거 되기 전까지
                 {
                     //rocketCubeGo.transform.position = HeadVector3 * Time.deltaTime * _rocketMoveSpeed; 
 
-                    rocketCubeGo.transform.position += (HeadDir * Time.deltaTime * _rocketMoveSpeed * 0.001f); // 매 프레임 헤드 정면으로 나아감
+                    rocketCubeGo.transform.position += (HeadDir * Time.deltaTime * _rocketMoveSpeed * 0.1f); // 매 프레임 헤드 정면으로 나아감
                 }
-                if (rocketCube.iscatched) // 물건이 트리거 되면 
+                if (rocketCube.iscatched && rocketCubeGo != null) // 물건이 트리거 되고 게임오브젝트가 null 상태가 아니라면
                 {
                     catchedPosition = rocketCube.catchedObjectPosition; //잡힌 오브젝트 위치만 매 프레임 갱신
                     curPlayerPosition = playerCamera.transform.position + playerCamera.transform.forward; // 플레이어 앞 위치 매 프레임 갱신
@@ -178,11 +184,18 @@ public class MovementManager : MonoBehaviour
                         //rocketCubeGo.transform.position = Vector3.Lerp(HeadVector3, curPlayerPosition, t - 2); //
                         rocketCubeGo.transform.position = Vector3.Lerp(curPlayerPosition, HeadVector3, 3 - t); //  그 다음 플레이 발사한 위치에서 최종위치로 큐브 이동
                     }
-
+                    if (t > 3.5)
+                    {
+                        rocketCube.ParentNull(); // 자식 해제
+                        rocketCube.ReUseGravity(); // 중력을 해제 했었다면 활성화
+                        Destroy(rocketCubeGo); // 로켓 큐브 파괴
+                        rocketCubeGo = null;  // 널로 설정
+                    }
                     t += Time.deltaTime;
                 }
                 yield return null;
             }
+            rocketCube.isFired = false;
         }
     }
     #endregion
