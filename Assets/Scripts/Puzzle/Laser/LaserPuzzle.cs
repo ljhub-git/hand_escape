@@ -1,15 +1,27 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class LaserShooter : MonoBehaviour
+public class LaserPuzzle : MonoBehaviour, IPuzzleObject
 {
+    [SerializeField]
+    private LaserGoal goal = null;
+
     [SerializeField]
     private Transform startPoint = null;
 
-    int maxBounces = 20;
     private LineRenderer lr = null;
 
-    private void Start()
+    int maxBounces = 20;
+
+    public void SolvePuzzle()
+    {
+        Debug.Log("SolvePuzzle");
+    }
+
+    public void ResetPuzzle()
+    {
+    }
+
+    private void Awake()
     {
         lr = GetComponent<LineRenderer>();
     }
@@ -33,9 +45,10 @@ public class LaserShooter : MonoBehaviour
             // 레이가 어떤 물체에 맞을 경우
             if (Physics.Raycast(ray, out hit, 15f))
             {
-                // 해당 물체가 레이저의 목표 골이라면
-                if(hit.collider.GetComponent<LaserGoal>() != null)
+                // 해당 물체가 레이저의 목표 골이라면 퍼즐이 풀린다.
+                if (hit.collider.GetComponent<LaserGoal>() != null)
                 {
+                    SolvePuzzle();
                     break;
                 }
 
@@ -45,7 +58,7 @@ public class LaserShooter : MonoBehaviour
 
                 // 만약 충돌했던 콜라이더가 Mirror 태그가 없다면 반사가 안 된다는 뜻.
                 // 반사가 끝났으니 반복문 탈출
-                if(!hit.collider.CompareTag("Mirror"))
+                if (!hit.collider.CompareTag("Mirror"))
                 {
                     break;
                 }
