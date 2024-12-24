@@ -44,7 +44,10 @@ public class LaserShooter : MonoBehaviour
             }
             else
             {
+                lr.positionCount = i + 2;
+
                 lr.SetPosition(i + 1, _pos + _dir * 15f);
+
                 break;
             }
         }
