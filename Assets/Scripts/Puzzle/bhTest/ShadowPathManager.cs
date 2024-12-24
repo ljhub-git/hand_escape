@@ -18,22 +18,23 @@ public class ShadowPathManager : MonoBehaviour
 
 
     private float xLength2D = 0f;
-    //private float yLength2D = 0f;
-
     private float xLength3D = 0f;
-    //private float yLength3D = 0f;
 
+    private Vector3 newPos = Vector3.zero;
     private float ratio = 0f;
 
     private void Start()
     {
         xLength2D = Mathf.Abs(startTr.position.x - endTr.position.x);
-        xLength3D = Mathf.Abs(start3DTr.position.x - end3DTr.position.x);
+        xLength3D = start3DTr.position.x - end3DTr.position.x;
     }
 
     private void Update()
     {
-        ratio = 1f - (character3DTr.localPosition.x / xLength3D);
+        if(xLength3D < 0)
+            ratio = character3DTr.localPosition.x / xLength3D;
+        else
+            ratio = 1f - (character3DTr.localPosition.x / xLength3D);
 
         Vector3 pos = character2DTr.position;
         pos.x = Mathf.Lerp(startTr.position.x, endTr.position.x, ratio);
