@@ -45,16 +45,16 @@ public class LaserPuzzle : MonoBehaviour, IPuzzleObject
             // 레이가 어떤 물체에 맞을 경우
             if (Physics.Raycast(ray, out hit, 15f))
             {
+                _pos = hit.point;
+                _dir = Vector3.Reflect(_dir, hit.normal);
+                lr.SetPosition(i + 1, hit.point);
+
                 // 해당 물체가 레이저의 목표 골이라면 퍼즐이 풀린다.
                 if (hit.collider.GetComponent<LaserGoal>() != null)
                 {
                     SolvePuzzle();
                     break;
                 }
-
-                _pos = hit.point;
-                _dir = Vector3.Reflect(_dir, hit.normal);
-                lr.SetPosition(i + 1, hit.point);
 
                 // 만약 충돌했던 콜라이더가 Mirror 태그가 없다면 반사가 안 된다는 뜻.
                 // 반사가 끝났으니 반복문 탈출
