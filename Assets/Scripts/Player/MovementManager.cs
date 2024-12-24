@@ -13,7 +13,8 @@ public class MovementManager : MonoBehaviour
     [SerializeField]// 로켓 펀치하면 아이템을 가져오기 위한 큐브 
     GameObject rocketCubePrefab = null;
     RocketCube rocketCube = null; // 트리거 발생시 받아올 클래스
-    public int preparedHandCnt = 0;
+    public int preparedHandCntR = 0;
+    public int preparedHandCntL = 0;
     private Coroutine rocketMoveCoroutine; // 코루틴을 추적할 변수
     private GameObject rocketCubeGo = null;
     private void Start()
@@ -94,37 +95,61 @@ public class MovementManager : MonoBehaviour
     }
     #endregion
     #region 로켓펀치
+
+    public void RocketPunchReadyR(float _rocketMoveSpeed)
+    {
+        preparedHandCntR++;
+        if (preparedHandCntR > 1) // 1 초과 할 경우가 생겼을 시
+        {
+            preparedHandCntR = 1; // 1 로 초기화
+        }
+        RocketPunchReady(_rocketMoveSpeed);
+    }
+    public void RocketPunchReadyL(float _rocketMoveSpeed)
+    {
+        preparedHandCntL++;
+        if (preparedHandCntL > 1) // 1 초과 할 경우가 생겼을 시
+        {
+            preparedHandCntL = 1; // 1 로 초기화
+        }
+        RocketPunchReady(_rocketMoveSpeed);
+    }
     public void RocketPunchReady(float _rocketMoveSpeed)
     {
-        preparedHandCnt++;
-        if (preparedHandCnt < 0) // 2 초과로 내려가는 경우가 생겼을 시
-        {
-            preparedHandCnt = 2; // 2 으로 초기화
-        }
         //Debug.Log("로켓펀치 준비된 손 갯수 : " + preparedHandCnt);
-        if (preparedHandCnt == 1) // 카운트 2개가 되면 실행
+        if (preparedHandCntR == 1 || preparedHandCntL == 1) // 한손이라도 준비 되면
         {       
             // 이미 실행 중인 코루틴이 있다면 먼저 멈추고, 새로운 코루틴 시작
             if (rocketMoveCoroutine != null)
             {
                 StopCoroutine(rocketMoveCoroutine);
-                if (rocketCube.iscatched)
+                if (rocketCube.iscatched) // 로켓큐브가 무언가 잡은 상태라면
                 {
-                    rocketCube.ParentNull();
+                    rocketCube.ParentNull(); // 자식 해제
+                    rocketCube.ReUseGravity(); // 중력을 해제 했었다면 활성화
                 }
-                    Destroy(rocketCubeGo);
-                    rocketCubeGo = null;
+                Destroy(rocketCubeGo); // 로켓 큐브 파괴
+                rocketCubeGo = null;  // 널로 설정
             }
 
             rocketMoveCoroutine = StartCoroutine(RocketMoveCo(_rocketMoveSpeed));
         }
     }
-    public void RocketPunchUnready()
+    public void RocketPunchUnreadyR()
     {
-        preparedHandCnt--;
-        if(preparedHandCnt < 0) // 0 미만으로 내려가는 경우가 생겼을 시
+        preparedHandCntR--;
+        if(preparedHandCntR < 0) // 0 미만으로 내려가는 경우가 생겼을 시
         {
-            preparedHandCnt = 0; // 0 으로 초기화
+            preparedHandCntR = 0; // 0 으로 초기화
+        }
+
+    }    
+    public void RocketPunchUnreadyL()
+    {
+        preparedHandCntL--;
+        if(preparedHandCntL < 0) // 0 미만으로 내려가는 경우가 생겼을 시
+        {
+            preparedHandCntL = 0; // 0 으로 초기화
         }
 
     }
@@ -139,21 +164,20 @@ public class MovementManager : MonoBehaviour
         Vector3 catchedPosition = Vector3.zero; // 물건 잡힌 위치 지역변수
         float t = 0; // 오브젝트에 닿은 후 돌아오는 경과 시간
 
-        while (t == 0 && 2 > preparedHandCnt) //준비 된 손이 하나고 발사 경과 시간이 0 일 경우  플레어 앞에 항상 위치
+        while (t == 0 && preparedHandCntR == 1 || preparedHandCntL == 1) //준비 된 손이 하나고 발사 경과 시간이 0 일 경우  플레어 앞에 항상 위치
         {
             rocketCubeGo.transform.position = playerCamera.transform.position + playerCamera.transform.forward; // 매 프레임 플레이어 카메라 앞에 위치
             rocketCubeGo.transform.rotation = playerCamera.transform.rotation; // 매 프레임 카메라 로테이션이랑 일치 시킴
-
-            if (preparedHandCnt == 0)
-            {
-                Destroy(rocketCubeGo); // 게임 오브젝트 파괴
-                Debug.Log("발사준비 해제" + preparedHandCnt);
-                rocketCubeGo = null;  // 널로 설정
-                yield break; // 코루틴 종료
-            }
             yield return null;
         }
-        if (preparedHandCnt == 2) // 준비된 손이 두개 일 경우
+        if (preparedHandCntR == 0 && preparedHandCntL == 0)
+        {
+            Destroy(rocketCubeGo); // 게임 오브젝트 파괴
+            Debug.Log("발사준비 해제");
+            rocketCubeGo = null;  // 널로 설정
+            yield break; // 코루틴 종료
+        }
+        if (preparedHandCntR == 1 && preparedHandCntL == 1) // 준비된 손이 두개 일 경우
         {
             HeadVector3 = playerCamera.transform.position + playerCamera.transform.forward;
             HeadDir = Vector3.Normalize(playerCamera.transform.forward);
@@ -186,16 +210,20 @@ public class MovementManager : MonoBehaviour
                     }
                     if (t > 3.5)
                     {
-                        rocketCube.ParentNull(); // 자식 해제
-                        rocketCube.ReUseGravity(); // 중력을 해제 했었다면 활성화
-                        Destroy(rocketCubeGo); // 로켓 큐브 파괴
-                        rocketCubeGo = null;  // 널로 설정
+                        if (rocketCubeGo != null)
+                        {
+                            rocketCube.ParentNull(); // 자식 해제
+                            rocketCube.ReUseGravity(); // 중력을 해제 했었다면 활성화
+                            Destroy(rocketCubeGo); // 로켓 큐브 파괴
+                            rocketCubeGo = null;  // 널로 설정
+                            rocketCube.isFired = false; // 더이상 로켓큐브가 트리거된 오브젝트를 자식으로 안만들게 설정
+                        }
                     }
                     t += Time.deltaTime;
                 }
                 yield return null;
             }
-            rocketCube.isFired = false;
+
         }
     }
     #endregion

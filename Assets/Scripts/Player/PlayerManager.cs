@@ -37,13 +37,21 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
     #region ·ÎÄÏÆÝÄ¡
-    public void RocketPunchLaunchReady()
+    public void RocketPunchLaunchReadyR()
     {
-        movementManager.RocketPunchReady(rocketMoveSpeed);
+        movementManager.RocketPunchReadyR(rocketMoveSpeed);
+    }   
+    public void RocketPunchLaunchReadyL()
+    {
+        movementManager.RocketPunchReadyL(rocketMoveSpeed);
     }     
-    public void RocketPunchLaunchUnready()
+    public void RocketPunchLaunchUnreadyR()
     {
-        movementManager.RocketPunchUnready();
+        movementManager.RocketPunchUnreadyR();
+    }        
+    public void RocketPunchLaunchUnreadyL()
+    {
+        movementManager.RocketPunchUnreadyL();
     }    
     #endregion
 }
