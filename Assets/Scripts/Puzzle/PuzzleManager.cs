@@ -11,6 +11,7 @@ public class PuzzleManager : MonoBehaviour
         public List<GameObject> reactiveObjects;
     }
 
+
     /// <summary>
     /// 퍼즐 오브젝트와 퍼즐에 반응하는 오브젝트들의 목록. 인스펙터 상에서 편집할 수 있음.
     /// </summary>

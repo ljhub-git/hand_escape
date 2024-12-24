@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,6 +21,11 @@ public class BoardGen : MonoBehaviour
     GameObject[,] mTileGameObjects = null;
 
     public Transform parentForTiles = null;
+
+    [SerializeField]
+    private Jigsaw_PuzzleManager puzzleManager;
+
+    public int numRandomTiles = 2;  // 랜덤 배치할 타일의 개수를 설정
 
     Sprite LoadBaseTexture()
     {
@@ -71,6 +77,7 @@ public class BoardGen : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         mBaseSpriteOpaque = LoadBaseTexture();
         mGameObjectQpaque = new GameObject();
         mGameObjectQpaque.name = imageFilename + "_Opaque";
@@ -86,6 +93,8 @@ public class BoardGen : MonoBehaviour
         mGameObjectQpaque.gameObject.SetActive(false);
 
         SetCameraPosition();
+
+        puzzleManager.SetTotalTiles(numRandomTiles);
 
         //CreateJigsawTiles();
         StartCoroutine(Coroutine_CreateJigsawTiles());
@@ -163,15 +172,51 @@ public class BoardGen : MonoBehaviour
         mTiles = new Tile[numTileX, numTileY];
         mTileGameObjects = new GameObject[numTileX, numTileY];
 
+        List<Vector2Int> randomTilePositions = new List<Vector2Int>();
+
+        // 랜덤으로 배치할 타일들의 위치를 저장
+        while (randomTilePositions.Count < numRandomTiles)
+        {
+            int randomX = Random.Range(0, numTileX);
+            int randomY = Random.Range(0, numTileY);
+
+            Vector2Int randomPosition = new Vector2Int(randomX, randomY);
+            if (!randomTilePositions.Contains(randomPosition)) // 중복되지 않도록 확인
+            {
+                randomTilePositions.Add(randomPosition);
+            }
+        }
+
         for (int i = 0; i < numTileX; i++) 
         {
             for (int j = 0; j < numTileY; j++) 
             {
                 mTiles[i, j] = CreateTile(i, j, baseTexture);
                 mTileGameObjects[i, j] = CreateGameObjectFromTile(mTiles[i, j]);
+
+                // 타일을 PuzzleManager에 등록
+                TileMovement tileMovement = mTileGameObjects[i, j].GetComponent<TileMovement>();
+                tileMovement.SetPuzzleManager(puzzleManager); // PuzzleManager 설정
+
                 if (parentForTiles != null)
                 {
                     mTileGameObjects[i, j].transform.SetParent(parentForTiles);
+                }
+
+                // 랜덤하게 선택된 타일은 랜덤 위치로 배치
+                if (randomTilePositions.Contains(new Vector2Int(i, j)))
+                {
+                    Vector3 randomPosition = new Vector3(
+                        Random.Range(-380f, -135f),
+                        Random.Range(0f, 650f),
+                        0f
+                    );
+                    mTileGameObjects[i, j].transform.position = randomPosition;
+                }
+                else
+                {
+                    // 비활성화된 타일은 이동 불가능
+                    tileMovement.DisableTileCollider();
                 }
 
                 yield return null;
@@ -251,6 +296,8 @@ public class BoardGen : MonoBehaviour
         tile.Apply();
         return tile;
     }
+
+
 
     // Update is called once per frame
     void Update()
