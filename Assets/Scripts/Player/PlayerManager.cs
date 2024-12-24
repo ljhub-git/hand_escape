@@ -44,6 +44,6 @@ public class PlayerManager : MonoBehaviour
     public void RocketPunchLaunchUnready()
     {
         movementManager.RocketPunchUnready();
-    }    
+    }
     #endregion
 }
