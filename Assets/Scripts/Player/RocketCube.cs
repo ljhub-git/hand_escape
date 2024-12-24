@@ -8,7 +8,6 @@ public class RocketCube : MonoBehaviour
     private GameObject catchedObject = null; // Trigger 오브젝트를 자식으로 만들기 위해 컴퍼넌트 가져옴
     public Vector3 catchedObjectPosition = Vector3.zero; // Trigger 오브젝트 position 값 저장하기 위함
     private Rigidbody catchedObjectRb = null; // Rigidbody useGravitiy를 온오프 하기위해 컴퍼넌트 가저옴
-    private bool isRbChanged = false; // Rigidbody를 바꾼적이 있는지 체크
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
@@ -29,7 +28,6 @@ public class RocketCube : MonoBehaviour
             if (catchedObjectRb.useGravity == true)
             {
                 catchedObjectRb.useGravity = false; // 중력이 적용중이면 중력 비활성화
-                isRbChanged = true;
             }
 
         }
@@ -44,13 +42,6 @@ public class RocketCube : MonoBehaviour
     }
     public void ReUseGravity()
     {
-        if(isRbChanged == true)
-        {
-            catchedObjectRb.useGravity = true;
-        }
-        if (isRbChanged == false)
-        {
-            Debug.Log("I didn't Change Use Gravity bool");
-        }
-    } // 중력 해제 했었다면 중력 재가동
+        catchedObjectRb.useGravity = true;
+    } 
 }
