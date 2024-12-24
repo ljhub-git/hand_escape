@@ -2,15 +2,36 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private static GameManager instance = null;
+
+    private bool isDebugMode = false;
+
+    public static GameManager Instance
     {
-        
+        get { return instance; }
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool IsDebugMode
     {
-        
+        get { return isDebugMode; }
     }
+
+    public void StartDebugMode()
+    {
+        isDebugMode = true;
+    }
+
+    public void EndDebugMode()
+    {
+        isDebugMode = false;
+    }
+
+    private void Awake()
+    {
+        if (instance != null)
+            Destroy(gameObject);
+        else
+            instance = this;
+    }
+
 }
