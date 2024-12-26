@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hand
   - Mirror
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -14,11 +15,11 @@ TagManager:
   - Water
   - UI
   - Marker
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Interactable
+  - InteractableIgnoreRay
+  - Body
+  - Furniture_Static
+  - Furniture_Movable
   - 
   - 
   - 
