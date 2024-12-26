@@ -18,8 +18,8 @@ TagManager:
   - Interactable
   - InteractableIgnoreRay
   - Body
-  - 
-  - 
+  - Furniture_Static
+  - Furniture_Movable
   - 
   - 
   - 
