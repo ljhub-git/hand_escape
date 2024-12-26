@@ -3,14 +3,12 @@ using UnityEngine;
 public class LaserPuzzle : MonoBehaviour, IPuzzleObject
 {
     [SerializeField]
-    private LaserGoal goal = null;
-
-    [SerializeField]
     private Transform startPoint = null;
 
     private LineRenderer lr = null;
 
-    int maxBounces = 20;
+    private int maxBounces = 20;
+    private float maxDistance = 15f;
 
     public void SolvePuzzle()
     {
@@ -33,8 +31,7 @@ public class LaserPuzzle : MonoBehaviour, IPuzzleObject
 
     private void CastLaser(Vector3 _pos, Vector3 _dir)
     {
-        // 레이저의 시작점은 시작 포인트로 고정.
-        lr.SetPosition(0, startPoint.position);
+        lr.SetPosition(0, _pos);
 
         // 최대 반사 가능한 횟수만큼 반복하면서 레이캐스트를 시행한다.
         for (int i = 0; i < maxBounces; ++i)
@@ -43,11 +40,13 @@ public class LaserPuzzle : MonoBehaviour, IPuzzleObject
             RaycastHit hit;
 
             // 레이가 어떤 물체에 맞을 경우
-            if (Physics.Raycast(ray, out hit, 15f))
+            if (Physics.Raycast(ray, out hit, maxDistance))
             {
                 _pos = hit.point;
+                // 충돌한 지점의 노말을 이용해서 반사 효과를 일으킨다.
                 _dir = Vector3.Reflect(_dir, hit.normal);
-                lr.SetPosition(i + 1, hit.point);
+                // 다음 시작 지점은 충돌한 지점.
+                lr.SetPosition(i + 1, _pos);
 
                 // 해당 물체가 레이저의 목표 골이라면 퍼즐이 풀린다.
                 if (hit.collider.GetComponent<LaserGoal>() != null)
@@ -67,9 +66,11 @@ public class LaserPuzzle : MonoBehaviour, IPuzzleObject
             else
             {
                 // 라인 렌더러의 위치 카운터를 동적으로 초기화해준다.
+                // 이거 안 해주면 라인 렌더러의 끝점이 이상한 곳으로 감.
                 lr.positionCount = i + 2;
 
-                lr.SetPosition(i + 1, _pos + _dir * 15f);
+                // 아무 물체에 안 맞았을 경우 라인 방향에서 최대거리만큼 간 뒤 끊는다.
+                lr.SetPosition(i + 1, _pos + _dir * maxDistance);
 
                 break;
             }
