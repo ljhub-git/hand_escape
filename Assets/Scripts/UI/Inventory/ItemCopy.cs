@@ -114,6 +114,10 @@ public class ItemCopy : MonoBehaviour
             rigidbody.useGravity = true;
             rigidbody.isKinematic = false;
         }
+
+        // 카메라의 전방 방향으로 힘을 적용
+        Vector3 forceDirection = Camera.main.transform.forward;
+        rigidbody.AddForce(forceDirection * 1f, ForceMode.Impulse); // 튕기는 힘
     }
 
     private void ResetDuplication()
