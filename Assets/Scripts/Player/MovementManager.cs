@@ -29,8 +29,6 @@ public class MovementManager : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
-
-
     }
 
     #region 전진, 후진, 정지
@@ -69,7 +67,7 @@ public class MovementManager : MonoBehaviour
         while (true)
         {
             HeadVector3 = playerCamera.transform.forward;
-            characterController.SimpleMove(HeadVector3 * _moveSpeed * Time.deltaTime);
+            characterController.SimpleMove(HeadVector3 * _moveSpeed * Time.fixedDeltaTime);
             yield return null;
         }
     }    
@@ -78,7 +76,7 @@ public class MovementManager : MonoBehaviour
         while (true)
         {
             HeadVector3 = playerCamera.transform.forward;
-            characterController.SimpleMove(HeadVector3 * _moveSpeed * Time.deltaTime * -1f);
+            characterController.SimpleMove(HeadVector3 * _moveSpeed * Time.fixedDeltaTime * -1f);
             yield return null;
         }
     }
@@ -126,7 +124,7 @@ public class MovementManager : MonoBehaviour
                 if (rocketCube.iscatched) // 로켓큐브가 무언가 잡은 상태라면
                 {
                     rocketCube.ParentNull(); // 자식 해제
-                    rocketCube.ReUseGravity(); // 중력을 해제 했었다면 활성화
+                    rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
                 }
                 Destroy(rocketCubeGo); // 로켓 큐브 파괴
                 rocketCubeGo = null;  // 널로 설정
@@ -214,7 +212,7 @@ public class MovementManager : MonoBehaviour
                         if (rocketCubeGo != null)
                         {
                             rocketCube.ParentNull(); // 자식 해제
-                            rocketCube.ReUseGravity(); // 중력을 해제 했었다면 활성화
+                            rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
                             Destroy(rocketCubeGo); // 로켓 큐브 파괴
                             rocketCubeGo = null;  // 널로 설정
                         }

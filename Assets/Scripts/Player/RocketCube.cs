@@ -40,7 +40,7 @@ public class RocketCube : MonoBehaviour
     {
         catchedObject.transform.SetParent(null);
     }
-    public void ReUseGravity()
+    public void UseGravity()
     {
         catchedObjectRb.useGravity = true;
     } 
