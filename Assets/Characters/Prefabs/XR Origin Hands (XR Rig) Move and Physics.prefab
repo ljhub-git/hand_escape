@@ -1698,7 +1698,6 @@ GameObject:
   - component: {fileID: 8831312611548048078}
   - component: {fileID: 7698906000825562132}
   - component: {fileID: 1826262705769218174}
-  - component: {fileID: 8914606707062231245}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -4162,6 +4161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2633564370256560949}
+  - component: {fileID: 3795628178933308904}
   m_Layer: 0
   m_Name: R_Wrist
   m_TagString: Untagged
@@ -9332,7 +9332,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6211256699153856712}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: RocketPunchLaunchReady
+        m_MethodName: RocketPunchLaunchReadyL
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9347,7 +9347,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6211256699153856712}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: RocketPunchLaunchUnready
+        m_MethodName: RocketPunchLaunchUnreadyL
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13382,7 +13382,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6211256699153856712}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: RocketPunchLaunchReady
+        m_MethodName: RocketPunchLaunchReadyR
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13397,7 +13397,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6211256699153856712}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: RocketPunchLaunchUnready
+        m_MethodName: RocketPunchLaunchUnreadyR
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14577,6 +14577,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8500562286987691060}
+  - component: {fileID: 7991078163003374754}
   m_Layer: 0
   m_Name: L_Wrist
   m_TagString: Untagged
@@ -15370,6 +15371,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8217495831810682382, guid: 620bc1b4ab69cb748a7b61c4d5183afa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7991078163003374754}
     - targetCorrespondingSourceObject: {fileID: 5652543798204087612, guid: 620bc1b4ab69cb748a7b61c4d5183afa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8542914061924821132}
@@ -15427,9 +15431,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2311739326646580250, guid: 620bc1b4ab69cb748a7b61c4d5183afa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 837711692713248516}
-    - targetCorrespondingSourceObject: {fileID: 193950873505681580, guid: 620bc1b4ab69cb748a7b61c4d5183afa, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 147650023674800433, guid: 620bc1b4ab69cb748a7b61c4d5183afa, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8914606707062231245}
+      addedObject: {fileID: 3795628178933308904}
     - targetCorrespondingSourceObject: {fileID: 7431757861457685202, guid: 620bc1b4ab69cb748a7b61c4d5183afa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1944659032905185421}
@@ -15649,28 +15653,6 @@ CapsuleCollider:
   m_Height: 0.05
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!64 &8914606707062231245
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953108791172087743}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4299625302041532480, guid: bf7151579c38e2a44be94ba8773876c1, type: 3}
 --- !u!136 &3094986932185678647
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15832,6 +15814,33 @@ CapsuleCollider:
   m_Height: 0.05
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3795628178933308904
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2725825288859791172}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!136 &1369319437965702562
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16384,3 +16393,30 @@ CapsuleCollider:
   m_Height: 0.1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7991078163003374754
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8826535464962892728}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
