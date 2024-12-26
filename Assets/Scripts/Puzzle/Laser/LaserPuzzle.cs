@@ -45,8 +45,6 @@ public class LaserPuzzle : MonoBehaviour, IPuzzleObject
             Ray ray = new Ray(pos, dir);
             RaycastHit hit;
 
-            Debug.DrawRay(pos, dir * maxDistance, Color.yellow);
-
             // 레이가 어떤 물체에 맞은 경우
             if (Physics.Raycast(ray, out hit, maxDistance))
             {
