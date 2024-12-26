@@ -29,8 +29,6 @@ public class MovementManager : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
-
-
     }
 
     #region 전진, 후진, 정지
@@ -69,7 +67,7 @@ public class MovementManager : MonoBehaviour
         while (true)
         {
             HeadVector3 = playerCamera.transform.forward;
-            characterController.SimpleMove(HeadVector3 * _moveSpeed * Time.deltaTime);
+            characterController.SimpleMove(HeadVector3 * _moveSpeed * Time.fixedDeltaTime);
             yield return null;
         }
     }    
@@ -78,7 +76,7 @@ public class MovementManager : MonoBehaviour
         while (true)
         {
             HeadVector3 = playerCamera.transform.forward;
-            characterController.SimpleMove(HeadVector3 * _moveSpeed * Time.deltaTime * -1f);
+            characterController.SimpleMove(HeadVector3 * _moveSpeed * Time.fixedDeltaTime * -1f);
             yield return null;
         }
     }
@@ -117,7 +115,7 @@ public class MovementManager : MonoBehaviour
     public void RocketPunchReady(float _rocketMoveSpeed)
     {
         //Debug.Log("로켓펀치 준비된 손 갯수 : " + preparedHandCnt);
-        if (preparedHandCntR == 1 || preparedHandCntL == 1) // 한손이라도 준비 되면
+        if ((preparedHandCntL + preparedHandCntR) == 1) // 한손이라도 준비 되면
         {       
             // 이미 실행 중인 코루틴이 있다면 먼저 멈추고, 새로운 코루틴 시작
             if (rocketMoveCoroutine != null)
@@ -126,13 +124,13 @@ public class MovementManager : MonoBehaviour
                 if (rocketCube.iscatched) // 로켓큐브가 무언가 잡은 상태라면
                 {
                     rocketCube.ParentNull(); // 자식 해제
-                    rocketCube.ReUseGravity(); // 중력을 해제 했었다면 활성화
+                    rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
                 }
                 Destroy(rocketCubeGo); // 로켓 큐브 파괴
                 rocketCubeGo = null;  // 널로 설정
             }
 
-            rocketMoveCoroutine = StartCoroutine(RocketMoveCo(_rocketMoveSpeed));
+        rocketMoveCoroutine = StartCoroutine(RocketMoveCo(_rocketMoveSpeed));
         }
     }
     public void RocketPunchUnreadyR()
@@ -163,8 +161,8 @@ public class MovementManager : MonoBehaviour
         Vector3 curPlayerPosition = Vector3.zero; // 최종적으로 돌아와야하는 위치 지역변수
         Vector3 catchedPosition = Vector3.zero; // 물건 잡힌 위치 지역변수
         float t = 0; // 오브젝트에 닿은 후 돌아오는 경과 시간
-
-        while (t == 0 && preparedHandCntR == 1 || preparedHandCntL == 1) //준비 된 손이 하나고 발사 경과 시간이 0 일 경우  플레어 앞에 항상 위치
+        Debug.Log("발사준비");
+        while (t == 0 && (preparedHandCntL + preparedHandCntR) == 1) //준비 된 손이 하나고 발사 경과 시간이 0 일 경우  플레어 앞에 항상 위치
         {
             rocketCubeGo.transform.position = playerCamera.transform.position + playerCamera.transform.forward; // 매 프레임 플레이어 카메라 앞에 위치
             rocketCubeGo.transform.rotation = playerCamera.transform.rotation; // 매 프레임 카메라 로테이션이랑 일치 시킴
@@ -179,6 +177,7 @@ public class MovementManager : MonoBehaviour
         }
         if (preparedHandCntR == 1 && preparedHandCntL == 1) // 준비된 손이 두개 일 경우
         {
+            Debug.Log("발사");
             HeadVector3 = playerCamera.transform.position + playerCamera.transform.forward;
             HeadDir = Vector3.Normalize(playerCamera.transform.forward);
             rocketCube.isFired = true;
@@ -208,15 +207,14 @@ public class MovementManager : MonoBehaviour
                         //rocketCubeGo.transform.position = Vector3.Lerp(HeadVector3, curPlayerPosition, t - 2); //
                         rocketCubeGo.transform.position = Vector3.Lerp(curPlayerPosition, HeadVector3, 3 - t); //  그 다음 플레이 발사한 위치에서 최종위치로 큐브 이동
                     }
-                    if (t > 3.5)
+                    if (t >= 3.5)
                     {
                         if (rocketCubeGo != null)
                         {
                             rocketCube.ParentNull(); // 자식 해제
-                            rocketCube.ReUseGravity(); // 중력을 해제 했었다면 활성화
+                            rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
                             Destroy(rocketCubeGo); // 로켓 큐브 파괴
                             rocketCubeGo = null;  // 널로 설정
-                            rocketCube.isFired = false; // 더이상 로켓큐브가 트리거된 오브젝트를 자식으로 안만들게 설정
                         }
                     }
                     t += Time.deltaTime;

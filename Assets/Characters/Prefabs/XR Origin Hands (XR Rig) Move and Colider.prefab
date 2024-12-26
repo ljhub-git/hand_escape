@@ -1698,7 +1698,6 @@ GameObject:
   - component: {fileID: 8831312611548048078}
   - component: {fileID: 7698906000825562132}
   - component: {fileID: 1826262705769218174}
-  - component: {fileID: 8914606707062231245}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -9332,7 +9331,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6211256699153856712}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: RocketPunchLaunchReady
+        m_MethodName: RocketPunchLaunchReadyL
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9347,7 +9346,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6211256699153856712}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: RocketPunchLaunchUnready
+        m_MethodName: RocketPunchLaunchUnreadyL
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13382,7 +13381,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6211256699153856712}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: RocketPunchLaunchReady
+        m_MethodName: RocketPunchLaunchReadyR
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13397,7 +13396,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6211256699153856712}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: RocketPunchLaunchUnready
+        m_MethodName: RocketPunchLaunchUnreadyR
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15427,9 +15426,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2311739326646580250, guid: 620bc1b4ab69cb748a7b61c4d5183afa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 837711692713248516}
-    - targetCorrespondingSourceObject: {fileID: 193950873505681580, guid: 620bc1b4ab69cb748a7b61c4d5183afa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8914606707062231245}
     - targetCorrespondingSourceObject: {fileID: 7431757861457685202, guid: 620bc1b4ab69cb748a7b61c4d5183afa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1944659032905185421}
@@ -15649,28 +15645,6 @@ CapsuleCollider:
   m_Height: 0.05
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!64 &8914606707062231245
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953108791172087743}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4299625302041532480, guid: bf7151579c38e2a44be94ba8773876c1, type: 3}
 --- !u!136 &3094986932185678647
 CapsuleCollider:
   m_ObjectHideFlags: 0
