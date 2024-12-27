@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Jeon/Jeon_TestScene.unity
+    path: Assets/Scenes/Jeon/Jeon_FurnitureTest.unity
     guid: 275c0305e95a5ec4a86478f7a0b57546
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity

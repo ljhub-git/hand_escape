@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Hand
   - Mirror
-  - Items
   layers:
   - Default
   - TransparentFX
@@ -15,17 +14,17 @@ TagManager:
   - Water
   - UI
   - Marker
-  - Wall
+  - Left Hand Physics
+  - Right Hand Physics
+  - Non Physical Hand
   - 
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Prop_Static
+  - Prop_Movable
   - 
   - 
   - 
