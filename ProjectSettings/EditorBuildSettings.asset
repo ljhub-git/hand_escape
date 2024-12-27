@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Jeon/Jeon_FurnitureTest.unity
-    guid: 275c0305e95a5ec4a86478f7a0b57546
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Jeon/Jeon_LaserTest.unity
+    guid: fa7349df68f1217418fcc21dd30aeac1
+  - enabled: 1
+    path: Assets/Scenes/Jeon/Jeon_MultiplayTest.unity
+    guid: 281dd0b6cb8bcda4695ca63105ca0b0b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0684c026621a12e4d87c274b5a920292, type: 2}
