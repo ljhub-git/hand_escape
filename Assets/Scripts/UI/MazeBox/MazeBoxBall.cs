@@ -1,45 +1,61 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class MazeBoxBall : MonoBehaviour
 {
-    private Rigidbody childRigidbody;
+    public float maxDelta = 0.01f;
     private Vector3 previousPosition;
-    private Vector3 velocity;
-    private Vector3 acceleration;
+    private Rigidbody rb;
 
-    public float forceThreshold = 20f; // 제어하려는 힘의 임계값
-
-    void Start()
+    private void Awake()
     {
-        childRigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         previousPosition = transform.localPosition;
     }
 
-    void FixedUpdate()
+    private void Update()
     {
-        // 자식의 현재 속도 계산
-        velocity = (transform.localPosition - previousPosition) / Time.fixedDeltaTime;
-        acceleration = (velocity - (previousPosition - transform.localPosition) / Time.fixedDeltaTime) / Time.fixedDeltaTime;
+        Vector3 currentLocalPosition = transform.localPosition;
+        Vector3 delta = currentLocalPosition - previousPosition;
 
-        previousPosition = transform.localPosition;
-        Debug.LogFormat("accel : {0}",acceleration);
-        // 일정 힘 이상 가해지면 제어
-        if (acceleration.magnitude > forceThreshold)
+        // Check if the movement exceeds the threshold and adjust
+        if (delta.magnitude > maxDelta)
         {
-            ControlChild();
+            // 큰 변화 감지 - 무시하거나 제한
+            rb.isKinematic = true;
+            currentLocalPosition = previousPosition + delta.normalized * maxDelta;
+            //currentLocalPosition = previousPosition;
         }
         else
         {
-            childRigidbody.isKinematic = false;
+            rb.isKinematic = false;
+        }
+        transform.localPosition = ApplyPositionLimits(currentLocalPosition);
+        previousPosition = transform.localPosition;
+
+        // 물체가 빠져나왔을 때 
+        if (transform.localPosition.z < -0.25f)
+        {
+            //부모오브젝트제거
+            transform.SetParent(null);
+            //현재스크립트 비활성화
+            this.enabled = false;
         }
     }
 
-    void ControlChild()
+    private Vector3 ApplyPositionLimits(Vector3 localPosition)
     {
-        transform.localPosition = previousPosition;
-        //// 제어 로직 예: 자식의 속도나 위치를 제한하는 코드 작성
-        //childRigidbody.linearVelocity = Vector3.zero;
-        childRigidbody.isKinematic = true;
+        float xMin = -0.23f, xMax = 0.23f;
+        float yMin = -0.01f, yMax = 0.01f;
+        
+        float zMin = Mathf.Abs(localPosition.x) < 0.0075f ? -0.3f : -0.23f;
+        float zMax = 0.23f;
+
+        localPosition.x = Mathf.Clamp(localPosition.x, xMin, xMax);
+        localPosition.y = Mathf.Clamp(localPosition.y, yMin, yMax);
+        localPosition.z = Mathf.Clamp(localPosition.z, zMin, zMax);
+
+        return localPosition;
     }
 }
