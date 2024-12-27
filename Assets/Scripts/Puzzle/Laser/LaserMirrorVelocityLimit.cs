@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class LaserMirrorVelocityLimit : MonoBehaviour
 {
+    [SerializeField]
+    private float maxAngularVelocity = 1f;
+
     private Rigidbody rb = null;
 
     private void Awake()
