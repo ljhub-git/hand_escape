@@ -23,13 +23,14 @@ public class MazeBoxBall : MonoBehaviour
         if (delta.magnitude > maxDelta)
         {
             // 큰 변화 감지 - 무시하거나 제한
-            rb.isKinematic = true;
+            rb.linearVelocity = Vector3.zero;
+            //rb.isKinematic = true;
             currentLocalPosition = previousPosition + delta.normalized * maxDelta;
             //currentLocalPosition = previousPosition;
         }
         else
         {
-            rb.isKinematic = false;
+            //rb.isKinematic = false;
         }
         transform.localPosition = ApplyPositionLimits(currentLocalPosition);
         previousPosition = transform.localPosition;
@@ -39,6 +40,7 @@ public class MazeBoxBall : MonoBehaviour
         {
             //부모오브젝트제거
             transform.SetParent(null);
+            //rb.isKinematic = false;
             //현재스크립트 비활성화
             this.enabled = false;
         }

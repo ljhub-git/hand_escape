@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2387939907643752806, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
       propertyPath: maxDelta
-      value: 0.02
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4605812994414741394, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
       propertyPath: m_Name
