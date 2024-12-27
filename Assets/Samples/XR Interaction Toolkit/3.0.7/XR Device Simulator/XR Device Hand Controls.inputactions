@@ -9,7 +9,7 @@
                     "name": "Poke",
                     "type": "Button",
                     "id": "40eda730-1343-4304-a541-d7c035370ce5",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -18,7 +18,7 @@
                     "name": "Pinch",
                     "type": "Button",
                     "id": "34056e04-d03d-4802-982b-a9972fd692ff",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -27,7 +27,7 @@
                     "name": "Grab",
                     "type": "Button",
                     "id": "07d064b1-f208-4c9f-bd5a-2620a10e7bab",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

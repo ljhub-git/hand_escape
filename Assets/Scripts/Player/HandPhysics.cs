@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class HandPhysics : MonoBehaviour
 {
@@ -12,14 +13,30 @@ public class HandPhysics : MonoBehaviour
     public Renderer nonPhysicalHand;
     public float showNonPhysicalHandDistance = 0.05f;
 
+    private Collider[] handColliders;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        handColliders = GetComponentsInChildren<CapsuleCollider>();
         rb.linearDamping = 10f;  // ¼Óµµ °¨¼è
         rb.angularDamping = 10f;  // È¸Àü °¨¼è
-        rb.mass = 2f;
+        rb.mass = 100f;
+    }
 
-
+    public void EnableHandCollider()
+    {
+        foreach (var item in handColliders)
+        {
+            item.enabled = true;
+        }
+    }
+    public void DisableHandCollider()
+    {
+        foreach (var item in handColliders)
+        {
+            item.enabled = false;
+        }
     }
 
     private void Update()
@@ -59,4 +76,6 @@ public class HandPhysics : MonoBehaviour
         Quaternion smoothedRotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * smoothRotationFactor);
         rb.MoveRotation(smoothedRotation);
     }
+
+
 }
