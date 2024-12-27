@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6137057210524586408}
-  m_Layer: 11
+  m_Layer: 17
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 5137969175155146881}
   - component: {fileID: 795322194325083578}
   - component: {fileID: 4612182002796216337}
-  m_Layer: 10
+  m_Layer: 16
   m_Name: separatorDoor_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 3308652207190077934}
   - component: {fileID: 4219335005668724718}
   - component: {fileID: 5899333881809915964}
-  m_Layer: 11
+  m_Layer: 17
   m_Name: separatorDoor_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
