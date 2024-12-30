@@ -56,7 +56,7 @@ public class HandPhysics : MonoBehaviour
 
     void FixedUpdate()
     {
-        //position
+        //position 
         //rb.linearVelocity = (target.position - transform.position)/Time.fixedDeltaTime;
         Vector3 targetPosition = target.position;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * smoothPositionFactor);
