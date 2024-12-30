@@ -1,11 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 public class PlayerManager : MonoBehaviour
 {
     private float moveSpeed = 120f; // 이동 속도
     private float rocketMoveSpeed = 180f; // 로켓 이동 속도
     private MovementManager movementManager; // 하위 매니저 연결
-    public bool isStitting = false;
-    
     private void Awake()
     {
         movementManager = GetComponent<MovementManager>();
@@ -53,16 +52,7 @@ public class PlayerManager : MonoBehaviour
     public void RocketPunchLaunchUnreadyL()
     {
         movementManager.RocketPunchUnreadyL();
-    }
-    #endregion
-    #region 앉기 서기 모드
-    public void OnSittingMode()
-    {
-        movementManager.SittingMode();
     }    
-    public void OnStandingMode()
-    {
-        movementManager.StandingMode();
-    }
     #endregion
+    
 }
