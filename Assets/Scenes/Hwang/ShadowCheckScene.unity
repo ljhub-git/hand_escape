@@ -1321,7 +1321,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
+  m_ForceGravityOnDetach: 1
   m_RetainTransformParent: 1
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
@@ -1661,6 +1661,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1845414561277072469, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+      propertyPath: m_SystemGestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845414561277072469, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+      propertyPath: m_SystemGestureEnded.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845414561277072469, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+      propertyPath: m_SystemGestureStarted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845414561277072469, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+      propertyPath: m_SystemGestureStarted.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5979123842049116059, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+      propertyPath: m_PokeGestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5979123842049116059, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+      propertyPath: m_PokeGestureStarted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6316535130673002781, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_StartingInteractionOverridesMap.Array.size
       value: 0
@@ -1669,13 +1693,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Duplicated Hand With Mesh Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8389632017875275920, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9022478869053830777, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5
+      value: 1.39
       objectReference: {fileID: 0}
     - target: {fileID: 9022478869053830777, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13
+      value: 1.37
       objectReference: {fileID: 0}
     - target: {fileID: 9022478869053830777, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_LocalPosition.z
