@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 using System;
+using UnityEngine.Events;
 public class MovementManager : MonoBehaviour
 {
     private CharacterController characterController; //캐릭터 컨트롤러
@@ -17,6 +18,8 @@ public class MovementManager : MonoBehaviour
     public int preparedHandCntL = 0;
     private Coroutine rocketMoveCoroutine; // 코루틴을 추적할 변수
     private GameObject rocketCubeGo = null;
+
+
     private void Start()
     {
         if (rocketCubePrefab == null) // 프리펩이 없으면 로켓큐브 로딩
@@ -225,6 +228,16 @@ public class MovementManager : MonoBehaviour
                 yield return null;
             }
         }
+    }
+    #endregion
+    #region 앉기서기모드
+    public void SittingMode()
+    {
+        characterController.height = 1.85f;
+    }
+    public void StandingMode()
+    {
+        characterController.height = 1.35f;
     }
     #endregion
 }
