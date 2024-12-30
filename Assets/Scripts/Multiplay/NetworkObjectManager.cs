@@ -8,7 +8,16 @@ using Photon.Realtime;
 
 public class NetworkObjectManager : MonoBehaviourPunCallbacks
 {
+    /// <summary>
+    /// 상호작용이 가능하면서 동기화하도록 설정된 오브젝트 딕셔너리
+    /// 키값은 포톤 뷰의 아이디임.
+    /// </summary>
     private Dictionary<int, GameObject> networkInteractableMap = null;
+
+    public Dictionary<int, GameObject> NetworkInteractableMap
+    {
+        get { return networkInteractableMap; }
+    }
 
     private void Awake()
     {
@@ -17,6 +26,9 @@ public class NetworkObjectManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        if (!PhotonNetwork.IsConnected)
+            return;
+
         XRGrabInteractable[] grabInteractables = FindObjectsByType<XRGrabInteractable>(FindObjectsSortMode.None);
 
         foreach(var interactable in grabInteractables)
@@ -31,38 +43,19 @@ public class NetworkObjectManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void OnInteractSelectEntered(SelectEnterEventArgs selectEnterEvent)
+    // 물체에 상호작용 시 해당 물체의 중력을 모든 클라이언트에서도 설정하도록 한다.
+    public void SetNetworkObjectGravityUsable(PhotonView _view, bool _usable)
     {
-        Debug.Log("Enter");
-
-        if(selectEnterEvent.interactableObject.transform.GetComponent<PhotonView>() == null)
-        {
-            Debug.LogWarning("XR Interactable Object must have Photon View in Our Project!");
+        if (!PhotonNetwork.IsConnected || _view == null)
             return;
-        }
 
-        int viewId = selectEnterEvent.interactableObject.transform.GetComponent<PhotonView>().ViewID;
+        int id = _view.ViewID;
 
-        photonView.RPC("SetObjectGravityUsable", RpcTarget.All, viewId, false);
-    }
-
-    public void OnInteractSelectExited(SelectExitEventArgs selectExitEvent)
-    {
-        Debug.Log("Exit");
-
-        if (selectExitEvent.interactableObject.transform.GetComponent<PhotonView>() == null)
-        {
-            Debug.LogWarning("XR Interactable Object must have Photon View in Our Project!");
-            return;
-        }
-
-        int viewId = selectExitEvent.interactableObject.transform.GetComponent<PhotonView>().ViewID;
-
-        photonView.RPC("SetObjectGravityUsable", RpcTarget.All, viewId, true);
+        photonView.RPC("SetObjectGravityUsableRPC", RpcTarget.All, id, _usable);
     }
 
     [PunRPC]
-    public void SetObjectGravityUsable(int _viewId, bool _usable)
+    private void SetObjectGravityUsableRPC(int _viewId, bool _usable)
     {
         Debug.Log("SetObjectGravityUsable RPC Called!");
 
