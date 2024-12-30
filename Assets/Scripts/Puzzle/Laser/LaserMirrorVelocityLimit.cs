@@ -14,6 +14,6 @@ public class LaserMirrorVelocityLimit : MonoBehaviour
 
     private void Start()
     {
-        rb.maxAngularVelocity = 1f;
+        rb.maxAngularVelocity = maxAngularVelocity;
     }
 }
