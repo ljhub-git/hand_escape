@@ -7,6 +7,7 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private TMP_InputField passwordInput = null;
     [SerializeField] private TextMeshProUGUI loginStatus = null;
 
+    //public bool isLogin = false;
     private TitleSceneManager titleSceneMng = null;
 
     public string CurrentID

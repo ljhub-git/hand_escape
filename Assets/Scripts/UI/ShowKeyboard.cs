@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class ShowKeyboard : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject keyboard;
+    
     private TMP_InputField inputField;
 
-    public float distance = 0.3f;
-    public float verticalOffset = -0.2f;
+    public float distance = 0.4f;
+    public float verticalOffset = -0.3f;
 
     public Transform positionSource;
 
@@ -21,6 +24,7 @@ public class ShowKeyboard : MonoBehaviour
 
     public void OpenKeyboard()
     {
+        keyboard.SetActive(true);
         NonNativeKeyboard.Instance.InputField = inputField;
         NonNativeKeyboard.Instance.PresentKeyboard(inputField.text);
 

@@ -12,6 +12,8 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
 
     private const int MaxPlayerPerRoom = 2;
 
+    private bool isLogin = false;
+
 
     #region Public Func
     public void TryLogin(string _id, string _pw)
@@ -21,6 +23,7 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
 
     public void OnLoginSuccess()
     {
+        isLogin = true;
         Connect();
     }
 
