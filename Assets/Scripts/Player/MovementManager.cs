@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 using System;
+using UnityEngine.Events;
 public class MovementManager : MonoBehaviour
 {
     private CharacterController characterController; //캐릭터 컨트롤러
@@ -17,6 +18,8 @@ public class MovementManager : MonoBehaviour
     public int preparedHandCntL = 0;
     private Coroutine rocketMoveCoroutine; // 코루틴을 추적할 변수
     private GameObject rocketCubeGo = null;
+
+
     private void Start()
     {
         if (rocketCubePrefab == null) // 프리펩이 없으면 로켓큐브 로딩
@@ -154,7 +157,6 @@ public class MovementManager : MonoBehaviour
 
     public IEnumerator RocketMoveCo(float _rocketMoveSpeed)
     {
-        HeadVector3 = Vector3.zero; // 발사할 위치
         HeadDir = Vector3.zero; // 발사할 방향 벡터
         rocketCubeGo = Instantiate(rocketCubePrefab, HeadVector3, Quaternion.identity); // 인스턴스화 생성
         rocketCube = rocketCubeGo.GetComponent<RocketCube>(); // 트리거 발생시 여기서 신호가 온다
@@ -179,33 +181,37 @@ public class MovementManager : MonoBehaviour
         {
             Debug.Log("발사");
             HeadVector3 = playerCamera.transform.position + playerCamera.transform.forward;
+            rocketCube.RemeberCatcherPosition(HeadVector3);
             HeadDir = Vector3.Normalize(playerCamera.transform.forward);
             rocketCube.isFired = true;
             while (t <= 4)
             {
-
+                
                 if (!rocketCube.iscatched) // 물건이 트리거 되기 전까지
                 {
                     //rocketCubeGo.transform.position = HeadVector3 * Time.deltaTime * _rocketMoveSpeed; 
-
-                    rocketCubeGo.transform.position += (HeadDir * Time.deltaTime * _rocketMoveSpeed * 0.1f); // 매 프레임 헤드 정면으로 나아감
+                    //rocketCubeGo.transform.position += (HeadDir * Time.deltaTime * _rocketMoveSpeed * 0.1f); // 매 프레임 헤드 정면으로 나아감
+                    rocketCubeGo.transform.Translate(HeadDir * _rocketMoveSpeed * 0.001f, transform);
                 }
                 if (rocketCube.iscatched && rocketCubeGo != null) // 물건이 트리거 되고 게임오브젝트가 null 상태가 아니라면
                 {
-                    catchedPosition = rocketCube.catchedObjectPosition; //잡힌 오브젝트 위치만 매 프레임 갱신
-                    curPlayerPosition = playerCamera.transform.position + playerCamera.transform.forward; // 플레이어 앞 위치 매 프레임 갱신
+                    if (t == 0)
+                    {
+                        catchedPosition = rocketCube.catchedObjectPosition; //잡힌 오브젝트 위치 맨처음 저장
+                    }
+                    curPlayerPosition = playerCamera.transform.position + (playerCamera.transform.forward * 0.5f); // 플레이어 앞 위치 매 프레임 갱신
                     if (1 > t)
                     {
                         rocketCubeGo.transform.position = Vector3.Lerp(rocketCubeGo.transform.position, catchedPosition, t); // 감시된 오브젝트로 큐브 이동
                     }
                     if (t >= 1 && 2 > t)
                     {
-                        rocketCubeGo.transform.position = Vector3.Lerp(catchedPosition, HeadVector3, t - 1); // 발사한 위치로 큐브 이동
+                        rocketCubeGo.transform.position = Vector3.Lerp(catchedPosition, rocketCube.WhoCatchMe(), t - 1); // 발사한 위치로 큐브 이동
                     }
                     if (t >= 2)
                     {
                         //rocketCubeGo.transform.position = Vector3.Lerp(HeadVector3, curPlayerPosition, t - 2); //
-                        rocketCubeGo.transform.position = Vector3.Lerp(curPlayerPosition, HeadVector3, 3 - t); //  그 다음 플레이 발사한 위치에서 최종위치로 큐브 이동
+                        rocketCubeGo.transform.position = Vector3.Lerp(curPlayerPosition, rocketCube.WhoCatchMe(), 3 - t); //  그 다음 플레이 발사한 위치에서 최종위치로 큐브 이동
                     }
                     if (t >= 3.5)
                     {
@@ -221,8 +227,17 @@ public class MovementManager : MonoBehaviour
                 }
                 yield return null;
             }
-
         }
+    }
+    #endregion
+    #region 앉기서기모드
+    public void SittingMode()
+    {
+        characterController.height = 1.85f;
+    }
+    public void StandingMode()
+    {
+        characterController.height = 1.35f;
     }
     #endregion
 }
