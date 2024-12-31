@@ -9,7 +9,6 @@ public class MovementManager : MonoBehaviour
     private Coroutine moveCoroutine; // 코루틴을 추적할 변수
     private Camera playerCamera; // 카메라 연결 (카메라 방향 벡터 구하기용);
     private Vector3 HeadVector3 = Vector3.zero; // 헤드 위치
-    private Vector3 HeadDir = Vector3.zero; // 헤드 방향 벡터
 
     [SerializeField]// 로켓 펀치하면 아이템을 가져오기 위한 큐브 
     GameObject rocketCubePrefab = null;
@@ -157,7 +156,6 @@ public class MovementManager : MonoBehaviour
 
     public IEnumerator RocketMoveCo(float _rocketMoveSpeed)
     {
-        HeadDir = Vector3.zero; // 발사할 방향 벡터
         rocketCubeGo = Instantiate(rocketCubePrefab, HeadVector3, Quaternion.identity); // 인스턴스화 생성
         rocketCube = rocketCubeGo.GetComponent<RocketCube>(); // 트리거 발생시 여기서 신호가 온다
         Vector3 curPlayerPosition = Vector3.zero; // 최종적으로 돌아와야하는 위치 지역변수
@@ -182,7 +180,7 @@ public class MovementManager : MonoBehaviour
             Debug.Log("발사");
             HeadVector3 = playerCamera.transform.position + playerCamera.transform.forward;
             rocketCube.RemeberCatcherPosition(HeadVector3);
-            HeadDir = Vector3.Normalize(playerCamera.transform.position - playerCamera.transform.forward);
+            Vector3 HeadDir = Vector3.Normalize(playerCamera.transform.forward);
             rocketCube.isFired = true;
             while (t <= 4)
             {
@@ -190,8 +188,8 @@ public class MovementManager : MonoBehaviour
                 if (!rocketCube.iscatched) // 물건이 트리거 되기 전까지
                 {
                     //rocketCubeGo.transform.position = HeadVector3 * Time.deltaTime * _rocketMoveSpeed; 
-                    //rocketCubeGo.transform.position += (HeadDir * Time.deltaTime * _rocketMoveSpeed * 0.1f); // 매 프레임 헤드 정면으로 나아감
-                    rocketCubeGo.transform.Translate(HeadDir * _rocketMoveSpeed * 0.0005f);
+                    rocketCubeGo.transform.position += (HeadDir * Time.deltaTime * _rocketMoveSpeed * 0.05f); // 매 프레임 헤드 정면으로 나아감
+                    //rocketCubeGo.transform.Translate(HeadDir * _rocketMoveSpeed * 0.0005f);
                 }
                 if (rocketCube.iscatched && rocketCubeGo != null) // 물건이 트리거 되고 게임오브젝트가 null 상태가 아니라면
                 {
