@@ -11,7 +11,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
     private GameObject spawnedPlayer = null;
 
-    public void SpawnPlayers()
+    public void SpawnPlayer()
     {
         if (PhotonNetwork.IsMasterClient)
         {

@@ -36,7 +36,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        playerSpawner.SpawnPlayers();
+        playerSpawner.SpawnPlayer();
     }
 
     #endregion
