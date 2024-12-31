@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class RocketCube : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class RocketCube : MonoBehaviour
             catchedObject = other.gameObject;
             catchedObjectPosition = catchedObject.transform.position;
             catchedObjectRb = other.gameObject.GetComponent<Rigidbody>();
-            if (catchedObjectRb.useGravity == true)
+            if (!catchedObjectRb && catchedObjectRb.useGravity == true)
             {
                 catchedObjectRb.useGravity = false; // 중력이 적용중이면 중력 비활성화
             }
@@ -43,6 +44,7 @@ public class RocketCube : MonoBehaviour
     }
     public void UseGravity()
     {
+        if (!catchedObjectRb && catchedObjectRb.useGravity == false)
         catchedObjectRb.useGravity = true;
     } 
     public void RemeberCatcherPosition(Vector3 _catcherPosition)
