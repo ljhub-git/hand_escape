@@ -1,22 +1,12 @@
 using UnityEngine;
 
-public class PuzzleTest : MonoBehaviour, IPuzzleObject
+public class PuzzleTest : PuzzleObject
 {
     private PuzzleManager puzzleMng = null;
 
     private void Start()
     {
         puzzleMng = FindAnyObjectByType<PuzzleManager>();
-    }
-
-    public void ResetPuzzle()
-    {
-        Debug.Log("Reset Puzzle");
-    }
-
-    public void SolvePuzzle()
-    {
-        puzzleMng.OnSolvePuzzle(this);
     }
 
     private void OnTriggerEnter(Collider other)

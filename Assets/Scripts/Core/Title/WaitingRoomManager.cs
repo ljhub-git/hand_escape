@@ -1,25 +1,13 @@
 using UnityEngine;
 
-public class WaitingRoomManager : MonoBehaviour, IReactToPuzzle
+public class WaitingRoomManager : PuzzleReactObject
 {
-    public void OnPuzzleReset()
+    public override void OnPuzzleSolved()
     {
+        base.OnPuzzleSolved();
+
+        Debug.Log("Waiting Room Puzzle Solved!");
     }
 
-    public void OnPuzzleSolved()
-    {
-        
-    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

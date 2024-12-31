@@ -1,15 +1,9 @@
 using UnityEngine;
 
-public class SimplePuzzle : MonoBehaviour, IPuzzleObject
+public class SimplePuzzle : PuzzleObject
 {
-    public void ResetPuzzle()
+    public void Test()
     {
+        Debug.Log("Logging");
     }
-
-    public void SolvePuzzle()
-    {
-        Debug.Log("Loggging");
-    }
-
-
 }

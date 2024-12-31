@@ -7,8 +7,8 @@ public class PuzzleManager : MonoBehaviour
     [System.Serializable]
     public struct PuzzleMapping
     {
-        public GameObject puzzleObject;
-        public List<GameObject> reactiveObjects;
+        public PuzzleObject puzzleObject;
+        public List<PuzzleReactObject> reactiveObjects;
     }
 
 
@@ -21,7 +21,7 @@ public class PuzzleManager : MonoBehaviour
     /// <summary>
     /// Key 값의 퍼즐이 풀리면 List로 보관중인 IReactToPuzzle를 구현한 오브젝트들이 변화한다.
     /// </summary>
-    private Dictionary<IPuzzleObject, List<IReactToPuzzle>> puzzleMap = null;
+    private Dictionary<PuzzleObject, List<PuzzleReactObject>> puzzleMap = null;
 
     #region Public Func
 
@@ -29,9 +29,9 @@ public class PuzzleManager : MonoBehaviour
     /// 퍼즐이 풀렸을 때 해당 오브젝트와 연결된 반응 오브젝트들에게 반응을 호출하는 함수.
     /// </summary>
     /// <param name="puzzleObject">퍼즐이 풀린 오브젝트.</param>
-    public void OnSolvePuzzle(IPuzzleObject puzzleObject)
+    public void OnSolvePuzzle(PuzzleObject puzzleObject)
     {
-        List<IReactToPuzzle> reactComps = puzzleMap[puzzleObject];
+        List<PuzzleReactObject> reactComps = puzzleMap[puzzleObject];
 
         foreach (var reactToSolve in reactComps)
         {
@@ -51,21 +51,19 @@ public class PuzzleManager : MonoBehaviour
     {
         foreach (PuzzleMapping mapping in _mappings)
         {
-            IPuzzleObject puzzleComponent = mapping.puzzleObject.GetComponent<IPuzzleObject>();
+            PuzzleObject puzzleObj = mapping.puzzleObject;
 
             // PuzzleMapping 클래스의 퍼즐 오브젝트가 IPuzzleObject를 구현했을 경우 경우.
-            if (puzzleComponent != null)
+            if (puzzleObj != null)
             {
-                List<IReactToPuzzle> puzzleReactComponents = new List<IReactToPuzzle>();
+                List<PuzzleReactObject> puzzleReactObj = new List<PuzzleReactObject>();
 
-                foreach (GameObject obj in mapping.reactiveObjects)
+                foreach (PuzzleReactObject obj in mapping.reactiveObjects)
                 {
-                    IReactToPuzzle puzzleReactcomponent = obj.GetComponent<IReactToPuzzle>();
-
-                    if (puzzleReactcomponent != null)
-                        puzzleReactComponents.Add(puzzleReactcomponent);
+                    if(obj != null)
+                        puzzleReactObj.Add(obj);
                 }
-                puzzleMap[puzzleComponent] = puzzleReactComponents;
+                puzzleMap[puzzleObj] = puzzleReactObj;
             }
         }
     }
@@ -76,7 +74,7 @@ public class PuzzleManager : MonoBehaviour
 
     private void Awake()
     {
-        puzzleMap = new Dictionary<IPuzzleObject, List<IReactToPuzzle>>();
+        puzzleMap = new Dictionary<PuzzleObject, List<PuzzleReactObject>>();
     }
 
     private void Start()

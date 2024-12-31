@@ -239,7 +239,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
       propertyPath: m_Deactivated.m_PersistentCalls.m_Calls.Array.size
@@ -401,10 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f2900bc58bd71409510e08139e43f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleMapping:
-  - puzzleObject: {fileID: 575274691}
-    reactiveObjects:
-    - {fileID: 98800208}
+  puzzleMapping: []
 --- !u!1 &204381689
 GameObject:
   m_ObjectHideFlags: 0
