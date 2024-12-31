@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class TilesSorting
 {
-    private List<SpriteRenderer> mSortIndices = new List<SpriteRenderer>();
+    private List<MeshRenderer> mSortIndices = new List<MeshRenderer>();
 
     public TilesSorting()
     {
         mSortIndices.Clear();
     }
 
-    public void Add(SpriteRenderer renderer)
+    public void Add(MeshRenderer renderer)
     {
         mSortIndices.Add(renderer);
         SetRenderOrder(renderer, mSortIndices.Count);
     }
 
-    public void Remove(SpriteRenderer renderer) 
+    public void Remove(MeshRenderer renderer) 
     {
         mSortIndices.Remove(renderer);
         for(int i = 0; i< mSortIndices.Count; i++)
@@ -25,13 +25,13 @@ public class TilesSorting
         }
     }
 
-    public void BringToTop(SpriteRenderer renderer)
+    public void BringToTop(MeshRenderer renderer)
     {
         Remove(renderer);
         Add(renderer);
     }
 
-    private void SetRenderOrder(SpriteRenderer renderer, int index)
+    private void SetRenderOrder(MeshRenderer renderer, int index)
     {
         renderer.sortingOrder = index;
         Vector3 p = renderer.transform.position;
