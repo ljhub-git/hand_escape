@@ -6,10 +6,6 @@ public class ObjectManager : MonoBehaviour
 {
     private XRGrabInteractable[] interactableObjList = null;
 
-    private void Awake()
-    {
-    }
-
     private void Start()
     {
         interactableObjList = FindObjectsByType<XRGrabInteractable>(FindObjectsSortMode.InstanceID);
