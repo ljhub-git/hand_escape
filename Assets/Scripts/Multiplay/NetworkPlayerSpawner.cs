@@ -11,17 +11,15 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
     private GameObject spawnedPlayer = null;
 
-    public override void OnJoinedRoom()
+    public void SpawnPlayers()
     {
-        base.OnJoinedRoom();
-
-        if(PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             spawnedPlayer = PhotonNetwork.Instantiate("XRMultiTest", spawnPoint1P.position, Quaternion.identity);
         }
         else
         {
-            spawnedPlayer = PhotonNetwork.Instantiate("P_NetworkObserver", spawnPoint2P.position, Quaternion.identity);
+            spawnedPlayer = PhotonNetwork.Instantiate("XRMultiTest", spawnPoint2P.position, Quaternion.identity);
         }
     }
 

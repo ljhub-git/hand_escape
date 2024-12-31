@@ -22,6 +22,4 @@ public class NetworkPlayerManager : MonoBehaviourPun
             cameraGo.SetActive(false);
         }
     }
-
-
 }

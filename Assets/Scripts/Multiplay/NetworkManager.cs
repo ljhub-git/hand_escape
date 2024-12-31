@@ -5,6 +5,8 @@ using Photon.Realtime;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    private NetworkPlayerSpawner playerSpawner = null;
+
     #region Public Func
 
     /// <summary>
@@ -19,13 +21,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region Private Func
-
-    private void ConnectToServer()
-    {
-        Debug.Log("Try Connect To server...");
-        PhotonNetwork.ConnectUsingSettings();
-    }
-
     #endregion
 
     #region Unity Callback Func
@@ -34,42 +29,44 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         // 게임 시작 시 두 플레이어는 항상 같은 씬에 있어야 한다.
         // 씬을 자동으로 동기화하도록 설정.
-        // PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+        playerSpawner = GetComponent<NetworkPlayerSpawner>();
     }
 
     private void Start()
     {
-        ConnectToServer();
+        playerSpawner.SpawnPlayers();
     }
 
     #endregion
 
     #region Photon Callback Func
 
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("Connected To Server...");
-        base.OnConnectedToMaster();
+    //public override void OnConnectedToMaster()
+    //{
+    //    Debug.Log("Connected To Server...");
+    //    base.OnConnectedToMaster();
 
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 10;
-        roomOptions.IsVisible = true;
-        roomOptions.IsOpen = true;
+    //    RoomOptions roomOptions = new RoomOptions();
+    //    roomOptions.MaxPlayers = 10;
+    //    roomOptions.IsVisible = true;
+    //    roomOptions.IsOpen = true;
 
-        PhotonNetwork.JoinOrCreateRoom("Room1", roomOptions, TypedLobby.Default);
-    }
+    //    PhotonNetwork.JoinOrCreateRoom("Room1", roomOptions, TypedLobby.Default);
+    //}
 
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("Joined a Room");
-        base.OnJoinedRoom();
-    }
+    //public override void OnJoinedRoom()
+    //{
+    //    Debug.Log("Joined a Room");
+    //    base.OnJoinedRoom();
+    //}
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        Debug.Log("A new player Joined Room!");
-        base.OnPlayerEnteredRoom(newPlayer);
-    }
+    //public override void OnPlayerEnteredRoom(Player newPlayer)
+    //{
+    //    Debug.Log("A new player Joined Room!");
+    //    base.OnPlayerEnteredRoom(newPlayer);
+    //}
 
     #endregion
 }
