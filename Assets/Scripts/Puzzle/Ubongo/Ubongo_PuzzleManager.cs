@@ -1,30 +1,42 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Ubongo_PuzzleManager : MonoBehaviour
 {
-    [SerializeField] private int numOfCompleteSpace;
-    private int curCompleteSpace = 0;
-
+    [SerializeField] private int numOfComplete;
+    private int curComplete = 0;
     public UnityEvent onPuzzleComplete;
+    public bool isEnd = false;
+    private List<Ubongo_PuzzleSocket> puzzleSocketList;
 
-    public void completedPuzzle(int _spacePlus, int _spaceMinus)
+    private void Start()
     {
-        curCompleteSpace += _spacePlus;
-        curCompleteSpace -= _spaceMinus;
+        puzzleSocketList = new List<Ubongo_PuzzleSocket>(GetComponentsInChildren<Ubongo_PuzzleSocket>());
+        numOfComplete = puzzleSocketList.Count;
+    }
+    public void completedPuzzle()
+    {
+        curComplete++;
+        Debug.Log(curComplete);
+    }
+    public void SnapCheckComplete()
+    {
         CheckForPuzzleCompletion();
     }
 
     private void CheckForPuzzleCompletion()
     {
-        if (curCompleteSpace >= numOfCompleteSpace)
+        if (curComplete >= numOfComplete && isEnd)
         {
             onPuzzleComplete.Invoke();
+            Debug.Log("Complete");
         }
     }
 
-    public void PuzzlePieceRemoved(int _spaceMinus)
+    public void PuzzlePieceRemoved()
     {
-        curCompleteSpace--;
+        curComplete--;
+        Debug.Log(curComplete);
     }
 }

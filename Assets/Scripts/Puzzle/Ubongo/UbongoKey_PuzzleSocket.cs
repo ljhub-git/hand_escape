@@ -6,14 +6,12 @@ public class UbongoKey_PuzzleSocket : MonoBehaviour
 {
     [SerializeField] private UbongoKey_PuzzleManager linkedPuzzleManager;
     [SerializeField] private Transform CorrectPuzzlePiece;
-    private Quaternion CorrectRotation = Quaternion.identity;
     private XRSocketInteractor socket;
     private Transform attachTransfrom;
     private void Awake()
     {
         socket = GetComponent<XRSocketInteractor>();
         attachTransfrom = GetComponentInChildren<Transform>();
-        CorrectRotation = CorrectPuzzlePiece.transform.rotation;
     }
     private void OnEnable() // 활성화시
     {

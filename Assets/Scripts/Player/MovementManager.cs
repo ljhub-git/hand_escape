@@ -182,7 +182,7 @@ public class MovementManager : MonoBehaviour
             Debug.Log("발사");
             HeadVector3 = playerCamera.transform.position + playerCamera.transform.forward;
             rocketCube.RemeberCatcherPosition(HeadVector3);
-            HeadDir = Vector3.Normalize(playerCamera.transform.forward);
+            HeadDir = Vector3.Normalize(playerCamera.transform.position - playerCamera.transform.forward);
             rocketCube.isFired = true;
             while (t <= 4)
             {
@@ -191,7 +191,7 @@ public class MovementManager : MonoBehaviour
                 {
                     //rocketCubeGo.transform.position = HeadVector3 * Time.deltaTime * _rocketMoveSpeed; 
                     //rocketCubeGo.transform.position += (HeadDir * Time.deltaTime * _rocketMoveSpeed * 0.1f); // 매 프레임 헤드 정면으로 나아감
-                    rocketCubeGo.transform.Translate(HeadDir * _rocketMoveSpeed * 0.001f, transform);
+                    rocketCubeGo.transform.Translate(HeadDir * _rocketMoveSpeed * 0.0005f);
                 }
                 if (rocketCube.iscatched && rocketCubeGo != null) // 물건이 트리거 되고 게임오브젝트가 null 상태가 아니라면
                 {
