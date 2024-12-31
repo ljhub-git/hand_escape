@@ -246,6 +246,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -258,6 +262,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -266,15 +274,35 @@ PrefabInstance:
       value: SolvePuzzle
       objectReference: {fileID: 0}
     - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 575274694}
+    - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
       propertyPath: m_Deactivated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SolvePuzzle
       objectReference: {fileID: 0}
     - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SimplePuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PuzzleObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130331530761912218, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2130331530761912220, guid: 1fa6b177dca1b8441a427acb4bd8ab48, type: 3}
@@ -401,7 +429,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f2900bc58bd71409510e08139e43f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleMapping: []
+  puzzleMapping:
+  - puzzleObject: {fileID: 575274694}
+    reactiveObjects:
+    - {fileID: 98800210}
 --- !u!1 &204381689
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,7 +881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.472, y: 0}
+  m_AnchoredPosition: {x: -0.005, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &332263106
@@ -2098,7 +2129,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744632002}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ac23d717c46a9c4ba1bd83cebd3a4e5, type: 3}
   m_Name: 
@@ -2144,7 +2175,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744632002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a8107c6c473b11469a0d74e75db760a, type: 3}
   m_Name: 

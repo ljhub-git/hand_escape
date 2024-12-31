@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaitingRoomManager : PuzzleReactObject
 {
@@ -6,7 +7,7 @@ public class WaitingRoomManager : PuzzleReactObject
     {
         base.OnPuzzleSolved();
 
-        Debug.Log("Waiting Room Puzzle Solved!");
+        SceneManager.LoadScene("S_Stage1");
     }
 
 
