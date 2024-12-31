@@ -8,6 +8,7 @@ public class RocketCube : MonoBehaviour
     private GameObject catchedObject = null; // Trigger 오브젝트를 자식으로 만들기 위해 컴퍼넌트 가져옴
     public Vector3 catchedObjectPosition = Vector3.zero; // Trigger 오브젝트 position 값 저장하기 위함
     private Rigidbody catchedObjectRb = null; // Rigidbody useGravitiy를 온오프 하기위해 컴퍼넌트 가저옴
+    private Vector3 catcherPosition = Vector3.zero;
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
@@ -44,4 +45,12 @@ public class RocketCube : MonoBehaviour
     {
         catchedObjectRb.useGravity = true;
     } 
+    public void RemeberCatcherPosition(Vector3 _catcherPosition)
+    {
+        catcherPosition = _catcherPosition;
+    }
+    public Vector3 WhoCatchMe()
+    {
+        return catcherPosition;
+    }
 }
