@@ -1,50 +1,84 @@
+using System.Collections;
 using UnityEngine;
 
 public class Miniature : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private float snapThreshold = 30f; // Threshold for snapping (e.g., within 10 degrees)
-    [SerializeField] private float[] snapAngles = { 0f, 90f, 180f, 270f}; // Snap angles
+    [SerializeField] private float snapThreshold = 30f;
+    [SerializeField] private float[] snapAngles = { 0f, 90f, 180f, 270f };
 
-    private float lastSnapAngles = -1f;
+    [SerializeField] private float rotationSpeed = 5f;
+
+    public float targetAlpha = 0.5f;
+    public float fadeDuration = 0.2f;
+
+    private SnapAngle snapAngle = new SnapAngle();
+    private ChangeTransparency changeTransparency;
+
+    private Material material;
+    private Color originalColor;
+    private Coroutine currentCoroutine;
+    private Coroutine rotationCoroutine;
+    private void Start()
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            material = renderer.material;
+            originalColor = material.color;
+            changeTransparency = new ChangeTransparency(material);
+        }
+    }
 
     private void Update()
     {
-        float currentYRotation = NormalizeAngle(transform.eulerAngles.y);
-        float snappedAngle = GetSnapAngle(currentYRotation);
+        float currentYRotation = snapAngle.NormalizeAngle(transform.eulerAngles.y);
+        float snappedAngle = snapAngle.GetSnapAngle(currentYRotation, snapAngles, snapThreshold);
 
         if (snappedAngle >= 0)
         {
-            transform.eulerAngles = new Vector3(0, snappedAngle, 0);
+            // 목표 각도를 설정
+            if (rotationCoroutine != null) StopCoroutine(rotationCoroutine);
+            rotationCoroutine = StartCoroutine(SmoothRotation(snappedAngle));
         }
-        
+
         SyncTransform();
-
     }
 
-    private float GetSnapAngle(float currentYRotation)
+    private IEnumerator SmoothRotation(float targetYRotation)
     {
-        foreach (float snapAngle in snapAngles)
+        float startRotation = transform.eulerAngles.y;
+        float timeElapsed = 0f;
+
+        while (timeElapsed < 1f)
         {
-            //Debug.Log(Mathf.Abs(Mathf.DeltaAngle(currentYRotation, snapAngle)));
-            if (Mathf.Abs(Mathf.DeltaAngle(currentYRotation, snapAngle)) <= snapThreshold && !Mathf.Approximately(lastSnapAngles, snapAngle))
-            {
-                lastSnapAngles = snapAngle;
-                return snapAngle;
-            }
+            timeElapsed += Time.deltaTime * rotationSpeed;
+            float smoothedYRotation = Mathf.LerpAngle(startRotation, targetYRotation, timeElapsed);
+            transform.eulerAngles = new Vector3(0, smoothedYRotation, 0);
+
+            yield return null;
         }
-        return -1f; // No snapping condition met
+
+        // 스냅된 각도에 도달한 후 투명도 변경을 트리거
+        TriggerTransparency();
     }
 
-    private float NormalizeAngle(float angle)
+    private void TriggerTransparency()
     {
-        angle %= 360f;
-        return angle < 0 ? angle + 360f : angle;
+        if (material == null) return;
+
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+        }
+
+        currentCoroutine = 
+            StartCoroutine(changeTransparency.FadeTransparency(
+            originalColor.a, targetAlpha, fadeDuration));
     }
 
     private void SyncTransform()
     {
         target.rotation = transform.rotation;
     }
-
 }

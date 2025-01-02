@@ -3241,7 +3241,7 @@ GameObject:
   - component: {fileID: 1717531606}
   - component: {fileID: 1717531610}
   m_Layer: 0
-  m_Name: Rotate
+  m_Name: Glass_Rotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3377,12 +3377,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 929762056}
-  snapThreshold: 10
+  snapThreshold: 30
   snapAngles:
+  - 0
   - 90
   - 180
   - 270
-  - 360
+  rotationSpeed: 5
+  targetAlpha: 0.3
+  fadeDuration: 0.2
 --- !u!1001 &1773455178
 PrefabInstance:
   m_ObjectHideFlags: 0
