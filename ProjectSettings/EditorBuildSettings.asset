@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Jeon/Jeon_FurnitureTest.unity
-    guid: 275c0305e95a5ec4a86478f7a0b57546
+    path: Assets/Scenes/S_Title.unity
+    guid: 0735a60d8342e5d408284bf5922c632b
   - enabled: 1
-    path: Assets/Scenes/Jeon/Jeon_MultiplayTest.unity
-    guid: 281dd0b6cb8bcda4695ca63105ca0b0b
+    path: Assets/Scenes/S_WaitingRoom.unity
+    guid: ee6c11cbdd46f1f4fbf3c98facb6e56b
   - enabled: 1
-    path: Assets/Scenes/Jeon/Jeon_LaserTest.unity
-    guid: fa7349df68f1217418fcc21dd30aeac1
+    path: Assets/Scenes/S_Stage1.unity
+    guid: fd0f49afc86afa34aa42e40ef85008f5
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 444b8793fc7cc914ea4b1db4dbb4db40, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}

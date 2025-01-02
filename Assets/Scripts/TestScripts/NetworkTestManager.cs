@@ -5,16 +5,24 @@ using Photon.Realtime;
 
 public class NetworkTestManager : MonoBehaviourPunCallbacks
 {
-    private void ConnectToServer()
+    private NetworkPlayerSpawner networkPlayerSpawner = null;
+
+    private void Awake()
     {
-        Debug.Log("Try Connect To server...");
-        PhotonNetwork.ConnectUsingSettings();
+        networkPlayerSpawner = GetComponent<NetworkPlayerSpawner>();
     }
 
     private void Start()
     {
         ConnectToServer();
     }
+
+    private void ConnectToServer()
+    {
+        Debug.Log("Try Connect To server...");
+        PhotonNetwork.ConnectUsingSettings();
+    }
+
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected To Server...");
@@ -32,6 +40,8 @@ public class NetworkTestManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joined a Room");
         base.OnJoinedRoom();
+
+        networkPlayerSpawner.SpawnPlayer();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)

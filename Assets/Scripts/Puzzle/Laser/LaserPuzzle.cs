@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserPuzzle : MonoBehaviour, IPuzzleObject
+public class LaserPuzzle : PuzzleObject
 {
     [SerializeField]
     private Transform startPoint = null;
@@ -14,14 +14,6 @@ public class LaserPuzzle : MonoBehaviour, IPuzzleObject
 
     private Vector3 pos = Vector3.zero;
     private Vector3 dir = Vector3.zero;
-
-    public void SolvePuzzle()
-    {
-        Debug.Log("SolvePuzzle");
-    }
-    public void ResetPuzzle()
-    {
-    }
 
     /// <summary>
     /// Laser 발사 코루틴 호출.

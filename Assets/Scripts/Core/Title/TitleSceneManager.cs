@@ -8,17 +8,22 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private string gameVersion = "0.0.1";
 
+    [SerializeField]
+    private bool isTestBuild = false;
+
     private LoginManager loginManager = null;
 
-    private const int MaxPlayerPerRoom = 2;
+    private const int MaxPlayerPerRoom = 5;
 
     public bool isLogin = false;
-
 
     #region Public Func
     public void TryLogin(string _id, string _pw)
     {
-        FindAnyObjectByType<DatabaseManager>().LoginCheck(_id, _pw);
+        if (!isTestBuild)
+            FindAnyObjectByType<DatabaseManager>().LoginCheck(_id, _pw);
+        else
+            OnLoginSuccess();
     }
 
     public void OnLoginSuccess()
@@ -37,7 +42,10 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
 
     private void Connect()
     {
-        PhotonNetwork.NickName = loginManager.CurrentID;
+        if (!isTestBuild)
+            PhotonNetwork.NickName = loginManager.CurrentID;
+        else
+            PhotonNetwork.NickName = "Nickky";
 
         if (PhotonNetwork.IsConnected)
         {
@@ -68,12 +76,16 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     // 마스터 클라이언트와 연결됐을 때
     public override void OnConnectedToMaster()
     {
+        base.OnConnectedToMaster();
+
         PhotonNetwork.JoinRandomRoom();
     }
 
     // 연결이 끊어졌을 때
     public override void OnDisconnected(DisconnectCause cause)
     {
+        base.OnDisconnected(cause);
+
         Debug.LogWarningFormat("Disconnected: {0}", cause);
 
         // 방을 생성하면 OnJoinedRoom 호출
@@ -89,20 +101,24 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     // 방에 입장할 때
     public override void OnJoinedRoom()
     {
+        base.OnJoinedRoom();
+
         Debug.Log("Joined Room");
 
-        // 방에 입장했으니 이제 대기실로 가면 된다.
-        // 그 전에 테스트로 게임에 입장 되는지 함 확인해봄.
-        SceneManager.LoadScene("Jeon_TestScene");
+        // 방에 입장하면 바로 대기실 씬으로 간다.
+        PhotonNetwork.LoadLevel("S_WaitingRoom");
     }
 
     // 방 입장이 실패했을 때
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
+        base.OnJoinRandomFailed(returnCode, message);
+
         Debug.LogErrorFormat("JoinRandomFailed({0}): {1}", returnCode, message);
 
+        // 방이 없다는 뜻이므로 방을 만들고, 만든 방에 입장한다.
         Debug.Log("Create Room");
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = MaxPlayerPerRoom });
+        PhotonNetwork.CreateRoom("Room1", new RoomOptions { MaxPlayers = MaxPlayerPerRoom });
     }
     #endregion
 }
