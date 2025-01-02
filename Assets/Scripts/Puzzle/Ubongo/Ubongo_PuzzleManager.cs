@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class Ubongo_PuzzleManager : MonoBehaviour
 {
-    [SerializeField] private int numOfComplete;
+    [SerializeField] private int numOfComplete = 0;
     private int curComplete = 0;
     public UnityEvent onPuzzleComplete;
     public bool isEnd = false;
@@ -15,14 +15,19 @@ public class Ubongo_PuzzleManager : MonoBehaviour
         puzzleSocketList = new List<Ubongo_PuzzleSocket>(GetComponentsInChildren<Ubongo_PuzzleSocket>());
         numOfComplete = puzzleSocketList.Count;
     }
+    public void AddNumOfComplete()
+    {
+        numOfComplete++;
+    }
     public void completedPuzzle()
     {
         curComplete++;
         Debug.Log(curComplete);
+
     }
     public void SnapCheckComplete()
     {
-        CheckForPuzzleCompletion();
+        Invoke("CheckForPuzzleCompletion", 0.5f);
     }
 
     private void CheckForPuzzleCompletion()

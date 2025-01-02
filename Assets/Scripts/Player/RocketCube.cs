@@ -20,14 +20,23 @@ public class RocketCube : MonoBehaviour
     private void OnTriggerEnter(Collider other) // 트리거 발생하면
     {
         Debug.Log("Rocket Cube OnTriggerEnter");
+
+        if (other.CompareTag("Ubongo") || other.CompareTag("UbongoCol"))
+        {
+            iscatched = true;
+            catchedObjectPosition = transform.position;
+            Debug.Log("우봉고는 로켓펀치로 못 가져옵니다");
+            return;
+        }
+
         if (catchedObject == null && isFired) // 잡힌 오브젝트가 없고 로켓펀치를 했으면
         {
             other.transform.SetParent(transform); // 현재 객체의 자식으로 만듦
             iscatched = true;
             catchedObject = other.gameObject;
             catchedObjectPosition = catchedObject.transform.position;
-            catchedObjectRb = other.gameObject.GetComponent<Rigidbody>();
-            if (!catchedObjectRb && catchedObjectRb.useGravity == true)
+            catchedObjectRb = catchedObject.GetComponentInChildren<Rigidbody>();
+            if (catchedObjectRb && catchedObjectRb.useGravity == true)
             {
                 catchedObjectRb.useGravity = false; // 중력이 적용중이면 중력 비활성화
             }
@@ -40,12 +49,18 @@ public class RocketCube : MonoBehaviour
     }
     public void ParentNull() // 자식을 자식이 아닌 상태로 만들기
     {
-        catchedObject.transform.SetParent(null);
+        if (catchedObject != null)
+        {
+            catchedObject.transform.SetParent(null);
+        }
     }
     public void UseGravity()
     {
-        if (!catchedObjectRb && catchedObjectRb.useGravity == false)
-        catchedObjectRb.useGravity = true;
+        if (catchedObject != null)
+        {
+            if (catchedObjectRb && catchedObjectRb.useGravity == false)
+                catchedObjectRb.useGravity = true;
+        }
     } 
     public void RemeberCatcherPosition(Vector3 _catcherPosition)
     {
