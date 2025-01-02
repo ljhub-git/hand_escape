@@ -15,6 +15,7 @@ public class Ubongo_PuzzleSocket : MonoBehaviour
         socket = GetComponent<XRSocketInteractor>();
         attachTransfrom = GetComponentsInChildren<Transform>()[1];
         BoxCollider = GetComponent<BoxCollider>();
+        linkedPuzzleManager.AddNumOfComplete();
     }
     private void OnEnable() // 활성화시
     {
