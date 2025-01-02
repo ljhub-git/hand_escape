@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.XR;
 
 using Photon.Pun;
+using System.Collections;
 
 public class NetworkPlayerManager : MonoBehaviourPun
 {
@@ -17,7 +18,7 @@ public class NetworkPlayerManager : MonoBehaviourPun
 
         multiHandMng.InitHandJointTrs();
 
-        // 다른 클라이언트 소유일 때
+        // 다른 클라이언트의 소유일 때
         if (!photonView.IsMine)
         {
             //LocalPlayerObject.SetActive(false);
@@ -26,11 +27,25 @@ public class NetworkPlayerManager : MonoBehaviourPun
 
             MultiPlayerObject.GetComponent<MultiHandManager>().DisableHandInput();
         }
-        // 현재 클라이언트 소유일 때
+        // 현재 클라이언트의 소유일 때
         else
         {
             LocalPlayerObject.SetActive(true);
             multiHandMng.HiddenHandMesh();
+
+            StartCoroutine(SetMultiModelTransformCoroutine());
         }
+    }
+
+    private IEnumerator SetMultiModelTransformCoroutine()
+    {
+        while(true)
+        {
+            MultiPlayerObject.transform.position = LocalPlayerObject.transform.position;
+            MultiPlayerObject.transform.rotation = LocalPlayerObject.transform.rotation;
+
+            yield return null;
+        }
+
     }
 }
