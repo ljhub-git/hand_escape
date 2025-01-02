@@ -35,8 +35,8 @@ public class RocketCube : MonoBehaviour
             iscatched = true;
             catchedObject = other.gameObject;
             catchedObjectPosition = catchedObject.transform.position;
-            catchedObjectRb = other.gameObject.GetComponent<Rigidbody>();
-            if (!catchedObjectRb && catchedObjectRb.useGravity == true)
+            catchedObjectRb = catchedObject.GetComponentInChildren<Rigidbody>();
+            if (catchedObjectRb && catchedObjectRb.useGravity == true)
             {
                 catchedObjectRb.useGravity = false; // 중력이 적용중이면 중력 비활성화
             }
@@ -49,14 +49,16 @@ public class RocketCube : MonoBehaviour
     }
     public void ParentNull() // 자식을 자식이 아닌 상태로 만들기
     {
-        if(catchedObject != null)
-        catchedObject.transform.SetParent(null);
+        if (catchedObject != null)
+        {
+            catchedObject.transform.SetParent(null);
+        }
     }
     public void UseGravity()
     {
         if (catchedObject != null)
         {
-            if (!catchedObjectRb && catchedObjectRb.useGravity == false)
+            if (catchedObjectRb && catchedObjectRb.useGravity == false)
                 catchedObjectRb.useGravity = true;
         }
     } 
