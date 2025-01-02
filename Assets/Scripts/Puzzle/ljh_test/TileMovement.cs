@@ -10,7 +10,7 @@ public class TileMovement : MonoBehaviour
     private Vector3 mOffset = new Vector3(0.0f, 0.0f, 0.0f);
     private bool isInCorrectPosition = false; // 타일이 정확한 위치에 있는지 확인하는 플래그
 
-    private SpriteRenderer mSpriteRenderer;
+    private MeshRenderer mSpriteRenderer;
 
     public delegate void DelegateOnTileInPlace(TileMovement tm);
     public DelegateOnTileInPlace onTileInPlace;
@@ -20,7 +20,7 @@ public class TileMovement : MonoBehaviour
 
     void Start()
     {
-        mSpriteRenderer = GetComponent<SpriteRenderer>();
+        mSpriteRenderer = GetComponent<MeshRenderer>();
 
     }
 
@@ -38,14 +38,16 @@ public class TileMovement : MonoBehaviour
 
     private void OnMouseDown()
     {
-
+        Debug.Log("마우스질");
         if (EventSystem.current.IsPointerOverGameObject())
         {
+            Debug.Log("마우스질?");
             return;
         }
 
         mOffset = transform.position - Camera.main.ScreenToWorldPoint(
           new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
+            
 
         // For sorting of tiles.
         Tile.tilesSorting.BringToTop(mSpriteRenderer);
@@ -60,8 +62,10 @@ public class TileMovement : MonoBehaviour
         }
 
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
+        //Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + mOffset;
         transform.position = curPosition;
+        Debug.Log("마우스질!!");
     }
 
     private void OnMouseUp()
@@ -93,7 +97,7 @@ public class TileMovement : MonoBehaviour
 
     public void DisableTileCollider()
     {
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        BoxCollider collider = GetComponent<BoxCollider>();
         if (collider != null)
         {
             collider.enabled = false;  // Collider 비활성화
