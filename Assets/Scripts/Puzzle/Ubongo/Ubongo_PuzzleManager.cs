@@ -19,10 +19,11 @@ public class Ubongo_PuzzleManager : MonoBehaviour
     {
         curComplete++;
         Debug.Log(curComplete);
+
     }
     public void SnapCheckComplete()
     {
-        CheckForPuzzleCompletion();
+        Invoke("CheckForPuzzleCompletion", 0.5f);
     }
 
     private void CheckForPuzzleCompletion()

@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Jeon/Jeon_LaserTest.unity
     guid: fa7349df68f1217418fcc21dd30aeac1
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: b23f37e3f8410324ebb1f4324b290bd1, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 06b95da2c8759954cacd6a812811dbc3, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: abb106ed276f5bc429e55a7c49021bda, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 444b8793fc7cc914ea4b1db4dbb4db40, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0684c026621a12e4d87c274b5a920292, type: 2}
