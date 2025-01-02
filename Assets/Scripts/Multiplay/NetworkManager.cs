@@ -55,13 +55,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
+    }
 
-        Debug.Log("Number of players in room: " + PhotonNetwork.PlayerList.Length);
-        foreach (var player in PhotonNetwork.PlayerList)
-        {
-            Debug.Log("Player in room: " + player.NickName);
-        }
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
 
+        playerSpawner.DestroyPlayer();
     }
     #endregion
 }

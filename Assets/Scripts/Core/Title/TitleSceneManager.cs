@@ -76,12 +76,16 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     // 마스터 클라이언트와 연결됐을 때
     public override void OnConnectedToMaster()
     {
+        base.OnConnectedToMaster();
+
         PhotonNetwork.JoinRandomRoom();
     }
 
     // 연결이 끊어졌을 때
     public override void OnDisconnected(DisconnectCause cause)
     {
+        base.OnDisconnected(cause);
+
         Debug.LogWarningFormat("Disconnected: {0}", cause);
 
         // 방을 생성하면 OnJoinedRoom 호출
@@ -97,20 +101,24 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     // 방에 입장할 때
     public override void OnJoinedRoom()
     {
+        base.OnJoinedRoom();
+
         Debug.Log("Joined Room");
 
         // 방에 입장하면 바로 대기실 씬으로 간다.
-        SceneManager.LoadScene("S_WaitingRoom");
+        PhotonNetwork.LoadLevel("S_WaitingRoom");
     }
 
     // 방 입장이 실패했을 때
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
+        base.OnJoinRandomFailed(returnCode, message);
+
         Debug.LogErrorFormat("JoinRandomFailed({0}): {1}", returnCode, message);
 
         // 방이 없다는 뜻이므로 방을 만들고, 만든 방에 입장한다.
         Debug.Log("Create Room");
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = MaxPlayerPerRoom });
+        PhotonNetwork.CreateRoom("Room1", new RoomOptions { MaxPlayers = MaxPlayerPerRoom });
     }
     #endregion
 }

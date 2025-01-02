@@ -20,7 +20,8 @@ public class NetworkPlayerManager : MonoBehaviourPun
         // 다른 클라이언트 소유일 때
         if (!photonView.IsMine)
         {
-            LocalPlayerObject.SetActive(false);
+            //LocalPlayerObject.SetActive(false);
+            Destroy(LocalPlayerObject);
             MultiPlayerObject.SetActive(true);
 
             MultiPlayerObject.GetComponent<MultiHandManager>().DisableHandInput();
@@ -30,14 +31,6 @@ public class NetworkPlayerManager : MonoBehaviourPun
         {
             LocalPlayerObject.SetActive(true);
             multiHandMng.HiddenHandMesh();
-        }
-    }
-
-    private void Update()
-    {
-        if(photonView.IsMine)
-        {
-            MultiPlayerObject.transform.position = LocalPlayerObject.transform.position;
         }
     }
 }

@@ -2,30 +2,24 @@ using UnityEngine;
 
 using Photon.Pun;
 
-public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
+public class NetworkPlayerSpawner : MonoBehaviourPun
 {
     [SerializeField]
-    private Transform spawnPoint1P = null;
-    [SerializeField]
-    private Transform spawnPoint2P = null;
+    private Transform[] spawnPoints = null;
 
     private GameObject spawnedPlayer = null;
 
     public void SpawnPlayer()
     {
-        if (PhotonNetwork.CountOfPlayers == 1)
-        {
-            spawnedPlayer = PhotonNetwork.Instantiate("XRMultiCharacter", spawnPoint1P.position, Quaternion.identity);
-        }
-        else
-        {
-            spawnedPlayer = PhotonNetwork.Instantiate("XRMultiCharacter", spawnPoint2P.position, Quaternion.identity);
-        }
+        spawnedPlayer = PhotonNetwork.Instantiate(
+            "XRMultiCharacter", 
+            spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount - 1].position, 
+            Quaternion.identity
+            );
     }
 
-    public override void OnLeftRoom()
+    public void DestroyPlayer()
     {
-        base.OnLeftRoom();
         PhotonNetwork.Destroy(spawnedPlayer);
     }
 }
