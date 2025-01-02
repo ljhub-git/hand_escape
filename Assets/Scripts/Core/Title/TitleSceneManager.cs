@@ -1,7 +1,7 @@
 using UnityEngine;
+
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine.SceneManagement;
 
 public class TitleSceneManager : MonoBehaviourPunCallbacks
 {
@@ -43,9 +43,14 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     private void Connect()
     {
         if (!isTestBuild)
+        {
             PhotonNetwork.NickName = loginManager.CurrentID;
+        }
         else
+        {
             PhotonNetwork.NickName = "Nickky";
+        }
+
 
         if (PhotonNetwork.IsConnected)
         {
@@ -77,6 +82,20 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
+
+        Debug.Log("Connected To Master");
+
+        // 같은 닉네임의 플레이어가 이미 접속했다면 접속을 못 하게 막는다.
+        foreach(var player in PhotonNetwork.PlayerListOthers)
+        {
+            Debug.Log(player.NickName);
+
+            if(player.NickName == PhotonNetwork.NickName)
+            {
+                Debug.Log("Same Id is current Login! Go back!");
+                return;
+            }
+        }
 
         PhotonNetwork.JoinRandomRoom();
     }
