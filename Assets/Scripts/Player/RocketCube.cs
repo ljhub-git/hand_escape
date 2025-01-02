@@ -19,14 +19,16 @@ public class RocketCube : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) // 트리거 발생하면
     {
-        if(other.CompareTag("Ubongo") || other.CompareTag("UbongoCol"))
+        Debug.Log("Rocket Cube OnTriggerEnter");
+
+        if (other.CompareTag("Ubongo") || other.CompareTag("UbongoCol"))
         {
             iscatched = true;
             catchedObjectPosition = transform.position;
             Debug.Log("우봉고는 로켓펀치로 못 가져옵니다");
             return;
         }
-        Debug.Log("Rocket Cube OnTriggerEnter");
+
         if (catchedObject == null && isFired) // 잡힌 오브젝트가 없고 로켓펀치를 했으면
         {
             other.transform.SetParent(transform); // 현재 객체의 자식으로 만듦

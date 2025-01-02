@@ -833,6 +833,18 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 285323342}
+    - target: {fileID: 1197892601848711561, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152765182060678788, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310208983894180933, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2753972263839551316, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
@@ -845,10 +857,30 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 285323342}
+    - target: {fileID: 4057680066814738076, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4173108495942115965, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730119466426788401, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5663884894850796784, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 285323342}
+    - target: {fileID: 6028196406451422418, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204470520760873149, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7821090148944851156, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Name
       value: Ubongo_Puzzle
@@ -858,6 +890,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 285323342}
     - target: {fileID: 8526379250056096334, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: numOfComplete
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526379250056096334, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: onPuzzleComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1720224932}
@@ -865,6 +901,10 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 285323342}
+    - target: {fileID: 9151854127231466597, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -920,6 +960,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4869329707428108763, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
       propertyPath: m_ForceGravityOnDetach
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6469972707017822488, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+      propertyPath: numOfComplete
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6469972707017822488, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
