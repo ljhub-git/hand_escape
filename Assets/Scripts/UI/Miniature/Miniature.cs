@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class Miniature : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class Miniature : MonoBehaviour
     private Coroutine currentCoroutine;
     private Coroutine rotationCoroutine;
 
+    private Rigidbody rb;
+
+    private bool isInteractable = true;
+
     private void Start()
     {
         Renderer renderer = GetComponent<Renderer>();
@@ -29,42 +34,27 @@ public class Miniature : MonoBehaviour
             originalColor = material.color;
             changeTransparency = new ChangeTransparency(material);
         }
+
+        // Rigidbody 컴포넌트 가져오기
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
+        if (!isInteractable) return;
+
         float currentYRotation = snapAngle.NormalizeAngle(transform.eulerAngles.y);
         float snappedAngle = snapAngle.GetSnapAngle(currentYRotation, snapAngles, snapThreshold);
 
-        if (snappedAngle >= 0)
+        // 스냅 각도가 유효하면 SmoothRotation 실행
+        if (snappedAngle >= 0 && rotationCoroutine == null)
         {
-            // 목표 각도를 설정
-            if (rotationCoroutine != null) StopCoroutine(rotationCoroutine);
-            rotationCoroutine = StartCoroutine(SmoothRotation(snappedAngle));
+            rotationCoroutine = 
+                StartCoroutine(MiniatureRotation.SmoothRotation(this, snappedAngle));
         }
-
-        SyncTransform();
     }
 
-    private IEnumerator SmoothRotation(float targetYRotation)
-    {
-        float startRotation = transform.eulerAngles.y;
-        float timeElapsed = 0f;
-
-        while (timeElapsed < 1f)
-        {
-            timeElapsed += Time.deltaTime * rotationSpeed;
-            float smoothedYRotation = Mathf.LerpAngle(startRotation, targetYRotation, timeElapsed);
-            transform.eulerAngles = new Vector3(0, smoothedYRotation, 0);
-
-            yield return null;
-        }
-
-        // 스냅된 각도에 도달한 후 투명도 변경을 트리거
-        TriggerTransparency();
-    }
-
-    private void TriggerTransparency()
+    public void TriggerTransparency()
     {
         if (material == null) return;
 
@@ -78,8 +68,22 @@ public class Miniature : MonoBehaviour
             originalColor.a, targetAlpha, fadeDuration));
     }
 
-    private void SyncTransform()
+    public void MakeDisable()
     {
-        target.rotation = transform.rotation;
+        if (material != null)
+        {
+            Color color = material.color;
+            color.a = 0.5f;
+            material.color = Color.black;
+        }
+
+        rb.isKinematic = true;
+        isInteractable = false;
     }
+
+    public Transform GetTarget() => target;
+    public Rigidbody GetRigidbody() => rb;
+    public float GetRotationSpeed() => rotationSpeed;
+    public Coroutine GetRotationCoroutine() => rotationCoroutine;
+    public void SetRotationCoroutine(Coroutine coroutine) => rotationCoroutine = coroutine;
 }
