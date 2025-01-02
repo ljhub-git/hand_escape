@@ -269,11 +269,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df43b81c01c2374a8c04f41fb392857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageFilename: images/imagetest3
-  ghostTransparency: 0.1
-  parentForTiles: {fileID: 1525335357}
+  tilesParent: {fileID: 1525335357}
   puzzleManager: {fileID: 2118946608}
-  numRandomTiles: 2
+  puzzleImage: {fileID: 2800000, guid: 0e10efaea112b3744a8f0bd4082eb91f, type: 3}
+  rows: 4
+  cols: 4
+  tileThickness: 0.1
 --- !u!4 &786294618
 Transform:
   m_ObjectHideFlags: 0

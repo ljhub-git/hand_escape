@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class Jigsaw_PuzzleManager : MonoBehaviour
 {
-    private HashSet<TileMovement> placedTiles; // 이미 정확한 위치에 놓인 타일을 추적
+    private HashSet<TileMovement> placedTiles; // 올바른 위치에 배치된 타일들
+    private int totalTiles; // 전체 타일 개수
+    private int correctTiles; // 올바른 위치에 배치된 타일 개수
 
-    private int totalTiles; // 전체 타일 수
-    private int correctTiles; // 정확한 위치에 놓인 타일 수
-
-    // 퍼즐이 완성되었을 때 호출되는 이벤트 (옵션)
+    // 퍼즐이 완성되었을 때 호출되는 이벤트
     public delegate void PuzzleCompleted();
     public event PuzzleCompleted OnPuzzleCompleted;
 
@@ -20,20 +19,15 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
 
     public void RegisterTile(TileMovement tileMovement)
     {
-        // 새로운 타일을 등록
+        if (tileMovement == null)
+        {
+            Debug.LogError("TileMovement가 null입니다. 타일을 등록할 수 없습니다.");
+            return;
+        }
+
         if (!placedTiles.Contains(tileMovement))
         {
             placedTiles.Add(tileMovement);
-        }
-    }
-
-    public void CheckPuzzleCompletion()
-    {
-        if (correctTiles == totalTiles)
-        {
-            // 퍼즐 완성
-            OnPuzzleCompleted?.Invoke();
-            Debug.Log("퍼즐완성");
         }
     }
 
@@ -41,15 +35,22 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
     {
         if (tileMovement != null && tileMovement.IsCorrectPosition())
         {
-            correctTiles++;
-            // 올바른 위치에 있으면 타일 수 증가
-            //if (!placedTiles.Contains(tileMovement))
-            //{
-            //    //placedTiles.Add(tileMovement);
+            if (!placedTiles.Contains(tileMovement))
+            {
+                placedTiles.Add(tileMovement);
+                correctTiles++;
+                tileMovement.DisableTileCollider(); // 타일 고정
+                CheckPuzzleCompletion();
+            }
+        }
+    }
 
-            //}
-            tileMovement.DisableTileCollider();
-            CheckPuzzleCompletion();
+    public void CheckPuzzleCompletion()
+    {
+        if (correctTiles >= totalTiles)
+        {
+            Debug.Log("퍼즐이 완성되었습니다!");
+            OnPuzzleCompleted?.Invoke();
         }
     }
 
