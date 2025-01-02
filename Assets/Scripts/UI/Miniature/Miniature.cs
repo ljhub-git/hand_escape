@@ -9,8 +9,8 @@ public class Miniature : MonoBehaviour
 
     [SerializeField] private float rotationSpeed = 5f;
 
-    public float targetAlpha = 0.5f;
-    public float fadeDuration = 0.2f;
+    [SerializeField] private float targetAlpha = 0.5f;
+    [SerializeField] private float fadeDuration = 0.2f;
 
     private SnapAngle snapAngle = new SnapAngle();
     private ChangeTransparency changeTransparency;
@@ -19,6 +19,7 @@ public class Miniature : MonoBehaviour
     private Color originalColor;
     private Coroutine currentCoroutine;
     private Coroutine rotationCoroutine;
+
     private void Start()
     {
         Renderer renderer = GetComponent<Renderer>();
