@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class DuplicatedTriggerHandMannager : MonoBehaviour
@@ -5,7 +6,11 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
 
     public GameObject duplicatedHandR;
     public GameObject duplicatedHandL;
-
+    public TextMeshPro TextMeshPro;
+    public bool R_HandTrigger;
+    public bool L_HandTrigger;
+    public bool R_HandCorrect { get; set; }
+    public bool L_HandCorrect { get; set; }
     private void Awake()
     {
         duplicatedHandR.SetActive(false);
@@ -15,11 +20,14 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics"))
         {
-            duplicatedHandR.SetActive(true);
+            duplicatedHandR.SetActive(true); 
+            R_HandTrigger = true;
+
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics"))
         {
             duplicatedHandL.SetActive(true);
+            L_HandTrigger = true;
         }
 
     }
@@ -28,10 +36,19 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics"))
         {
             duplicatedHandR.SetActive(false);
+            R_HandTrigger = false;
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics"))
         {
             duplicatedHandL.SetActive(false);
+            L_HandTrigger = false;
+        }
+    }
+    public void CheckAllHands()
+    {
+        if (R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
+        {
+            TextMeshPro.text = ("GOOD!\nStay Your Hands!");
         }
     }
 }

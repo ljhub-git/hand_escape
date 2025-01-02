@@ -72,11 +72,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 81873067622231891, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.1
+      value: -0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 200343605182034325, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+      propertyPath: m_MenuPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1543157083343737587, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: 0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845414561277072469, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+      propertyPath: m_MenuPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4111215587105355179, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_RootTransform
@@ -100,15 +108,15 @@ PrefabInstance:
       objectReference: {fileID: 4900277100447118086}
     - target: {fileID: 9022478869053830777, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_LocalScale.x
-      value: 17
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9022478869053830777, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_LocalScale.y
-      value: 17
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9022478869053830777, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_LocalScale.z
-      value: 17
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9022478869053830777, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
       propertyPath: m_LocalPosition.x
@@ -150,7 +158,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4472667839611058526, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
+    - {fileID: 147481379238346371, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7578979069142372474, guid: a85bd98b31ffe3240b56f1dda35f9637, type: 3}
