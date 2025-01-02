@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin Hands (XR Rig) Physical(Use This)
       objectReference: {fileID: 0}
+    - target: {fileID: 3680737558720398073, guid: cfe06014ced6933438886babd60e1465, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3680737558720398074, guid: cfe06014ced6933438886babd60e1465, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -5647,7 +5647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameVersion: 0.0.1
-  isTestBuild: 0
+  isTestBuild: 1
   isLogin: 0
 --- !u!1 &2143405889
 GameObject:
