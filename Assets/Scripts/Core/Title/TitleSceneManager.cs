@@ -13,7 +13,7 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
 
     private LoginManager loginManager = null;
 
-    private const int MaxPlayerPerRoom = 2;
+    private const int MaxPlayerPerRoom = 5;
 
     public bool isLogin = false;
 
@@ -99,8 +99,7 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joined Room");
 
-        // 방에 입장했으니 이제 대기실로 가면 된다.
-        // 그 전에 테스트로 게임에 입장 되는지 함 확인해봄.
+        // 방에 입장하면 바로 대기실 씬으로 간다.
         SceneManager.LoadScene("S_WaitingRoom");
     }
 
@@ -109,6 +108,7 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     {
         Debug.LogErrorFormat("JoinRandomFailed({0}): {1}", returnCode, message);
 
+        // 방이 없다는 뜻이므로 방을 만들고, 만든 방에 입장한다.
         Debug.Log("Create Room");
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = MaxPlayerPerRoom });
     }

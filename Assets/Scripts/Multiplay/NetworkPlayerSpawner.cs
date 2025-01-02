@@ -15,11 +15,11 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            spawnedPlayer = PhotonNetwork.Instantiate("XRMultiTest", spawnPoint1P.position, Quaternion.identity);
+            spawnedPlayer = PhotonNetwork.Instantiate("XRMultiCharacter", spawnPoint1P.position, Quaternion.identity);
         }
         else
         {
-            spawnedPlayer = PhotonNetwork.Instantiate("XRMultiTest", spawnPoint2P.position, Quaternion.identity);
+            spawnedPlayer = PhotonNetwork.Instantiate("XRMultiCharacter", spawnPoint2P.position, Quaternion.identity);
         }
     }
 

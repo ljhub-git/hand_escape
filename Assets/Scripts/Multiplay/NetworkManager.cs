@@ -43,30 +43,5 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region Photon Callback Func
 
-    //public override void OnConnectedToMaster()
-    //{
-    //    Debug.Log("Connected To Server...");
-    //    base.OnConnectedToMaster();
-
-    //    RoomOptions roomOptions = new RoomOptions();
-    //    roomOptions.MaxPlayers = 10;
-    //    roomOptions.IsVisible = true;
-    //    roomOptions.IsOpen = true;
-
-    //    PhotonNetwork.JoinOrCreateRoom("Room1", roomOptions, TypedLobby.Default);
-    //}
-
-    //public override void OnJoinedRoom()
-    //{
-    //    Debug.Log("Joined a Room");
-    //    base.OnJoinedRoom();
-    //}
-
-    //public override void OnPlayerEnteredRoom(Player newPlayer)
-    //{
-    //    Debug.Log("A new player Joined Room!");
-    //    base.OnPlayerEnteredRoom(newPlayer);
-    //}
-
     #endregion
 }

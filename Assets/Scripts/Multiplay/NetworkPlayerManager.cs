@@ -3,40 +3,41 @@ using UnityEngine;
 using UnityEngine.XR;
 
 using Photon.Pun;
-using NUnit.Framework;
 
 public class NetworkPlayerManager : MonoBehaviourPun
 {
-
     [SerializeField]
-    private Transform headTr = null;
+    private GameObject LocalPlayerObject = null;
     [SerializeField]
-    private Transform leftHandTr = null;
-    [SerializeField]
-    private Transform rightHandTr = null;
-
-    [SerializeField]
-    private GameObject[] destroyObjects = null;
-
-    [SerializeField]
-    private GameObject cameraGo = null;
-
-    private InputDevice handDevice;
+    private GameObject MultiPlayerObject = null;
 
     private void Start()
     {
+        MultiHandManager multiHandMng = MultiPlayerObject.GetComponent<MultiHandManager>();
+
+        multiHandMng.InitHandJointTrs();
+
+        // 다른 클라이언트 소유일 때
         if (!photonView.IsMine)
         {
-            foreach(var obj in destroyObjects)
-            {
-                Destroy(obj);
-            }
+            LocalPlayerObject.SetActive(false);
+            MultiPlayerObject.SetActive(true);
+
+            MultiPlayerObject.GetComponent<MultiHandManager>().DisableHandInput();
+        }
+        // 현재 클라이언트 소유일 때
+        else
+        {
+            LocalPlayerObject.SetActive(true);
+            multiHandMng.HiddenHandMesh();
         }
     }
-    private void MapPosition(Transform _target, XRNode _node)
-    {
-        //InputDevices.GetDeviceAtXRNode(_node).TryGetFeatureVal
 
-        
+    private void Update()
+    {
+        if(photonView.IsMine)
+        {
+            MultiPlayerObject.transform.position = LocalPlayerObject.transform.position;
+        }
     }
 }
