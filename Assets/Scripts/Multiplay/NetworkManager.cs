@@ -37,11 +37,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         playerSpawner.SpawnPlayer();
+
+        if(PhotonNetwork.IsConnected)
+        {
+            Debug.Log("Number of players in room: " + PhotonNetwork.PlayerList.Length);
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                Debug.Log("Player in room: " + player.NickName);
+            }
+        }
     }
 
     #endregion
 
     #region Photon Callback Func
 
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+
+        Debug.Log("Number of players in room: " + PhotonNetwork.PlayerList.Length);
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            Debug.Log("Player in room: " + player.NickName);
+        }
+
+    }
     #endregion
 }

@@ -13,7 +13,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
     public void SpawnPlayer()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.CountOfPlayers == 1)
         {
             spawnedPlayer = PhotonNetwork.Instantiate("XRMultiCharacter", spawnPoint1P.position, Quaternion.identity);
         }

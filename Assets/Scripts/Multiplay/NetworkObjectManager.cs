@@ -26,13 +26,17 @@ public class NetworkObjectManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        // 포톤 서버에 접속이 되어있어야 함.
         if (!PhotonNetwork.IsConnected)
             return;
 
+        // XRGrabInteractable 컴포넌트를 가진 오브젝트들을 모두 가져온다.
         XRGrabInteractable[] grabInteractables = FindObjectsByType<XRGrabInteractable>(FindObjectsSortMode.None);
 
         foreach(var interactable in grabInteractables)
         {
+            // XRGrabInteractable 컴포넌트를 가진 오브젝트들의 위치를 동기화하기로 함.
+            // 따라서 해당 오브젝트들은 포톤 뷰 컴포넌트를 가지고 있어야만 한다.
             if (interactable.GetComponent<PhotonView>() == null)
             {
                 Debug.LogWarning("XR Interactable Object must have Photon View in Our Project!");

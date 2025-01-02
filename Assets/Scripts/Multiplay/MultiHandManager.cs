@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Hands;
 
-using Photon.Pun;
-
-public class MultiHandManager : MonoBehaviourPun
+public class MultiHandManager : MonoBehaviour
 {
     [SerializeField]
     private TransformSync transformSync = null;

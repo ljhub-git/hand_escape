@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-
 public class TransformSync : MonoBehaviourPun, IPunObservable
 {
     private List<Transform> syncTargetTransforms = new List<Transform>(); // Array of transforms to sync
