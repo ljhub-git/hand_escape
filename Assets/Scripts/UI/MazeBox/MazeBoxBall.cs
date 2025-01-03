@@ -1,12 +1,12 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.Events;
 
 public class MazeBoxBall : MonoBehaviour
 {
     public float maxDelta = 0.01f;
     private Vector3 previousPosition;
     private Rigidbody rb;
+    public UnityEvent onBallPuzzleComplete;
 
     private void Awake()
     {
@@ -40,6 +40,7 @@ public class MazeBoxBall : MonoBehaviour
         {
             //부모오브젝트제거
             transform.SetParent(null);
+            onBallPuzzleComplete.Invoke();
             //rb.isKinematic = false;
             //현재스크립트 비활성화
             this.enabled = false;

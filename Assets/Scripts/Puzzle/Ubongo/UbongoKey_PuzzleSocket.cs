@@ -31,7 +31,7 @@ public class UbongoKey_PuzzleSocket : MonoBehaviour
         var snappedObjectName = _arg0.interactableObject;
         //Debug.Log("들어옴");
         {
-            if (snappedObjectName.transform.name == CorrectPuzzlePiece.name)// 이름을 조건으로 일치할 경우
+            if (snappedObjectName.transform.name.Contains(CorrectPuzzlePiece.name))// 이름을 포함하는 조건으로 일치할 경우
             {
                 linkedPuzzleManager.completedPuzzle(); //매니저 함수 호출 (완료된 퍼즐갯수++,퍼즐완성확인)
                 //Debug.Log("정답들어옴");
