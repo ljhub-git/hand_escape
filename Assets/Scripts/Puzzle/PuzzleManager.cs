@@ -28,10 +28,11 @@ public class PuzzleManager : MonoBehaviour
     /// <summary>
     /// 퍼즐이 풀렸을 때 해당 오브젝트와 연결된 반응 오브젝트들에게 반응을 호출하는 함수.
     /// </summary>
-    /// <param name="puzzleObject">퍼즐이 풀린 오브젝트.</param>
-    public void OnSolvePuzzle(PuzzleObject puzzleObject)
+    /// <param name="_puzzleObj">퍼즐이 풀린 오브젝트.</param>
+    public void OnSolvePuzzle(PuzzleObject _puzzleObj)
     {
-        List<PuzzleReactObject> reactComps = puzzleMap[puzzleObject];
+        List<PuzzleReactObject> reactComps = null;
+        puzzleMap.TryGetValue(_puzzleObj, out reactComps);
 
         foreach (var reactToSolve in reactComps)
         {

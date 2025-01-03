@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Jeon/Jeon_PuzzleMultiTest.unity
+    guid: 7b1e9e2a9e2acb348a4d358ad14af53a
+  - enabled: 1
     path: Assets/Scenes/S_Title.unity
     guid: 0735a60d8342e5d408284bf5922c632b
   - enabled: 1
