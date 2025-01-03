@@ -7,6 +7,8 @@ TagManager:
   - Hand
   - Mirror
   - Items
+  - Ubongo
+  - UbongoCol
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - 
   - Prop_Static
   - Prop_Movable
-  - 
+  - MovablePuzzle
   - 
   - 
   - 

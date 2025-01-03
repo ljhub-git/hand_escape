@@ -2,20 +2,20 @@ using UnityEngine;
 
 public abstract class PuzzleObject : MonoBehaviour
 {
-    private PuzzleManager puzzleMng = null;
+    protected PuzzleManager puzzleMng = null;
 
-    private void Awake()
+    protected void Awake()
     {
         puzzleMng = FindAnyObjectByType<PuzzleManager>();
     }
 
-    public virtual void ResetPuzzle()
+    protected virtual void ResetPuzzle()
     {
 
     }
 
-    public virtual void SolvePuzzle()
+    protected virtual void SolvePuzzle()
     {
-        puzzleMng.OnSolvePuzzle(this);
+        puzzleMng?.OnSolvePuzzle(this);
     }
 }

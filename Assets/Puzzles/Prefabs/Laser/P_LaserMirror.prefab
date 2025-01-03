@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2698049332195956652}
   - component: {fileID: 1564911151517470616}
-  - component: {fileID: 4460881133610756503}
-  - component: {fileID: 1355947922082848213}
-  m_Layer: 0
+  - component: {fileID: 1148103958264438521}
+  - component: {fileID: 7220392245743254424}
+  - component: {fileID: 8126911385600125940}
+  m_Layer: 18
   m_Name: P_LaserMirror
-  m_TagString: Untagged
+  m_TagString: Mirror
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +63,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
---- !u!114 &4460881133610756503
+--- !u!114 &1148103958264438521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,11 +72,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924144360326007747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f5e0bed0cee42545ba45d8d42fc12ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 81b6bc8899c81cf4292b5cb86eab7591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAngularVelocity: 1
---- !u!114 &1355947922082848213
+--- !u!114 &7220392245743254424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924144360326007747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8126911385600125940}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &8126911385600125940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,7 +126,7 @@ GameObject:
   - component: {fileID: 8133290606030383093}
   - component: {fileID: 4859398823576116941}
   - component: {fileID: 6297350787706987515}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: body
   m_TagString: Mirror
   m_Icon: {fileID: 0}
