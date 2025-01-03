@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DuplicatedTriggerHandMannager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
     public bool L_HandTrigger;
     public bool R_HandCorrect { get; set; }
     public bool L_HandCorrect { get; set; }
+    public UnityEvent onPuzzleComplete;
     private void Awake()
     {
         duplicatedHandR.SetActive(false);
@@ -20,13 +22,13 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics"))
         {
-            duplicatedHandR.SetActive(true); 
+            if (duplicatedHandR) duplicatedHandR.SetActive(true); 
             R_HandTrigger = true;
 
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics"))
         {
-            duplicatedHandL.SetActive(true);
+            if (duplicatedHandL) duplicatedHandL.SetActive(true);
             L_HandTrigger = true;
         }
 
@@ -35,12 +37,12 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics"))
         {
-            duplicatedHandR.SetActive(false);
+            if (duplicatedHandR) duplicatedHandR.SetActive(false);
             R_HandTrigger = false;
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics"))
         {
-            duplicatedHandL.SetActive(false);
+            if (duplicatedHandL) duplicatedHandL.SetActive(false);
             L_HandTrigger = false;
         }
     }
@@ -48,7 +50,8 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
     {
         if (R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
         {
-            TextMeshPro.text = ("GOOD!\nStay Your Hands!");
+            TextMeshPro.text = ("GOOD!");
+            onPuzzleComplete.Invoke();
         }
     }
 }
