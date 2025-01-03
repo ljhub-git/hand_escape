@@ -9,7 +9,7 @@ public class LaserPuzzle : PuzzleObject
 
     private LineRenderer lr = null;
 
-    private int maxBounces = 15;
+    private int maxBounces = 14;
     private float maxDistance = 15f;
 
     private Vector3 pos = Vector3.zero;

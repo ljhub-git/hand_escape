@@ -16,4 +16,9 @@ public class LaserMirrorVelocityLimit : MonoBehaviour
     {
         rb.maxAngularVelocity = maxAngularVelocity;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Hello, World!");
+    }
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2077705546946503489}
   - component: {fileID: 6893398782131583759}
   - component: {fileID: 6882366804044637310}
-  - component: {fileID: 6057312811605713957}
   m_Layer: 0
   m_Name: XRMultiPlayer
   m_TagString: Untagged
@@ -69,27 +68,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 6057312811605713957}
   - {fileID: 2959019543291548966}
+  - {fileID: 904377642726137100}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6057312811605713957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7848747601012498489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!1001 &2915674625867273181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,7 +128,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6277127722852492573, guid: a4806a4551396d040947e555e4b63ac6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 904377642726137100}
   m_SourcePrefab: {fileID: 100100000, guid: a4806a4551396d040947e555e4b63ac6, type: 3}
 --- !u!4 &1405957391388278315 stripped
 Transform:
@@ -168,6 +154,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6277127722852492573, guid: a4806a4551396d040947e555e4b63ac6, type: 3}
   m_PrefabInstance: {fileID: 2915674625867273181}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &904377642726137100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9181248611735926464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1001 &6490158768715019833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,7 +180,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3680737558720398073, guid: cfe06014ced6933438886babd60e1465, type: 3}
       propertyPath: m_Name
-      value: XR Origin Hands (XR Rig) Physical(Use This)
+      value: SingleModel
       objectReference: {fileID: 0}
     - target: {fileID: 3680737558720398073, guid: cfe06014ced6933438886babd60e1465, type: 3}
       propertyPath: m_IsActive
