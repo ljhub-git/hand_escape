@@ -12,8 +12,10 @@ public class Slide_img : MonoBehaviour
     [SerializeField]
     private float y_hei = 1.12f; // 퍼즐 조각의 세로 크기
 
-    private Action<int, int> swapFunc = null;
+    private Action<int, int> swapFunc = null; // 클릭 델리게이트
+    private Action<int, int, string> dragFunc = null; // 드래그 델리게이트
     private BoxCollider2D boxCollider;  // BoxCollider2D 컴포넌트
+
 
     private void Awake()
     {
@@ -38,18 +40,16 @@ public class Slide_img : MonoBehaviour
 
     public void UpdatePos(int i, int j)
     {
-        //x = i * x_wid;
-        //y = j * y_hei;
-        //this.gameObject.transform.localPosition = new Vector2(x, y);
+        x = i * x_wid;
+        y = j * y_hei;
+        Debug.Log($"UpdatePos called for Index {index}: Moving to ({x}, {y})");
 
-        if (!IsInvoking("Move")) // 이동 애니메이션, 필요 없으면 지우고 위에꺼 주석해제
+        if (!IsInvoking("Move"))
         {
-            x = i * x_wid;
-            y = j * y_hei;
             StartCoroutine(Move());
         }
-
     }
+
 
     IEnumerator Move() // 이동 애니메이션, 안써도 됨(지우고 UpdatePos 수정하기, 인보크도 지우면 됨)
     {
@@ -58,15 +58,18 @@ public class Slide_img : MonoBehaviour
         Vector2 startpos = this.gameObject.transform.localPosition;
         Vector2 endpos = new Vector2(x, y);
 
+        Debug.Log($"Move started for Index {index}: From {startpos} to {endpos}");
+
         while (elapsedTime < duration)
         {
             this.gameObject.transform.localPosition = Vector2.Lerp(startpos, endpos, (elapsedTime / duration));
+            Debug.Log("aaaaa"+transform.localPosition);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        // 정확한 위치로 강제로 이동
         this.gameObject.transform.localPosition = endpos;
+        Debug.Log($"Move completed for Index {index}: Reached {endpos}");
     }
 
     public bool IsEmpty()

@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  x: 0
+  y: 0
   x_wid: 2
   y_hei: 1.12
 --- !u!212 &4463384932600341648
@@ -148,5 +150,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 1.12}
   m_EdgeRadius: 0
