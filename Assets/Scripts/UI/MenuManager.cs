@@ -1,3 +1,6 @@
+using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,9 +18,19 @@ public class MenuManager : MonoBehaviour
     private bool isLogin = false;
     //LoginManager loginManager;
 
+    [SerializeField] private float distance = 0.5f;
+    [SerializeField] private float verticalOffset = 0.2f;
+
+    public Transform positionSource;
+    public Transform menuPosition;
     // Start는 초기화 작업을 하는 함수
     void Start()
     {
+        if (loginUI == null)
+        {
+            //테스트용 할당
+            isLogin = true;
+        }
         // 게임 오디오의 초기 볼륨을 슬라이더 값에 맞게 설정
         //soundSlider.value = gameAudio.volume;
     }
@@ -28,10 +41,13 @@ public class MenuManager : MonoBehaviour
         if (!isLogin)
         //if (!titleSceneManager.isLogin)
         {
+            Debug.Log("333");
             loginUI.SetActive(false);
+            menuUI.SetActive(true);   // 메인 메뉴 활성화
+            optionUI.SetActive(false); // 옵션 메뉴 비활성화
         }
-        menuUI.SetActive(true);   // 메인 메뉴 활성화
-        optionUI.SetActive(false); // 옵션 메뉴 비활성화
+        Debug.Log("111");
+        OpenMenuIngame();
     }
 
     // 옵션 메뉴로 이동
@@ -66,6 +82,31 @@ public class MenuManager : MonoBehaviour
     // 뒤로가기 버튼을 누르면 메인 메뉴로 돌아가기
     public void BackToMainMenu()
     {
-        ShowMainMenu();
+        //ShowMainMenu();
+        menuUI.SetActive(true);   // 메인 메뉴 활성화
+        optionUI.SetActive(false); // 옵션 메뉴 비활성화
     }
+
+    public void OpenMenuIngame()
+    {
+        Debug.Log("222");
+        menuUI.SetActive(true);
+        optionUI.SetActive(false);
+
+        Vector3 direction = positionSource.forward;
+        direction.y = 0;
+        direction.Normalize();
+
+        Vector3 targetPosition = positionSource.position + direction * distance + Vector3.up * verticalOffset;
+        RepositionMenu(targetPosition);
+    }
+
+    public void RepositionMenu(Vector3 kbPos)
+    {
+        menuPosition.transform.position = kbPos;
+        menuPosition.transform.LookAt(Camera.main.transform.position);
+        menuPosition.transform.Rotate(Vector3.up, 180.0f);
+
+    }
+
 }
