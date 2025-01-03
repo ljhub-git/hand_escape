@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class MiniatureRotation
 {
-    public static IEnumerator SmoothRotation(Miniature miniature, float targetYRotation)
+    public static IEnumerator CaseRotation(Miniature miniature, float targetYRotation)
     {
         Transform transform = miniature.transform;
         Rigidbody rb = miniature.GetRigidbody();

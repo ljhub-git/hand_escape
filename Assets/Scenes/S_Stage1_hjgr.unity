@@ -576,7 +576,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 3, z: 12}
+  m_LocalScale: {x: 1, y: 3, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 321881394}
@@ -1661,7 +1661,7 @@ Transform:
   m_GameObject: {fileID: 673502264}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 1.5, z: -8}
+  m_LocalPosition: {x: -0.5, y: 1.5, z: -9}
   m_LocalScale: {x: 18, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2156,8 +2156,8 @@ Transform:
   m_GameObject: {fileID: 795055327}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 1.5, z: 3}
-  m_LocalScale: {x: 6, y: 3, z: 1}
+  m_LocalPosition: {x: 2, y: 0.5, z: 3}
+  m_LocalScale: {x: 6, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 321881394}
@@ -2715,7 +2715,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 3, z: 12}
+  m_LocalScale: {x: 1, y: 3, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 321881394}
@@ -4666,10 +4666,10 @@ MonoBehaviour:
   loginUI: {fileID: 0}
   menuUI: {fileID: 992697547}
   optionUI: {fileID: 624581785}
-  distance: 0.4
+  distance: 0.5
   verticalOffset: 0.2
-  positionSource: {fileID: 1388291211}
-  menuPosition: {fileID: 751341096}
+  positionSource: {fileID: 0}
+  menuPosition: {fileID: 0}
 --- !u!4 &1282241317
 Transform:
   m_ObjectHideFlags: 0
@@ -5950,8 +5950,8 @@ Transform:
   m_GameObject: {fileID: 1683021248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 1.5, z: -3}
-  m_LocalScale: {x: 6, y: 3, z: 1}
+  m_LocalPosition: {x: 2, y: 0.5, z: -3}
+  m_LocalScale: {x: 6, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 321881394}
