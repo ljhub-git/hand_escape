@@ -181,6 +181,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 748975213}
     m_Modifications:
+    - target: {fileID: 1163643675967498909, guid: 1e31c911824a3dc4e922ed3b5d37d922, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356865817844745057, guid: 1e31c911824a3dc4e922ed3b5d37d922, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1570140907078673180, guid: 1e31c911824a3dc4e922ed3b5d37d922, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.543
@@ -220,6 +228,14 @@ PrefabInstance:
     - target: {fileID: 1570140907078673180, guid: 1e31c911824a3dc4e922ed3b5d37d922, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013942618459690810, guid: 1e31c911824a3dc4e922ed3b5d37d922, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192434236760379395, guid: 1e31c911824a3dc4e922ed3b5d37d922, type: 3}
+      propertyPath: sceneViewId
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8954531815512505354, guid: 1e31c911824a3dc4e922ed3b5d37d922, type: 3}
       propertyPath: m_Name
@@ -1826,7 +1842,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -2292,7 +2308,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -2676,9 +2692,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 528386004616990518, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_TrackScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 528386004616990518, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_ThrowOnDetach
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3996590094413921267, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5663884894850796784, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_TrackScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5663884894850796784, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_ThrowOnDetach
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907634321290394775, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165882101961294742, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7821090148944851156, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Name

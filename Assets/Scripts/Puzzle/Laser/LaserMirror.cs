@@ -1,7 +1,6 @@
 using UnityEngine;
 
-using Photon.Pun;
-public class LaserMirror : MonoBehaviourPun
+public class LaserMirror : MonoBehaviour
 {
     private Rigidbody rb = null;
 
