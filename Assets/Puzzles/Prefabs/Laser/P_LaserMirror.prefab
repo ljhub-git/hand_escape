@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 2698049332195956652}
   - component: {fileID: 1564911151517470616}
   - component: {fileID: 1148103958264438521}
-  - component: {fileID: 7220392245743254424}
-  - component: {fileID: 8126911385600125940}
   m_Layer: 18
   m_Name: P_LaserMirror
   m_TagString: Mirror
@@ -75,45 +73,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b6bc8899c81cf4292b5cb86eab7591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7220392245743254424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924144360326007747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8126911385600125940}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &8126911385600125940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924144360326007747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 0
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!1 &2723533810771819387
 GameObject:
   m_ObjectHideFlags: 0

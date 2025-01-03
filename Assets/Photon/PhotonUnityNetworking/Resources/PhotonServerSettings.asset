@@ -39,13 +39,9 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - SetObjectGravityUsable
-  - SetObjectGravityUsableRPC
-  - RPC_SetObjectGravityUsable
-  - SendTransform
-  - SendRot
   - RPC_SetGravity
   - RPC_SetRotation
+  - RPC_PuzzleSolved
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
