@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class NetworkObjectManager : MonoBehaviourPunCallbacks
+public class NetworkObjectManager : MonoBehaviourPun
 {
     /// <summary>
     /// 상호작용이 가능하면서 동기화하도록 설정된 오브젝트 딕셔너리.
@@ -68,6 +68,36 @@ public class NetworkObjectManager : MonoBehaviourPunCallbacks
         photonView.RPC("RPC_PuzzleSolved", RpcTarget.Others, id);
     }
 
+    public void SetObjectTransform(PhotonView _view, Transform _tr)
+    {
+        if (!IsViewValid(_view))
+            return;
+
+        SetObjectRotation(_view, _tr.rotation);
+
+        SetObjectPosition(_view, _tr.position);
+    }
+
+    public void SetObjectRotation(PhotonView _view, Quaternion _rot)
+    {
+        if (!IsViewValid(_view))
+            return;
+
+        int id = _view.ViewID;
+
+        photonView.RPC("RPC_SetRotation", RpcTarget.Others, id, _rot);
+    }
+
+    public void SetObjectPosition(PhotonView _view, Vector3 _pos)
+    {
+        if (!IsViewValid(_view))
+            return;
+
+        int id = _view.ViewID;
+
+        photonView.RPC("RPC_SetPosition", RpcTarget.Others, id, _pos);
+    }
+
     // 매개변수로 들어온 뷰가 유효한 뷰인지 체크.
     private bool IsViewValid(PhotonView _view)
     {
@@ -90,9 +120,17 @@ public class NetworkObjectManager : MonoBehaviourPunCallbacks
     [PunRPC]
     private void RPC_SetRotation(int _viewId, Quaternion _rot)
     {
-        Debug.Log("SetObjectGravityUsable RPC Called!");
+        Debug.Log("SetRotation RPC Called!");
 
         networkObjectMap[_viewId].transform.rotation = _rot;
+    }
+
+    [PunRPC]
+    private void RPC_SetPosition(int _viewId, Vector3 _pos)
+    {
+        Debug.Log("SetPosition RPC Called!");
+
+        networkObjectMap[_viewId].transform.position = _pos;
     }
 
     [PunRPC]
