@@ -653,27 +653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d32877a61618345ab75b56d2ebc644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &299465993 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 479896030144876887, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
-  m_PrefabInstance: {fileID: 2002982900}
-  m_PrefabAsset: {fileID: 0}
---- !u!138 &299465997
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299465993}
-  serializedVersion: 1
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!114 &329591447 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8526379250056096334, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
@@ -3181,6 +3160,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 479896030144876887, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 528386004616990518, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_TrackScale
       value: 0
@@ -3191,7 +3174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 528386004616990518, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 528386004616990518, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.size
@@ -3273,6 +3256,18 @@ PrefabInstance:
       propertyPath: m_FirstSelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1197892601848711561, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152765182060678788, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310208983894180933, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2538018926835035685, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_ImplicitTensor
       value: 1
@@ -3281,9 +3276,33 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4057680066814738076, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4173108495942115965, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442792573883163817, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4450657644031473366, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_ImplicitTensor
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730119466426788401, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098147528767995425, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337562434163072078, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5663884894850796784, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_TrackScale
@@ -3369,6 +3388,14 @@ PrefabInstance:
       propertyPath: m_ImplicitTensor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6028196406451422418, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100735533401763675, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6165882101961294742, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_IsKinematic
       value: 1
@@ -3377,15 +3404,53 @@ PrefabInstance:
       propertyPath: m_ImplicitTensor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6204470520760873149, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7821090148944851156, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Name
       value: Ubongo_Puzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7841577904318689338, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7874712440358749792, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8053804636837305957, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8702679589371944710, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879310236997184632, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9074375051911314888, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151854127231466597, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153820089776860245, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9180707061135117094, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2538018926835035685, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+    - {fileID: 8053804636837305957, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -3401,9 +3466,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2930034386814685972, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1727999176}
-    - targetCorrespondingSourceObject: {fileID: 479896030144876887, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 299465997}
   m_SourcePrefab: {fileID: 100100000, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
 --- !u!1 &2021400199
 GameObject:
