@@ -33,7 +33,7 @@ public class Ubongo_PuzzleManager : PuzzleObject
     {
         if (curComplete >= numOfComplete && isEnd)
         {
-            // onPuzzleComplete.Invoke();
+            //onPuzzleComplete.Invoke();
             SolvePuzzle();
             Debug.Log("Complete");
         }
