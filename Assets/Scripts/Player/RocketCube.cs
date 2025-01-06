@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -8,7 +10,8 @@ public class RocketCube : MonoBehaviour
     private BoxCollider BoxCollider = null; //현 오브젝트 박스 콜라이더 가져옴
     private GameObject catchedObject = null; // Trigger 오브젝트를 자식으로 만들기 위해 컴퍼넌트 가져옴
     public Vector3 catchedObjectPosition = Vector3.zero; // Trigger 오브젝트 position 값 저장하기 위함
-    private Rigidbody catchedObjectRb = null; // Rigidbody useGravitiy를 온오프 하기위해 컴퍼넌트 가저옴
+    private List<Rigidbody> catchedObjectRb = new List<Rigidbody>(); // Rigidbody useGravitiy를 온오프 하기위해 컴퍼넌트 가저옴
+    private List<bool> isChangedGravity = new List<bool>(); //이 컴퍼넌트에서 중력을 비활성화 했는지 확인하는 bool값
     private Vector3 catcherPosition = Vector3.zero;
     private void Awake()
     {
@@ -31,14 +34,36 @@ public class RocketCube : MonoBehaviour
 
         if (catchedObject == null && isFired) // 잡힌 오브젝트가 없고 로켓펀치를 했으면
         {
-            other.transform.SetParent(transform); // 현재 객체의 자식으로 만듦
-            iscatched = true;
-            catchedObject = other.gameObject;
-            catchedObjectPosition = catchedObject.transform.position;
-            catchedObjectRb = catchedObject.GetComponentInChildren<Rigidbody>();
-            if (catchedObjectRb && catchedObjectRb.useGravity == true)
+            Transform currentParent = other.transform; // 충돌 한 오브젝트 부모 정의
+            Transform finalParent = null; //최상위 부모
+            while (currentParent.parent != null) // 부모가 있는 동안
             {
-                catchedObjectRb.useGravity = false; // 중력이 적용중이면 중력 비활성화
+                currentParent = currentParent.parent; //부모 재정의
+            }
+            if (currentParent.parent == null) // 부모가 없으면
+            {
+                finalParent = currentParent;
+                finalParent.transform.SetParent(transform);// 객체를 자식으로 바꿈
+            }
+
+            iscatched = true;
+            catchedObject = finalParent.gameObject;
+            catchedObjectPosition = catchedObject.transform.position;
+            // GetComponentsInChildren<Rigidbody>()로 배열을 가져오고, 이를 List로 변환
+            catchedObjectRb = catchedObject.GetComponentsInChildren<Rigidbody>().ToList();
+            isChangedGravity.Clear();  // 기존 값 비우기
+            for (int n = 0; n < catchedObjectRb.Count; n++)
+            {
+                Rigidbody rb = catchedObjectRb[n];
+                if (rb.useGravity)
+                {
+                    rb.useGravity = false; // 중력이 적용중이면 중력 비활성화
+                    isChangedGravity.Add(true); // 해당 인덱스에 중력 비활성화 기록
+                }
+                else
+                {
+                    isChangedGravity.Add(false); // 중력이 적용되지 않으면 false 추가
+                }
             }
 
         }
@@ -56,10 +81,15 @@ public class RocketCube : MonoBehaviour
     }
     public void UseGravity()
     {
-        if (catchedObject != null)
+        for (int n = 0; n < catchedObjectRb.Count; n++)
         {
-            if (catchedObjectRb && catchedObjectRb.useGravity == false)
-                catchedObjectRb.useGravity = true;
+            Rigidbody rb = catchedObjectRb[n];
+
+            // 중력이 비활성화되어 있고, 이전에 중력을 비활성화했던 경우
+            if (!rb.useGravity && isChangedGravity[n])
+            {
+                rb.useGravity = true;  // 중력 재활성화
+            }
         }
     } 
     public void RemeberCatcherPosition(Vector3 _catcherPosition)
