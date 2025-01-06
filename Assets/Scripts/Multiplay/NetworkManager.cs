@@ -6,6 +6,7 @@ using Photon.Realtime;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     private NetworkPlayerSpawner playerSpawner = null;
+    private NetworkObjectManager networkObjectMng = null;
 
     public string NickName
     {
@@ -39,6 +40,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
 
         playerSpawner = GetComponent<NetworkPlayerSpawner>();
+
+        networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
+
+        networkObjectMng.InitPrefabPool();
     }
 
     private void Start()

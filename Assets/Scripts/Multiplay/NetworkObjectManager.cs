@@ -10,6 +10,11 @@ public class NetworkObjectManager : MonoBehaviourPun
     /// 상호작용이 가능하면서 동기화하도록 설정된 오브젝트 딕셔너리.
     /// 키값은 포톤 뷰의 아이디.
     /// </summary>
+    /// 
+
+    [SerializeField]
+    private GameObject[] runtimeInstantiatePrefabs;
+
     private Dictionary<int, GameObject> networkObjectMap = null;
 
     public Dictionary<int, GameObject> NetworkObjectMap
@@ -17,14 +22,21 @@ public class NetworkObjectManager : MonoBehaviourPun
         get { return networkObjectMap; }
     }
 
-    private void Awake()
-    {
-        networkObjectMap = new Dictionary<int, GameObject>();
-    }
-
     private void Start()
     {
         InitObjectMap();
+    }
+
+    public void InitPrefabPool()
+    {
+        networkObjectMap = new Dictionary<int, GameObject>();
+
+        DefaultPool Pool = PhotonNetwork.PrefabPool as DefaultPool;
+
+        foreach (var prefab in runtimeInstantiatePrefabs)
+        {
+            Pool.ResourceCache.TryAdd(prefab.name, prefab);
+        }
     }
 
     // 씬에 있는 포톤 뷰를 가져오고 포톤뷰 아이디를 통해서 networkInteractableMap 을 초기화한다.
@@ -96,6 +108,19 @@ public class NetworkObjectManager : MonoBehaviourPun
         int id = _view.ViewID;
 
         photonView.RPC("RPC_SetPosition", RpcTarget.Others, id, _pos);
+    }
+
+    public void DestroyObject(PhotonView _view)
+    {
+        if (!IsViewValid(_view))
+            return;
+
+        PhotonNetwork.Destroy(_view);
+    }
+
+    public void InstantiateObject(string _name, Vector3 _pos, Quaternion _rot)
+    {
+        PhotonNetwork.Instantiate(_name, _pos, _rot);
     }
 
     // 매개변수로 들어온 뷰가 유효한 뷰인지 체크.

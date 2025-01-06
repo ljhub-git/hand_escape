@@ -163,7 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b1841632cc8304f8dbd31346c51e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui_PlayerReady: []
+  ui_PlayerReadyArr:
+  - {fileID: 1008899378}
+  - {fileID: 1786061802}
 --- !u!1001 &130830079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1278,7 +1280,7 @@ GameObject:
   - component: {fileID: 1010856158}
   - component: {fileID: 1010856157}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: WallCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

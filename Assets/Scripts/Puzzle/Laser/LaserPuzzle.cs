@@ -24,7 +24,7 @@ public class LaserPuzzle : PuzzleObject
         StartCoroutine(LaserCoroutine());
     }
 
-    protected override void SolvePuzzle()
+    public override void SolvePuzzle()
     {
         foreach(var laserMirror in laserMirrors)
         {

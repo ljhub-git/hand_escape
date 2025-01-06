@@ -1,30 +1,23 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MazeBoxBall : PuzzleObject
+public class MazeBoxBall : MonoBehaviour
 {
     [SerializeField]
     private GameObject ballPrefab = null;
+
+    private MazeBoxManager mazeBoxMng = null;
 
     public float maxDelta = 0.01f;
     private Vector3 previousPosition;
     private Rigidbody rb;
 
-    public UnityEvent onBallPuzzleComplete;
-
-    protected override void SolvePuzzle()
-    {
-        base.SolvePuzzle();
-
-        Instantiate(ballPrefab, transform.position, transform.rotation);
-
-        Destroy(gameObject);
-    }
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         previousPosition = transform.localPosition;
+
+        mazeBoxMng = transform.parent.GetComponent<MazeBoxManager>();
     }
 
     private void Update()
@@ -59,7 +52,7 @@ public class MazeBoxBall : PuzzleObject
             ////현재스크립트 비활성화
             //this.enabled = false
 
-            SolvePuzzle();
+            mazeBoxMng.SolvePuzzle();
         }
     }
 

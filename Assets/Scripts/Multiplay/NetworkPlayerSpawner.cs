@@ -7,16 +7,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPun
     [SerializeField]
     private Transform[] spawnPoints = null;
 
-    [SerializeField]
-    private GameObject playerPrefab = null;
-
     private GameObject spawnedPlayer = null;
-
-    private void Awake()
-    {
-        DefaultPool Pool = PhotonNetwork.PrefabPool as DefaultPool;
-        Pool.ResourceCache.TryAdd("XRMultiCharacter", playerPrefab);
-    }
     public void SpawnPlayer()
     {
         spawnedPlayer = PhotonNetwork.Instantiate(
