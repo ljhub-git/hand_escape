@@ -1,12 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
-public class DoorBodyOpenClose : MonoBehaviour
+public class DoorBodyOpenClose : PuzzleReactObject
 {
     private Quaternion openedDoorRot = Quaternion.Euler(0f, 5f, 0f);
     private Quaternion closedDoorRot = Quaternion.Euler(0f, 90f, 0f);
     private Coroutine DoorMoveCoroutine = null; // 코루틴을 추적할 변수
     private bool isLocked = false;
+
+    public override void OnPuzzleSolved()
+    {
+        base.OnPuzzleSolved();
+
+        OpenDoor();
+    }
 
     public void OpenDoor()
     {
