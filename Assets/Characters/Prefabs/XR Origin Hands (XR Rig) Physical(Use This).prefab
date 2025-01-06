@@ -4802,6 +4802,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2942156198692655549, guid: 51efda4ee873b154c90e0976b982c08e, type: 3}
+      propertyPath: m_EnableFarCasting
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2958593068129369998, guid: 51efda4ee873b154c90e0976b982c08e, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -4873,6 +4877,10 @@ PrefabInstance:
     - target: {fileID: 5169788651624585358, guid: 51efda4ee873b154c90e0976b982c08e, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359434741994886739, guid: 51efda4ee873b154c90e0976b982c08e, type: 3}
+      propertyPath: m_EnableFarCasting
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5540120870987152557, guid: 51efda4ee873b154c90e0976b982c08e, type: 3}
       propertyPath: m_Layer
