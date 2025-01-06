@@ -13,8 +13,9 @@ public class Slide_img : MonoBehaviour
     private float y_hei = 1.12f; // 퍼즐 조각의 세로 크기
 
     private Action<int, int> swapFunc = null; // 클릭 델리게이트
-    private Action<int, int, string> dragFunc = null; // 드래그 델리게이트
     private BoxCollider2D boxCollider;  // BoxCollider2D 컴포넌트
+
+    private bool isMoving = false;
 
 
     private void Awake()
@@ -34,18 +35,24 @@ public class Slide_img : MonoBehaviour
     {
         this.index = index;
         this.GetComponent<SpriteRenderer>().sprite = sprite;
-        UpdatePos(i, j);
+        UpdatePos(i, j, true);
         this.swapFunc = swapFunc;
     }
 
-    public void UpdatePos(int i, int j)
+    public void UpdatePos(int i, int j, bool immediate = false)
     {
         x = i * x_wid;
         y = j * y_hei;
-        Debug.Log($"UpdatePos called for Index {index}: Moving to ({x}, {y})");
 
-        if (!IsInvoking("Move"))
+        if (immediate)
         {
+            // 즉시 위치 갱신
+            this.transform.localPosition = new Vector2(x, y);
+            Debug.Log($"UpdatePos Immediate: Index {index}, New Pos: {transform.localPosition}");
+        }
+        else if (!IsInvoking("Move"))
+        {
+            // 코루틴으로 부드럽게 이동
             StartCoroutine(Move());
         }
     }
@@ -53,23 +60,24 @@ public class Slide_img : MonoBehaviour
 
     IEnumerator Move() // 이동 애니메이션, 안써도 됨(지우고 UpdatePos 수정하기, 인보크도 지우면 됨)
     {
+        if (isMoving) yield break; // 이미 이동 중이면 중단
+        isMoving = true; // 이동 시작
+
         float elapsedTime = 0;
         float duration = 0.2f;
         Vector2 startpos = this.gameObject.transform.localPosition;
         Vector2 endpos = new Vector2(x, y);
 
-        Debug.Log($"Move started for Index {index}: From {startpos} to {endpos}");
 
         while (elapsedTime < duration)
         {
             this.gameObject.transform.localPosition = Vector2.Lerp(startpos, endpos, (elapsedTime / duration));
-            Debug.Log("aaaaa"+transform.localPosition);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         this.gameObject.transform.localPosition = endpos;
-        Debug.Log($"Move completed for Index {index}: Reached {endpos}");
+        isMoving = false;
     }
 
     public bool IsEmpty()

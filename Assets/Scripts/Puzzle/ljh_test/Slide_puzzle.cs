@@ -12,8 +12,7 @@ public class Slide_puzzle : MonoBehaviour
     private void Start()
     {
         Init();
-        //for (int i = 0; i < 2; i++)
-        //    Shuffle();
+        Shuffle();
     }
 
     private void Init()
@@ -29,14 +28,46 @@ public class Slide_puzzle : MonoBehaviour
             }
     }
 
-    void ClickToSwap(int x, int y)
+    private void Shuffle()
     {
-        int dx = getDx(x, y);
-        int dy = getDy(x, y);
-        Swap(x, y, dx, dy);
-        CheckIfSolved();// Á¤´äÈ®ÀÎ
+        int emptyX = -1, emptyY = -1;
+
+        // ºóÄ­ À§Ä¡ Ã£±â
+        for (int y = 0; y < 4; y++)
+        {
+            for (int x = 0; x < 4; x++)
+            {
+                if (boxes[x, y].IsEmpty())
+                {
+                    emptyX = x;
+                    emptyY = y;
+                    Debug.Log($"Initial Empty Tile: ({emptyX}, {emptyY}), LocalPos: {boxes[x, y].gameObject.transform.localPosition}");
+                    break;
+                }
+            }
+        }
+
+        int shuffleSteps = 50; // ¼¯±â ¹Ýº¹ È½¼ö
+        for (int i = 0; i < shuffleSteps; i++)
+        {
+            // À¯È¿ÇÑ ¹«ÀÛÀ§ ÀÌµ¿ ¹æÇâ ¼±ÅÃ
+            Vector2 move = getValidMove(emptyX, emptyY);
+
+            // ºóÄ­°ú ±³È¯
+            int newX = emptyX + (int)move.x;
+            int newY = emptyY + (int)move.y;
+
+            Swap(emptyX, emptyY, (int)move.x, (int)move.y);
+
+            // »õ ºóÄ­ À§Ä¡ °»½Å
+            emptyX = newX;
+            emptyY = newY;
+        }
+
+        // ÃÖÁ¾ È®ÀÎ
+        Debug.Log($"Final Empty Tile: ({emptyX}, {emptyY}), LocalPos: {boxes[emptyX, emptyY].gameObject.transform.localPosition}");
+        Debug.Log("Shuffle completed!");
     }
-    
 
 
     void Swap(int x, int y, int dx, int dy)
@@ -72,12 +103,10 @@ public class Slide_puzzle : MonoBehaviour
             }
         }
 
-        Debug.Log($"Empty tile found at: Array({emptyX}, {emptyY})");
 
         int rowDirection = clickedY - emptyY;
         int columnDirection = clickedX - emptyX;
 
-        Debug.Log($"RowDirection: {rowDirection}, ColumnDirection: {columnDirection}");
 
         if (rowDirection != 0 && columnDirection != 0)
         {
@@ -93,34 +122,30 @@ public class Slide_puzzle : MonoBehaviour
         {
             MoveTilesVertically(clickedY, emptyY, clickedX);
         }
+
+        CheckIfSolved();// Á¤´äÈ®ÀÎ
     }
     private void MoveTilesHorizontally(int clickedX, int emptyX, int y)
     {
         int direction = (clickedX > emptyX) ? 1 : -1;
 
-        Debug.Log("clickedX : " + clickedX);
-        Debug.Log("emptyX : " + emptyX);
-        Debug.Log($"Horizontal move direction: {direction}");
+        Slide_img emptyTile = boxes[emptyX, y];
 
         for (int x = emptyX; x != clickedX; x += direction)
         {
             Slide_img currentTile = boxes[x + direction, y];
             boxes[x, y] = currentTile;
             currentTile.UpdatePos(x, y);
-            Debug.Log($"Moved tile: Index {currentTile.index}, New Array Position ({x}, {y}), UI Position: {currentTile.gameObject.transform.localPosition}");
         }
 
-        Slide_img emptyTile = boxes[emptyX, y];
         boxes[clickedX, y] = emptyTile;
         emptyTile.UpdatePos(clickedX, y);
-        Debug.Log($"Empty tile moved to: Array({clickedX}, {y}), UI Position: {emptyTile.gameObject.transform.localPosition}");
     }
 
     private void MoveTilesVertically(int clickedY, int emptyY, int x)
     {
         int direction = (clickedY > emptyY) ? 1 : -1;
-        Debug.Log($"Vertical move direction: {direction}");
-
+        Slide_img emptyTile = boxes[x, emptyY];
         for (int y = emptyY; y != clickedY; y += direction)
         {
             Slide_img currentTile = boxes[x, y + direction];
@@ -129,43 +154,40 @@ public class Slide_puzzle : MonoBehaviour
         }
 
         // ºóÄ­ ÀÌµ¿
-        Slide_img emptyTile = boxes[x, emptyY];
+
         boxes[x, clickedY] = emptyTile;
         emptyTile.UpdatePos(x, clickedY);
 
-        Debug.Log($"Moved tiles vertically. Empty tile is now at ({x}, {clickedY}).");
     }
 
 
 
-    int getDx(int x, int y)
-    {
-        Debug.Log("getDX.x : " + x + "getDX.y" + y);
+    //int getDx(int x, int y)
+    //{
 
-        if (x < 3 && boxes[x + 1, y].IsEmpty())
-        {
-            return 1;
-        }
-        if (x > 0 && boxes[x - 1, y].IsEmpty())
-        {
-            return -1;
-        }
-        return 0;
-    }
+    //    if (x < 3 && boxes[x + 1, y].IsEmpty())
+    //    {
+    //        return 1;
+    //    }
+    //    if (x > 0 && boxes[x - 1, y].IsEmpty())
+    //    {
+    //        return -1;
+    //    }
+    //    return 0;
+    //}
 
-    int getDy(int x, int y)
-    {
-        Debug.Log("getDY.x : " + x + "getDY.y" + y);
-        if (y < 3 && boxes[x, y + 1].IsEmpty())
-        {
-            return 1;
-        }
-        if (y > 0 && boxes[x, y - 1].IsEmpty())
-        {
-            return -1;
-        }
-        return 0;
-    }
+    //int getDy(int x, int y)
+    //{
+    //    if (y < 3 && boxes[x, y + 1].IsEmpty())
+    //    {
+    //        return 1;
+    //    }
+    //    if (y > 0 && boxes[x, y - 1].IsEmpty())
+    //    {
+    //        return -1;
+    //    }
+    //    return 0;
+    //}
     //int getColumnDirection(int x, int y)
     //{
     //    Debug.Log($"Start checking column for ({x}, {y})");
@@ -200,20 +222,20 @@ public class Slide_puzzle : MonoBehaviour
 
 
 
-    void Shuffle()
-    {
-        for (int i = 0; i < 4; ++i)
-        {
-            for (int j = 0; j < 4; ++j)
-            {
-                if (boxes[i, j].IsEmpty())
-                {
-                    Vector2 pos = getValidMove(i, j);
-                    Swap(i, j, (int)pos.x, (int)pos.y);
-                }
-            }
-        }
-    }
+    //void Shuffle()
+    //{
+    //    for (int i = 0; i < 4; ++i)
+    //    {
+    //        for (int j = 0; j < 4; ++j)
+    //        {
+    //            if (boxes[i, j].IsEmpty())
+    //            {
+    //                Vector2 pos = getValidMove(i, j);
+    //                Swap(i, j, (int)pos.x, (int)pos.y);
+    //            }
+    //        }
+    //    }
+    //}
 
     private Vector2 lastMove;
 
@@ -283,4 +305,5 @@ public class Slide_puzzle : MonoBehaviour
         }
         
     }
+
 }
