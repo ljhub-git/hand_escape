@@ -5,9 +5,15 @@ using Photon.Realtime;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
     private NetworkPlayerSpawner playerSpawner = null;
 
+    public string NickName
+    {
+        get
+        {
+            return PhotonNetwork.NickName;
+        }
+    }
     #region Public Func
 
     /// <summary>
@@ -31,6 +37,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // 게임 시작 시 두 플레이어는 항상 같은 씬에 있어야 한다.
         // 씬을 자동으로 동기화하도록 설정.
         PhotonNetwork.AutomaticallySyncScene = true;
+
+        playerSpawner = GetComponent<NetworkPlayerSpawner>();
     }
 
     private void Start()
