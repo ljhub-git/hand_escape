@@ -11,6 +11,7 @@ public class Slide_img : MonoBehaviour
     private float x_wid = 2; // 퍼즐 조각의 가로 크기
     [SerializeField]
     private float y_hei = 1.12f; // 퍼즐 조각의 세로 크기
+    public float vr_scale = 0.25f; //vr에 맞춘 퍼즐조각 크기(프리팹 크기 조절이 되어야함)
 
     private Action<int, int> swapFunc = null; // 클릭 델리게이트
     private BoxCollider2D boxCollider;  // BoxCollider2D 컴포넌트
@@ -37,18 +38,52 @@ public class Slide_img : MonoBehaviour
         this.GetComponent<SpriteRenderer>().sprite = sprite;
         UpdatePos(i, j, true);
         this.swapFunc = swapFunc;
+
+        // index가 16번일 경우 특별한 처리
+        if (this.index == 16)
+        {
+            // 자식 오브젝트 cube를 찾음
+            Transform cubeTransform = transform.Find("Cube");
+
+            if (cubeTransform != null)
+            {
+                // 1. cube의 머티리얼을 투명한 머티리얼로 변경
+                MeshRenderer cubeRenderer = cubeTransform.GetComponent<MeshRenderer>();
+                if (cubeRenderer != null)
+                {
+                    Material transparentMaterial = Resources.Load<Material>("shader/transparencys");
+                    if (transparentMaterial != null)
+                    {
+                        cubeRenderer.material = transparentMaterial;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("투명 머티리얼을 Resources에서 찾을 수 없습니다.");
+                    }
+                }
+
+                // 2. cube의 조명(Lighting)을 off로 설정
+                if (cubeRenderer != null)
+                {
+                    cubeRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("cube 오브젝트를 찾을 수 없습니다.");
+            }
+        }
     }
 
     public void UpdatePos(int i, int j, bool immediate = false)
     {
-        x = i * x_wid;
-        y = j * y_hei;
+        x = i * x_wid * vr_scale;
+        y = j * y_hei * vr_scale;
 
         if (immediate)
         {
             // 즉시 위치 갱신
             this.transform.localPosition = new Vector2(x, y);
-            Debug.Log($"UpdatePos Immediate: Index {index}, New Pos: {transform.localPosition}");
         }
         else if (!IsInvoking("Move"))
         {
@@ -89,7 +124,7 @@ public class Slide_img : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && swapFunc != null)
         {
-            swapFunc((int)(x / x_wid), (int)(y / y_hei));
+            swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
         }
     }
 }

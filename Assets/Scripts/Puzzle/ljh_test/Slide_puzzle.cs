@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class Slide_puzzle : MonoBehaviour
 {
-    public Slide_img img_Prefab;  // 퍼즐 조각 프리팹
-    public Slide_img[,] boxes = new Slide_img[4, 4]; // 4x4 그리드
-    public Sprite[] sprites;  // 15개의 퍼즐 조각에 들어갈 스프라이트들
+    public Slide_img img_Prefab;  
+    public Slide_img[,] boxes = new Slide_img[4, 4]; 
+    public Sprite[] sprites; 
 
     private Vector2Int dragStartPos;
+
+    public GameObject puzzleParent;
 
     private void Start()
     {
@@ -17,12 +19,25 @@ public class Slide_puzzle : MonoBehaviour
 
     private void Init()
     {
+        // 빈 오브젝트 생성하여 부모로 설정
+        if (puzzleParent == null)
+        {
+            puzzleParent = new GameObject("PuzzleParent");  // "PuzzleParent"라는 이름의 빈 오브젝트 생성
+        }
+
         int n = 0;
         for (int y = 3; y >= 0; y--)
             for (int x = 0; x < 4; x++)
             {
                 Slide_img box = Instantiate(img_Prefab, new Vector2(x, y), Quaternion.identity);
                 box.Init(x, y, n + 1, sprites[n], HandleClick);
+
+                float vr_scale = box.vr_scale;
+                box.transform.localScale = new Vector3(vr_scale, vr_scale, vr_scale);
+
+                // 퍼즐 조각을 puzzleParent 오브젝트의 자식으로 설정
+                box.transform.SetParent(puzzleParent.transform);
+
                 boxes[x, y] = box;
                 n++;
             }
@@ -61,29 +76,7 @@ public class Slide_puzzle : MonoBehaviour
             emptyX = newX;
             emptyY = newY;
         }
-
-        Debug.Log("Shuffle completed!");
-
-        // 섞은 후 모든 퍼즐 조각 위치 출력
-        LogPuzzlePositions();
     }
-
-
-
-    private void LogPuzzlePositions()
-    {
-        Debug.Log("섞인 후 퍼즐 위치:");
-        for (int y = 0; y < 4; y++)
-        {
-            for (int x = 0; x < 4; x++)
-            {
-                var tile = boxes[x, y];
-                Debug.Log($"Index: {tile.index}, Array Pos: ({x}, {y}), LocalPos: {tile.transform.localPosition}");
-            }
-        }
-    }
-
-
 
     void Swap(int x, int y, int dx, int dy)
     {
@@ -102,8 +95,7 @@ public class Slide_puzzle : MonoBehaviour
 
     private void HandleClick(int clickedX, int clickedY)
     {
-        Debug.Log($"HandleClick called: Array({clickedX}, {clickedY}), Index: {boxes[clickedX, clickedY].index}");
-
+        
         int emptyX = -1, emptyY = -1;
         for (int y = 0; y < 4; y++)
         {
@@ -175,85 +167,7 @@ public class Slide_puzzle : MonoBehaviour
 
     }
 
-
-
-    //int getDx(int x, int y)
-    //{
-
-    //    if (x < 3 && boxes[x + 1, y].IsEmpty())
-    //    {
-    //        return 1;
-    //    }
-    //    if (x > 0 && boxes[x - 1, y].IsEmpty())
-    //    {
-    //        return -1;
-    //    }
-    //    return 0;
-    //}
-
-    //int getDy(int x, int y)
-    //{
-    //    if (y < 3 && boxes[x, y + 1].IsEmpty())
-    //    {
-    //        return 1;
-    //    }
-    //    if (y > 0 && boxes[x, y - 1].IsEmpty())
-    //    {
-    //        return -1;
-    //    }
-    //    return 0;
-    //}
-    //int getColumnDirection(int x, int y)
-    //{
-    //    Debug.Log($"Start checking column for ({x}, {y})");
-    //    for (int j = 0; j < 4; j++)
-    //    {
-    //        Debug.Log($"Checking column: Array({x}, {j}), Index: {boxes[x, j].index}, IsEmpty: {boxes[x, j].IsEmpty()}");
-    //        if (boxes[x, j].IsEmpty())
-    //        {
-    //            Debug.Log($"Empty tile found in column: Array({x}, {j})");
-    //            return j > y ? 1 : -1; // 위쪽(+1) 또는 아래쪽(-1)
-    //        }
-    //    }
-    //    return 0;
-    //}
-
-
-    //int getRowDirection(int x, int y)
-    //{
-    //    Debug.Log($"Start checking row for ({x}, {y})");
-    //    for (int i = 0; i < 4; i++)
-    //    {
-    //        Debug.Log($"Checking row: Array({i}, {y}), Index: {boxes[i, y].index}, IsEmpty: {boxes[i, y].IsEmpty()}");
-    //        if (boxes[i, y].IsEmpty())
-    //        {
-    //            Debug.Log($"Empty tile found in row: Array({i}, {y})");
-    //            return i > x ? 1 : -1; // 오른쪽(+1) 또는 왼쪽(-1)
-    //        }
-    //    }
-    //    return 0;
-    //}
-
-
-
-
-    //void Shuffle()
-    //{
-    //    for (int i = 0; i < 4; ++i)
-    //    {
-    //        for (int j = 0; j < 4; ++j)
-    //        {
-    //            if (boxes[i, j].IsEmpty())
-    //            {
-    //                Vector2 pos = getValidMove(i, j);
-    //                Swap(i, j, (int)pos.x, (int)pos.y);
-    //            }
-    //        }
-    //    }
-    //}
-
     private Vector2 lastMove;
-
     Vector2 getValidMove(int x, int y)
     {
         Vector2 pos = new Vector2();
@@ -290,7 +204,6 @@ public class Slide_puzzle : MonoBehaviour
     {
         int count = 0;
         bool isSolved = true;
-        Debug.Log("클릭시작" + isSolved);
 
         for (int y = 3; y >= 0; y--)
         {
@@ -313,12 +226,6 @@ public class Slide_puzzle : MonoBehaviour
             {
                 Debug.Log("정답입니다");
             }
-            else
-            {
-                Debug.Log("count: " + count);
-            }
         }
-        
     }
-
 }
