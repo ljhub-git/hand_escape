@@ -1,7 +1,9 @@
+using ExitGames.Client.Photon.StructWrapping;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class RocketCube : MonoBehaviour
 {
@@ -51,6 +53,16 @@ public class RocketCube : MonoBehaviour
             catchedObjectPosition = catchedObject.transform.position;
             // GetComponentsInChildren<Rigidbody>()로 배열을 가져오고, 이를 List로 변환
             catchedObjectRb = catchedObject.GetComponentsInChildren<Rigidbody>().ToList();
+            XRGrabInteractable catchedObjectGrabInteractable = null;
+            catchedObjectGrabInteractable = GetComponentInChildren<XRGrabInteractable>();
+            if (catchedObjectGrabInteractable != null)
+            {
+                // XRGrabInteractable이 비활성화되어 있을 경우, 활성화시킵니다.
+                if (!catchedObjectGrabInteractable.enabled)
+                {
+                    catchedObjectGrabInteractable.enabled = true;
+                }
+            }
             isChangedGravity.Clear();  // 기존 값 비우기
             for (int n = 0; n < catchedObjectRb.Count; n++)
             {
