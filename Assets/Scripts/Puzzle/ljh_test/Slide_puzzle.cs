@@ -41,16 +41,14 @@ public class Slide_puzzle : MonoBehaviour
                 {
                     emptyX = x;
                     emptyY = y;
-                    Debug.Log($"Initial Empty Tile: ({emptyX}, {emptyY}), LocalPos: {boxes[x, y].gameObject.transform.localPosition}");
                     break;
                 }
             }
         }
 
-        int shuffleSteps = 50; // ¼¯±â ¹Ýº¹ È½¼ö
+        int shuffleSteps = 100; // ¼¯±â ¹Ýº¹ È½¼ö
         for (int i = 0; i < shuffleSteps; i++)
         {
-            // À¯È¿ÇÑ ¹«ÀÛÀ§ ÀÌµ¿ ¹æÇâ ¼±ÅÃ
             Vector2 move = getValidMove(emptyX, emptyY);
 
             // ºóÄ­°ú ±³È¯
@@ -59,15 +57,32 @@ public class Slide_puzzle : MonoBehaviour
 
             Swap(emptyX, emptyY, (int)move.x, (int)move.y);
 
-            // »õ ºóÄ­ À§Ä¡ °»½Å
+            // ºóÄ­ À§Ä¡ °»½Å
             emptyX = newX;
             emptyY = newY;
         }
 
-        // ÃÖÁ¾ È®ÀÎ
-        Debug.Log($"Final Empty Tile: ({emptyX}, {emptyY}), LocalPos: {boxes[emptyX, emptyY].gameObject.transform.localPosition}");
         Debug.Log("Shuffle completed!");
+
+        // ¼¯Àº ÈÄ ¸ðµç ÆÛÁñ Á¶°¢ À§Ä¡ Ãâ·Â
+        LogPuzzlePositions();
     }
+
+
+
+    private void LogPuzzlePositions()
+    {
+        Debug.Log("¼¯ÀÎ ÈÄ ÆÛÁñ À§Ä¡:");
+        for (int y = 0; y < 4; y++)
+        {
+            for (int x = 0; x < 4; x++)
+            {
+                var tile = boxes[x, y];
+                Debug.Log($"Index: {tile.index}, Array Pos: ({x}, {y}), LocalPos: {tile.transform.localPosition}");
+            }
+        }
+    }
+
 
 
     void Swap(int x, int y, int dx, int dy)
@@ -81,8 +96,8 @@ public class Slide_puzzle : MonoBehaviour
         boxes[x, y] = target;
         boxes[x + dx, y + dy] = from;
 
-        from.UpdatePos(x + dx, y + dy);
-        target.UpdatePos(x, y);
+        from.UpdatePos(x + dx, y + dy, true);
+        target.UpdatePos(x, y, true);
     }
 
     private void HandleClick(int clickedX, int clickedY)
