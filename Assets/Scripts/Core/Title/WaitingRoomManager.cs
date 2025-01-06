@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using Photon.Pun;
+
 public class WaitingRoomManager : PuzzleReactObject
 {
     public override void OnPuzzleSolved()
     {
         base.OnPuzzleSolved();
 
-        SceneManager.LoadScene("S_Stage1");
+        PhotonNetwork.LoadLevel("S_Stage1Door");
     }
-
-
 }

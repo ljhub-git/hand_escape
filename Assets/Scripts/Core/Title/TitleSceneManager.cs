@@ -130,9 +130,9 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
         Debug.Log("Joined Room");
 
         // 방에 입장하면 바로 대기실 씬으로 간다.
-        //PhotonNetwork.LoadLevel("S_WaitingRoom");
+        PhotonNetwork.LoadLevel("S_WaitingRoom");
         // 잠깐 테스트 용으로 퍼즐 테스트 씬으로 감!! 나중에 본게임 때 반드시 수정할 것!!
-        PhotonNetwork.LoadLevel("Jeon_PuzzleMultiTest");
+        //PhotonNetwork.LoadLevel("Jeon_PuzzleMultiTest");
     }
 
     // 방 입장이 실패했을 때
