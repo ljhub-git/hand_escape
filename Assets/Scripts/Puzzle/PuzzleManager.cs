@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
+
 public class PuzzleManager : MonoBehaviour
 {
     // 퍼즐 오브젝트와 퍼즐에 반응하는 오브젝트의 매핑을 위한 구조체.
@@ -10,7 +12,6 @@ public class PuzzleManager : MonoBehaviour
         public PuzzleObject puzzleObject;
         public List<PuzzleReactObject> reactiveObjects;
     }
-
 
     /// <summary>
     /// 퍼즐 오브젝트와 퍼즐에 반응하는 오브젝트들의 목록. 인스펙터 상에서 편집할 수 있음.
@@ -22,6 +23,8 @@ public class PuzzleManager : MonoBehaviour
     /// Key 값의 퍼즐이 풀리면 List로 보관중인 IReactToPuzzle를 구현한 오브젝트들이 변화한다.
     /// </summary>
     private Dictionary<PuzzleObject, List<PuzzleReactObject>> puzzleMap = null;
+
+    private NetworkObjectManager networkObjectManager = null;
 
     #region Public Func
 
@@ -37,6 +40,8 @@ public class PuzzleManager : MonoBehaviour
         foreach (var reactToSolve in reactComps)
         {
             reactToSolve.OnPuzzleSolved();
+
+            networkObjectManager.CallOnPuzzleSolvedToOthers(reactToSolve.GetComponent<PhotonView>());
         }
     }
 
@@ -76,6 +81,7 @@ public class PuzzleManager : MonoBehaviour
     private void Awake()
     {
         puzzleMap = new Dictionary<PuzzleObject, List<PuzzleReactObject>>();
+        networkObjectManager = FindAnyObjectByType<NetworkObjectManager>();
     }
 
     private void Start()

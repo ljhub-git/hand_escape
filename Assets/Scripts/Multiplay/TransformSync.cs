@@ -33,8 +33,15 @@ public class TransformSync : MonoBehaviourPun, IPunObservable
             {
                 if (t != null)
                 {
-                    t.position = (Vector3)stream.ReceiveNext();
-                    t.rotation = (Quaternion)stream.ReceiveNext();
+                    try
+                    {
+                        t.position = (Vector3)stream.ReceiveNext();
+                        t.rotation = (Quaternion)stream.ReceiveNext();
+                    }
+                    catch
+                    {
+                        Debug.Log("Transform Sync Receive Error");
+                    }
                 }
             }
         }
