@@ -1,14 +1,60 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public class WaitingRoomManager : PuzzleReactObject
+using Photon.Pun;
+
+public class WaitingRoomManager : MonoBehaviour
 {
-    public override void OnPuzzleSolved()
-    {
-        base.OnPuzzleSolved();
+    [SerializeField]
+    private PlayerReadyUI[] ui_PlayerReadyArr;
 
-        SceneManager.LoadScene("S_Stage1");
+    private bool[] isPlayersReadyArr = { false, false };
+
+    private NetworkManager networkMng = null;    
+
+    public void OnReadyButtonSelect(SelectEnterEventArgs _enterEventArgs)
+    {
+        //if (PhotonNetwork.IsMasterClient)
+        //    TogglePlayerReady(0);
+        //else
+        //    TogglePlayerReady(1);
+
+        networkMng.LoadScene("S_Stage1Door");
     }
 
+    private void TogglePlayerReady(int _playerInd)
+    {
+        isPlayersReadyArr[_playerInd] = !isPlayersReadyArr[_playerInd];
 
+        // UI
+        ui_PlayerReadyArr[_playerInd].ToggleReady();
+
+        // 플레이어들의 준비 여부를 확인하고 모두 준비중이지 않으면 이 함수를 종료한다.
+        foreach (var isReady in isPlayersReadyArr)
+        {
+            if (!isReady)
+                return;
+        }
+
+        // 모든 플레이어가 준비됐음. 레벨 1 씬으로 넘어감.
+        networkMng.LoadScene("S_Stage1Door");
+    }
+
+    private void SetNicknameUIs()
+    {
+        foreach(var ui_PlayerReady in ui_PlayerReadyArr)
+        {
+            ui_PlayerReady.SetNickName(networkMng.NickName);
+        }
+    }
+
+    private void Awake()
+    {
+        networkMng = FindAnyObjectByType<NetworkManager>();
+    }
+
+    private void Start()
+    {
+        SetNicknameUIs();
+    }
 }
