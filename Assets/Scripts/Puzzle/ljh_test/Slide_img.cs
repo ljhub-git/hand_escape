@@ -17,9 +17,10 @@ public class Slide_img : MonoBehaviour
     private Action<int, int> swapFunc = null; // 클릭 델리게이트
     private BoxCollider boxCollider;  // BoxCollider 컴포넌트
 
-    private bool isMoving = false;
+    private bool isMoving;
 
-    private int count = 0;
+    private Collider firstCollider = null;  // 최초 충돌한 Collider
+
     private void Awake()
     {
         // BoxCollider2D 컴포넌트를 가져옵니다. 없으면 추가합니다.
@@ -103,6 +104,7 @@ public class Slide_img : MonoBehaviour
         float duration = 0.2f;
         Vector2 startpos = this.gameObject.transform.localPosition;
         Vector2 endpos = new Vector2(x, y);
+        Slide_puzzle moving = new Slide_puzzle();
 
 
         while (elapsedTime < duration)
@@ -113,7 +115,7 @@ public class Slide_img : MonoBehaviour
         }
 
         this.gameObject.transform.localPosition = endpos;
-        isMoving = false;
+        moving.SetMove(isMoving);
     }
 
     public bool IsEmpty()
@@ -130,14 +132,32 @@ public class Slide_img : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other)
-    {   
-        if (other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics") && (swapFunc != null) && (isMoving == false) && (count == 0))
+    {
+        Slide_puzzle moving = new Slide_puzzle();
+        isMoving = moving.GetMove();
+
+        if ((other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics")) 
+            && (swapFunc != null) && (isMoving == false) && (firstCollider == null))
         {
-            count++;
-            Debug.Log("count : " + count);
-            Debug.Log("트리거 발생중");
-            isMoving = true;
+            firstCollider = other;  // 첫 번째 충돌이 발생했을 때 저장
+            Debug.Log($"First Trigger Entered with {other.name}");
+            moving.SetMove(isMoving);
             swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
+        }
+        else
+        {
+            // 첫 번째 외의 다른 Collider가 충돌해도 무시
+            Debug.Log($"Ignoring Trigger with {other.name}");
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        // 충돌이 끝나면 상태 리셋
+        if (other == firstCollider)
+        {
+            Debug.Log($"Trigger Exited with {other.name}");
+            firstCollider = null;  // 충돌이 끝나면 첫 번째 Collider를 초기화
         }
     }
 }

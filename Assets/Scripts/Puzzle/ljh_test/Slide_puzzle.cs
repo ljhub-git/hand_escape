@@ -11,6 +11,8 @@ public class Slide_puzzle : MonoBehaviour
 
     private GameObject puzzleParent;
 
+    private bool isMoving = false;
+
     [SerializeField]
     private float puzzlepotion_x = 0f;
     [SerializeField]
@@ -49,6 +51,16 @@ public class Slide_puzzle : MonoBehaviour
                 boxes[x, y] = box;
                 n++;
             }
+    }
+
+    public void SetMove(bool isMoving)
+    {
+        this.isMoving = !isMoving;
+    }
+
+    public bool GetMove()
+    {
+        return isMoving;
     }
 
     private void Shuffle()
