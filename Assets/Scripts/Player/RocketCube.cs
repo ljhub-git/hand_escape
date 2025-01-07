@@ -50,7 +50,7 @@ public class RocketCube : MonoBehaviour
 
             iscatched = true;
             catchedObject = finalParent.gameObject;
-            catchedObjectPosition = catchedObject.transform.position;
+            catchedObjectPosition = other.transform.position;
             // GetComponentsInChildren<Rigidbody>()로 배열을 가져오고, 이를 List로 변환
             catchedObjectRb = catchedObject.GetComponentsInChildren<Rigidbody>().ToList();
             XRGrabInteractable catchedObjectGrabInteractable = null;
