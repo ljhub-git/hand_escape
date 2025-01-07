@@ -32,7 +32,7 @@ public class ToggleTransformSync : MonoBehaviourPun
         {
             // OnTransformSync.Invoke();
 
-            _networkObjectMng.SetObjectTransform(photonView, transform);
+            _networkObjectMng?.SetObjectTransform(photonView, transform);
 
             yield return null;
         }
