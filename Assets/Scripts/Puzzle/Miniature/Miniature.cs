@@ -23,7 +23,7 @@ public class Miniature : MonoBehaviour
 
     private Rigidbody rb;
 
-    private bool isInteractable = true;
+    public bool isInteractable = true;
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class Miniature : MonoBehaviour
         if (snappedAngle >= 0 && rotationCoroutine == null)
         {
             rotationCoroutine = 
-                StartCoroutine(MiniatureRotation.SmoothRotation(this, snappedAngle));
+                StartCoroutine(MiniatureRotation.CaseRotation(this, snappedAngle));
         }
     }
 
@@ -73,9 +73,12 @@ public class Miniature : MonoBehaviour
         if (material != null)
         {
             Color color = material.color;
-            color.a = 0.5f;
+            color.a = 0.3f;
             material.color = Color.black;
         }
+
+        //StartCoroutine(changeTransparency.FadeTransparency(
+        //    originalColor.a, targetAlpha, fadeDuration));
 
         rb.isKinematic = true;
         isInteractable = false;
