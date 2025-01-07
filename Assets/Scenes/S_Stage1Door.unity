@@ -1551,8 +1551,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2446533214912907324, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 833719152}
   m_SourcePrefab: {fileID: 100100000, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+--- !u!1 &833719151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2446533214912907324, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+  m_PrefabInstance: {fileID: 833719150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &833719152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833719151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf1681f13070324c9ea0fcc08a02b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  twoHandDistance: 1
+  minSpeedForDuplication: 2
+  grayColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  spawnDistanceFromCamera: 1
 --- !u!1 &850785209
 GameObject:
   m_ObjectHideFlags: 0
