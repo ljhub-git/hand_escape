@@ -2,6 +2,7 @@ using UnityEngine;
 
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -48,16 +49,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        playerSpawner.SpawnPlayer();
-
-        if(PhotonNetwork.IsConnected)
-        {
-            Debug.Log("Number of players in room: " + PhotonNetwork.PlayerList.Length);
-            foreach (var player in PhotonNetwork.PlayerList)
-            {
-                Debug.Log("Player in room: " + player.NickName);
-            }
-        }
+        StartCoroutine(SpawnPlayerCoroutine());
     }
 
     #endregion
@@ -74,6 +66,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         base.OnLeftRoom();
 
         playerSpawner.DestroyPlayer();
+    }
+
+    private IEnumerator SpawnPlayerCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        playerSpawner.SpawnPlayer();
     }
     #endregion
 }

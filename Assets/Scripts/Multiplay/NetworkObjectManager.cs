@@ -24,13 +24,13 @@ public class NetworkObjectManager : MonoBehaviourPun
 
     private void Start()
     {
+        networkObjectMap = new Dictionary<int, GameObject>();
+
         InitObjectMap();
     }
 
     public void InitPrefabPool()
     {
-        networkObjectMap = new Dictionary<int, GameObject>();
-
         DefaultPool Pool = PhotonNetwork.PrefabPool as DefaultPool;
 
         foreach (var prefab in runtimeInstantiatePrefabs)

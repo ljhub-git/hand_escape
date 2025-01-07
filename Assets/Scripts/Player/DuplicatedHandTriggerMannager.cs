@@ -15,7 +15,7 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
     public bool R_HandCorrect { get; set; }
     public bool L_HandCorrect { get; set; }
 
-    private void Awake()
+    private void Start()
     {
         duplicatedHandR?.SetActive(false);
         duplicatedHandL?.SetActive(false);

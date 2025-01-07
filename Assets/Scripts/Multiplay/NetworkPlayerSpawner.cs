@@ -11,7 +11,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPun
     public void SpawnPlayer()
     {
         spawnedPlayer = PhotonNetwork.Instantiate(
-            "XRMultiCharacter", 
+            "XRMultiPlayer", 
             spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount - 1].position, 
             Quaternion.identity
             );

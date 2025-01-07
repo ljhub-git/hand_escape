@@ -2005,6 +2005,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2089126099097247191, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
+      propertyPath: runtimeInstantiatePrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089126099097247191, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
+      propertyPath: 'runtimeInstantiatePrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7848747601012498489, guid: 356770530b712c1499bffbdd60b6a731, type: 3}
+    - target: {fileID: 2089126099097247191, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
+      propertyPath: 'runtimeInstantiatePrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 556529272130679049, guid: 7dad08966542e1e409c78e102b9ebcd3, type: 3}
     - target: {fileID: 2800046763573032150, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
       propertyPath: 'spawnPoints.Array.data[0]'
       value: 
