@@ -13,6 +13,7 @@ public class UbongoKey_PuzzleSocket : MonoBehaviour
         socket = GetComponent<XRSocketInteractor>();
         attachTransfrom = GetComponentInChildren<Transform>();
         linkedPuzzleManager.AddNumOfComplete();
+        transform.tag = "UbongoCol";
     }
     private void OnEnable() // 활성화시
     {

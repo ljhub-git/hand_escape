@@ -14,40 +14,43 @@ public class RocketCube : MonoBehaviour
     private List<Rigidbody> catchedObjectRb = new List<Rigidbody>(); // Rigidbody useGravitiy를 온오프 하기위해 컴퍼넌트 가저옴
     private List<bool> isChangedGravity = new List<bool>(); //이 컴퍼넌트에서 중력을 비활성화 했는지 확인하는 bool값
     private Vector3 catcherPosition = Vector3.zero;
+    private AudioSource fireSound = null;
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
         BoxCollider.enabled = true; // 박스 콜라이더 활성화
         BoxCollider.isTrigger = true; // 박스 콜라이더 isTrigger 활성화
+        fireSound = GetComponent<AudioSource>();
 
     }
     private void OnTriggerEnter(Collider other) // 트리거 발생하면
     {
         Debug.Log("Rocket Cube OnTriggerEnter");
 
-        if (other.CompareTag("Ubongo") || other.CompareTag("UbongoCol"))
+        if (other.CompareTag("Ubongo") || other.CompareTag("UbongoCol") || other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics"))
         {
             iscatched = true;
+            catchedObject = null;
             catchedObjectPosition = transform.position;
-            Debug.Log("우봉고는 로켓펀치로 못 가져옵니다");
+            Debug.Log("로켓펀치로 못 가져옵니다");
             return;
         }
 
         if (catchedObject == null && isFired) // 잡힌 오브젝트가 없고 로켓펀치를 했으면
         {
             Transform currentParent = other.transform; // 충돌 한 오브젝트 부모 정의
-            Transform finalParent = null; //최상위 부모
-            while (currentParent.parent != null) // 부모가 있는 동안
+            Transform finalParent = null; //최상위 부모 정의
+            while (currentParent.parent != null && currentParent.parent.GetComponent<PuzzleObject>() == null) // 부모가 있고 부모가 퍼즐 오브젝트를 가지고 있지 않는 동안 실행 
             {
                 currentParent = currentParent.parent; //부모 재정의
             }
-            if (currentParent.parent == null) // 부모가 없으면
+            if (currentParent.parent == null || currentParent.parent.GetComponent<PuzzleObject>()) // 부모가 없거나 부모에 퍼즐 오브젝트가 있으면
             {
-                finalParent = currentParent;
+                finalParent = currentParent; // 최상위 부모 재정의
                 finalParent.transform.SetParent(transform);// 객체를 자식으로 바꿈
             }
 
-            iscatched = true;
+            iscatched = true; 
             catchedObject = finalParent.gameObject;
             catchedObjectPosition = other.transform.position;
             // GetComponentsInChildren<Rigidbody>()로 배열을 가져오고, 이를 List로 변환
@@ -78,7 +81,7 @@ public class RocketCube : MonoBehaviour
             }
 
         }
-        if (catchedObject != null) // 잡힌 오브젝트가 있으면
+        if (catchedObject) // 잡힌 오브젝트가 있으면
         {
             Debug.Log("두개 이상 못 가져옴"); 
         }
@@ -92,6 +95,10 @@ public class RocketCube : MonoBehaviour
     }
     public void UseGravity()
     {
+        if (isChangedGravity == null || isChangedGravity.Count == 0)
+        {
+            return;
+        }
         for (int n = 0; n < catchedObjectRb.Count; n++)
         {
             Rigidbody rb = catchedObjectRb[n];
@@ -106,6 +113,10 @@ public class RocketCube : MonoBehaviour
     public void RemeberCatcherPosition(Vector3 _catcherPosition)
     {
         catcherPosition = _catcherPosition;
+    }
+    public void FireSound()
+    {
+        fireSound.Play();
     }
     public Vector3 WhoCatchMe()
     {

@@ -14,6 +14,10 @@ public class MovementManager : MonoBehaviour
     public int preparedHandCntL = 0;
     private Coroutine rocketMoveCoroutine; // 코루틴을 추적할 변수
     private GameObject rocketCubeGo = null;
+    float positionSmoothTime = 0.1f;  // 위치 부드럽게 처리하는 시간
+    float rotationSmoothTime = 0.1f;  // 회전 부드럽게 처리하는 시간
+    Vector3 velocity = Vector3.zero;  // 위치 보간에 사용될 변수
+    Quaternion angularVelocity = Quaternion.identity;  // 회전 보간에 사용될 변수
 
 
     private void Start()
@@ -119,14 +123,11 @@ public class MovementManager : MonoBehaviour
             // 이미 실행 중인 코루틴이 있다면 먼저 멈추고, 새로운 코루틴 시작
             if (rocketMoveCoroutine != null)
             {
-                StopCoroutine(rocketMoveCoroutine);
-                if (rocketCube.iscatched) // 로켓큐브가 무언가 잡은 상태라면
-                {
-                    rocketCube.ParentNull(); // 자식 해제
-                    rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
-                }
+                rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
+                rocketCube.ParentNull(); // 자식 해제
                 Destroy(rocketCubeGo); // 로켓 큐브 파괴
                 rocketCubeGo = null;  // 널로 설정
+                StopCoroutine(rocketMoveCoroutine);
             }
 
         rocketMoveCoroutine = StartCoroutine(RocketMoveCo(_rocketMoveSpeed));
@@ -158,11 +159,29 @@ public class MovementManager : MonoBehaviour
         Vector3 curPlayerPosition = Vector3.zero; // 최종적으로 돌아와야하는 위치 지역변수
         Vector3 catchedPosition = Vector3.zero; // 물건 잡힌 위치 지역변수
         float t = 0; // 오브젝트에 닿은 후 돌아오는 경과 시간
+        rocketCubeGo.transform.position = playerCamera.transform.position + playerCamera.transform.forward; // 큐브 position 초기화
+        rocketCubeGo.transform.rotation = playerCamera.transform.rotation;// 큐브 rotation 초기화
         Debug.Log("발사준비");
         while (t == 0 && (preparedHandCntL + preparedHandCntR) == 1) //준비 된 손이 하나고 발사 경과 시간이 0 일 경우  플레어 앞에 항상 위치
         {
-            rocketCubeGo.transform.position = playerCamera.transform.position + playerCamera.transform.forward; // 매 프레임 플레이어 카메라 앞에 위치
-            rocketCubeGo.transform.rotation = playerCamera.transform.rotation; // 매 프레임 카메라 로테이션이랑 일치 시킴
+            //rocketCubeGo.transform.position = playerCamera.transform.position + playerCamera.transform.forward; // 매 프레임 플레이어 카메라 앞에 위치
+            //rocketCubeGo.transform.rotation = playerCamera.transform.rotation; // 매 프레임 카메라 로테이션이랑 일치 시킴
+            //yield return null;
+            // 카메라 위치 보간 (부드럽게 이동)
+                rocketCubeGo.transform.position = Vector3.SmoothDamp(
+                rocketCubeGo.transform.position,
+                playerCamera.transform.position + playerCamera.transform.forward,
+                ref velocity,
+                positionSmoothTime
+            );
+
+            // 카메라 회전 보간 (부드럽게 회전)
+                rocketCubeGo.transform.rotation = Quaternion.Slerp(
+                rocketCubeGo.transform.rotation,
+                playerCamera.transform.rotation,
+                rotationSmoothTime
+            );
+
             yield return null;
         }
         if (preparedHandCntR == 0 && preparedHandCntL == 0)
@@ -175,6 +194,7 @@ public class MovementManager : MonoBehaviour
         if (preparedHandCntR == 1 && preparedHandCntL == 1) // 준비된 손이 두개 일 경우
         {
             Debug.Log("발사");
+            rocketCube.FireSound();
             HeadVector3 = playerCamera.transform.position + playerCamera.transform.forward;
             rocketCube.RemeberCatcherPosition(HeadVector3);
             Vector3 HeadDir = Vector3.Normalize(playerCamera.transform.forward);
@@ -203,7 +223,7 @@ public class MovementManager : MonoBehaviour
                     {
                         rocketCubeGo.transform.position = Vector3.Lerp(catchedPosition, rocketCube.WhoCatchMe(), t - 1); // 발사한 위치로 큐브 이동
                     }
-                    if (t >= 2)
+                    if (t >= 2 && 3 > t)
                     {
                         //rocketCubeGo.transform.position = Vector3.Lerp(HeadVector3, curPlayerPosition, t - 2); //
                         rocketCubeGo.transform.position = Vector3.Lerp(curPlayerPosition, rocketCube.WhoCatchMe(), 3 - t); //  그 다음 플레이 발사한 위치에서 최종위치로 큐브 이동
