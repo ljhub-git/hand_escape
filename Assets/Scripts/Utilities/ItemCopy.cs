@@ -9,9 +9,11 @@ public class ItemCopy : MonoBehaviour
     public Color grayColor = Color.gray; // 복사된 오브젝트의 색상
     public float spawnDistanceFromCamera = 1f; // 카메라 앞 복제 거리
 
-    [Header("Hand References")]
-    [SerializeField] private Transform leftHand;
-    [SerializeField] private Transform rightHand;
+    //[Header("Hand References")]
+    //[SerializeField] private Transform leftHand;
+    //[SerializeField] private Transform rightHand;
+
+    private PlayerManager playerMng = null;
 
     private XRGrabInteractable grabInteractable;
     private Renderer objectRenderer;
@@ -30,11 +32,14 @@ public class ItemCopy : MonoBehaviour
         objectRigidbody = GetComponent<Rigidbody>();
 
         ValidateComponents();
+
+        NetworkManager networkMng = FindAnyObjectByType<NetworkManager>();
+
+        networkMng.OnPlayerSpawned += new NetworkManager.OnPlayerSpawnedDelegate(InitPlayerManager);
     }
 
     void Update()
     {
-
         if (!grabInteractable.isSelected) return;
 
         if (IsHeldByBothHands())
@@ -53,20 +58,25 @@ public class ItemCopy : MonoBehaviour
         }
     }
 
+    private void InitPlayerManager()
+    {
+        playerMng = FindAnyObjectByType<PlayerManager>();
+    }
+
     private void ValidateComponents()
     {
         if (grabInteractable == null)
             Debug.LogError("XRGrabInteractable 컴포넌트가 필요합니다.");
 
-        if (leftHand == null || rightHand == null)
-            Debug.LogError("LeftHand 또는 RightHand Transform을 설정해야 합니다.");
+        //if (leftHand == null || rightHand == null)
+        //    Debug.LogError("LeftHand 또는 RightHand Transform을 설정해야 합니다.");
     }
 
     private bool IsHeldByBothHands() => grabInteractable.interactorsSelecting.Count == 2;
 
     private void UpdateSpeed()
     {
-        float currentDistance = Vector3.Distance(leftHand.position, rightHand.position);
+        float currentDistance = playerMng.GetHandDistance();
 
         if (previousDistance >= 0f)
         {
@@ -77,7 +87,7 @@ public class ItemCopy : MonoBehaviour
     }
 
     private bool CanDuplicate() =>
-        Vector3.Distance(leftHand.position, rightHand.position) >= twoHandDistance && currentSpeed >= minSpeedForDuplication;
+        playerMng.GetHandDistance() >= twoHandDistance && currentSpeed >= minSpeedForDuplication;
 
 
     private void DuplicateObject()
