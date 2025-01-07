@@ -5200,6 +5200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a3a1d6d92aeb74cbe9871a493c31a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftHandTr: {fileID: 0}
+  rightHandTr: {fileID: 0}
+  isStitting: 0
 --- !u!114 &2059305379118862287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5325,7 +5328,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rocketCubePrefab: {fileID: 2730277677284205437, guid: ece064771befa5a448c652da931a44d9, type: 3}
-  preparedHandCnt: 0
+  preparedHandCntR: 0
+  preparedHandCntL: 0
 --- !u!1 &3410175103178154971
 GameObject:
   m_ObjectHideFlags: 0
