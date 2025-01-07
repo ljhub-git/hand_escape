@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &285323342 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8816656840227014564, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-  m_PrefabInstance: {fileID: 8068122296875830352}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e4e6cca11330d4088d729ab4fc9d9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &576625086
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,7 +756,7 @@ Transform:
   m_GameObject: {fileID: 1950598397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -824,15 +813,15 @@ PrefabInstance:
     - target: {fileID: 528386004616990518, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 285323342}
+      objectReference: {fileID: 0}
     - target: {fileID: 541358110401228797, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 285323342}
+      objectReference: {fileID: 0}
     - target: {fileID: 652393828255138694, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 285323342}
+      objectReference: {fileID: 0}
     - target: {fileID: 1197892601848711561, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -848,15 +837,15 @@ PrefabInstance:
     - target: {fileID: 2753972263839551316, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 285323342}
+      objectReference: {fileID: 0}
     - target: {fileID: 2930514481446810997, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 285323342}
+      objectReference: {fileID: 0}
     - target: {fileID: 3560128246054873691, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 285323342}
+      objectReference: {fileID: 0}
     - target: {fileID: 4057680066814738076, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -872,7 +861,7 @@ PrefabInstance:
     - target: {fileID: 5663884894850796784, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 285323342}
+      objectReference: {fileID: 0}
     - target: {fileID: 6028196406451422418, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -888,7 +877,7 @@ PrefabInstance:
     - target: {fileID: 8072987166438002202, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 285323342}
+      objectReference: {fileID: 0}
     - target: {fileID: 8526379250056096334, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: numOfComplete
       value: 0
@@ -900,7 +889,7 @@ PrefabInstance:
     - target: {fileID: 8621284691178697970, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 285323342}
+      objectReference: {fileID: 0}
     - target: {fileID: 9151854127231466597, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -957,6 +946,18 @@ PrefabInstance:
     - target: {fileID: 350782619085055465, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 452435018210150770, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 705411575113632287, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656521232075331184, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+      propertyPath: sceneViewId
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4869329707428108763, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
       propertyPath: m_ForceGravityOnDetach
