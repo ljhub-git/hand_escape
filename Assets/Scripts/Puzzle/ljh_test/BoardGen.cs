@@ -16,6 +16,8 @@ public class BoardGen : MonoBehaviour
 
     public float ghostTransparency = 0.1f;
 
+    public float scaleFactor = 1.0f;// 퍼즐 조각과 배경 그림의 크기를 조절하는 변수
+
     public int numTileX { get; private set; }
     public int numTileY { get; private set; }
 
@@ -32,15 +34,19 @@ public class BoardGen : MonoBehaviour
     Sprite LoadBaseTexture()
     {
         Texture2D tex = SpriteUtils.LoadTexture(imageFilename);
-        if(!tex.isReadable)
+        if (!tex.isReadable)
         {
             return null;
         }
 
-        if(tex.width % Tile.tileSize != 0 || tex.height % Tile.tileSize != 0)
+        if (tex.width % Tile.tileSize != 0 || tex.height % Tile.tileSize != 0)
         {
             return null;
         }
+
+        // `scaleFactor`를 사용하여 그림의 크기를 조절
+        int newWidth = Mathf.RoundToInt(tex.width * scaleFactor);
+        int newHeight = Mathf.RoundToInt(tex.height * scaleFactor);
 
         Texture2D newTex = new Texture2D(
             tex.width + Tile.padding * 2,
@@ -48,24 +54,24 @@ public class BoardGen : MonoBehaviour
             TextureFormat.ARGB32,
             false);
 
-        for(int i = 0; i< tex.width; i++)
-        {
-            for(int j=0; j< tex.height; j++)
-            {
-                newTex.SetPixel(i, j, Color.white);
-            }
+        for (int i = 0; i < newWidth; i++) 
+        { 
+            for (int j = 0; j < newHeight; j++) 
+            { 
+                newTex.SetPixel(i, j, Color.white); 
+            } 
         }
 
-        for (int x = 0; x < tex.width; x++)
-        {
-            for (int y = 0; y < tex.height; y++)
-            {
-                Color color = tex.GetPixel(x, y);
-                color.a = 1.0f;
-                newTex.SetPixel(x,y,color);
-            }
+        for (int x = 0; x < newWidth; x++) 
+        { 
+            for (int y = 0; y < newHeight; y++) 
+            { 
+                Color color = tex.GetPixel(x, y); color.a = 1.0f; 
+                newTex.SetPixel(x, y, color); 
+            } 
         }
         newTex.Apply();
+
 
         Sprite sprite = SpriteUtils.CreateSpriteFromTexture2D(
             newTex,
@@ -79,6 +85,8 @@ public class BoardGen : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // `scaleFactor`를 사용하여 `tileSize`를 조절
+        Tile.tileSize = Mathf.RoundToInt(Tile.tileSize * scaleFactor);
 
         mBaseSpriteOpaque = LoadBaseTexture();
         mGameObjectQpaque = new GameObject();
@@ -96,6 +104,10 @@ public class BoardGen : MonoBehaviour
 
         SetCameraPosition();
 
+        // 그림의 크기에 맞게 퍼즐 조각의 갯수를 계산합니다.
+        numTileX = Mathf.CeilToInt(mBaseSpriteOpaque.texture.width / (float)Tile.tileSize);
+        numTileY = Mathf.CeilToInt(mBaseSpriteOpaque.texture.height / (float)Tile.tileSize);
+
         puzzleManager.SetTotalTiles(numRandomTiles);
 
         //CreateJigsawTiles();
@@ -112,12 +124,12 @@ public class BoardGen : MonoBehaviour
 
         for (int x = 0; x < newTex.width; x++)
         {
-            for (int y = 0; y < newTex.height; y++) 
+            for (int y = 0; y < newTex.height; y++)
             {
                 Color c = tex.GetPixel(x, y);
-                if(x > Tile.padding && 
+                if (x > Tile.padding &&
                     x < (newTex.width - Tile.padding) &&
-                    y > Tile.padding && 
+                    y > Tile.padding &&
                     y < (newTex.height - Tile.padding))
                 {
                     c.a = ghostTransparency;
@@ -142,94 +154,7 @@ public class BoardGen : MonoBehaviour
         Camera.main.orthographicSize = mBaseSpriteOpaque.texture.width / 2;
     }
 
-    //public static Mesh CreateMeshFromSprite(Sprite sprite, float thickness = 0.1f)
-    //{
-
-    //    Mesh mesh = new Mesh();
-    //    Vector3[] vertices2D = Array.ConvertAll(sprite.vertices, v => new Vector3(v.x, v.y, 0));
-
-    //    // 상단(face) 메쉬
-    //    List<Vector3> vertices3D = new List<Vector3>();
-    //    List<int> triangles = new List<int>();
-    //    List<Vector2> uv = new List<Vector2>();  // UV 좌표 리스트 추가
-
-    //    foreach (var vert in vertices2D) // 앞면
-    //    {
-    //        vertices3D.Add(vert);
-    //    }
-    //    foreach (var vert in vertices2D) // 뒷면
-    //    {
-    //        vertices3D.Add(new Vector3(vert.x, vert.y, -thickness));
-    //    }
-
-    //    // 삼각형 설정
-    //    for (int i = 0; i < sprite.triangles.Length; i += 3)
-    //    {
-    //        triangles.Add(sprite.triangles[i]);  // 첫 번째, 세 번째, 두 번째 순서로 변경
-    //        triangles.Add(sprite.triangles[i + 1]);
-    //        triangles.Add(sprite.triangles[i + 2]);
-    //    }
-
-
-    //    // UV 좌표 설정
-    //    for (int i = 0; i < sprite.uv.Length; i++)
-    //    {
-    //        uv.Add(sprite.uv[i]);
-    //    }
-
-    //    // UV 좌표는 두 면 모두 동일하게 설정
-    //    for (int i = 0; i < sprite.uv.Length; i++)
-    //    {
-    //        uv.Add(sprite.uv[i]);
-    //    }
-
-
-    //    mesh.vertices = vertices3D.ToArray();
-    //    mesh.triangles = triangles.ToArray();
-    //    mesh.uv = uv.ToArray();  // UV 좌표를 메쉬에 설정
-    //    mesh.RecalculateNormals();
-
-    //    return mesh;
-    //}
-
-    //public static GameObject CreateGameObjectFromTile(Tile tile)
-    //{
-    //    GameObject obj = new GameObject();
-    //    obj.name = "TileGameObe_" + tile.xIndex + "_" + tile.yIndex;
-    //    obj.transform.position = new Vector3(tile.xIndex * Tile.tileSize, tile.yIndex * Tile.tileSize, 0.0f);
-
-    //    // SpriteRenderer를 제거하고 MeshFilter와 MeshRenderer 추가
-    //    MeshRenderer meshRenderer = obj.AddComponent<MeshRenderer>();
-    //    MeshFilter meshFilter = obj.AddComponent<MeshFilter>();
-
-    //    // Sprite에서 Mesh로 변환 (SpriteUtils의 CreateSpriteFromTexture2D를 사용)
-    //    Sprite sprite = SpriteUtils.CreateSpriteFromTexture2D(
-    //        tile.finalCut,
-    //        0,
-    //        0,
-    //        Tile.padding * 2 + Tile.tileSize,
-    //        Tile.padding * 2 + Tile.tileSize
-    //    );
-
-    //    // 생성된 Sprite를 사용하여 Mesh 생성
-    //    Mesh tileMesh = CreateMeshFromSprite(sprite);  // 이 함수는 sprite를 Mesh로 변환하는 함수 (아래 참조)
-    //    meshFilter.mesh = tileMesh;
-
-    //    // Material 설정 (Sprite용 기본 셰이더 사용)
-    //    Material material = new Material(Shader.Find("Sprites/Default"));
-    //    material.mainTexture = sprite.texture;  // Sprite의 텍스처를 Material에 설정
-    //    meshRenderer.material = material;
-
-    //    // BoxCollider 3D 추가
-    //    BoxCollider box = obj.AddComponent<BoxCollider>();
-
-    //    TileMovement tileMovement = obj.AddComponent<TileMovement>();
-    //    tileMovement.tile = tile;
-
-    //    return obj;
-    //}
-
-    public static Mesh CreateMeshFromSprite(Sprite sprite, float thickness = 0.1f)
+    public static Mesh CreateMeshFromSprite(Sprite sprite)
     {
         Mesh mesh = new Mesh();
 
@@ -245,7 +170,7 @@ public class BoardGen : MonoBehaviour
 
         // 뒷면 추가 (z 방향으로 thickness만큼 이동)
         foreach (var vert in vertices2D)
-            vertices3D.Add(new Vector3(vert.x, vert.y, -thickness));
+            vertices3D.Add(new Vector3(vert.x, vert.y));
 
         // 앞면 삼각형
         for (int i = 0; i < sprite.triangles.Length; i += 3)
@@ -269,40 +194,6 @@ public class BoardGen : MonoBehaviour
             uv.Add(uvCoord);
         foreach (var uvCoord in sprite.uv)
             uv.Add(uvCoord);
-
-        // 2. 측면 추가
-        for (int i = 0; i < sprite.vertices.Length; i++)
-        {
-            int next = (i + 1) % sprite.vertices.Length;
-
-            // 네 꼭짓점을 정의
-            Vector3 v0 = vertices3D[i];                     // 앞면
-            Vector3 v1 = vertices3D[next];                  // 앞면
-            Vector3 v2 = vertices3D[offset + next];         // 뒷면
-            Vector3 v3 = vertices3D[offset + i];            // 뒷면
-
-            // 두께가 있는 측면 추가
-            vertices3D.Add(v0);
-            vertices3D.Add(v1);
-            vertices3D.Add(v2);
-            vertices3D.Add(v3);
-
-            // 삼각형 (시계 방향)
-            int baseIndex = vertices3D.Count - 4;
-            triangles.Add(baseIndex);
-            triangles.Add(baseIndex + 1);
-            triangles.Add(baseIndex + 2);
-
-            triangles.Add(baseIndex);
-            triangles.Add(baseIndex + 2);
-            triangles.Add(baseIndex + 3);
-
-            // UV 매핑 (기본 값 또는 특정 텍스처 좌표로 변경 가능)
-            uv.Add(new Vector2(0.2f, 0.2f)); // 임시 값
-            uv.Add(new Vector2(0.8f, 0.2f)); // 임시 값
-            uv.Add(new Vector2(0.8f, 0.8f)); // 임시 값
-            uv.Add(new Vector2(0.2f, 0.8f)); // 임시 값
-        }
 
         // 3. 최종 데이터 설정
         mesh.vertices = vertices3D.ToArray();
@@ -333,7 +224,7 @@ public class BoardGen : MonoBehaviour
         );
 
         // 생성된 Sprite를 사용하여 Mesh 생성 (두께 포함)
-        Mesh tileMesh = CreateMeshFromSprite(sprite, 2f);
+        Mesh tileMesh = CreateMeshFromSprite(sprite);
         meshFilter.mesh = tileMesh;
 
         // Material 설정 (Sprite용 기본 셰이더 사용)
@@ -383,9 +274,9 @@ public class BoardGen : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < numTileX; i++) 
+        for (int i = 0; i < numTileX; i++)
         {
-            for (int j = 0; j < numTileY; j++) 
+            for (int j = 0; j < numTileY; j++)
             {
                 mTiles[i, j] = CreateTile(i, j, baseTexture);
                 mTileGameObjects[i, j] = CreateGameObjectFromTile(mTiles[i, j]);
@@ -496,6 +387,6 @@ public class BoardGen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

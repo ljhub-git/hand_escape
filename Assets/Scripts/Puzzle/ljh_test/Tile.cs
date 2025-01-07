@@ -60,6 +60,8 @@ public class Tile
 
     // For tiles sorting.
     public static TilesSorting tilesSorting = new TilesSorting();
+
+
     public void SetCurveType(Direction dir, PosNegType type)
     {
         mCurveTypes[(int)dir] = type;
@@ -115,11 +117,24 @@ public class Tile
             pts.AddRange(CreateCurve((Direction)i, mCurveTypes[i]));
         }
 
-        // Now we should have a closed curve.
-        for (int i = 0; i < pts.Count; ++i)
-        {
-            mVisited[(int)pts[i].x, (int)pts[i].y] = true;
+        // 이제 `pts`의 값을 검사하여 `mVisited` 배열의 범위를 벗어나는 값이 없는지 확인합니다.
+        foreach (var pt in pts) 
+        { 
+            if (pt.x >= 0 && pt.x < tileSizeWithPadding && pt.y >= 0 && pt.y < tileSizeWithPadding) 
+            { 
+                mVisited[(int)pt.x, (int)pt.y] = true; 
+            } 
+            else 
+            { 
+                Debug.LogWarning($"Point ({pt.x}, {pt.y}) is out of bounds for mVisited array."); 
+            } 
         }
+
+        // Now we should have a closed curve.
+        //for (int i = 0; i < pts.Count; ++i)
+        //{
+        //    mVisited[(int)pts[i].x, (int)pts[i].y] = true;
+        //}
         // start from the center.
         Vector2Int start = new Vector2Int(tileSizeWithPadding / 2, tileSizeWithPadding / 2);
 
@@ -217,6 +232,7 @@ public class Tile
         lr.material = new Material(Shader.Find("Sprites/Default"));
         return lr;
     }
+
 
     public static void TranslatePoints(List<Vector2> iList, Vector2 offset)
     {
@@ -333,6 +349,15 @@ public class Tile
                 }
                 break;
         }
+        // 새로운 코드: 범위를 벗어나는 포인트를 확인하고 경고 메시지 출력
+        foreach (var pt in pts) 
+        { 
+            int tileSizeWithPadding = 2 * Tile.padding + Tile.tileSize; if (pt.x < 0 || pt.x >= tileSizeWithPadding || pt.y < 0 || pt.y >= tileSizeWithPadding) 
+            { 
+                Debug.LogWarning($"Point ({pt.x}, {pt.y}) is out of bounds for tile size {tileSizeWithPadding}."); 
+            } 
+        }
+
         return pts;
     }
 
