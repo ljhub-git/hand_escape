@@ -29,7 +29,7 @@ public class Slide_img : MonoBehaviour
         }
 
         // 콜라이더의 크기를 x_wid와 y_hei 값으로 설정
-        boxCollider.size = new Vector3(x_wid, y_hei, 0.5f);
+        boxCollider.size = new Vector3(x_wid /2, y_hei/2, 0.5f);
     }
 
     public void Init(int i, int j, int index, Sprite sprite, Action<int, int> swapFunc)
@@ -123,6 +123,14 @@ public class Slide_img : MonoBehaviour
     private void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0) && swapFunc != null)
+        {
+            swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics") && swapFunc != null)
         {
             swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
         }
