@@ -14,7 +14,7 @@ public class Slide_img : MonoBehaviour
     public float vr_scale = 0.25f; //vr에 맞춘 퍼즐조각 크기(프리팹 크기 조절이 되어야함)
 
     private Action<int, int> swapFunc = null; // 클릭 델리게이트
-    private BoxCollider2D boxCollider;  // BoxCollider2D 컴포넌트
+    private BoxCollider boxCollider;  // BoxCollider 컴포넌트
 
     private bool isMoving = false;
 
@@ -22,14 +22,14 @@ public class Slide_img : MonoBehaviour
     private void Awake()
     {
         // BoxCollider2D 컴포넌트를 가져옵니다. 없으면 추가합니다.
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider>();
         if (boxCollider == null)
         {
-            boxCollider = gameObject.AddComponent<BoxCollider2D>();
+            boxCollider = gameObject.AddComponent<BoxCollider>();
         }
 
         // 콜라이더의 크기를 x_wid와 y_hei 값으로 설정
-        boxCollider.size = new Vector2(x_wid, y_hei);
+        boxCollider.size = new Vector3(x_wid /2, y_hei/2, 0.5f);
     }
 
     public void Init(int i, int j, int index, Sprite sprite, Action<int, int> swapFunc)
@@ -123,6 +123,14 @@ public class Slide_img : MonoBehaviour
     private void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0) && swapFunc != null)
+        {
+            swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics") && swapFunc != null)
         {
             swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
         }
