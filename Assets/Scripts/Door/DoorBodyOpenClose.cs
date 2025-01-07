@@ -7,16 +7,25 @@ public class DoorBodyOpenClose : PuzzleReactObject
     private Quaternion closedDoorRot = Quaternion.Euler(0f, 90f, 0f);
     private Coroutine DoorMoveCoroutine = null; // 코루틴을 추적할 변수
     private bool isLocked = false;
+    private AudioSource doorOpenSound = null;
 
+    private void Awake()
+    {
+       doorOpenSound = GetComponent<AudioSource>();
+        if (doorOpenSound == null)
+        {
+            Debug.LogError("doorOpenSound is not valid");
+        }
+    }
     public override void OnPuzzleSolved()
     {
         base.OnPuzzleSolved();
-
         OpenDoor();
     }
 
     public void OpenDoor()
     {
+        doorOpenSound.Play();
         if (DoorMoveCoroutine != null) 
         {
             StopCoroutine(DoorMoveCoroutine);
@@ -55,5 +64,10 @@ public class DoorBodyOpenClose : PuzzleReactObject
             yield return null;
         }
         transform.rotation = _goalRot;
+
+        if (closedDoorRot == transform.rotation) // 닫힌문이면 사운드 출력
+        {
+            doorOpenSound.Play();
+        }
     }
 }
