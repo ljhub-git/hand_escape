@@ -9,12 +9,12 @@ public abstract class PuzzleObject : MonoBehaviour
         puzzleMng = FindAnyObjectByType<PuzzleManager>();
     }
 
-    protected virtual void ResetPuzzle()
+    public virtual void ResetPuzzle()
     {
 
     }
 
-    protected virtual void SolvePuzzle()
+    public virtual void SolvePuzzle()
     {
         puzzleMng?.OnSolvePuzzle(this);
     }

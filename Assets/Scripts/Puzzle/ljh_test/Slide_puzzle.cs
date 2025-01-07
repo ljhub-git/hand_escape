@@ -9,7 +9,14 @@ public class Slide_puzzle : MonoBehaviour
 
     private Vector2Int dragStartPos;
 
-    public GameObject puzzleParent;
+    private GameObject puzzleParent;
+
+    [SerializeField]
+    private float puzzlepotion_x = 0f;
+    [SerializeField]
+    private float puzzlepotion_y = 1f;
+    [SerializeField]
+    private float puzzlepotion_z = 2.5f;
 
     private void Start()
     {
@@ -23,6 +30,7 @@ public class Slide_puzzle : MonoBehaviour
         if (puzzleParent == null)
         {
             puzzleParent = new GameObject("PuzzleParent");  // "PuzzleParent"라는 이름의 빈 오브젝트 생성
+            puzzleParent.transform.position = new Vector3(puzzlepotion_x, puzzlepotion_y, puzzlepotion_z);
         }
 
         int n = 0;
