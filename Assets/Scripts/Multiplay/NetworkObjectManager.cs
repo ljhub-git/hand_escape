@@ -110,6 +110,16 @@ public class NetworkObjectManager : MonoBehaviourPun
         photonView.RPC("RPC_SetPosition", RpcTarget.Others, id, _pos);
     }
 
+    public void SetObjectActive(PhotonView _view, bool _active)
+    {
+        if (!IsViewValid(_view))
+            return;
+
+        int id = _view.ViewID;
+
+        photonView.RPC("RPC_SetActive", RpcTarget.All, id, _active);
+    }
+
     public void DestroyObject(PhotonView _view)
     {
         if (!IsViewValid(_view))
@@ -118,9 +128,14 @@ public class NetworkObjectManager : MonoBehaviourPun
         PhotonNetwork.Destroy(_view);
     }
 
-    public void InstantiateObject(string _name, Vector3 _pos, Quaternion _rot)
+    public GameObject InstantiateObject(string _name, Vector3 _pos, Quaternion _rot)
     {
-        PhotonNetwork.Instantiate(_name, _pos, _rot);
+        GameObject obj = PhotonNetwork.Instantiate(_name, _pos, _rot);
+
+        // 오브젝트를 새로 생성했으므로 뷰_오브젝트 맵을 다시 초기화한다.
+        photonView.RPC("RPC_ResetObjectMap", RpcTarget.All);
+
+        return obj;
     }
 
     // 매개변수로 들어온 뷰가 유효한 뷰인지 체크.
@@ -161,9 +176,23 @@ public class NetworkObjectManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_PuzzleSolved(int _viewId)
     {
-        PuzzleReactObject reactObj = networkObjectMap[_viewId].GetComponent<PuzzleReactObject>();
+        PuzzleReactObject reactObj = networkObjectMap[_viewId]?.GetComponent<PuzzleReactObject>();
 
         reactObj?.OnPuzzleSolved();
+    }
+
+    [PunRPC]
+    private void RPC_SetActive(int _viewId, bool _active)
+    {
+        Debug.Log("SetPosition RPC Called!");
+
+        networkObjectMap[_viewId].SetActive(_active);
+    }
+
+    [PunRPC]
+    private void RPC_ResetObjectMap()
+    {
+        InitObjectMap();
     }
     #endregion
 }
