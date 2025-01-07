@@ -14,12 +14,13 @@ public class WaitingRoomManager : MonoBehaviour
 
     public void OnReadyButtonSelect(SelectEnterEventArgs _enterEventArgs)
     {
-        //if (PhotonNetwork.IsMasterClient)
-        //    TogglePlayerReady(0);
-        //else
-        //    TogglePlayerReady(1);
+        if (PhotonNetwork.IsMasterClient)
+            TogglePlayerReady(0);
+        else
+            TogglePlayerReady(1);
 
-        networkMng.LoadScene("S_Stage1Door");
+        // networkMng.LoadScene("S_Stage1Door");
+        // networkMng.LoadScene("S_Stage3Hand");
     }
 
     private void TogglePlayerReady(int _playerInd)
@@ -30,11 +31,11 @@ public class WaitingRoomManager : MonoBehaviour
         ui_PlayerReadyArr[_playerInd].ToggleReady();
 
         // 플레이어들의 준비 여부를 확인하고 모두 준비중이지 않으면 이 함수를 종료한다.
-        foreach (var isReady in isPlayersReadyArr)
-        {
-            if (!isReady)
-                return;
-        }
+        //foreach (var isReady in isPlayersReadyArr)
+        //{
+        //    if (!isReady)
+        //        return;
+        //}
 
         // 모든 플레이어가 준비됐음. 레벨 1 씬으로 넘어감.
         networkMng.LoadScene("S_Stage1Door");
@@ -42,9 +43,13 @@ public class WaitingRoomManager : MonoBehaviour
 
     private void SetNicknameUIs()
     {
-        foreach(var ui_PlayerReady in ui_PlayerReadyArr)
+        if(PhotonNetwork.IsMasterClient)
         {
-            ui_PlayerReady.SetNickName(networkMng.NickName);
+            ui_PlayerReadyArr[0].SetNickName(networkMng.NickName);
+        }
+        else
+        {
+            ui_PlayerReadyArr[1].SetNickName(networkMng.NickName);
         }
     }
 

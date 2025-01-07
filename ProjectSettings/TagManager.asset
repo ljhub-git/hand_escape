@@ -21,15 +21,15 @@ TagManager:
   - Right Hand Physics
   - Non Physical Hand
   - Interactable Grab
-  - 
-  - 
+  - Left Hand Check
+  - Right Hand Check
   - 
   - 
   - 
   - Prop_Static
   - Prop_Movable
   - MovablePuzzle
-  - 
+  - HandShadowTrigger
   - 
   - 
   - 
