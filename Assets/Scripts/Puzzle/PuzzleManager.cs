@@ -37,9 +37,17 @@ public class PuzzleManager : MonoBehaviour
         List<PuzzleReactObject> reactComps = null;
         puzzleMap.TryGetValue(_puzzleObj, out reactComps);
 
+        if (reactComps == null)
+            Debug.Log("No puzzle react!");
+
         foreach (var reactToSolve in reactComps)
         {
-            reactToSolve.OnPuzzleSolved();
+            if (reactToSolve == null)
+            {
+                return;
+            }
+
+            reactToSolve?.OnPuzzleSolved();
 
             networkObjectManager.CallOnPuzzleSolvedToOthers(reactToSolve.GetComponent<PhotonView>());
         }
