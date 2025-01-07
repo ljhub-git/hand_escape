@@ -1,8 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
-using System;
-using UnityEngine.Events;
 public class MovementManager : MonoBehaviour
 {
     private CharacterController characterController; //캐릭터 컨트롤러
