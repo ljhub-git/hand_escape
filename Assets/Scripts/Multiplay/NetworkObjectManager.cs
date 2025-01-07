@@ -50,7 +50,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         networkObjectMap.Clear();
 
         // PhotonView 컴포넌트를 가진 오브젝트들을 모두 가져온다.
-        PhotonView[] photonViews = FindObjectsByType<PhotonView>(FindObjectsSortMode.None);
+        PhotonView[] photonViews = FindObjectsByType<PhotonView>(FindObjectsInactive.Include,FindObjectsSortMode.None);
 
         foreach (var view in photonViews)
         {
