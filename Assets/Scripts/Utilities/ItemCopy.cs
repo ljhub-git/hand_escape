@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
@@ -17,6 +18,8 @@ public class ItemCopy : MonoBehaviour
     private Renderer objectRenderer;
     private Rigidbody objectRigidbody;
 
+    private NetworkObjectManager networkObjectMng = null;
+
     private float previousDistance = -1f; // 이전 프레임 두 손 간 거리
     private float currentSpeed = 0f; // 두 손의 상대 속도
 
@@ -28,6 +31,8 @@ public class ItemCopy : MonoBehaviour
         grabInteractable = GetComponent<XRGrabInteractable>();
         objectRenderer = GetComponent<Renderer>();
         objectRigidbody = GetComponent<Rigidbody>();
+
+        networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
 
         ValidateComponents();
     }
@@ -86,7 +91,8 @@ public class ItemCopy : MonoBehaviour
         Transform cameraTransform = Camera.main.transform;
         Vector3 spawnPosition = cameraTransform.position + cameraTransform.forward * spawnDistanceFromCamera;
 
-        GameObject duplicatedObject = Instantiate(gameObject, spawnPosition, transform.rotation);
+        //GameObject duplicatedObject = Instantiate(gameObject, spawnPosition, transform.rotation);
+        GameObject duplicatedObject = networkObjectMng.InstantiateObject(name, spawnPosition, transform.rotation);
 
         // 중복 방지를 위해 복사된 오브젝트에서 이 스크립트 제거
         Destroy(duplicatedObject.GetComponent<ItemCopy>());

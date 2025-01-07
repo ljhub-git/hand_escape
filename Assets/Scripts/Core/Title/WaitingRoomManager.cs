@@ -19,7 +19,8 @@ public class WaitingRoomManager : MonoBehaviour
         //else
         //    TogglePlayerReady(1);
 
-        networkMng.LoadScene("S_Stage1Door");
+        // networkMng.LoadScene("S_Stage1Door");
+        networkMng.LoadScene("S_Stage3Hand");
     }
 
     private void TogglePlayerReady(int _playerInd)

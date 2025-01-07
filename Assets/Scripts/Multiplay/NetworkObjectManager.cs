@@ -118,9 +118,13 @@ public class NetworkObjectManager : MonoBehaviourPun
         PhotonNetwork.Destroy(_view);
     }
 
-    public void InstantiateObject(string _name, Vector3 _pos, Quaternion _rot)
+    public GameObject InstantiateObject(string _name, Vector3 _pos, Quaternion _rot)
     {
-        PhotonNetwork.Instantiate(_name, _pos, _rot);
+        GameObject obj = PhotonNetwork.Instantiate(_name, _pos, _rot);
+
+        photonView.RPC("RPC_ResetObjectMap", RpcTarget.All);
+
+        return obj;
     }
 
     // 매개변수로 들어온 뷰가 유효한 뷰인지 체크.
@@ -161,9 +165,15 @@ public class NetworkObjectManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_PuzzleSolved(int _viewId)
     {
-        PuzzleReactObject reactObj = networkObjectMap[_viewId].GetComponent<PuzzleReactObject>();
+        PuzzleReactObject reactObj = networkObjectMap[_viewId]?.GetComponent<PuzzleReactObject>();
 
         reactObj?.OnPuzzleSolved();
+    }
+
+    [PunRPC]
+    private void RPC_ResetObjectMap()
+    {
+        InitObjectMap();
     }
     #endregion
 }

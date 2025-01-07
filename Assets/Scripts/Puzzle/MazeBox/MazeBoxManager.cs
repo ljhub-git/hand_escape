@@ -15,9 +15,9 @@ public class MazeBoxManager : PuzzleObject
         // 공 파괴하고 새로운 공 생성. (네트워크 오브젝트 매니저를 통해서)
         Vector3 spawnPos = ball.transform.position;
 
-        networkObjectMng.InstantiateObject("P_Ball", spawnPos, Quaternion.identity);
-
         networkObjectMng.DestroyObject(ball.GetComponent<PhotonView>());
+
+        networkObjectMng.InstantiateObject("P_Ball", spawnPos, Quaternion.identity);
     }
 
     private void Start()
