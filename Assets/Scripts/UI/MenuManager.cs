@@ -1,8 +1,5 @@
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class MenuManager : MonoBehaviour
 {
