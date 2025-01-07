@@ -15,7 +15,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPun
     private void Awake()
     {
         DefaultPool Pool = PhotonNetwork.PrefabPool as DefaultPool;
-        Pool.ResourceCache.Add("XRMultiCharacter", playerPrefab);
+        Pool.ResourceCache.TryAdd("XRMultiCharacter", playerPrefab);
     }
     public void SpawnPlayer()
     {

@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public class UbongoKey_PuzzleManager : MonoBehaviour
+public class UbongoKey_PuzzleManager : PuzzleObject
 {
     [SerializeField] private int numOfComplete = 0;
     private int curComplete = 0;
-    public UnityEvent onPuzzleComplete;
 
     public void AddNumOfComplete()
     {
@@ -23,7 +22,7 @@ public class UbongoKey_PuzzleManager : MonoBehaviour
     {
         if (curComplete >= numOfComplete)
         {
-            onPuzzleComplete.Invoke();
+            SolvePuzzle();
         }
     }
 

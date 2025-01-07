@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class DuplicatedTriggerHandMannager : MonoBehaviour
+public class DuplicatedTriggerHandMannager : PuzzleObject
 {
 
     public GameObject duplicatedHandR;
@@ -12,7 +11,6 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
     public bool L_HandTrigger;
     public bool R_HandCorrect { get; set; }
     public bool L_HandCorrect { get; set; }
-    public UnityEvent onPuzzleComplete;
     private void Awake()
     {
         duplicatedHandR.SetActive(false);
@@ -51,7 +49,7 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
         if (R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
         {
             TextMeshPro.text = ("GOOD!");
-            onPuzzleComplete.Invoke();
+            SolvePuzzle();
         }
     }
 }

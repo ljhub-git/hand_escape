@@ -7,6 +7,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     private NetworkPlayerSpawner playerSpawner = null;
 
+    public string NickName
+    {
+        get
+        {
+            return PhotonNetwork.NickName;
+        }
+    }
     #region Public Func
 
     /// <summary>

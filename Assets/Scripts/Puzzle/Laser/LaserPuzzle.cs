@@ -8,6 +8,7 @@ public class LaserPuzzle : PuzzleObject
     private Transform startPoint = null;
 
     private LineRenderer lr = null;
+    private LaserMirror[] laserMirrors = null;
 
     private int maxBounces = 14;
     private float maxDistance = 15f;
@@ -23,13 +24,22 @@ public class LaserPuzzle : PuzzleObject
         StartCoroutine(LaserCoroutine());
     }
 
-    private void Awake()
+    protected override void SolvePuzzle()
     {
-        lr = GetComponent<LineRenderer>();
+        foreach(var laserMirror in laserMirrors)
+        {
+            laserMirror.BlockRotate();
+        }
+
+        base.SolvePuzzle();
     }
 
     private void Start()
     {
+        lr = GetComponent<LineRenderer>();
+
+        laserMirrors = GetComponentsInChildren<LaserMirror>();
+
         StartLaserShoot();
     }
 

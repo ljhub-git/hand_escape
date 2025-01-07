@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance = null;
-
+    [SerializeField]
     private bool isDebugMode = false;
 
-    public static GameManager Instance
-    {
-        get { return instance; }
-    }
+    [SerializeField]
+    private string nextLevelName = string.Empty;
+
+    private NetworkManager networkMng = null;
 
     public bool IsDebugMode
     {
@@ -26,12 +25,13 @@ public class GameManager : MonoBehaviour
         isDebugMode = false;
     }
 
-    private void Awake()
+    public void LoadNextLevel()
     {
-        if (instance != null)
-            Destroy(gameObject);
-        else
-            instance = this;
+        networkMng.LoadScene(nextLevelName);
     }
 
+    private void Awake()
+    {
+        networkMng = FindAnyObjectByType<NetworkManager>();
+    }
 }

@@ -6,17 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Jeon/Jeon_PuzzleMultiTest.unity
-    guid: 7b1e9e2a9e2acb348a4d358ad14af53a
-  - enabled: 1
     path: Assets/Scenes/S_Title.unity
     guid: 0735a60d8342e5d408284bf5922c632b
   - enabled: 1
     path: Assets/Scenes/S_WaitingRoom.unity
     guid: ee6c11cbdd46f1f4fbf3c98facb6e56b
   - enabled: 1
-    path: Assets/Scenes/S_Stage1.unity
-    guid: fd0f49afc86afa34aa42e40ef85008f5
+    path: Assets/Scenes/S_Stage1Door.unity
+    guid: 249d231800b9d9a4b9aebfae7abf3741
+  - enabled: 1
+    path: Assets/Scenes/Jeon/Jeon_PuzzleMultiTest.unity
+    guid: 7b1e9e2a9e2acb348a4d358ad14af53a
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: b23f37e3f8410324ebb1f4324b290bd1, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 06b95da2c8759954cacd6a812811dbc3, type: 2}
