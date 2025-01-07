@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class Slide_img : MonoBehaviour
@@ -18,7 +19,7 @@ public class Slide_img : MonoBehaviour
 
     private bool isMoving = false;
 
-
+    private int count = 0;
     private void Awake()
     {
         // BoxCollider2D 컴포넌트를 가져옵니다. 없으면 추가합니다.
@@ -95,8 +96,8 @@ public class Slide_img : MonoBehaviour
 
     IEnumerator Move() // 이동 애니메이션, 안써도 됨(지우고 UpdatePos 수정하기, 인보크도 지우면 됨)
     {
-        if (isMoving) yield break; // 이미 이동 중이면 중단
-        isMoving = true; // 이동 시작
+        //if (isMoving) yield break; // 이미 이동 중이면 중단
+        //isMoving = true; // 이동 시작
 
         float elapsedTime = 0;
         float duration = 0.2f;
@@ -129,9 +130,13 @@ public class Slide_img : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics") && swapFunc != null)
+    {   
+        if (other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics") && (swapFunc != null) && (isMoving == false) && (count == 0))
         {
+            count++;
+            Debug.Log("count : " + count);
+            Debug.Log("트리거 발생중");
+            isMoving = true;
             swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
         }
     }
