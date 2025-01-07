@@ -14,13 +14,13 @@ public class WaitingRoomManager : MonoBehaviour
 
     public void OnReadyButtonSelect(SelectEnterEventArgs _enterEventArgs)
     {
-        //if (PhotonNetwork.IsMasterClient)
-        //    TogglePlayerReady(0);
-        //else
-        //    TogglePlayerReady(1);
+        if (PhotonNetwork.IsMasterClient)
+            TogglePlayerReady(0);
+        else
+            TogglePlayerReady(1);
 
         // networkMng.LoadScene("S_Stage1Door");
-        networkMng.LoadScene("S_Stage3Hand");
+        // networkMng.LoadScene("S_Stage3Hand");
     }
 
     private void TogglePlayerReady(int _playerInd)
@@ -43,9 +43,13 @@ public class WaitingRoomManager : MonoBehaviour
 
     private void SetNicknameUIs()
     {
-        foreach(var ui_PlayerReady in ui_PlayerReadyArr)
+        if(PhotonNetwork.IsMasterClient)
         {
-            ui_PlayerReady.SetNickName(networkMng.NickName);
+            ui_PlayerReadyArr[0].SetNickName(networkMng.NickName);
+        }
+        else
+        {
+            ui_PlayerReadyArr[1].SetNickName(networkMng.NickName);
         }
     }
 
