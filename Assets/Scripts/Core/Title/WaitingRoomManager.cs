@@ -31,11 +31,11 @@ public class WaitingRoomManager : MonoBehaviour
         ui_PlayerReadyArr[_playerInd].ToggleReady();
 
         // 플레이어들의 준비 여부를 확인하고 모두 준비중이지 않으면 이 함수를 종료한다.
-        foreach (var isReady in isPlayersReadyArr)
-        {
-            if (!isReady)
-                return;
-        }
+        //foreach (var isReady in isPlayersReadyArr)
+        //{
+        //    if (!isReady)
+        //        return;
+        //}
 
         // 모든 플레이어가 준비됐음. 레벨 1 씬으로 넘어감.
         networkMng.LoadScene("S_Stage1Door");
