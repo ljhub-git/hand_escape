@@ -6,6 +6,10 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    public delegate void OnPlayerSpawnedDelegate();
+
+    public OnPlayerSpawnedDelegate OnPlayerSpawned = null;
+
     private NetworkPlayerSpawner playerSpawner = null;
     private NetworkObjectManager networkObjectMng = null;
 
@@ -72,7 +76,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(0.5f);
 
+        Debug.Log("Network Player Spawned!");
+
         playerSpawner.SpawnPlayer();
+
+        OnPlayerSpawned?.Invoke();
     }
     #endregion
 }

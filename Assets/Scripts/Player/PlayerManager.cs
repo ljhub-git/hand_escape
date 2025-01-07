@@ -1,11 +1,16 @@
 using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField]
+    private Transform leftHandTr = null;
+    [SerializeField]
+    private Transform rightHandTr = null;
+
     private float moveSpeed = 120f; // 이동 속도
     private float rocketMoveSpeed = 180f; // 로켓 이동 속도
     private MovementManager movementManager; // 하위 매니저 연결
     public bool isStitting = false;
-    
+
     private void Awake()
     {
         movementManager = GetComponent<MovementManager>();
@@ -65,4 +70,9 @@ public class PlayerManager : MonoBehaviour
         movementManager.StandingMode();
     }
     #endregion
+
+    public float GetHandDistance()
+    {
+        return Vector3.Distance(leftHandTr.position, rightHandTr.position);
+    }
 }
