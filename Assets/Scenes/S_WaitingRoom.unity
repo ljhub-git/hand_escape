@@ -163,7 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b1841632cc8304f8dbd31346c51e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui_PlayerReady: []
+  ui_PlayerReadyArr:
+  - {fileID: 1008899378}
+  - {fileID: 1786061802}
 --- !u!1001 &130830079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1278,7 +1280,7 @@ GameObject:
   - component: {fileID: 1010856158}
   - component: {fileID: 1010856157}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: WallCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2003,6 +2005,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2089126099097247191, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
+      propertyPath: runtimeInstantiatePrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089126099097247191, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
+      propertyPath: 'runtimeInstantiatePrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7848747601012498489, guid: 356770530b712c1499bffbdd60b6a731, type: 3}
+    - target: {fileID: 2089126099097247191, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
+      propertyPath: 'runtimeInstantiatePrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 556529272130679049, guid: 7dad08966542e1e409c78e102b9ebcd3, type: 3}
     - target: {fileID: 2800046763573032150, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
       propertyPath: 'spawnPoints.Array.data[0]'
       value: 

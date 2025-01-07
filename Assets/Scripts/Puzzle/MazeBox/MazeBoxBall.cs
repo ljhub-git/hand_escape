@@ -3,15 +3,21 @@ using UnityEngine.Events;
 
 public class MazeBoxBall : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject ballPrefab = null;
+
+    private MazeBoxManager mazeBoxMng = null;
+
     public float maxDelta = 0.01f;
     private Vector3 previousPosition;
     private Rigidbody rb;
-    public UnityEvent onBallPuzzleComplete;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         previousPosition = transform.localPosition;
+
+        mazeBoxMng = transform.parent.GetComponent<MazeBoxManager>();
     }
 
     private void Update()
@@ -38,12 +44,15 @@ public class MazeBoxBall : MonoBehaviour
         // 물체가 빠져나왔을 때 
         if (transform.localPosition.z < -0.25f)
         {
-            //부모오브젝트제거
-            transform.SetParent(null);
-            onBallPuzzleComplete.Invoke();
+            ////부모오브젝트제거
+            //transform.SetParent(null);
+            //onBallPuzzleComplete.Invoke();
             //rb.isKinematic = false;
-            //현재스크립트 비활성화
-            this.enabled = false;
+
+            ////현재스크립트 비활성화
+            //this.enabled = false
+
+            mazeBoxMng.SolvePuzzle();
         }
     }
 

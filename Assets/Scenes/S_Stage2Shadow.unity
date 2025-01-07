@@ -678,7 +678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6913751949224772331, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: onPuzzleComplete.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6913751949224772331, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: onPuzzleComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -744,9 +744,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quiz3 Pose 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7876109071658392744, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8105136442226636827, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: end3DTr
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105136442226636827, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8105136442226636827, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: start3DTr
@@ -789,6 +797,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6078729998041961529, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
   m_PrefabInstance: {fileID: 196326582}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &196326584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6913751949224772331, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
+  m_PrefabInstance: {fileID: 196326582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f015275f2ed734987657e518dd10e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &222598716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4819,12 +4838,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[0].puzzleObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 196326584}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[1].puzzleObject
       value: 
@@ -4835,8 +4854,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[1].reactiveObjects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
+      propertyPath: 'puzzleMapping.Array.data[0].reactiveObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1152137189}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5270,8 +5293,8 @@ Transform:
   m_GameObject: {fileID: 2135303681}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 40, y: 1, z: 20}
+  m_LocalPosition: {x: 13.42, y: -0.5, z: 0}
+  m_LocalScale: {x: 15.6276, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 321881394}
