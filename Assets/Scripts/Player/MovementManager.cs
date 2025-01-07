@@ -123,10 +123,13 @@ public class MovementManager : MonoBehaviour
             // 이미 실행 중인 코루틴이 있다면 먼저 멈추고, 새로운 코루틴 시작
             if (rocketMoveCoroutine != null)
             {
-                rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
-                rocketCube.ParentNull(); // 자식 해제
-                Destroy(rocketCubeGo); // 로켓 큐브 파괴
-                rocketCubeGo = null;  // 널로 설정
+                if (rocketCubeGo)
+                {
+                    rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
+                    rocketCube.ParentNull(); // 자식 해제
+                    Destroy(rocketCubeGo); // 로켓 큐브 파괴
+                    rocketCubeGo = null;  // 널로 설정
+                }
                 StopCoroutine(rocketMoveCoroutine);
             }
 
@@ -230,7 +233,7 @@ public class MovementManager : MonoBehaviour
                     }
                     if (t >= 3.5)
                     {
-                        if (rocketCubeGo != null)
+                        if (rocketCubeGo)
                         {
                             rocketCube.ParentNull(); // 자식 해제
                             rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화

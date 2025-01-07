@@ -3,9 +3,6 @@ using UnityEngine.Events;
 
 public class MazeBoxBall : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject ballPrefab = null;
-
     private MazeBoxManager mazeBoxMng = null;
 
     public float maxDelta = 0.01f;
