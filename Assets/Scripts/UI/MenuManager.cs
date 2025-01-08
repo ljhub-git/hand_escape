@@ -32,6 +32,7 @@ public class MenuManager : MonoBehaviour
         }
 
         NetworkManager networkManager = FindAnyObjectByType<NetworkManager>();
+
         if (networkManager != null)
         {
             networkManager.OnPlayerSpawned += SetPositionSource;

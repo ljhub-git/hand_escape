@@ -51,9 +51,32 @@ public class PuzzleManager : MonoBehaviour
                 return;
             }
 
-            reactToSolve?.OnPuzzleSolved();
+            reactToSolve.OnPuzzleSolved();
 
             networkObjectManager.CallOnPuzzleSolvedToOthers(reactToSolve.GetComponent<PhotonView>());
+        }
+    }
+
+    public void OnResetPuzzle(PuzzleObject _puzzleObj)
+    {
+        List<PuzzleReactObject> reactComps = null;
+        puzzleMap.TryGetValue(_puzzleObj, out reactComps);
+
+        if (reactComps == null)
+        {
+            Debug.Log("No puzzle react!");
+            return;
+        }
+
+
+        foreach (var reactToReset in reactComps)
+        {
+            if (reactToReset == null)
+            {
+                return;
+            }
+
+            reactToReset.OnPuzzleReset();
         }
     }
 
