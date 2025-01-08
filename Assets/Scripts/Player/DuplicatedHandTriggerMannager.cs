@@ -30,6 +30,8 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
 
     private NetworkObjectManager networkObjectMng = null;
 
+    private LightOnOffReact lightOnOff = null;
+
     private void Start()
     {
         if(duplicatedHandR != null)
@@ -41,6 +43,8 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
         leftHandLayer = LayerMask.NameToLayer("Left Hand Check");
 
         networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
+
+        lightOnOff = GetComponent<LightOnOffReact>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,7 +65,7 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
     {
         if (other.gameObject.layer == rightHandLayer)
         {
-            if(R_HandCorrect)
+            if(lightOnOff && R_HandCorrect)
             {
                 //duplicatedHandR?.SetActive(true);
                 SetShowingDuplicatedHand(true, false);
@@ -75,7 +79,7 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
 
         if (other.gameObject.layer == leftHandLayer)
         {
-            if (L_HandCorrect)
+            if (lightOnOff && L_HandCorrect)
             {
                 //duplicatedHandL?.SetActive(true);
                 SetShowingDuplicatedHand(true, true);
@@ -150,7 +154,7 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
 
     public void CheckAllHands()
     {
-        if (R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
+        if (lightOnOff && R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
         {
             // TextMeshPro.text = ("GOOD!");
             SolvePuzzle();
