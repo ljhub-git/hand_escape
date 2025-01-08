@@ -8,7 +8,6 @@ using Photon.Pun;
 
 public class DuplicatedTriggerHandMannager : PuzzleObject
 {
-
     public GameObject duplicatedHandR;
     public GameObject duplicatedHandL;
 
@@ -17,8 +16,8 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
     public bool R_HandTrigger;
     public bool L_HandTrigger;
 
-    [SerializeField]
-    private HandShadowSync handShadowSync = null;
+    //[SerializeField]
+    //private HandShadowSync handShadowSync = null;
 
     public bool R_HandCorrect { get; set; }
     public bool L_HandCorrect { get; set; }
@@ -26,15 +25,17 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
     private int rightHandLayer = 0;
     private int leftHandLayer = 0;
 
-    private HandCheckTrigger leftHandCheck = null;
-    private HandCheckTrigger rightHandCheck = null;
+    public HandCheckTrigger leftHandCheck = null;
+    public HandCheckTrigger rightHandCheck = null;
 
     private NetworkObjectManager networkObjectMng = null;
 
     private void Start()
     {
-        duplicatedHandR?.SetActive(false);
-        duplicatedHandL?.SetActive(false);
+        if(duplicatedHandR != null)
+            duplicatedHandR.SetActive(false);
+        if (duplicatedHandL != null)
+            duplicatedHandL.SetActive(false);
 
         rightHandLayer = LayerMask.NameToLayer("Right Hand Check");
         leftHandLayer = LayerMask.NameToLayer("Left Hand Check");
@@ -99,7 +100,7 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
         if (other.gameObject.layer == leftHandLayer)
         {
             leftHandCheck = null;
-            //L_HandTrigger = false;
+            L_HandTrigger = false;
             SetShowingDuplicatedHand(false, true);
         }
     }
@@ -114,17 +115,28 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
 
         if(_isLeftHand)
         {
+            // 보이는 상태에서 한 번 더 보이게 하려고 하면 안 됨.
             if (_show && duplicatedHandL.activeInHierarchy) 
                 return;
 
-            networkObjectMng.SetObjectActive(duplicatedHandL.GetComponent<PhotonView>(), _show);
+            PhotonView view = duplicatedHandL.GetComponent<PhotonView>();
+
+            if (view == null)
+                duplicatedHandL.SetActive(_show);
+            else
+                networkObjectMng.SetObjectActive(duplicatedHandL.GetComponent<PhotonView>(), _show);
         }
         else
         {
             if (_show && duplicatedHandR.activeInHierarchy) 
                 return;
 
-            networkObjectMng.SetObjectActive(duplicatedHandR.GetComponent<PhotonView>(), _show);
+            PhotonView view = duplicatedHandR.GetComponent<PhotonView>();
+
+            if (view == null)
+                duplicatedHandR.SetActive(_show);
+            else
+                networkObjectMng.SetObjectActive(duplicatedHandR.GetComponent<PhotonView>(), _show);
         }
     }
 
@@ -140,7 +152,7 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
     {
         if (R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
         {
-            TextMeshPro.text = ("GOOD!");
+            // TextMeshPro.text = ("GOOD!");
             SolvePuzzle();
         }
     }

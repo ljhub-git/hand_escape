@@ -38,7 +38,11 @@ public class PuzzleManager : MonoBehaviour
         puzzleMap.TryGetValue(_puzzleObj, out reactComps);
 
         if (reactComps == null)
+        {
             Debug.Log("No puzzle react!");
+            return;
+        }
+
 
         foreach (var reactToSolve in reactComps)
         {
