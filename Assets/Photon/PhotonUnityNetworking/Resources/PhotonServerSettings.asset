@@ -46,6 +46,7 @@ MonoBehaviour:
   - RPC_SetPosition
   - RPC_ResetObjectMap
   - RPC_SetActive
+  - RPC_AddObjectToMap
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
