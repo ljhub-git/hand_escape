@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2a975253b89f03147813702ebc3dfa98
+guid: 673ac7f73d1850e41b12db0a6bbe30c4
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
@@ -102,8 +102,8 @@ ModelImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 258600
-  packageName: Office Pack - Free
+  productId: 258782
+  packageName: House Interior - Free
   packageVersion: 1.0.1
-  assetPath: Assets/nappin/Office Props Softpack/Models/(Msh)Drawer3.fbx
-  uploadId: 694065
+  assetPath: Assets/DownloadedAssets/nappin/House Props Softpack/Models/(Msh)Drawer3.fbx
+  uploadId: 694060

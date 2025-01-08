@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6742d9d0591e16e48b701a5fd806e2ad
+guid: 929d65dd4157b3e49b715a4d57acc1fb
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
@@ -102,8 +102,8 @@ ModelImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 258600
-  packageName: Office Pack - Free
+  productId: 258782
+  packageName: House Interior - Free
   packageVersion: 1.0.1
-  assetPath: Assets/nappin/Office Props Softpack/Models/(Msh)DeskLight.fbx
-  uploadId: 694065
+  assetPath: Assets/DownloadedAssets/nappin/House Props Softpack/Models/(Msh)DeskLight.fbx
+  uploadId: 694060
