@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class DoorBodyOpenClose : PuzzleReactObject
 {
-    private Quaternion openedDoorRot = Quaternion.Euler(0f, 5f, 0f);
-    private Quaternion closedDoorRot = Quaternion.Euler(0f, 90f, 0f);
+    private Quaternion openedDoorRot = Quaternion.Euler(0f, 90f, 0f);
+    private Quaternion closedDoorRot = Quaternion.Euler(0f, 0f, 0f);
     private Coroutine DoorMoveCoroutine = null; // 코루틴을 추적할 변수
     private bool isLocked = false;
     private AudioSource doorOpenSound = null;
@@ -14,7 +14,7 @@ public class DoorBodyOpenClose : PuzzleReactObject
        doorOpenSound = GetComponent<AudioSource>();
         if (doorOpenSound == null)
         {
-            Debug.LogError("doorOpenSound is not valid");
+            Debug.LogError("doorOpenSound is not valid Add AudioSource in this Gameobject");
         }
     }
     public override void OnPuzzleSolved()

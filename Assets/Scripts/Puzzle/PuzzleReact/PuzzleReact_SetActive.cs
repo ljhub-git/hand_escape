@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class PuzzleReact_SetActive : PuzzleReactObject
 {
     public override void OnPuzzleSolved()
