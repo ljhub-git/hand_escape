@@ -38,6 +38,9 @@ public class Tile
 
     public Texture2D finalCut { get; private set; }
 
+    public int xIndex = 0; 
+    public int yIndex = 0;
+
     public static readonly Color TransparentColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 
     private PosNegType[] mCurveTypes = new PosNegType[4]
@@ -54,9 +57,6 @@ public class Tile
 
     // A stack needed for the flood fill of the texture.
     private Stack<Vector2Int> mStack = new Stack<Vector2Int>();
-
-    public int xIndex = 0;
-    public int yIndex = 0;
 
     // For tiles sorting.
     public static TilesSorting tilesSorting = new TilesSorting();
@@ -85,7 +85,8 @@ public class Tile
         {
             for (int j = 0; j < tileSizeWithPadding; ++j)
             {
-                finalCut.SetPixel(i, j, TransparentColor);
+                //finalCut.SetPixel(i, j, TransparentColor);
+                finalCut.SetPixel(i, j, Color.clear);
             }
         }
     }
@@ -117,24 +118,11 @@ public class Tile
             pts.AddRange(CreateCurve((Direction)i, mCurveTypes[i]));
         }
 
-        // 이제 `pts`의 값을 검사하여 `mVisited` 배열의 범위를 벗어나는 값이 없는지 확인합니다.
-        foreach (var pt in pts) 
-        { 
-            if (pt.x >= 0 && pt.x < tileSizeWithPadding && pt.y >= 0 && pt.y < tileSizeWithPadding) 
-            { 
-                mVisited[(int)pt.x, (int)pt.y] = true; 
-            } 
-            else 
-            { 
-                Debug.LogWarning($"Point ({pt.x}, {pt.y}) is out of bounds for mVisited array."); 
-            } 
-        }
-
         // Now we should have a closed curve.
-        //for (int i = 0; i < pts.Count; ++i)
-        //{
-        //    mVisited[(int)pts[i].x, (int)pts[i].y] = true;
-        //}
+        for (int i = 0; i < pts.Count; ++i)
+        {
+            mVisited[(int)pts[i].x, (int)pts[i].y] = true;
+        }
         // start from the center.
         Vector2Int start = new Vector2Int(tileSizeWithPadding / 2, tileSizeWithPadding / 2);
 
@@ -219,6 +207,17 @@ public class Tile
             }
         }
     }
+
+
+
+    public void SetTileSize(float scaleFactor)
+    {
+        finalCut = SpriteUtils.ResizeTexture(finalCut, scaleFactor);
+    }
+
+
+
+
 
     public static LineRenderer CreateLineRenderer(UnityEngine.Color color, float lineWidth = 1.0f)
     {
@@ -349,15 +348,6 @@ public class Tile
                 }
                 break;
         }
-        // 새로운 코드: 범위를 벗어나는 포인트를 확인하고 경고 메시지 출력
-        foreach (var pt in pts) 
-        { 
-            int tileSizeWithPadding = 2 * Tile.padding + Tile.tileSize; if (pt.x < 0 || pt.x >= tileSizeWithPadding || pt.y < 0 || pt.y >= tileSizeWithPadding) 
-            { 
-                Debug.LogWarning($"Point ({pt.x}, {pt.y}) is out of bounds for tile size {tileSizeWithPadding}."); 
-            } 
-        }
-
         return pts;
     }
 

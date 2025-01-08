@@ -8,6 +8,9 @@ using UnityEngine;
 public class BoardGen : MonoBehaviour
 {
     public string imageFilename;
+    public float puzzleScale = 1.0f;
+    public float backgroundScale = 1.0f;
+
     Sprite mBaseSpriteOpaque;
     Sprite mBaseSpriteTransparent;
 
@@ -15,8 +18,6 @@ public class BoardGen : MonoBehaviour
     GameObject mGameObjectTransparent;
 
     public float ghostTransparency = 0.1f;
-
-    public float scaleFactor = 1.0f;// 퍼즐 조각과 배경 그림의 크기를 조절하는 변수
 
     public int numTileX { get; private set; }
     public int numTileY { get; private set; }
@@ -44,34 +45,30 @@ public class BoardGen : MonoBehaviour
             return null;
         }
 
-        // `scaleFactor`를 사용하여 그림의 크기를 조절
-        int newWidth = Mathf.RoundToInt(tex.width * scaleFactor);
-        int newHeight = Mathf.RoundToInt(tex.height * scaleFactor);
-
         Texture2D newTex = new Texture2D(
             tex.width + Tile.padding * 2,
             tex.height + Tile.padding * 2,
             TextureFormat.ARGB32,
             false);
 
-        for (int i = 0; i < newWidth; i++) 
-        { 
-            for (int j = 0; j < newHeight; j++) 
-            { 
-                newTex.SetPixel(i, j, Color.white); 
-            } 
+        for (int i = 0; i < tex.width; i++)
+        {
+            for (int j = 0; j < tex.height; j++)
+            {
+                newTex.SetPixel(i, j, Color.white);
+            }
         }
 
-        for (int x = 0; x < newWidth; x++) 
-        { 
-            for (int y = 0; y < newHeight; y++) 
-            { 
-                Color color = tex.GetPixel(x, y); color.a = 1.0f; 
-                newTex.SetPixel(x, y, color); 
-            } 
+        for (int x = 0; x < tex.width; x++)
+        {
+            for (int y = 0; y < tex.height; y++)
+            {
+                Color color = tex.GetPixel(x, y);
+                color.a = 1.0f;
+                newTex.SetPixel(x, y, color);
+            }
         }
         newTex.Apply();
-
 
         Sprite sprite = SpriteUtils.CreateSpriteFromTexture2D(
             newTex,
@@ -85,8 +82,6 @@ public class BoardGen : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // `scaleFactor`를 사용하여 `tileSize`를 조절
-        Tile.tileSize = Mathf.RoundToInt(Tile.tileSize * scaleFactor);
 
         mBaseSpriteOpaque = LoadBaseTexture();
         mGameObjectQpaque = new GameObject();
@@ -103,10 +98,6 @@ public class BoardGen : MonoBehaviour
         mGameObjectQpaque.gameObject.SetActive(false);
 
         SetCameraPosition();
-
-        // 그림의 크기에 맞게 퍼즐 조각의 갯수를 계산합니다.
-        numTileX = Mathf.CeilToInt(mBaseSpriteOpaque.texture.width / (float)Tile.tileSize);
-        numTileY = Mathf.CeilToInt(mBaseSpriteOpaque.texture.height / (float)Tile.tileSize);
 
         puzzleManager.SetTotalTiles(numRandomTiles);
 
@@ -154,7 +145,7 @@ public class BoardGen : MonoBehaviour
         Camera.main.orthographicSize = mBaseSpriteOpaque.texture.width / 2;
     }
 
-    public static Mesh CreateMeshFromSprite(Sprite sprite)
+    public static Mesh CreateMeshFromSprite(Sprite sprite, float thickness = 0.1f)
     {
         Mesh mesh = new Mesh();
 
@@ -170,7 +161,7 @@ public class BoardGen : MonoBehaviour
 
         // 뒷면 추가 (z 방향으로 thickness만큼 이동)
         foreach (var vert in vertices2D)
-            vertices3D.Add(new Vector3(vert.x, vert.y));
+            vertices3D.Add(new Vector3(vert.x, vert.y, -thickness));
 
         // 앞면 삼각형
         for (int i = 0; i < sprite.triangles.Length; i += 3)
@@ -224,7 +215,7 @@ public class BoardGen : MonoBehaviour
         );
 
         // 생성된 Sprite를 사용하여 Mesh 생성 (두께 포함)
-        Mesh tileMesh = CreateMeshFromSprite(sprite);
+        Mesh tileMesh = CreateMeshFromSprite(sprite, 2f);
         meshFilter.mesh = tileMesh;
 
         // Material 설정 (Sprite용 기본 셰이더 사용)
@@ -247,6 +238,8 @@ public class BoardGen : MonoBehaviour
     IEnumerator Coroutine_CreateJigsawTiles()
     {
         Texture2D baseTexture = mBaseSpriteOpaque.texture;
+        baseTexture = SpriteUtils.ResizeTexture(baseTexture, backgroundScale); // 배경 크기 조정
+        
         numTileX = baseTexture.width / Tile.tileSize;
         numTileY = baseTexture.height / Tile.tileSize;
 
@@ -278,7 +271,7 @@ public class BoardGen : MonoBehaviour
         {
             for (int j = 0; j < numTileY; j++)
             {
-                mTiles[i, j] = CreateTile(i, j, baseTexture);
+                mTiles[i, j] = CreateTile(i, j, baseTexture, puzzleScale);
                 mTileGameObjects[i, j] = CreateGameObjectFromTile(mTiles[i, j]);
 
                 // 타일을 PuzzleManager에 등록
@@ -311,7 +304,7 @@ public class BoardGen : MonoBehaviour
         }
     }
 
-    Tile CreateTile(int i, int j, Texture2D baseTexture)
+    Tile CreateTile(int i, int j, Texture2D baseTexture, float puzzleScale)
     {
         Tile tile = new Tile(baseTexture);
         tile.xIndex = i;
@@ -381,6 +374,7 @@ public class BoardGen : MonoBehaviour
         }
 
         tile.Apply();
+        tile.SetTileSize(puzzleScale); // 퍼즐 크기 조정
         return tile;
     }
 

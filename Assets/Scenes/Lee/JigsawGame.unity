@@ -270,8 +270,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageFilename: images/imagetest3
+  puzzleScale: 0.5
+  backgroundScale: 0.5
   ghostTransparency: 0.1
-  scaleFactor: 0.5
   parentForTiles: {fileID: 1525335357}
   puzzleManager: {fileID: 2118946608}
   numRandomTiles: 2
