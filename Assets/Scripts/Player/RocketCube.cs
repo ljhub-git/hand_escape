@@ -15,19 +15,23 @@ public class RocketCube : MonoBehaviour
     private List<bool> isChangedGravity = new List<bool>(); //이 컴퍼넌트에서 중력을 비활성화 했는지 확인하는 bool값
     private Vector3 catcherPosition = Vector3.zero;
     private AudioSource fireSound = null;
+    private ParticleSystem fireParticleSystem = null;
+    private ParticleSystem catchParticleSystem = null;
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
         BoxCollider.enabled = true; // 박스 콜라이더 활성화
         BoxCollider.isTrigger = true; // 박스 콜라이더 isTrigger 활성화
         fireSound = GetComponent<AudioSource>();
+        fireParticleSystem = GetComponentInChildren<ParticleSystem>();
+        catchParticleSystem = GetComponentsInChildren<ParticleSystem>()[1];
 
     }
     private void OnTriggerEnter(Collider other) // 트리거 발생하면
     {
         Debug.Log("Rocket Cube OnTriggerEnter");
 
-        if (other.CompareTag("Ubongo") || other.CompareTag("UbongoCol") || other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics"))
         {
             iscatched = true;
             catchedObject = null;
@@ -49,7 +53,7 @@ public class RocketCube : MonoBehaviour
                 finalParent = currentParent; // 최상위 부모 재정의
                 finalParent.transform.SetParent(transform);// 객체를 자식으로 바꿈
             }
-
+            catchParticleSystem.Play();
             iscatched = true; 
             catchedObject = finalParent.gameObject;
             catchedObjectPosition = other.transform.position;
@@ -93,12 +97,22 @@ public class RocketCube : MonoBehaviour
             catchedObject.transform.SetParent(null);
         }
     }
-    public void UseGravity()
+    public bool IsChangedGravityListClear()
     {
         if (isChangedGravity == null || isChangedGravity.Count == 0)
         {
-            return;
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void UseGravity()
+    {
+        if (IsChangedGravityListClear())
+        { return; }
         for (int n = 0; n < catchedObjectRb.Count; n++)
         {
             Rigidbody rb = catchedObjectRb[n];
@@ -109,6 +123,8 @@ public class RocketCube : MonoBehaviour
                 rb.useGravity = true;  // 중력 재활성화
             }
         }
+        isChangedGravity.Clear(); //중력 비활성화 했음을 확인하는 리스트 클리어
+        isChangedGravity = new List<bool>();
     } 
     public void RemeberCatcherPosition(Vector3 _catcherPosition)
     {
@@ -117,6 +133,7 @@ public class RocketCube : MonoBehaviour
     public void FireSound()
     {
         fireSound.Play();
+        fireParticleSystem.Play();
     }
     public Vector3 WhoCatchMe()
     {
