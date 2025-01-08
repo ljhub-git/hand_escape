@@ -15,20 +15,6 @@ public class NetworkObjectManager : MonoBehaviourPun
     [SerializeField]
     private GameObject[] runtimeInstantiatePrefabs;
 
-    private Dictionary<int, GameObject> networkObjectMap = null;
-
-    public Dictionary<int, GameObject> NetworkObjectMap
-    {
-        get { return networkObjectMap; }
-    }
-
-    private void Start()
-    {
-        networkObjectMap = new Dictionary<int, GameObject>();
-
-        InitObjectMap();
-    }
-
     public void InitPrefabPool()
     {
         DefaultPool Pool = PhotonNetwork.PrefabPool as DefaultPool;
@@ -36,25 +22,6 @@ public class NetworkObjectManager : MonoBehaviourPun
         foreach (var prefab in runtimeInstantiatePrefabs)
         {
             Pool.ResourceCache.TryAdd(prefab.name, prefab);
-        }
-    }
-
-    // 씬에 있는 포톤 뷰를 가져오고 포톤뷰 아이디를 통해서 networkInteractableMap 을 초기화한다.
-    public void InitObjectMap()
-    {
-        // 포톤 서버에 접속이 되어있어야 함.
-        if (!PhotonNetwork.IsConnected)
-            return;
-
-        // 맵을 초기화한다.
-        networkObjectMap.Clear();
-
-        // PhotonView 컴포넌트를 가진 오브젝트들을 모두 가져온다.
-        PhotonView[] photonViews = FindObjectsByType<PhotonView>(FindObjectsInactive.Include,FindObjectsSortMode.None);
-
-        foreach (var view in photonViews)
-        {
-            networkObjectMap.Add(view.ViewID, view.gameObject);
         }
     }
 
@@ -132,9 +99,6 @@ public class NetworkObjectManager : MonoBehaviourPun
     {
         GameObject obj = PhotonNetwork.Instantiate(_name, _pos, _rot);
 
-        // 오브젝트를 새로 생성했으므로 뷰_오브젝트 맵을 다시 초기화한다.
-        photonView.RPC("RPC_ResetObjectMap", RpcTarget.All);
-
         return obj;
     }
 
@@ -154,15 +118,42 @@ public class NetworkObjectManager : MonoBehaviourPun
     {
         Debug.Log("SetObjectGravityUsable RPC Called!");
 
-        networkObjectMap[_viewId].GetComponent<Rigidbody>().useGravity = _usable;
+        PhotonView view = PhotonNetwork.GetPhotonView(_viewId);
+
+        if (view == null)
+        {
+            Debug.LogWarningFormat("{0} view is not exist in Scene!", _viewId);
+
+            return;
+        }
+
+        Rigidbody targetRb = view.GetComponent<Rigidbody>();
+
+        if(targetRb != null)
+        {
+            targetRb.useGravity = _usable;
+        }
     }
 
     [PunRPC]
     private void RPC_SetRotation(int _viewId, Quaternion _rot)
     {
         Debug.Log("SetRotation RPC Called!");
+        PhotonView view = PhotonNetwork.GetPhotonView(_viewId);
 
-        networkObjectMap[_viewId].transform.rotation = _rot;
+        if(view == null)
+        {
+            Debug.LogWarningFormat("{0} view is not exist in Scene!", _viewId);
+
+            return;
+        }
+
+        Transform targetTr = view.transform;
+
+        if(targetTr != null)
+        {
+            targetTr.rotation = _rot;
+        }
     }
 
     [PunRPC]
@@ -170,15 +161,41 @@ public class NetworkObjectManager : MonoBehaviourPun
     {
         Debug.Log("SetPosition RPC Called!");
 
-        networkObjectMap[_viewId].transform.position = _pos;
+        PhotonView view = PhotonNetwork.GetPhotonView(_viewId);
+
+        if (view == null)
+        {
+            Debug.LogWarningFormat("{0} view is not exist in Scene!", _viewId);
+
+            return;
+        }
+
+        Transform targetTr = view.transform;
+
+        if (targetTr != null)
+        {
+            targetTr.position = _pos;
+        }
     }
 
     [PunRPC]
     private void RPC_PuzzleSolved(int _viewId)
     {
-        PuzzleReactObject reactObj = networkObjectMap[_viewId]?.GetComponent<PuzzleReactObject>();
+        PhotonView view = PhotonNetwork.GetPhotonView(_viewId);
 
-        reactObj?.OnPuzzleSolved();
+        if (view == null)
+        {
+            Debug.LogWarningFormat("{0} view is not exist in Scene!", _viewId);
+
+            return;
+        }
+
+        PuzzleReactObject reactObj = view.GetComponent<PuzzleReactObject>();
+
+        if (reactObj != null)
+        {
+            reactObj.OnPuzzleSolved();
+        }
     }
 
     [PunRPC]
@@ -186,13 +203,16 @@ public class NetworkObjectManager : MonoBehaviourPun
     {
         Debug.Log("SetPosition RPC Called!");
 
-        networkObjectMap[_viewId].SetActive(_active);
-    }
+        PhotonView view = PhotonNetwork.GetPhotonView(_viewId);
 
-    [PunRPC]
-    private void RPC_ResetObjectMap()
-    {
-        InitObjectMap();
+        if (view == null)
+        {
+            Debug.LogWarningFormat("{0} view is not exist in Scene!", _viewId);
+
+            return;
+        }
+
+        view.gameObject.SetActive(_active);
     }
     #endregion
 }
