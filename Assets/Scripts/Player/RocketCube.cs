@@ -48,7 +48,7 @@ public class RocketCube : MonoBehaviour
             {
                 currentParent = currentParent.parent; //부모 재정의
             }
-            if (currentParent.parent.GetComponent<MazeBoxManager>())
+            if (currentParent.parent.GetComponent<MazeBoxManager>() != null)
             {
                 currentParent = currentParent.parent; //부모 재정의                
             }
