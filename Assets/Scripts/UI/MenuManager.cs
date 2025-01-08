@@ -18,8 +18,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float distance = 0.5f;
     [SerializeField] private float verticalOffset = 0.2f;
 
-    public Transform positionSource;
     public Transform menuPosition;
+
+    private Transform positionSource;
+
     // Start는 초기화 작업을 하는 함수
     void Start()
     {
@@ -28,6 +30,9 @@ public class MenuManager : MonoBehaviour
             //테스트용 할당
             isLogin = true;
         }
+
+        FindAnyObjectByType<NetworkManager>().OnPlayerSpawned += SetPositionSource;
+
         // 게임 오디오의 초기 볼륨을 슬라이더 값에 맞게 설정
         //soundSlider.value = gameAudio.volume;
     }
@@ -106,4 +111,8 @@ public class MenuManager : MonoBehaviour
 
     }
 
+    public void SetPositionSource()
+    {
+        positionSource = Camera.main.transform;
+    }
 }

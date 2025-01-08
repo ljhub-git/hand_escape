@@ -80,6 +80,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         playerSpawner.SpawnPlayer();
 
+        yield return new WaitForSeconds(0.5f);
+
         OnPlayerSpawned?.Invoke();
     }
     #endregion
