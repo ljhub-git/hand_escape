@@ -14,11 +14,17 @@ public class Slide_puzzle : MonoBehaviour
     private bool isMoving = false;
 
     [SerializeField]
-    private float puzzlepotion_x = 0f;
+    private float puzzlePotion_x = 0f;
     [SerializeField]
-    private float puzzlepotion_y = 1f;
+    private float puzzlePotion_y = 1f;
     [SerializeField]
-    private float puzzlepotion_z = 2.5f;
+    private float puzzlePotion_z = 2.5f;
+    [SerializeField]
+    private float puzzleRotate_x = 0f;
+    [SerializeField]
+    private float puzzleRotate_y = 0f;
+    [SerializeField]
+    private float puzzleRotate_z = 0f;
 
     private void Start()
     {
@@ -32,7 +38,8 @@ public class Slide_puzzle : MonoBehaviour
         if (puzzleParent == null)
         {
             puzzleParent = new GameObject("PuzzleParent");  // "PuzzleParent"라는 이름의 빈 오브젝트 생성
-            puzzleParent.transform.position = new Vector3(puzzlepotion_x, puzzlepotion_y, puzzlepotion_z);
+            puzzleParent.transform.position = new Vector3(puzzlePotion_x, puzzlePotion_y, puzzlePotion_z);
+            puzzleParent.transform.localRotation = Quaternion.Euler(puzzleRotate_x, puzzleRotate_y, puzzleRotate_z);
         }
 
         int n = 0;
@@ -44,9 +51,10 @@ public class Slide_puzzle : MonoBehaviour
 
                 float vr_scale = box.vr_scale;
                 box.transform.localScale = new Vector3(vr_scale, vr_scale, vr_scale);
-
                 // 퍼즐 조각을 puzzleParent 오브젝트의 자식으로 설정
                 box.transform.SetParent(puzzleParent.transform);
+                // 각도 회전시 자식 초기화
+                box.transform.localRotation = Quaternion.identity;
 
                 boxes[x, y] = box;
                 n++;
@@ -245,6 +253,7 @@ public class Slide_puzzle : MonoBehaviour
             if(count == 16)
             {
                 Debug.Log("정답입니다");
+
             }
         }
     }

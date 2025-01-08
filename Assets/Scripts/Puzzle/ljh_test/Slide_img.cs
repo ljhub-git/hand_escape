@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading;
+using TMPro.Examples;
 using UnityEngine;
 
 public class Slide_img : MonoBehaviour
@@ -21,17 +22,15 @@ public class Slide_img : MonoBehaviour
 
     private Collider firstCollider = null;  // 최초 충돌한 Collider
 
-    private void Awake()
+    private void Start()
     {
-        // BoxCollider2D 컴포넌트를 가져옵니다. 없으면 추가합니다.
         boxCollider = GetComponent<BoxCollider>();
         if (boxCollider == null)
         {
             boxCollider = gameObject.AddComponent<BoxCollider>();
         }
 
-        // 콜라이더의 크기를 x_wid와 y_hei 값으로 설정
-        boxCollider.size = new Vector3(x_wid /2, y_hei/2, 0.5f);
+        boxCollider.size = new Vector3(x_wid / 2, y_hei / 2, 0.5f);
     }
 
     public void Init(int i, int j, int index, Sprite sprite, Action<int, int> swapFunc)
@@ -125,6 +124,9 @@ public class Slide_img : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // 클릭된 콜라이더를 지닌 오브젝트의 이름을 출력합니다.
+        Debug.Log("Clicked on object: " + gameObject.transform.localPosition);
+
         if (Input.GetMouseButtonDown(0) && swapFunc != null)
         {
             swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
@@ -133,6 +135,8 @@ public class Slide_img : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("닿인object: " + gameObject.name);
+
         Slide_puzzle moving = new Slide_puzzle();
         isMoving = moving.GetMove();
 
