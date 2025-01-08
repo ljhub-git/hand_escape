@@ -3459,8 +3459,8 @@ MonoBehaviour:
   optionUI: {fileID: 624581785}
   distance: 0.5
   verticalOffset: 0.2
-  positionSource: {fileID: 0}
-  menuPosition: {fileID: 0}
+  positionSource: {fileID: 1388291211}
+  menuPosition: {fileID: 751341096}
 --- !u!4 &1282241317
 Transform:
   m_ObjectHideFlags: 0
