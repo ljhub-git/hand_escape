@@ -11,6 +11,8 @@ public class Slide_puzzle : MonoBehaviour
 
     private GameObject puzzleParent;
 
+    public Slide_Puzzle_Manager slide_Puzzle_Manager;
+
     private bool isMoving = false;
 
     [SerializeField]
@@ -89,7 +91,7 @@ public class Slide_puzzle : MonoBehaviour
             }
         }
 
-        int shuffleSteps = 100; // ¼¯±â ¹Ýº¹ È½¼ö
+        int shuffleSteps = 50; // ¼¯±â ¹Ýº¹ È½¼ö
         for (int i = 0; i < shuffleSteps; i++)
         {
             Vector2 move = getValidMove(emptyX, emptyY);
@@ -253,8 +255,15 @@ public class Slide_puzzle : MonoBehaviour
             if(count == 16)
             {
                 Debug.Log("Á¤´äÀÔ´Ï´Ù");
-
+                slide_Puzzle_Manager.SolvePuzzle();
+                //OnDestroy();
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        Destroy(puzzleParent);
+    }
+
 }
