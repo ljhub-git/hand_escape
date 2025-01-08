@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7210340521638108182}
   m_Layer: 0
   m_Name: PuzzlePieceGrab
-  m_TagString: Ubongo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1765,7 +1765,7 @@ GameObject:
   - component: {fileID: 7440928797970632000}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Ubongo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2022,7 +2022,7 @@ GameObject:
   - component: {fileID: 8053804636837305957}
   m_Layer: 10
   m_Name: PuzzlePieceCollider
-  m_TagString: UbongoCol
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2099,7 +2099,7 @@ GameObject:
   - component: {fileID: 3272731279248365283}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Ubongo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2185,7 +2185,7 @@ GameObject:
   - component: {fileID: 3996590094413921267}
   m_Layer: 10
   m_Name: PuzzlePieceCollider
-  m_TagString: UbongoCol
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2407,7 +2407,7 @@ GameObject:
   - component: {fileID: 1994294291498406592}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Ubongo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2524,7 +2524,7 @@ GameObject:
   - component: {fileID: 6621581962106772927}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Ubongo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2783,7 +2783,7 @@ GameObject:
   - component: {fileID: 739739649299906419}
   m_Layer: 0
   m_Name: PuzzlePieceGrab
-  m_TagString: Ubongo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3079,7 +3079,7 @@ GameObject:
   - component: {fileID: 6847345122953077816}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Ubongo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

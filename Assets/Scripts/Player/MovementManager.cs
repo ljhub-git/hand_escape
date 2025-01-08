@@ -125,8 +125,14 @@ public class MovementManager : MonoBehaviour
             {
                 if (rocketCubeGo)
                 {
-                    rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
-                    rocketCube.ParentNull(); // 자식 해제
+                    if (!rocketCube.IsChangedGravityListClear()) // 중력을 비활성화 했음을 확인하는 리스트가 남아있다면
+                    {
+                        rocketCube.UseGravity(); // 비활성화 중력 재활성화
+                    }
+                    if (rocketCube.transform.childCount > 0)
+                    {
+                        rocketCube.ParentNull(); // 자식 해제
+                    }
                     Destroy(rocketCubeGo); // 로켓 큐브 파괴
                     rocketCubeGo = null;  // 널로 설정
                 }
@@ -235,8 +241,14 @@ public class MovementManager : MonoBehaviour
                     {
                         if (rocketCubeGo)
                         {
-                            rocketCube.ParentNull(); // 자식 해제
-                            rocketCube.UseGravity(); // 중력을 해제 했었다면 활성화
+                            if (!rocketCube.IsChangedGravityListClear()) // 중력을 비활성화 했음을 확인하는 리스트가 남아있다면
+                            {
+                                rocketCube.UseGravity(); // 비활성화 중력 재활성화
+                            }
+                            if (rocketCube.transform.childCount > 0)
+                            {
+                                rocketCube.ParentNull(); // 자식 해제
+                            }
                             Destroy(rocketCubeGo); // 로켓 큐브 파괴
                             rocketCubeGo = null;  // 널로 설정
                         }
