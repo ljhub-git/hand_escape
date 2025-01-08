@@ -1637,6 +1637,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 17643794}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
+      propertyPath: puzzleMapping.Array.data[3].puzzleObject
+      value: 
+      objectReference: {fileID: 17643794}
+    - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[0].reactiveObjects.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1649,6 +1653,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
+      propertyPath: puzzleMapping.Array.data[3].reactiveObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: 'puzzleMapping.Array.data[0].reactiveObjects.Array.data[0]'
       value: 
       objectReference: {fileID: 155164387}
@@ -1658,6 +1666,10 @@ PrefabInstance:
       objectReference: {fileID: 1683750781}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: 'puzzleMapping.Array.data[2].reactiveObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1649237297}
+    - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
+      propertyPath: 'puzzleMapping.Array.data[3].reactiveObjects.Array.data[0]'
       value: 
       objectReference: {fileID: 1649237297}
     m_RemovedComponents: []
