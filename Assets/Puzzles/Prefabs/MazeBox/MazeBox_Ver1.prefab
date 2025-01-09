@@ -150,9 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDelta: 0.01
-  onBallPuzzleComplete:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &4138383577573247893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -483,15 +480,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19
+      value: 20.710617
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.85
+      value: 0.9493655
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -11.168079
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1366,6 +1363,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 469886688024873991, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3643521771536632680}
+    - targetCorrespondingSourceObject: {fileID: 469886688024873991, guid: 67dbe489668bec64289698982e25c34c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4417212414486037903}
   m_SourcePrefab: {fileID: 100100000, guid: 67dbe489668bec64289698982e25c34c, type: 3}
 --- !u!4 &2286240971035525930 stripped
 Transform:
@@ -1526,3 +1526,15 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!114 &4417212414486037903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4605812994414741394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274a93bf4ab7bd34d9948e00de441252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

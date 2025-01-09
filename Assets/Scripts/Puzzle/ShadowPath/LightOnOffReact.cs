@@ -5,11 +5,11 @@ public class LightOnOffReact : PuzzleReactObject
     [SerializeField]
     private GameObject lightObj = null;
 
-    private bool isLightOn = false;
+    public bool isLightOn = false;
 
-    public bool IsLightOn
+    private void Start()
     {
-        get { return isLightOn; }
+        lightObj.SetActive(isLightOn);
     }
 
     public override void OnPuzzleSolved()
@@ -19,5 +19,15 @@ public class LightOnOffReact : PuzzleReactObject
         isLightOn = true;
 
         lightObj.SetActive(true);
+    }
+
+    public override void OnPuzzleReset()
+    {
+        base.OnPuzzleReset();
+
+        isLightOn = false;
+
+        lightObj.SetActive(false);
+
     }
 }

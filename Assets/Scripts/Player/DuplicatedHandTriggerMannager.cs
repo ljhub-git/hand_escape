@@ -8,12 +8,12 @@ using Photon.Pun;
 
 public class DuplicatedTriggerHandMannager : MonoBehaviour
 {
-    public TextMeshPro TextMeshPro;
-
     [SerializeField]
     private HandCorrectCheck leftHandPuzzleObj = null;
     [SerializeField]
     private HandCorrectCheck rightHandPuzzleObj = null;
+    [SerializeField]
+    private LightOnOffReact lightOnOff = null;
 
     private bool R_HandTrigger;
     private bool L_HandTrigger;
@@ -21,21 +21,11 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
     private int rightHandLayer = 0;
     private int leftHandLayer = 0;
 
-    //private HandCheckTrigger leftHandCheck = null;
-    //private HandCheckTrigger rightHandCheck = null;
-
     private NetworkObjectManager networkObjectMng = null;
-
-    private LightOnOffReact lightOnOff = null;
-
-    //public bool R_HandCorrect { get; set; }
-    //public bool L_HandCorrect { get; set; }
 
     private void Awake()
     {
         networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
-
-        lightOnOff = GetComponent<LightOnOffReact>();
     }
 
     private void Start()
@@ -82,7 +72,7 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
             return;
         }
 
-        if (lightOnOff && L_HandTrigger)
+        if (lightOnOff.isLightOn && L_HandTrigger)
         {
             // TextMeshPro.text = ("GOOD!");
             leftHandPuzzleObj.SolvePuzzle();
@@ -101,7 +91,7 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
             return;
         }
 
-        if (lightOnOff && R_HandTrigger)
+        if (lightOnOff.isLightOn && R_HandTrigger)
         {
             // TextMeshPro.text = ("GOOD!");
             rightHandPuzzleObj.SolvePuzzle();
