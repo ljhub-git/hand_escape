@@ -13,6 +13,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private NetworkPlayerSpawner playerSpawner = null;
     private NetworkObjectManager networkObjectMng = null;
 
+    public bool IsMaster
+    {
+        get { return PhotonNetwork.IsMasterClient; }
+    }
+
     public string NickName
     {
         get

@@ -13,7 +13,7 @@ public class DestinationTrigger : MonoBehaviour
     {
         if (other.GetComponent<PlayerManager>() != null)
         {
-            gameMng.LoadNextLevel();
+            gameMng.OnPlayerEnteredDestination();
         }
     }
 }
