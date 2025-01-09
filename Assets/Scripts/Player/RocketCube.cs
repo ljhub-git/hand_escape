@@ -30,6 +30,11 @@ public class RocketCube : MonoBehaviour
     private void OnTriggerEnter(Collider other) // 트리거 발생하면
     {
         Debug.Log("Rocket Cube OnTriggerEnter");
+        if (iscatched == true)
+        {
+            Debug.Log("isCatched is true");
+            return;
+        }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics"))
         {
@@ -48,7 +53,7 @@ public class RocketCube : MonoBehaviour
             {
                 currentParent = currentParent.parent; //부모 재정의
             }
-            if (currentParent.parent.GetComponent<MazeBoxManager>() != null)
+            if (currentParent.parent && currentParent.parent.GetComponent<MazeBoxManager>() != null)
             {
                 currentParent = currentParent.parent; //부모 재정의                
             }
@@ -96,9 +101,9 @@ public class RocketCube : MonoBehaviour
     }
     public void ParentNull() // 자식을 자식이 아닌 상태로 만들기
     {
-        if (catchedObject != null)
+        if (catchedObject != null)  // catchedObject가 null이 아닌지 확인
         {
-            catchedObject.transform.SetParent(null);
+            catchedObject.transform.SetParent(null); // 부모를 null로 설정
         }
     }
     public bool IsChangedGravityListClear()
@@ -143,4 +148,5 @@ public class RocketCube : MonoBehaviour
     {
         return catcherPosition;
     }
+    
 }
