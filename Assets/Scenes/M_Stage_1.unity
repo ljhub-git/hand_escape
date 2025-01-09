@@ -5001,8 +5001,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -7875,15 +7875,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2530489414377163258, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9550002
+      value: 2.029
       objectReference: {fileID: 0}
     - target: {fileID: 2530489414377163258, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09000003
+      value: 0.1071
       objectReference: {fileID: 0}
     - target: {fileID: 2530489414377163258, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.199
+      value: -2.18
       objectReference: {fileID: 0}
     - target: {fileID: 2658058283197990104, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: m_Name
