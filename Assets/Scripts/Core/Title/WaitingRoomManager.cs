@@ -3,7 +3,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 using Photon.Pun;
 
-public class WaitingRoomManager : MonoBehaviour
+public class WaitingRoomManager : MonoBehaviourPun
 {
     [SerializeField]
     private PlayerReadyUI[] ui_PlayerReadyArr;
@@ -18,27 +18,39 @@ public class WaitingRoomManager : MonoBehaviour
             TogglePlayerReady(0);
         else
             TogglePlayerReady(1);
-
-        // networkMng.LoadScene("S_Stage1Door");
-        // networkMng.LoadScene("S_Stage3Hand");
     }
 
     private void TogglePlayerReady(int _playerInd)
     {
+        photonView.RPC("RPC_PlayerReady", RpcTarget.All, _playerInd);
+
+        // photonView.RPC()
+
         isPlayersReadyArr[_playerInd] = !isPlayersReadyArr[_playerInd];
 
         // UI
         ui_PlayerReadyArr[_playerInd].ToggleReady();
 
-        // 플레이어들의 준비 여부를 확인하고 모두 준비중이지 않으면 이 함수를 종료한다.
-        //foreach (var isReady in isPlayersReadyArr)
-        //{
-        //    if (!isReady)
-        //        return;
-        //}
-
         // 모든 플레이어가 준비됐음. 레벨 1 씬으로 넘어감.
-        networkMng.LoadScene("M_Stage_2");
+        // networkMng.LoadScene("M_Stage_1");
+    }
+
+    [PunRPC]
+    public void RPC_PlayerReady(int _playerInd)
+    {
+        isPlayersReadyArr[_playerInd] = !isPlayersReadyArr[_playerInd];
+        ui_PlayerReadyArr[_playerInd].ToggleReady();
+
+        if(PhotonNetwork.IsMasterClient)
+        {
+            foreach (var isReady in isPlayersReadyArr)
+            {
+                if (!isReady)
+                    return;
+            }
+
+            networkMng.LoadScene("S_Stage1");
+        }
     }
 
     private void SetNicknameUIs()
