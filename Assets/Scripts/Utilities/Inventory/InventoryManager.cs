@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
+
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
     public InventoryUI inventoryUI;
 
     private bool isInventoryOpen = false;
+
+    private NetworkObjectManager networkObjectMng = null;
 
     // InventoryItem 리스트 추가
     private List<InventoryItem> inventoryItems = new List<InventoryItem>();
@@ -21,6 +25,8 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(gameObject); // 이미 존재하는 경우 삭제
         }
+
+        networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
     }
 
     private void OnDestroy()
@@ -79,8 +85,20 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventoryItem != null && inventoryItem.ItemInfo != null)
         {
+            var itemInfo = inventoryItem.ItemInfo;
+
             // 씬으로 아이템을 배치하고, UI에서 삭제
-            inventoryItem.ItemInfo.gameObject.SetActive(true);
+            itemInfo.gameObject.SetActive(true);
+            itemInfo.transform.position = transform.position;
+
+            // 만약 네트워크 오브젝트 매니저가 있다면 네트워크 오브젝트 매니저를 통해서 다른 클라이언트에게도 이에 대해서 알린다.
+            if (networkObjectMng != null)
+            {
+                PhotonView view = itemInfo.GetComponent<PhotonView>();
+                networkObjectMng.SetObjectPosition(view, transform.position);
+                networkObjectMng.SetObjectActive(view, true);
+            }
+
             //inventoryItem.ItemInfo.transform.position = new Vector3(0, 1, 0); // 원하는 위치에 배치
             RemoveItemFromInventory(inventoryItem); // UI에서 아이템 삭제
         }

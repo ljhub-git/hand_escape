@@ -129,17 +129,38 @@ public class MovementManager : MonoBehaviour
                     {
                         rocketCube.UseGravity(); // 비활성화 중력 재활성화
                     }
-                    if (rocketCube.transform.childCount > 0)
+                    if (rocketCube.transform.childCount > 3)
                     {
                         rocketCube.ParentNull(); // 자식 해제
                     }
+                    if (rocketCube.transform.childCount == 3)
+                    {
+                        Destroy(rocketCubeGo); // 로켓 큐브 파괴
+                        rocketCubeGo = null;  // 널로 설정
+                    }
+                }
+                StopCoroutine(rocketMoveCoroutine);
+                rocketMoveCoroutine = null;
+                RocketPunchReady(_rocketMoveSpeed);
+                return;
+            }
+            if (rocketCubeGo && rocketCube.isFired == false)
+            {
+                if (!rocketCube.IsChangedGravityListClear()) // 중력을 비활성화 했음을 확인하는 리스트가 남아있다면
+                {
+                    rocketCube.UseGravity(); // 비활성화 중력 재활성화
+                }
+                if (rocketCube.transform.childCount > 3)
+                {
+                    rocketCube.ParentNull(); // 자식 해제
+                }
+                if (rocketCube.transform.childCount == 3)
+                {
                     Destroy(rocketCubeGo); // 로켓 큐브 파괴
                     rocketCubeGo = null;  // 널로 설정
                 }
-                StopCoroutine(rocketMoveCoroutine);
             }
-
-        rocketMoveCoroutine = StartCoroutine(RocketMoveCo(_rocketMoveSpeed));
+            rocketMoveCoroutine = StartCoroutine(RocketMoveCo(_rocketMoveSpeed));
         }
     }
     public void RocketPunchUnreadyR()
@@ -245,12 +266,14 @@ public class MovementManager : MonoBehaviour
                             {
                                 rocketCube.UseGravity(); // 비활성화 중력 재활성화
                             }
-                            if (rocketCube.transform.childCount > 0)
+                            if (rocketCube.transform.childCount > 3)
                             {
                                 rocketCube.ParentNull(); // 자식 해제
                             }
-                            Destroy(rocketCubeGo); // 로켓 큐브 파괴
-                            rocketCubeGo = null;  // 널로 설정
+                            if (rocketCube.transform.childCount == 3)
+                            {
+                                Destroy(rocketCubeGo); // 로켓 큐브 파괴
+                            }
                         }
                     }
                     t += Time.deltaTime;

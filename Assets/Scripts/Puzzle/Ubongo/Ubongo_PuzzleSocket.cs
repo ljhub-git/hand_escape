@@ -70,7 +70,15 @@ public class Ubongo_PuzzleSocket : MonoBehaviour
     {
         if (other.CompareTag("Ubongo"))
         {
-            transform.rotation = GetNearestOrthogonalRotation(other.transform.rotation);
+            //transform.rotation = GetNearestOrthogonalRotation(other.transform.rotation);
+            // 'this' 객체의 현재 회전과 'other' 객체의 상대 회전 구하기
+            Quaternion relativeRotation = Quaternion.Inverse(transform.rotation) * other.transform.rotation;
+
+            // 상대 회전값을 가장 가까운 90도 직교 회전으로 맞춤
+            Quaternion nearestRotation = GetNearestOrthogonalRotation(relativeRotation);
+
+            // 'this' 객체의 회전에 상대 회전을 적용
+            transform.rotation = transform.rotation * nearestRotation;
         }
     }
     private void OnTriggerExit(Collider other)

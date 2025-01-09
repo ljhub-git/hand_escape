@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class Miniature : MonoBehaviour
+public class Miniature : PuzzleObject
 {
     [SerializeField] private Transform target;
     [SerializeField] private float snapThreshold = 30f;
@@ -24,6 +23,12 @@ public class Miniature : MonoBehaviour
     private Rigidbody rb;
 
     public bool isInteractable = true;
+
+    public override void SolvePuzzle()
+    {
+        MakeDisable();
+        base.SolvePuzzle();
+    }
 
     private void Start()
     {
@@ -49,8 +54,8 @@ public class Miniature : MonoBehaviour
         // 스냅 각도가 유효하면 SmoothRotation 실행
         if (snappedAngle >= 0 && rotationCoroutine == null)
         {
-            rotationCoroutine = 
-                StartCoroutine(MiniatureRotation.CaseRotation(this, snappedAngle));
+            rotationCoroutine =
+                StartCoroutine(CaseRotation(this, snappedAngle));
         }
     }
 
@@ -82,6 +87,40 @@ public class Miniature : MonoBehaviour
 
         rb.isKinematic = true;
         isInteractable = false;
+    }
+
+    public IEnumerator CaseRotation(Miniature miniature, float targetYRotation)
+    {
+        Transform transform = miniature.transform;
+        Rigidbody rb = miniature.GetRigidbody();
+        float startRotation = transform.eulerAngles.y;
+        float timeElapsed = 0f;
+
+        if (rb != null) rb.isKinematic = true;
+
+        while (timeElapsed < 1f)
+        {
+            timeElapsed += Time.deltaTime * miniature.GetRotationSpeed();
+            float smoothedYRotation = Mathf.LerpAngle(startRotation, targetYRotation, timeElapsed);
+            transform.eulerAngles = new Vector3(0, smoothedYRotation, 0);
+
+            yield return null;
+        }
+
+        miniature.TriggerTransparency();
+
+        yield return new WaitForSeconds(1f);
+
+        if (rb != null) rb.isKinematic = false;
+        miniature.SetRotationCoroutine(null);
+
+
+        // 정답!
+        if (Mathf.Approximately(targetYRotation, 90f))
+        {
+            // Coroutine syncCoroutine = miniature.StartCoroutine(MiniatureSync.SyncTransform(miniature, 90f));
+            SolvePuzzle();
+        }
     }
 
     public Transform GetTarget() => target;

@@ -28,11 +28,15 @@ public class ToggleTransformSync : MonoBehaviourPun
 
     private IEnumerator TransformSyncCoroutine()
     {
+        if(_networkObjectMng == null)
+        {
+            Debug.LogWarning("networkObjectManager is null!");
+            yield break;
+        }
+
         while(true)
         {
-            // OnTransformSync.Invoke();
-
-            _networkObjectMng?.SetObjectTransform(photonView, transform);
+            _networkObjectMng.SetObjectTransform(photonView, transform);
 
             yield return null;
         }
