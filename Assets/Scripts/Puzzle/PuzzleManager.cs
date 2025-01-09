@@ -53,7 +53,10 @@ public class PuzzleManager : MonoBehaviour
 
             reactToSolve.OnPuzzleSolved();
 
-            networkObjectManager.CallOnPuzzleSolvedToOthers(reactToSolve.GetComponent<PhotonView>());
+            if(networkObjectManager != null)
+            {
+                networkObjectManager.CallOnPuzzleSolvedToOthers(reactToSolve.GetComponent<PhotonView>());
+            }
         }
     }
 

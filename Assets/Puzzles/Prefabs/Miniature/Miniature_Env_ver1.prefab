@@ -891,5 +891,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9031910573712310017, guid: 2dc51b8344ac2af4e964f180ef36112c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6508741579708719949}
   m_SourcePrefab: {fileID: 100100000, guid: 2dc51b8344ac2af4e964f180ef36112c, type: 3}
+--- !u!1 &1566526589758992998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9031910573712310017, guid: 2dc51b8344ac2af4e964f180ef36112c, type: 3}
+  m_PrefabInstance: {fileID: 7560032437590199655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6508741579708719949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566526589758992998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6959a9895aee14eba202c4dd370754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObj: {fileID: 7889124738889631404}
+  goalAngle: 90
+  rotateTime: 5
+--- !u!1 &7889124738889631404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 401220952777411531, guid: 2dc51b8344ac2af4e964f180ef36112c, type: 3}
+  m_PrefabInstance: {fileID: 7560032437590199655}
+  m_PrefabAsset: {fileID: 0}
