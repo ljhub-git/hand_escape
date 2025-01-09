@@ -100,7 +100,11 @@ public class NetworkObjectManager : MonoBehaviourPun
     public void DestroyObject(PhotonView _view)
     {
         if (!IsViewValid(_view))
+        {
+            Debug.Log("view is not valid!");
             return;
+        }
+
 
         PhotonNetwork.Destroy(_view);
     }

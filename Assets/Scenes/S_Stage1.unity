@@ -271,6 +271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MazeBox_Ver1
       objectReference: {fileID: 0}
+    - target: {fileID: 7683435269955793848, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+      propertyPath: sceneViewId
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
