@@ -11,9 +11,10 @@ public abstract class PuzzleObject : MonoBehaviour
 
     public virtual void ResetPuzzle()
     {
-        if (puzzleMng != null)
+        if (puzzleMng == null)
         {
             Debug.LogWarning("Puzzle Manager is not exist in hierarchy!");
+            return;
         }
 
         puzzleMng.OnResetPuzzle(this);
@@ -21,9 +22,10 @@ public abstract class PuzzleObject : MonoBehaviour
 
     public virtual void SolvePuzzle()
     {
-        if(puzzleMng != null)
+        if(puzzleMng == null)
         {
             Debug.LogWarning("Puzzle Manager is not exist in hierarchy!");
+            return;
         }
 
         puzzleMng.OnSolvePuzzle(this);
