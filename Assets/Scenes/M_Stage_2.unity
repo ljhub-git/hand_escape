@@ -8421,7 +8421,7 @@ PrefabInstance:
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[3].puzzleObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 522691222}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[4].puzzleObject
       value: 
