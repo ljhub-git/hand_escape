@@ -484,6 +484,7 @@ MonoBehaviour:
   rotationSpeed: 5
   targetAlpha: 0.3
   fadeDuration: 0.2
+  isInteractable: 1
 --- !u!1 &2954572689213871427
 GameObject:
   m_ObjectHideFlags: 0
