@@ -38,7 +38,7 @@ public class WaitingRoomManager : MonoBehaviour
         //}
 
         // 모든 플레이어가 준비됐음. 레벨 1 씬으로 넘어감.
-        networkMng.LoadScene("S_Stage1Door");
+        networkMng.LoadScene("M_Stage_2");
     }
 
     private void SetNicknameUIs()

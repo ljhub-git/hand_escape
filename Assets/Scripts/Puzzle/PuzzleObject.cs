@@ -11,11 +11,13 @@ public abstract class PuzzleObject : MonoBehaviour
 
     public virtual void ResetPuzzle()
     {
-
+        if (puzzleMng != null)
+            puzzleMng.OnResetPuzzle(this);
     }
 
     public virtual void SolvePuzzle()
     {
-        puzzleMng?.OnSolvePuzzle(this);
+        if(puzzleMng != null)
+            puzzleMng.OnSolvePuzzle(this);
     }
 }

@@ -12,8 +12,8 @@ public class MazeBoxManager : PuzzleObject
 
     public override void SolvePuzzle()
     {
-        StartCoroutine(SpawnBallCoroutine());
         base.SolvePuzzle();
+        StartCoroutine(SpawnBallCoroutine());
     }
 
     private void Start()

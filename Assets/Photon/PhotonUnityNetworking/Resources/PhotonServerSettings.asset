@@ -47,6 +47,7 @@ MonoBehaviour:
   - RPC_ResetObjectMap
   - RPC_SetActive
   - RPC_AddObjectToMap
+  - RPC_PuzzleReset
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
