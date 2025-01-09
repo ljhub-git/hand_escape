@@ -480,15 +480,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.710617
+      value: -12.4
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9493655
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.168079
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1366,6 +1366,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 469886688024873991, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4417212414486037903}
+    - targetCorrespondingSourceObject: {fileID: 469886688024873991, guid: 67dbe489668bec64289698982e25c34c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7683435269955793848}
   m_SourcePrefab: {fileID: 100100000, guid: 67dbe489668bec64289698982e25c34c, type: 3}
 --- !u!4 &2286240971035525930 stripped
 Transform:
@@ -1538,3 +1541,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a93bf4ab7bd34d9948e00de441252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7683435269955793848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4605812994414741394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

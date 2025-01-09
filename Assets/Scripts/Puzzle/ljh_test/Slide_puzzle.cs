@@ -261,9 +261,26 @@ public class Slide_puzzle : MonoBehaviour
         }
     }
 
+    private void cheatkey()
+    {
+        slide_Puzzle_Manager.SolvePuzzle();
+        OnDestroy();
+    }
+
+
     private void OnDestroy()
     {
         Destroy(puzzleParent);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("l"))
+        {
+            Debug.Log("¾å»ðÇÑ³ð");
+            cheatkey();
+        }
+            
     }
 
 }
