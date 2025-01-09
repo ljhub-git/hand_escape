@@ -5455,7 +5455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1455018794182820270, guid: 0177ee00efab698438288ebb753747ce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.002
+      value: 0.0087
       objectReference: {fileID: 0}
     - target: {fileID: 1455018794182820270, guid: 0177ee00efab698438288ebb753747ce, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7693,6 +7693,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2530489414377163258, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.9550002
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530489414377163258, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.09000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530489414377163258, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.199
+      objectReference: {fileID: 0}
     - target: {fileID: 2658058283197990104, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: m_Name
       value: Ubongo_Puzzle
@@ -7717,10 +7729,34 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6384223563418020075, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384223563418020075, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.135
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384223563418020075, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.45
+      objectReference: {fileID: 0}
     - target: {fileID: 6752805767314841991, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 11635a95861f03f4584821b6dfb4ef01, type: 2}
+    - target: {fileID: 8405495972518436048, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.989
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405495972518436048, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405495972518436048, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.935
+      objectReference: {fileID: 0}
     - target: {fileID: 8427221085146598678, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: m_IsActive
       value: 0
