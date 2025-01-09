@@ -47,6 +47,16 @@ public class NetworkObjectManager : MonoBehaviourPun
         photonView.RPC("RPC_PuzzleSolved", RpcTarget.Others, id);
     }
 
+    public void CallOnPuzzleResetToOthers(PhotonView _view)
+    {
+        if (!IsViewValid(_view) || _view.GetComponent<PuzzleReactObject>() == null)
+            return;
+
+        int id = _view.ViewID;
+
+        photonView.RPC("RPC_PuzzleReset", RpcTarget.Others, id);
+    }
+
     public void SetObjectTransform(PhotonView _view, Transform _tr)
     {
         if (!IsViewValid(_view))
@@ -195,6 +205,26 @@ public class NetworkObjectManager : MonoBehaviourPun
         if (reactObj != null)
         {
             reactObj.OnPuzzleSolved();
+        }
+    }
+
+    [PunRPC]
+    private void RPC_PuzzleReset(int _viewId)
+    {
+        PhotonView view = PhotonNetwork.GetPhotonView(_viewId);
+
+        if (view == null)
+        {
+            Debug.LogWarningFormat("{0} view is not exist in Scene!", _viewId);
+
+            return;
+        }
+
+        PuzzleReactObject reactObj = view.GetComponent<PuzzleReactObject>();
+
+        if (reactObj != null)
+        {
+            reactObj.OnPuzzleReset();
         }
     }
 

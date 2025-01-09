@@ -31,7 +31,12 @@ public class MenuManager : MonoBehaviour
             isLogin = true;
         }
 
-        FindAnyObjectByType<NetworkManager>().OnPlayerSpawned += SetPositionSource;
+        NetworkManager networkManager = FindAnyObjectByType<NetworkManager>();
+
+        if (networkManager != null)
+        {
+            networkManager.OnPlayerSpawned += SetPositionSource;
+        }
 
         // 게임 오디오의 초기 볼륨을 슬라이더 값에 맞게 설정
         //soundSlider.value = gameAudio.volume;
