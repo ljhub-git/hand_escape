@@ -6,6 +6,7 @@ public class MenuManager : MonoBehaviour
     public GameObject loginUI;
     public GameObject menuUI;   // 메인 메뉴 (Resume, Option, Quit)
     public GameObject optionUI; // 옵션 메뉴 (슬라이더, 뒤로가기 버튼)
+    public GameObject checkUI;
 
     //public Slider soundSlider;    // 사운드 슬라이더
     //public AudioSource gameAudio; // 게임의 오디오 소스 (사운드 효과 조정용)
@@ -48,12 +49,10 @@ public class MenuManager : MonoBehaviour
         if (!isLogin)
         //if (!titleSceneManager.isLogin)
         {
-            Debug.Log("333");
             loginUI.SetActive(false);
             menuUI.SetActive(true);   // 메인 메뉴 활성화
             optionUI.SetActive(false); // 옵션 메뉴 비활성화
         }
-        Debug.Log("111");
         OpenMenuIngame();
     }
 
@@ -80,6 +79,11 @@ public class MenuManager : MonoBehaviour
         menuUI.SetActive(false);  // 메인 메뉴 비활성화
     }
 
+    public void Check()
+    {
+        menuUI.SetActive(false);
+        checkUI.SetActive(true);
+    }
     // 게임 종료
     public void QuitGame()
     {
@@ -96,7 +100,6 @@ public class MenuManager : MonoBehaviour
 
     public void OpenMenuIngame()
     {
-        Debug.Log("222");
         menuUI.SetActive(true);
         optionUI.SetActive(false);
 
