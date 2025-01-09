@@ -54,13 +54,13 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
         {
             // rightHandCheck = null;
             R_HandTrigger = false;
-            rightHandPuzzleObj.ResetPuzzle();
+            ResetRightHand();
         }
         if (other.gameObject.layer == leftHandLayer)
         {
             // leftHandCheck = null;
             L_HandTrigger = false;
-            leftHandPuzzleObj.ResetPuzzle();
+            ResetLeftHand();
         }
     }
 
@@ -93,13 +93,34 @@ public class DuplicatedTriggerHandMannager : MonoBehaviour
 
         if (lightOnOff.isLightOn && R_HandTrigger)
         {
-            // TextMeshPro.text = ("GOOD!");
             rightHandPuzzleObj.SolvePuzzle();
         }
         else
         {
             rightHandPuzzleObj.ResetPuzzle();
         }
+    }
+
+    public void ResetLeftHand()
+    {
+        if (leftHandPuzzleObj == null)
+        {
+            Debug.LogWarning("Left Hand Puzzle is null!");
+            return;
+        }
+
+        leftHandPuzzleObj.ResetPuzzle();
+    }
+
+    public void ResetRightHand()
+    {
+        if (rightHandPuzzleObj == null)
+        {
+            Debug.LogWarning("Right Hand Puzzle is null!");
+            return;
+        }
+
+        rightHandPuzzleObj.ResetPuzzle();
     }
 
     //public void CheckAllHands()
