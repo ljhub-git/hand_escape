@@ -256,7 +256,7 @@ public class Slide_puzzle : MonoBehaviour
             {
                 Debug.Log("정답입니다");
                 slide_Puzzle_Manager.SolvePuzzle();
-                //OnDestroy();
+                OnDestroy();
             }
         }
     }
