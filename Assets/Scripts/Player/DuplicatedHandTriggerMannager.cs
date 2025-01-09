@@ -6,46 +6,54 @@ using TMPro;
 
 using Photon.Pun;
 
-public class DuplicatedTriggerHandMannager : PuzzleObject
+public class DuplicatedTriggerHandMannager : MonoBehaviour
 {
     public TextMeshPro TextMeshPro;
 
-    public bool R_HandTrigger;
-    public bool L_HandTrigger;
+    [SerializeField]
+    private HandCorrectCheck leftHandPuzzleObj = null;
+    [SerializeField]
+    private HandCorrectCheck rightHandPuzzleObj = null;
 
-    public bool R_HandCorrect { get; set; }
-    public bool L_HandCorrect { get; set; }
+    private bool R_HandTrigger;
+    private bool L_HandTrigger;
 
     private int rightHandLayer = 0;
     private int leftHandLayer = 0;
 
-    public HandCheckTrigger leftHandCheck = null;
-    public HandCheckTrigger rightHandCheck = null;
+    //private HandCheckTrigger leftHandCheck = null;
+    //private HandCheckTrigger rightHandCheck = null;
 
     private NetworkObjectManager networkObjectMng = null;
 
     private LightOnOffReact lightOnOff = null;
 
+    //public bool R_HandCorrect { get; set; }
+    //public bool L_HandCorrect { get; set; }
+
+    private void Awake()
+    {
+        networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
+
+        lightOnOff = GetComponent<LightOnOffReact>();
+    }
+
     private void Start()
     {
         rightHandLayer = LayerMask.NameToLayer("Right Hand Check");
         leftHandLayer = LayerMask.NameToLayer("Left Hand Check");
-
-        networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
-
-        lightOnOff = GetComponent<LightOnOffReact>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == rightHandLayer)
         {
-            rightHandCheck = other.GetComponent<HandCheckTrigger>();
+            // rightHandCheck = other.GetComponent<HandCheckTrigger>();
             R_HandTrigger = true;
         }
         if (other.gameObject.layer == leftHandLayer)
         {
-            leftHandCheck = other.GetComponent<HandCheckTrigger>();
+            // leftHandCheck = other.GetComponent<HandCheckTrigger>();
             L_HandTrigger = true;
         }
     }
@@ -54,26 +62,66 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
     {
         if (other.gameObject.layer == rightHandLayer)
         {
-            rightHandCheck = null;
+            // rightHandCheck = null;
             R_HandTrigger = false;
+            rightHandPuzzleObj.ResetPuzzle();
         }
         if (other.gameObject.layer == leftHandLayer)
         {
-            leftHandCheck = null;
+            // leftHandCheck = null;
             L_HandTrigger = false;
+            leftHandPuzzleObj.ResetPuzzle();
         }
     }
 
-    public void CheckAllHands()
+    public void CheckLeftHand()
     {
-        if (lightOnOff && R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
+        if(leftHandPuzzleObj == null)
+        {
+            Debug.LogWarning("Left Hand Puzzle is null!");
+            return;
+        }
+
+        if (lightOnOff && L_HandTrigger)
         {
             // TextMeshPro.text = ("GOOD!");
-            SolvePuzzle();
+            leftHandPuzzleObj.SolvePuzzle();
         }
         else
         {
-            ResetPuzzle();
+            leftHandPuzzleObj.ResetPuzzle();
         }
     }
+
+    public void CheckRightHand()
+    {
+        if (rightHandPuzzleObj == null)
+        {
+            Debug.LogWarning("Right Hand Puzzle is null!");
+            return;
+        }
+
+        if (lightOnOff && R_HandTrigger)
+        {
+            // TextMeshPro.text = ("GOOD!");
+            rightHandPuzzleObj.SolvePuzzle();
+        }
+        else
+        {
+            rightHandPuzzleObj.ResetPuzzle();
+        }
+    }
+
+    //public void CheckAllHands()
+    //{
+    //    if (lightOnOff && R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
+    //    {
+    //        // TextMeshPro.text = ("GOOD!");
+    //        SolvePuzzle();
+    //    }
+    //    else
+    //    {
+    //        ResetPuzzle();
+    //    }
+    //}
 }

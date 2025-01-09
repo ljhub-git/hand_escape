@@ -8,4 +8,11 @@ public class PuzzleReact_SetActive : PuzzleReactObject
 
         gameObject.SetActive(true);
     }
+
+    public override void OnPuzzleReset()
+    {
+        base.OnPuzzleSolved();
+
+        gameObject.SetActive(false);
+    }
 }
