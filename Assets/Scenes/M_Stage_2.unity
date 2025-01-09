@@ -7347,7 +7347,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2162519676626303268, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1577929549}
+    - targetCorrespondingSourceObject: {fileID: 2930034386814685972, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1577929548}
   m_SourcePrefab: {fileID: 100100000, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
 --- !u!114 &1577929544 stripped
 MonoBehaviour:
@@ -7365,6 +7371,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 195449654201412601, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
   m_PrefabInstance: {fileID: 1577929543}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1577929546 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2930034386814685972, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+  m_PrefabInstance: {fileID: 1577929543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1577929547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2162519676626303268, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+  m_PrefabInstance: {fileID: 1577929543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1577929548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577929546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dcba4b1ca4cf0a48900155728ea1201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XRGrabInteractable: {fileID: 0}
+  itemColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1577929549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577929547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dcba4b1ca4cf0a48900155728ea1201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XRGrabInteractable: {fileID: 0}
+  itemColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1621196476
 GameObject:
   m_ObjectHideFlags: 0

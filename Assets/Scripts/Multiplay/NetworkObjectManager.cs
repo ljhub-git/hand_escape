@@ -94,7 +94,7 @@ public class NetworkObjectManager : MonoBehaviourPun
 
         int id = _view.ViewID;
 
-        photonView.RPC("RPC_SetActive", RpcTarget.All, id, _active);
+        photonView.RPC("RPC_SetActive", RpcTarget.Others, id, _active);
     }
 
     public void DestroyObject(PhotonView _view)
