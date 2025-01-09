@@ -6,84 +6,45 @@ using TMPro;
 
 using Photon.Pun;
 
-public class DuplicatedTriggerHandMannager : PuzzleObject
+public class DuplicatedTriggerHandMannager : MonoBehaviour
 {
-
-    public GameObject duplicatedHandR;
-    public GameObject duplicatedHandL;
-
-    public TextMeshPro TextMeshPro;
-
-    public bool R_HandTrigger;
-    public bool L_HandTrigger;
-
     [SerializeField]
-    private HandShadowSync handShadowSync = null;
+    private HandCorrectCheck leftHandPuzzleObj = null;
+    [SerializeField]
+    private HandCorrectCheck rightHandPuzzleObj = null;
+    [SerializeField]
+    private LightOnOffReact lightOnOff = null;
 
-    public bool R_HandCorrect { get; set; }
-    public bool L_HandCorrect { get; set; }
+    private bool R_HandTrigger;
+    private bool L_HandTrigger;
 
     private int rightHandLayer = 0;
     private int leftHandLayer = 0;
 
-    private HandCheckTrigger leftHandCheck = null;
-    private HandCheckTrigger rightHandCheck = null;
-
     private NetworkObjectManager networkObjectMng = null;
+
+    private void Awake()
+    {
+        networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
+    }
 
     private void Start()
     {
-        duplicatedHandR?.SetActive(false);
-        duplicatedHandL?.SetActive(false);
-
         rightHandLayer = LayerMask.NameToLayer("Right Hand Check");
         leftHandLayer = LayerMask.NameToLayer("Left Hand Check");
-
-        networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == rightHandLayer)
         {
-            rightHandCheck = other.GetComponent<HandCheckTrigger>();
+            // rightHandCheck = other.GetComponent<HandCheckTrigger>();
             R_HandTrigger = true;
         }
         if (other.gameObject.layer == leftHandLayer)
         {
-            leftHandCheck = other.GetComponent<HandCheckTrigger>();
+            // leftHandCheck = other.GetComponent<HandCheckTrigger>();
             L_HandTrigger = true;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.layer == rightHandLayer)
-        {
-            if(R_HandCorrect)
-            {
-                //duplicatedHandR?.SetActive(true);
-                SetShowingDuplicatedHand(true, false);
-            }
-            else
-            {
-                //duplicatedHandR?.SetActive(false);
-                SetShowingDuplicatedHand(false, false);
-            }
-        }
-
-        if (other.gameObject.layer == leftHandLayer)
-        {
-            if (L_HandCorrect)
-            {
-                //duplicatedHandL?.SetActive(true);
-                SetShowingDuplicatedHand(true, true);
-            }
-            else
-            {
-                //duplicatedHandL?.SetActive(false);
-                SetShowingDuplicatedHand(false, true);
-            }
         }
     }
 
@@ -91,57 +52,66 @@ public class DuplicatedTriggerHandMannager : PuzzleObject
     {
         if (other.gameObject.layer == rightHandLayer)
         {
-            rightHandCheck = null;
+            // rightHandCheck = null;
             R_HandTrigger = false;
-            //duplicatedHandR?.SetActive(true);
-            SetShowingDuplicatedHand(false, false);
+            rightHandPuzzleObj.ResetPuzzle();
         }
         if (other.gameObject.layer == leftHandLayer)
         {
-            leftHandCheck = null;
-            //L_HandTrigger = false;
-            SetShowingDuplicatedHand(false, true);
+            // leftHandCheck = null;
+            L_HandTrigger = false;
+            leftHandPuzzleObj.ResetPuzzle();
         }
     }
 
-    private void SetShowingDuplicatedHand(bool _show, bool _isLeftHand)
+    public void CheckLeftHand()
     {
-        if (networkObjectMng == null)
+        if(leftHandPuzzleObj == null)
         {
-            Debug.LogWarning("NetworkObjectManager is null!");
+            Debug.LogWarning("Left Hand Puzzle is null!");
             return;
         }
 
-        if(_isLeftHand)
+        if (lightOnOff.isLightOn && L_HandTrigger)
         {
-            if (_show && duplicatedHandL.activeInHierarchy) 
-                return;
-
-            networkObjectMng.SetObjectActive(duplicatedHandL.GetComponent<PhotonView>(), _show);
+            // TextMeshPro.text = ("GOOD!");
+            leftHandPuzzleObj.SolvePuzzle();
         }
         else
         {
-            if (_show && duplicatedHandR.activeInHierarchy) 
-                return;
-
-            networkObjectMng.SetObjectActive(duplicatedHandR.GetComponent<PhotonView>(), _show);
+            leftHandPuzzleObj.ResetPuzzle();
         }
     }
 
-    //private void HandSync()
-    //{
-    //    if (handShadowSync == null)
-    //        return;
-
-    //    handShadowSync.SyncHand()
-    //}
-
-    public void CheckAllHands()
+    public void CheckRightHand()
     {
-        if (R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
+        if (rightHandPuzzleObj == null)
         {
-            TextMeshPro.text = ("GOOD!");
-            SolvePuzzle();
+            Debug.LogWarning("Right Hand Puzzle is null!");
+            return;
+        }
+
+        if (lightOnOff.isLightOn && R_HandTrigger)
+        {
+            // TextMeshPro.text = ("GOOD!");
+            rightHandPuzzleObj.SolvePuzzle();
+        }
+        else
+        {
+            rightHandPuzzleObj.ResetPuzzle();
         }
     }
+
+    //public void CheckAllHands()
+    //{
+    //    if (lightOnOff && R_HandTrigger && L_HandTrigger && R_HandCorrect && L_HandCorrect)
+    //    {
+    //        // TextMeshPro.text = ("GOOD!");
+    //        SolvePuzzle();
+    //    }
+    //    else
+    //    {
+    //        ResetPuzzle();
+    //    }
+    //}
 }
