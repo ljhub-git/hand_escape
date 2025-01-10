@@ -171,29 +171,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3643521771536632680, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
-      propertyPath: m_Colliders.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4605812994414741394, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
       propertyPath: m_Name
       value: MazeBox_Ver1
       objectReference: {fileID: 0}
     - target: {fileID: 7650109329131997927, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
       propertyPath: sceneViewId
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7683435269955793848, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
       propertyPath: sceneViewId
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8260041986324713125, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 17643791}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
 --- !u!114 &17643788 stripped
 MonoBehaviour:
@@ -206,11 +199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &17643789 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8260041986324713125, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
-  m_PrefabInstance: {fileID: 17643787}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &17643790 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1444265653045012816, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
@@ -222,13 +210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d3e0fc48d1db44883254e027a0ded5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &17643791
+--- !u!114 &17643791 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2887314938702177322, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+  m_PrefabInstance: {fileID: 17643787}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17643789}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93c7a8fd285af694b892f8574cf9c786, type: 3}
@@ -2910,6 +2897,10 @@ PrefabInstance:
     - target: {fileID: 2999930658603056672, guid: 368a5541c4469c84c8b4dc4b2da3634d, type: 3}
       propertyPath: m_Name
       value: (Prb)SeparatorDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154107890128671954, guid: 368a5541c4469c84c8b4dc4b2da3634d, type: 3}
+      propertyPath: sceneViewId
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
