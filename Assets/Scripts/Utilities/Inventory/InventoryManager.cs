@@ -12,11 +12,14 @@ public class InventoryManager : MonoBehaviour
 
     private NetworkObjectManager networkObjectMng = null;
 
+    public Transform position;
+
     // InventoryItem 리스트 추가
     private List<InventoryItem> inventoryItems = new List<InventoryItem>();
 
     private void Awake()
     {
+
         if (instance == null)
         {
             instance = this; // Singleton 설정
@@ -27,6 +30,10 @@ public class InventoryManager : MonoBehaviour
         }
 
         networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
+
+        inventoryUI = FindAnyObjectByType<InventoryUI>(FindObjectsInactive.Include);
+
+        inventoryUI.positionSource = position;
     }
 
     private void OnDestroy()

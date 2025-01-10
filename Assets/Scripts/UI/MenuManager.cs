@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
+    private MenuUI menuUIParent = null;
     public GameObject loginUI;
     public GameObject menuUI;   // 메인 메뉴 (Resume, Option, Quit)
     public GameObject optionUI; // 옵션 메뉴 (슬라이더, 뒤로가기 버튼)
@@ -23,37 +24,31 @@ public class MenuManager : MonoBehaviour
 
     private Transform positionSource;
 
-    // Start는 초기화 작업을 하는 함수
-    void Start()
+    private void Awake()
     {
-        if (loginUI == null)
-        {
-            //테스트용 할당
-            isLogin = true;
-        }
+        menuPosition = FindAnyObjectByType<MenuUI>().transform;
 
-        NetworkManager networkManager = FindAnyObjectByType<NetworkManager>();
+        menuUIParent = FindAnyObjectByType<MenuUI>();
+        menuUI = menuUIParent._menuUI;
+        optionUI = menuUIParent._optionUI;
+        checkUI = menuUIParent._checkUI;
 
-        if (networkManager != null)
-        {
-            networkManager.OnPlayerSpawned += SetPositionSource;
-        }
-
-        // 게임 오디오의 초기 볼륨을 슬라이더 값에 맞게 설정
-        //soundSlider.value = gameAudio.volume;
+        positionSource = transform;
     }
+
 
     // 메인 메뉴로 이동
     public void ShowMainMenu()
     {
-        if (!isLogin)
-        //if (!titleSceneManager.isLogin)
-        {
-            loginUI.SetActive(false);
-            menuUI.SetActive(true);   // 메인 메뉴 활성화
-            optionUI.SetActive(false); // 옵션 메뉴 비활성화
-            return;
-        }
+        Debug.Log("111");
+        //if (!isLogin)
+        ////if (!titleSceneManager.isLogin)
+        //{
+        //    loginUI.SetActive(false);
+        //    menuUI.SetActive(true);   // 메인 메뉴 활성화
+        //    optionUI.SetActive(false); // 옵션 메뉴 비활성화
+        //    return;
+        //}
         OpenMenuIngame();
     }
 
@@ -117,11 +112,5 @@ public class MenuManager : MonoBehaviour
         menuPosition.transform.position = kbPos;
         menuPosition.transform.LookAt(Camera.main.transform.position);
         menuPosition.transform.Rotate(Vector3.up, 180.0f);
-
-    }
-
-    public void SetPositionSource()
-    {
-        positionSource = Camera.main.transform;
     }
 }
