@@ -1541,6 +1541,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 33378110165808497, guid: 980a2d0cf2ab65c48b74ffa75e57d374, type: 3}
   m_PrefabInstance: {fileID: 312571442}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &312571444 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7553568305580635503, guid: 980a2d0cf2ab65c48b74ffa75e57d374, type: 3}
+  m_PrefabInstance: {fileID: 312571442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &312571445 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3778413663644875700, guid: 980a2d0cf2ab65c48b74ffa75e57d374, type: 3}
+  m_PrefabInstance: {fileID: 312571442}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &321881393
 GameObject:
   m_ObjectHideFlags: 0
@@ -9375,16 +9385,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 33378110165808497, guid: 980a2d0cf2ab65c48b74ffa75e57d374, type: 3}
   m_PrefabInstance: {fileID: 1476973496}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1476973498 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7553568305580635503, guid: 980a2d0cf2ab65c48b74ffa75e57d374, type: 3}
-  m_PrefabInstance: {fileID: 1476973496}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1476973499 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3778413663644875700, guid: 980a2d0cf2ab65c48b74ffa75e57d374, type: 3}
-  m_PrefabInstance: {fileID: 1476973496}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1478273914
 GameObject:
   m_ObjectHideFlags: 0
@@ -10314,11 +10314,11 @@ PrefabInstance:
     - target: {fileID: 2800046763573032150, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
       propertyPath: 'spawnPoints.Array.data[0]'
       value: 
-      objectReference: {fileID: 1476973499}
+      objectReference: {fileID: 312571445}
     - target: {fileID: 2800046763573032150, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
       propertyPath: 'spawnPoints.Array.data[1]'
       value: 
-      objectReference: {fileID: 1476973498}
+      objectReference: {fileID: 312571444}
     - target: {fileID: 3102630773838325235, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
       propertyPath: sceneViewId
       value: 3
