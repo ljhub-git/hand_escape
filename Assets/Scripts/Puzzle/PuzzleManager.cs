@@ -39,7 +39,7 @@ public class PuzzleManager : MonoBehaviour
 
         if (reactComps == null)
         {
-            Debug.Log("No puzzle react!");
+            Debug.LogWarning("Puzzle React list is null.");
             return;
         }
 
@@ -48,6 +48,7 @@ public class PuzzleManager : MonoBehaviour
         {
             if (reactToSolve == null)
             {
+                Debug.LogWarning("Puzzle react is null.");
                 return;
             }
 
@@ -67,7 +68,7 @@ public class PuzzleManager : MonoBehaviour
 
         if (reactComps == null)
         {
-            Debug.Log("No puzzle react!");
+            Debug.LogWarning("Puzzle React list is null.");
             return;
         }
 
@@ -76,6 +77,7 @@ public class PuzzleManager : MonoBehaviour
         {
             if (reactToReset == null)
             {
+                Debug.LogWarning("Puzzle react is null.");
                 return;
             }
 

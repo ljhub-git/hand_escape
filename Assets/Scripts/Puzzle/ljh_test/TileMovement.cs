@@ -15,7 +15,6 @@ public class TileMovement : MonoBehaviour
     public delegate void DelegateOnTileInPlace(TileMovement tm);
     public DelegateOnTileInPlace onTileInPlace;
 
-
     private Jigsaw_PuzzleManager puzzleManager;  // PuzzleManager ÂüÁ¶
 
     void Start()
@@ -33,7 +32,7 @@ public class TileMovement : MonoBehaviour
 
     private Vector3 GetCorrectPosition()
     {
-        return new Vector3(tile.xIndex * Tile.tileSize, tile.yIndex * Tile.tileSize, 0f);
+        return new Vector3(tile.xIndex * Tile.tileSize * BoardGen.puzzle_Scale, tile.yIndex * Tile.tileSize * BoardGen.puzzle_Scale, 0f);
     }
 
     private void OnMouseDown()

@@ -13,6 +13,7 @@ public class PuzzleReact_SetActiveAndAudioPlay : PuzzleReactObject
         Debug.Log("½ÇÇàµÊ");
         gameObject.SetActive(true);
         audiosource.Play();
+        audiosource = null;
     }
 
     public override void OnPuzzleReset()

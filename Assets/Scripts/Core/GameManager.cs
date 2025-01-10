@@ -31,18 +31,22 @@ public class GameManager : MonoBehaviourPun
 
     public void LoadNextLevel()
     {
-        networkMng.LoadScene(nextLevelName);
+        if(PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.DestroyAll();
+            networkMng.LoadScene(nextLevelName);
+        }
     }
 
     public void OnPlayerEnteredDestination()
     {
         if(networkMng.IsMaster)
         {
-            photonView.RPC("RPC_OnPlayerEnterDest", RpcTarget.All, true);
+            photonView.RPC("RPC_OnPlayerEnterDest", RpcTarget.MasterClient, true);
         }
         else
         {
-            photonView.RPC("RPC_OnPlayerEnterDest", RpcTarget.All, false);
+            photonView.RPC("RPC_OnPlayerEnterDest", RpcTarget.MasterClient, false);
         }
     }
 
@@ -50,54 +54,44 @@ public class GameManager : MonoBehaviourPun
     {
         if(networkMng.IsMaster)
         {
-            photonView.RPC("RPC_OnPlayerExitDest", RpcTarget.All, true);
+            photonView.RPC("RPC_OnPlayerExitDest", RpcTarget.MasterClient, true);
         }
         else
         {
-            photonView.RPC("RPC_OnPlayerExitDest", RpcTarget.All, false);
+            photonView.RPC("RPC_OnPlayerExitDest", RpcTarget.MasterClient, false);
         }
     }
 
     [PunRPC]
-    public void RPC_OnPlayerEnterDest(bool _isMaster)
+    public void RPC_OnPlayerEnterDest(int _idx)
     {
-        if(_isMaster)
+        playerReady[_idx] = true;
+
+        foreach (var ready in playerReady)
         {
-            playerReady[0] = true;
-        }
-        else
-        {
-            playerReady[1] = true;
+            if (!ready)
+                return;
         }
 
-
-        if (networkMng.IsMaster)
-        {
-            foreach (var ready in playerReady)
-            {
-                if (!ready)
-                    return;
-            }
-
-            LoadNextLevel();
-        }
+        LoadNextLevel();
     }
 
     [PunRPC]
-    public void RPC_OnPlayerExitDest(bool _isMaster)
+    public void RPC_OnPlayerExitDest(int _idx)
     {
-        if (_isMaster)
-        {
-            playerReady[0] = false;
-        }
-        else
-        {
-            playerReady[1] = false;
-        }
+        playerReady[_idx] = false;
     }
 
     private void Awake()
     {
         networkMng = FindAnyObjectByType<NetworkManager>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            LoadNextLevel();
+        }
     }
 }

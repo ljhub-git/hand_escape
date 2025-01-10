@@ -24,6 +24,8 @@ public class Tile
     // The size of our jigsaw tile.
     public static int tileSize = 100;
 
+    public float tile_Scale = 1f;
+
     // The line renderers for all directions and types.
     private Dictionary<(Direction, PosNegType), LineRenderer> mLineRenderers
       = new Dictionary<(Direction, PosNegType), LineRenderer>();
@@ -57,6 +59,15 @@ public class Tile
 
     public int xIndex = 0;
     public int yIndex = 0;
+
+    public float GetTileScale()
+    {
+        return tile_Scale;
+    }
+    public void SetTileScale(float puzzleScale)
+    {
+        tile_Scale = puzzleScale;
+    }
 
     // For tiles sorting.
     public static TilesSorting tilesSorting = new TilesSorting();
@@ -336,7 +347,7 @@ public class Tile
         return pts;
     }
 
-    public void DrawCurve(Direction dir, PosNegType type, UnityEngine.Color color)
+    public void DrawCurve(Direction dir, PosNegType type, Color color)
     {
         if (!mLineRenderers.ContainsKey((dir, type)))
         {

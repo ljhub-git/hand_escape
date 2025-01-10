@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoardGen : MonoBehaviour
@@ -15,6 +13,11 @@ public class BoardGen : MonoBehaviour
     GameObject mGameObjectTransparent;
 
     public float ghostTransparency = 0.1f;
+
+    public static float puzzle_Scale;
+    [SerializeField] 
+    private float puzzle_Scale_Instance = 0.5f;
+
 
     public int numTileX { get; private set; }
     public int numTileY { get; private set; }
@@ -76,8 +79,13 @@ public class BoardGen : MonoBehaviour
         return sprite;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnValidate()
+    { // 인스턴스 변수의 값을 static 변수에 동기화
+      puzzle_Scale = puzzle_Scale_Instance; 
+    }
+
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
     {
 
         mBaseSpriteOpaque = LoadBaseTexture();
@@ -91,6 +99,10 @@ public class BoardGen : MonoBehaviour
         mGameObjectTransparent.name = imageFilename + "_Opaque";
         mGameObjectTransparent.AddComponent<SpriteRenderer>().sprite = mBaseSpriteTransparent;
         mGameObjectTransparent.GetComponent<SpriteRenderer>().sortingLayerName = "Transparent";
+        mGameObjectTransparent.transform.localScale = new Vector3(
+            mGameObjectTransparent.transform.localScale.x * puzzle_Scale,
+            mGameObjectTransparent.transform.localScale.y * puzzle_Scale,
+            mGameObjectTransparent.transform.localScale.z * puzzle_Scale);
 
         mGameObjectQpaque.gameObject.SetActive(false);
 
@@ -141,94 +153,6 @@ public class BoardGen : MonoBehaviour
         Camera.main.transform.position = new Vector3(mBaseSpriteOpaque.texture.width / 2, mBaseSpriteOpaque.texture.height / 2, -650.0f);
         Camera.main.orthographicSize = mBaseSpriteOpaque.texture.width / 2;
     }
-
-    //public static Mesh CreateMeshFromSprite(Sprite sprite, float thickness = 0.1f)
-    //{
-
-    //    Mesh mesh = new Mesh();
-    //    Vector3[] vertices2D = Array.ConvertAll(sprite.vertices, v => new Vector3(v.x, v.y, 0));
-
-    //    // 상단(face) 메쉬
-    //    List<Vector3> vertices3D = new List<Vector3>();
-    //    List<int> triangles = new List<int>();
-    //    List<Vector2> uv = new List<Vector2>();  // UV 좌표 리스트 추가
-
-    //    foreach (var vert in vertices2D) // 앞면
-    //    {
-    //        vertices3D.Add(vert);
-    //    }
-    //    foreach (var vert in vertices2D) // 뒷면
-    //    {
-    //        vertices3D.Add(new Vector3(vert.x, vert.y, -thickness));
-    //    }
-
-    //    // 삼각형 설정
-    //    for (int i = 0; i < sprite.triangles.Length; i += 3)
-    //    {
-    //        triangles.Add(sprite.triangles[i]);  // 첫 번째, 세 번째, 두 번째 순서로 변경
-    //        triangles.Add(sprite.triangles[i + 1]);
-    //        triangles.Add(sprite.triangles[i + 2]);
-    //    }
-
-
-    //    // UV 좌표 설정
-    //    for (int i = 0; i < sprite.uv.Length; i++)
-    //    {
-    //        uv.Add(sprite.uv[i]);
-    //    }
-
-    //    // UV 좌표는 두 면 모두 동일하게 설정
-    //    for (int i = 0; i < sprite.uv.Length; i++)
-    //    {
-    //        uv.Add(sprite.uv[i]);
-    //    }
-
-
-    //    mesh.vertices = vertices3D.ToArray();
-    //    mesh.triangles = triangles.ToArray();
-    //    mesh.uv = uv.ToArray();  // UV 좌표를 메쉬에 설정
-    //    mesh.RecalculateNormals();
-
-    //    return mesh;
-    //}
-
-    //public static GameObject CreateGameObjectFromTile(Tile tile)
-    //{
-    //    GameObject obj = new GameObject();
-    //    obj.name = "TileGameObe_" + tile.xIndex + "_" + tile.yIndex;
-    //    obj.transform.position = new Vector3(tile.xIndex * Tile.tileSize, tile.yIndex * Tile.tileSize, 0.0f);
-
-    //    // SpriteRenderer를 제거하고 MeshFilter와 MeshRenderer 추가
-    //    MeshRenderer meshRenderer = obj.AddComponent<MeshRenderer>();
-    //    MeshFilter meshFilter = obj.AddComponent<MeshFilter>();
-
-    //    // Sprite에서 Mesh로 변환 (SpriteUtils의 CreateSpriteFromTexture2D를 사용)
-    //    Sprite sprite = SpriteUtils.CreateSpriteFromTexture2D(
-    //        tile.finalCut,
-    //        0,
-    //        0,
-    //        Tile.padding * 2 + Tile.tileSize,
-    //        Tile.padding * 2 + Tile.tileSize
-    //    );
-
-    //    // 생성된 Sprite를 사용하여 Mesh 생성
-    //    Mesh tileMesh = CreateMeshFromSprite(sprite);  // 이 함수는 sprite를 Mesh로 변환하는 함수 (아래 참조)
-    //    meshFilter.mesh = tileMesh;
-
-    //    // Material 설정 (Sprite용 기본 셰이더 사용)
-    //    Material material = new Material(Shader.Find("Sprites/Default"));
-    //    material.mainTexture = sprite.texture;  // Sprite의 텍스처를 Material에 설정
-    //    meshRenderer.material = material;
-
-    //    // BoxCollider 3D 추가
-    //    BoxCollider box = obj.AddComponent<BoxCollider>();
-
-    //    TileMovement tileMovement = obj.AddComponent<TileMovement>();
-    //    tileMovement.tile = tile;
-
-    //    return obj;
-    //}
-
     public static Mesh CreateMeshFromSprite(Sprite sprite, float thickness = 0.1f)
     {
         Mesh mesh = new Mesh();
@@ -316,6 +240,7 @@ public class BoardGen : MonoBehaviour
     public static GameObject CreateGameObjectFromTile(Tile tile)
     {
         GameObject obj = new GameObject();
+
         obj.name = "TileGameObe_" + tile.xIndex + "_" + tile.yIndex;
         obj.transform.position = new Vector3(tile.xIndex * Tile.tileSize, tile.yIndex * Tile.tileSize, 0.0f);
 
@@ -389,6 +314,16 @@ public class BoardGen : MonoBehaviour
             {
                 mTiles[i, j] = CreateTile(i, j, baseTexture);
                 mTileGameObjects[i, j] = CreateGameObjectFromTile(mTiles[i, j]);
+                
+                mTileGameObjects[i, j].transform.localPosition =
+                    new Vector3(mTileGameObjects[i, j].transform.localPosition.x * puzzle_Scale,
+                    mTileGameObjects[i, j].transform.localPosition.y * puzzle_Scale,
+                    mTileGameObjects[i, j].transform.localPosition.z * puzzle_Scale);
+
+                mTileGameObjects[i, j].transform.localScale =
+                    new Vector3(mTileGameObjects[i, j].transform.localScale.x * puzzle_Scale,
+                    mTileGameObjects[i, j].transform.localScale.y * puzzle_Scale,
+                    mTileGameObjects[i, j].transform.localScale.z * puzzle_Scale);
 
                 // 타일을 PuzzleManager에 등록
                 TileMovement tileMovement = mTileGameObjects[i, j].GetComponent<TileMovement>();
