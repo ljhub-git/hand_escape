@@ -940,6 +940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 1909176616}
+  position: {fileID: 0}
 --- !u!4 &269333184
 Transform:
   m_ObjectHideFlags: 0
@@ -1193,6 +1194,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65303254702179264, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726752832479399448, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1053114841079392216, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
@@ -1250,13 +1255,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 65303254702179264, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 328983725}
   m_SourcePrefab: {fileID: 100100000, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
 --- !u!4 &328983723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1053114841079392216, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
   m_PrefabInstance: {fileID: 328983722}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &328983724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 65303254702179264, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
+  m_PrefabInstance: {fileID: 328983722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &328983725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328983724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8107c6c473b11469a0d74e75db760a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &333943149
 GameObject:
   m_ObjectHideFlags: 0
@@ -6611,6 +6636,7 @@ MonoBehaviour:
   m_MinDistance: 0.5
   distance: 0.5
   verticalOffset: -0.3
+  positionSource: {fileID: 0}
 --- !u!65 &1909176617
 BoxCollider:
   m_ObjectHideFlags: 0
