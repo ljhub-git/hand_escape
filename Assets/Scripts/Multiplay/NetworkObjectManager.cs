@@ -3,6 +3,8 @@ using UnityEngine;
 
 using Photon.Pun;
 using Photon.Realtime;
+using ExitGames.Client.Photon;
+using System.Collections;
 
 public class NetworkObjectManager : MonoBehaviourPun
 {
@@ -14,6 +16,40 @@ public class NetworkObjectManager : MonoBehaviourPun
 
     [SerializeField]
     private GameObject[] runtimeInstantiatePrefabs;
+
+    [SerializeField]
+    private GameObject[] viewErrorObjects;
+
+    public void SyncInGameManagerViewID()
+    {
+        if (PhotonNetwork.IsMasterClient == false)
+        {
+            throw new System.Exception("Only Master CLient can send sync manager view ID event.");
+        }
+
+        foreach(var obj in viewErrorObjects)
+        {
+            PhotonView targetView = obj.GetComponent<PhotonView>();
+
+            if (targetView != null && PhotonNetwork.AllocateViewID(targetView))
+            {
+                object content = new object[] {
+                    targetView.ViewID,
+                };
+
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions()
+                {
+                    Receivers = ReceiverGroup.Others,
+                };
+
+                PhotonNetwork.RaiseEvent(6, content, raiseEventOptions, SendOptions.SendReliable);
+            }
+            else
+            {
+                throw new System.Exception("Failed allocate View ID");
+            }
+        }
+    }
 
     public void InitPrefabPool()
     {
@@ -40,7 +76,9 @@ public class NetworkObjectManager : MonoBehaviourPun
     public void CallOnPuzzleSolvedToOthers(PhotonView _view)
     {
         if (!IsViewValid(_view) || _view.GetComponent<PuzzleReactObject>() == null)
+        {
             return;
+        }
 
         int id = _view.ViewID;
 
