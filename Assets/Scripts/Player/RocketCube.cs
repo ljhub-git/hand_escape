@@ -53,11 +53,11 @@ public class RocketCube : MonoBehaviour
             {
                 currentParent = currentParent.parent; //부모 재정의
             }
-            if (currentParent.parent && currentParent.parent.GetComponent<MazeBoxManager>() != null)
-            {
-                currentParent = currentParent.parent; //부모 재정의                
-            }
-            if (currentParent.parent == null || currentParent.parent.GetComponent<PuzzleObject>()) // 부모가 없거나 부모에 퍼즐 오브젝트가 있으면
+                //if (currentParent.parent && currentParent.parent.GetComponent<MazeBoxManager>() != null) //mazeboxmanager삭제
+                //{
+                //    currentParent = currentParent.parent; //부모 재정의                
+                //}
+                if (currentParent.parent == null || currentParent.parent.GetComponent<PuzzleObject>()) // 부모가 없거나 부모에 퍼즐 오브젝트가 있으면
             {
                 finalParent = currentParent; // 최상위 부모 재정의
                 finalParent.transform.SetParent(transform);// 객체를 자식으로 바꿈

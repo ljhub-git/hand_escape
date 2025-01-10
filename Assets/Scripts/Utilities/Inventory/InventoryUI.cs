@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
@@ -23,7 +24,19 @@ public class InventoryUI : MonoBehaviour
     public float distance = 0.3f;
     public float verticalOffset = -0.2f;
 
-    public Transform positionSource;
+    private Transform positionSource;
+
+    void Start()
+    {
+        NetworkManager networkManager = FindAnyObjectByType<NetworkManager>();
+
+        if (networkManager != null)
+        {
+            networkManager.OnPlayerSpawned += SetPositionSource;
+        }
+
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -80,5 +93,10 @@ public class InventoryUI : MonoBehaviour
     {
         transform.LookAt(Camera.main.transform.position);
         transform.Rotate(Vector3.up, 180.0f);
+    }
+
+    public void SetPositionSource()
+    {
+        positionSource = Camera.main.transform;
     }
 }

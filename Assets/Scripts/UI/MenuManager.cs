@@ -52,6 +52,7 @@ public class MenuManager : MonoBehaviour
             loginUI.SetActive(false);
             menuUI.SetActive(true);   // 메인 메뉴 활성화
             optionUI.SetActive(false); // 옵션 메뉴 비활성화
+            return;
         }
         OpenMenuIngame();
     }
