@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b1841632cc8304f8dbd31346c51e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebugMode: 1
+  isDebugMode: 0
   ui_PlayerReadyArr:
   - {fileID: 1008899378}
   - {fileID: 1786061802}
