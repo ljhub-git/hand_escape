@@ -1,8 +1,14 @@
 using UnityEngine;
-public class UbongoKey_PuzzleManager : PuzzleObject
+public class UbongoKey_PuzzleManager : MonoBehaviour
 {
     [SerializeField] private int numOfComplete = 0;
     private int curComplete = 0;
+    private PuzzleObject puzzleObj = null;
+
+    private void Awake()
+    {
+        puzzleObj = GetComponent<PuzzleObject>();
+    }
 
     public void AddNumOfComplete()
     {
@@ -19,7 +25,7 @@ public class UbongoKey_PuzzleManager : PuzzleObject
     {
         if (curComplete >= numOfComplete)
         {
-            SolvePuzzle();
+            puzzleObj.SolvePuzzle();
         }
     }
 

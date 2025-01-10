@@ -271,6 +271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MazeBox_Ver1
       objectReference: {fileID: 0}
+    - target: {fileID: 7683435269955793848, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+      propertyPath: sceneViewId
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -291,6 +295,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 17643790}
   m_SourcePrefab: {fileID: 100100000, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+--- !u!114 &17643788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2236670031485873877, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+  m_PrefabInstance: {fileID: 17643787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17643791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &17643789 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8260041986324713125, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
@@ -386,6 +401,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d75cf5f961e324c9b6c0f6e46db1f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &88983582 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 296349550488914459, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+  m_PrefabInstance: {fileID: 17643787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17643791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3749419db2825a4d86c6ae3bf11103c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &149975260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -434,22 +460,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3676251652131789934, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
-      propertyPath: sceneViewId
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036120643573703765, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
-      propertyPath: sceneViewId
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7259405445673350612, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 7259405445673350612, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.39
-      objectReference: {fileID: 0}
     - target: {fileID: 7821090148944851156, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: m_Name
       value: Ubongo_Puzzle
@@ -457,14 +467,6 @@ PrefabInstance:
     - target: {fileID: 7842645896826204343, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: sceneViewId
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8165332428117991401, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.533
-      objectReference: {fileID: 0}
-    - target: {fileID: 8165332428117991401, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.504
       objectReference: {fileID: 0}
     - target: {fileID: 8598027819806822913, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: sceneViewId
@@ -1309,14 +1311,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 168524908749933864, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-      propertyPath: m_SelectMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 245815907629864766, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 350782619085055465, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.0810003
@@ -1359,27 +1353,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 452435018210150770, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
       propertyPath: sceneViewId
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 705411575113632287, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
       propertyPath: sceneViewId
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 928919187922801747, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2363330142012920362, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-      propertyPath: m_SelectMode
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2656521232075331184, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
       propertyPath: sceneViewId
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3405076914520625479, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-      propertyPath: m_SelectMode
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7000975521331308082, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
       propertyPath: m_Name
@@ -1388,32 +1370,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2446533214912907324, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 833719152}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
---- !u!1 &833719151 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2446533214912907324, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-  m_PrefabInstance: {fileID: 833719150}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &833719152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833719151}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcf1681f13070324c9ea0fcc08a02b38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  twoHandDistance: 1
-  minSpeedForDuplication: 2
-  grayColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  spawnDistanceFromCamera: 1
 --- !u!1 &850785209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,11 +1684,11 @@ PrefabInstance:
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[1].puzzleObject
       value: 
-      objectReference: {fileID: 1575956857}
+      objectReference: {fileID: 1575956858}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[2].puzzleObject
       value: 
-      objectReference: {fileID: 17643794}
+      objectReference: {fileID: 17643788}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[3].puzzleObject
       value: 
@@ -1745,7 +1703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[2].reactiveObjects.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[3].reactiveObjects.Array.size
@@ -1761,6 +1719,10 @@ PrefabInstance:
       objectReference: {fileID: 1683750781}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: 'puzzleMapping.Array.data[2].reactiveObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 88983582}
+    - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
+      propertyPath: 'puzzleMapping.Array.data[2].reactiveObjects.Array.data[1]'
       value: 
       objectReference: {fileID: 1649237297}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
@@ -2129,15 +2091,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 321881394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1575956857 stripped
+--- !u!114 &1575956858 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6469972707017822488, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6386649969624583963, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
   m_PrefabInstance: {fileID: 833719150}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bd148e5f3f726c47b117f75bc192a50, type: 3}
+  m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1609009986

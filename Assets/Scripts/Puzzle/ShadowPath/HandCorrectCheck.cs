@@ -1,9 +1,5 @@
 using UnityEngine;
 
-public class HandCorrectCheck : PuzzleObject
+public class HandCorrectCheck : MonoBehaviour
 {
-    public override void SolvePuzzle()
-    {
-        base.SolvePuzzle();
-    }
 }
