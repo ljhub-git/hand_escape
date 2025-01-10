@@ -766,7 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2797898638344587455}
   m_Layer: 0
-  m_Name: MazeBox_origin
+  m_Name: MazeBox99_origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
