@@ -10750,6 +10750,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 5239056889725007927, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5378961395691600886, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: isLightOn
       value: 0
@@ -10813,6 +10817,10 @@ PrefabInstance:
     - target: {fileID: 6504633314713029750, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: sceneViewId
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6504633314713029750, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
