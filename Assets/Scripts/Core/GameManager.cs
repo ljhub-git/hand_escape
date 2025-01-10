@@ -42,11 +42,11 @@ public class GameManager : MonoBehaviourPun
     {
         if(networkMng.IsMaster)
         {
-            photonView.RPC("RPC_OnPlayerEnterDest", RpcTarget.MasterClient, true);
+            photonView.RPC("RPC_OnPlayerEnterDest", RpcTarget.MasterClient, 0);
         }
         else
         {
-            photonView.RPC("RPC_OnPlayerEnterDest", RpcTarget.MasterClient, false);
+            photonView.RPC("RPC_OnPlayerEnterDest", RpcTarget.MasterClient, 1);
         }
     }
 
@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviourPun
     {
         if(networkMng.IsMaster)
         {
-            photonView.RPC("RPC_OnPlayerExitDest", RpcTarget.MasterClient, true);
+            photonView.RPC("RPC_OnPlayerExitDest", RpcTarget.MasterClient, 0);
         }
         else
         {
-            photonView.RPC("RPC_OnPlayerExitDest", RpcTarget.MasterClient, false);
+            photonView.RPC("RPC_OnPlayerExitDest", RpcTarget.MasterClient, 1);
         }
     }
 

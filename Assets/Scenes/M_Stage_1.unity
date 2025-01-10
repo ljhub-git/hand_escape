@@ -4541,6 +4541,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8195855870314513265, guid: c605a7faa93cb3543a2c5781fb50b305, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9204406534765539743, guid: c605a7faa93cb3543a2c5781fb50b305, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
