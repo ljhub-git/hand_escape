@@ -26,6 +26,11 @@ public class Miniature : MonoBehaviour
 
     public bool isInteractable = true;
 
+    private void Awake()
+    {
+        puzzleObj = GetComponent<PuzzleObject>();
+    }
+
     private void Start()
     {
         Renderer renderer = GetComponent<Renderer>();

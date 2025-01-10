@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 2678614212025041557}
   - component: {fileID: 9201482343564396992}
   - component: {fileID: 6345462386729417109}
+  - component: {fileID: 2879636746173679839}
   m_Layer: 0
   m_Name: Glass_Rotate
   m_TagString: Untagged
@@ -485,6 +486,18 @@ MonoBehaviour:
   targetAlpha: 0.3
   fadeDuration: 0.2
   isInteractable: 1
+--- !u!114 &2879636746173679839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2763410867743300543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2954572689213871427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,6 +3362,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8312440246117944418, guid: 348170a0ae1d6e9479c83499ec0cdb75, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8469865201787934778, guid: 348170a0ae1d6e9479c83499ec0cdb75, type: 3}
+      propertyPath: sceneViewId
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8502858409525242031, guid: 348170a0ae1d6e9479c83499ec0cdb75, type: 3}
