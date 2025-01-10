@@ -2525,7 +2525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &522691223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3393,6 +3393,10 @@ PrefabInstance:
     - target: {fileID: 4512113589427419424, guid: bb1d6330b8bb1124b99ab8e34a09bfc3, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871261791080925743, guid: bb1d6330b8bb1124b99ab8e34a09bfc3, type: 3}
+      propertyPath: sceneViewId
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6051141193062521404, guid: bb1d6330b8bb1124b99ab8e34a09bfc3, type: 3}
       propertyPath: nextLevelName
@@ -4799,6 +4803,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814351257}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &815518756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 815518758}
+  - component: {fileID: 815518757}
+  m_Layer: 0
+  m_Name: 'Jigsaw_PuzzleManager '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &815518757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815518756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600505c9df4961f4db8de9919e410a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &815518758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815518756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.107369, y: 3.420983, z: -20.440727}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &833327695
 GameObject:
   m_ObjectHideFlags: 0
@@ -10117,7 +10165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65303254702179264, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1053114841079392216, guid: ef9c1c4b1e49aed45b8046c432a31134, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12021,6 +12069,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 503874851122134821, guid: e2a10e8083e1fc145a5337c19834675c, type: 3}
   m_PrefabInstance: {fileID: 1886746646}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1908630616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1908630617}
+  m_Layer: 0
+  m_Name: tiles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1908630617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908630616}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2138317297}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1909176609
 GameObject:
   m_ObjectHideFlags: 0
@@ -12167,7 +12246,6 @@ MonoBehaviour:
   m_MinDistance: 0.5
   distance: 0.5
   verticalOffset: -0.3
-  positionSource: {fileID: 0}
 --- !u!65 &1909176617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13957,6 +14035,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 430736413}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2138317295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2138317297}
+  - component: {fileID: 2138317296}
+  m_Layer: 0
+  m_Name: 'BoardGen '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2138317296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138317295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df43b81c01c2374a8c04f41fb392857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageFilename: images/imagetest3
+  ghostTransparency: 0.1
+  puzzle_Scale_Instance: 0.001
+  parentForTiles: {fileID: 1908630617}
+  puzzleManager: {fileID: 815518757}
+  numRandomTiles: 2
+  randomTilePositions:
+  - {x: 20, y: 2, z: -17.8}
+  - {x: -2, y: 3, z: 0}
+--- !u!4 &2138317297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138317295}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.5, y: 1.5, z: -3.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1908630617}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &632264078716119240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14046,3 +14178,5 @@ SceneRoots:
   - {fileID: 1424736156}
   - {fileID: 522691224}
   - {fileID: 1825727979}
+  - {fileID: 815518758}
+  - {fileID: 2138317297}

@@ -86,11 +86,12 @@ public class BoardGen : MonoBehaviour
       puzzle_Scale = puzzle_Scale_Instance; 
     }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
 
         mBaseSpriteOpaque = LoadBaseTexture();
+        //완성그림(비활성화 시킬것)
         mGameObjectQpaque = new GameObject();
         mGameObjectQpaque.name = imageFilename + "_Opaque";
         mGameObjectQpaque.AddComponent<SpriteRenderer>().sprite = mBaseSpriteOpaque;
@@ -101,6 +102,11 @@ public class BoardGen : MonoBehaviour
         mGameObjectTransparent.name = imageFilename + "_Opaque";
         mGameObjectTransparent.AddComponent<SpriteRenderer>().sprite = mBaseSpriteTransparent;
         mGameObjectTransparent.GetComponent<SpriteRenderer>().sortingLayerName = "Transparent";
+        mGameObjectTransparent.transform.localPosition = new Vector3(
+            gameObject.transform.localPosition.x,
+            gameObject.transform.localPosition.y,
+            gameObject.transform.localPosition.z);
+
         mGameObjectTransparent.transform.localScale = new Vector3(
             mGameObjectTransparent.transform.localScale.x * puzzle_Scale,
             mGameObjectTransparent.transform.localScale.y * puzzle_Scale,
@@ -316,7 +322,7 @@ public class BoardGen : MonoBehaviour
                     }
 
                     mTileGameObjects[i, j].transform.localPosition =
-                        new Vector3(0,0,0 - (z * 0.1f));
+                        new Vector3(0,0,0 - (z * 0.0005f));
                     // 3D 타일 오브젝트의 자식으로 설정
                     mTileGameObjects[i, j].transform.SetParent(puzzle_Tile_3D.transform);
                 }
@@ -343,7 +349,7 @@ public class BoardGen : MonoBehaviour
                     int randomIndex = randomTileIndices.IndexOf(new Vector2Int(i, j));
                     if (randomIndex < randomTilePositions.Length)
                     {
-                        puzzle_Tile_3D.transform.position = randomTilePositions[randomIndex];
+                        puzzle_Tile_3D.transform.localPosition = randomTilePositions[randomIndex];
                     }
                     else
                     {
@@ -356,24 +362,24 @@ public class BoardGen : MonoBehaviour
                     tileMovement.DisableTileCollider();
                 }
 
-                // 랜덤하게 선택된 타일은 인스펙터에서 지정한 위치로 배치
-                if (randomTileIndices.Contains(new Vector2Int(i, j)))
-                {
-                    int randomIndex = randomTileIndices.IndexOf(new Vector2Int(i, j));
-                    if (randomIndex < randomTilePositions.Length)
-                    {
-                        puzzle_Tile_3D.transform.position = randomTilePositions[randomIndex];
-                    }
-                    else
-                    {
-                        Debug.LogError("randomTilePositions 배열의 길이가 충분하지 않습니다.");
-                    }
-                }
-                else
-                {
-                    // 비활성화된 타일은 이동 불가능
-                    tileMovement.DisableTileCollider();
-                }
+                ////랜덤하게 선택된 타일은 인스펙터에서 지정한 위치로 배치
+                //if (randomTileIndices.Contains(new Vector2Int(i, j)))
+                //{
+                //    int randomIndex = randomTileIndices.IndexOf(new Vector2Int(i, j));
+                //    if (randomIndex < randomTilePositions.Length)
+                //    {
+                //        puzzle_Tile_3D.transform.position = randomTilePositions[randomIndex];
+                //    }
+                //    else
+                //    {
+                //        Debug.LogError("randomTilePositions 배열의 길이가 충분하지 않습니다.");
+                //    }
+                //}
+                //else
+                //{
+                ////    비활성화된 타일은 이동 불가능
+                //    tileMovement.DisableTileCollider();
+                //}
 
                 yield return null;
             }
