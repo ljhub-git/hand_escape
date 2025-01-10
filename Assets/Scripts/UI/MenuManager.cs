@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    private MenuUI menuUIParent = null;
     public GameObject loginUI;
     public GameObject menuUI;   // 메인 메뉴 (Resume, Option, Quit)
     public GameObject optionUI; // 옵션 메뉴 (슬라이더, 뒤로가기 버튼)
@@ -20,35 +19,22 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float distance = 0.5f;
     [SerializeField] private float verticalOffset = 0.2f;
 
-    public Transform menuPosition;
+    public Transform menuUIPosition;
 
     private Transform positionSource;
-
-    private void Awake()
-    {
-        menuPosition = FindAnyObjectByType<MenuUI>().transform;
-
-        menuUIParent = FindAnyObjectByType<MenuUI>();
-        menuUI = menuUIParent._menuUI;
-        optionUI = menuUIParent._optionUI;
-        checkUI = menuUIParent._checkUI;
-
-        positionSource = transform;
-    }
 
 
     // 메인 메뉴로 이동
     public void ShowMainMenu()
     {
-        Debug.Log("111");
-        //if (!isLogin)
-        ////if (!titleSceneManager.isLogin)
-        //{
-        //    loginUI.SetActive(false);
-        //    menuUI.SetActive(true);   // 메인 메뉴 활성화
-        //    optionUI.SetActive(false); // 옵션 메뉴 비활성화
-        //    return;
-        //}
+        if (!isLogin)
+        //if (!titleSceneManager.isLogin)
+        {
+            loginUI.SetActive(false);
+            menuUI.SetActive(true);   // 메인 메뉴 활성화
+            optionUI.SetActive(false); // 옵션 메뉴 비활성화
+            return;
+        }
         OpenMenuIngame();
     }
 
@@ -92,12 +78,14 @@ public class MenuManager : MonoBehaviour
         //ShowMainMenu();
         menuUI.SetActive(true);   // 메인 메뉴 활성화
         optionUI.SetActive(false); // 옵션 메뉴 비활성화
+        checkUI.SetActive(false);
     }
 
     public void OpenMenuIngame()
     {
         menuUI.SetActive(true);
         optionUI.SetActive(false);
+        checkUI.SetActive(false);
 
         Vector3 direction = positionSource.forward;
         direction.y = 0;
@@ -109,8 +97,8 @@ public class MenuManager : MonoBehaviour
 
     public void RepositionMenu(Vector3 kbPos)
     {
-        menuPosition.transform.position = kbPos;
-        menuPosition.transform.LookAt(Camera.main.transform.position);
-        menuPosition.transform.Rotate(Vector3.up, 180.0f);
+        menuUIPosition.transform.position = kbPos;
+        menuUIPosition.transform.LookAt(Camera.main.transform.position);
+        menuUIPosition.transform.Rotate(Vector3.up, 180.0f);
     }
 }
