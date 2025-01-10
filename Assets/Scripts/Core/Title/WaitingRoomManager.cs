@@ -25,8 +25,6 @@ public class WaitingRoomManager : MonoBehaviourPun
 
     private void TogglePlayerReady(int _playerInd)
     {
-        photonView.RPC("RPC_PlayerReady", RpcTarget.All, _playerInd);
-
         isPlayersReadyArr[_playerInd] = !isPlayersReadyArr[_playerInd];
 
         // UI
@@ -37,6 +35,8 @@ public class WaitingRoomManager : MonoBehaviourPun
             PhotonNetwork.DestroyAll();
             networkMng.LoadScene("S_Stage1");
         }
+
+        photonView.RPC("RPC_PlayerReady", RpcTarget.Others, _playerInd);
     }
 
     [PunRPC]
@@ -54,7 +54,7 @@ public class WaitingRoomManager : MonoBehaviourPun
             }
 
             PhotonNetwork.DestroyAll();
-            networkMng.LoadScene("S_Stage1");
+            networkMng.LoadScene("M_Stage_1");
         }
     }
 

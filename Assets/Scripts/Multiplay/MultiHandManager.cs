@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Hands;
 
 public class MultiHandManager : MonoBehaviour
@@ -55,6 +56,8 @@ public class MultiHandManager : MonoBehaviour
             component.enabled = false;
         }
 
+        var headTrackedPoseDriver = GetComponentInChildren<TrackedPoseDriver>();
+        headTrackedPoseDriver.enabled = false;
     }
 
     public void HiddenHandMesh()

@@ -271,9 +271,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageFilename: images/imagetest3
   ghostTransparency: 0.1
+  puzzle_Scale_Instance: 0.2
   parentForTiles: {fileID: 1525335357}
   puzzleManager: {fileID: 2118946608}
   numRandomTiles: 2
+  randomTilePositions:
+  - {x: -20, y: 10, z: 0}
+  - {x: -40, y: 20, z: 0}
 --- !u!4 &786294618
 Transform:
   m_ObjectHideFlags: 0
@@ -575,7 +579,7 @@ Transform:
   m_GameObject: {fileID: 2118946607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.49289, y: 415.81818, z: 139.58418}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
