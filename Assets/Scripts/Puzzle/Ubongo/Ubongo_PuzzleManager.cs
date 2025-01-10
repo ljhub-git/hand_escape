@@ -2,12 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Ubongo_PuzzleManager : PuzzleObject
+public class Ubongo_PuzzleManager : MonoBehaviour
 {
     [SerializeField] private int numOfComplete = 0;
     private int curComplete = 0;
     public bool isEnd = false;
     private List<Ubongo_PuzzleSocket> puzzleSocketList;
+
+    private PuzzleObject puzzleObj = null;
+
+    private void Awake()
+    {
+        puzzleObj = GetComponent<PuzzleObject>();
+    }
 
     private void Start()
     {
@@ -34,7 +41,7 @@ public class Ubongo_PuzzleManager : PuzzleObject
         if (curComplete >= numOfComplete && isEnd)
         {
             //onPuzzleComplete.Invoke();
-            SolvePuzzle();
+            puzzleObj.SolvePuzzle();
             Debug.Log("Complete");
         }
     }

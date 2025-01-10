@@ -24,14 +24,16 @@ public class PuzzleReact_MazeBox : PuzzleReactObject
 
     private IEnumerator SpawnBallCoroutine()
     {
-        // 공 파괴하고 새로운 공 생성. (네트워크 오브젝트 매니저를 통해서)
-        Vector3 spawnPos = ball.transform.position;
+        if(PhotonNetwork.IsMasterClient)
+        {
+            // 공 파괴하고 새로운 공 생성. (네트워크 오브젝트 매니저를 통해서)
+            Vector3 spawnPos = ball.transform.position;
 
-        networkObjectMng.DestroyObject(ball.GetComponent<PhotonView>());
+            networkObjectMng.DestroyObject(ball.GetComponent<PhotonView>());
 
-        yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.5f);
 
-        networkObjectMng.InstantiateObject("P_Ball", spawnPos, Quaternion.identity);
-
+            networkObjectMng.InstantiateObject("P_Ball", spawnPos, Quaternion.identity);
+        }
     }
 }

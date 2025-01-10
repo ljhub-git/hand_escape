@@ -1422,6 +1422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4480fbdcd5d4154c9e4ab2daf3d1b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openDoorAngle: 0
+  closeDoorAngle: 90
 --- !u!82 &560302726
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4319,6 +4321,10 @@ PrefabInstance:
     - target: {fileID: 3151874886396416882, guid: c605a7faa93cb3543a2c5781fb50b305, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458297687501376855, guid: c605a7faa93cb3543a2c5781fb50b305, type: 3}
+      propertyPath: sceneViewId
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5594812398312713501, guid: c605a7faa93cb3543a2c5781fb50b305, type: 3}
       propertyPath: m_LocalScale.z
@@ -7263,7 +7269,7 @@ PrefabInstance:
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[1].puzzleObject
       value: 
-      objectReference: {fileID: 8526379249692492246}
+      objectReference: {fileID: 1691263932382978769}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[2].puzzleObject
       value: 
@@ -8100,6 +8106,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1123425091666521264, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: sceneViewId
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1436993431827036782, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: sceneViewId
       value: 6
@@ -8200,6 +8210,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5055637415338597566, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: sceneViewId
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6384223563418020075, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.091
@@ -8247,6 +8261,10 @@ PrefabInstance:
     - target: {fileID: 6808037086812655945, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843948675807165378, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: sceneViewId
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8405495972518436048, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8451,15 +8469,15 @@ SphereCollider:
   m_CorrespondingSourceObject: {fileID: 4212187111931683102, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
   m_PrefabInstance: {fileID: 1691263932382978764}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8526379249692492246 stripped
+--- !u!114 &1691263932382978769 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1848396337609404037, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7100248266600670668, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
   m_PrefabInstance: {fileID: 1691263932382978764}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be7507874d9837d43852f49e9e771034, type: 3}
+  m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
