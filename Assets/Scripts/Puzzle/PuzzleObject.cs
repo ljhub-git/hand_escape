@@ -17,6 +17,8 @@ public class PuzzleObject : MonoBehaviour
             return;
         }
 
+        Debug.Log("Reset Puzzle!");
+
         puzzleMng.OnResetPuzzle(this);
     }
 
@@ -27,6 +29,8 @@ public class PuzzleObject : MonoBehaviour
             Debug.LogWarning("Puzzle Manager is not exist in hierarchy!");
             return;
         }
+
+        Debug.Log("Solve Puzzle!");
 
         puzzleMng.OnSolvePuzzle(this);
     }
