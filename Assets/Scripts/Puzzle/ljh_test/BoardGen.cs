@@ -322,7 +322,7 @@ public class BoardGen : MonoBehaviour
                     }
 
                     mTileGameObjects[i, j].transform.localPosition =
-                        new Vector3(0,0,0 - (z * 0.0005f));
+                        new Vector3(0,0,0 - (z * puzzle_Scale_Instance/2));
                     // 3D 타일 오브젝트의 자식으로 설정
                     mTileGameObjects[i, j].transform.SetParent(puzzle_Tile_3D.transform);
                 }

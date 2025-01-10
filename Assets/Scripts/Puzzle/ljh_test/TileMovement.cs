@@ -32,6 +32,7 @@ public class TileMovement : MonoBehaviour
 
     private Vector3 GetCorrectPosition()
     {
+        Debug.Log("tile.xIndex : " + tile.xIndex + "Tile.tileSize : " + Tile.tileSize + "BoardGen.puzzle_Scale : " + BoardGen.puzzle_Scale);
         return new Vector3(tile.xIndex * Tile.tileSize * BoardGen.puzzle_Scale, tile.yIndex * Tile.tileSize * BoardGen.puzzle_Scale, 0f);
     }
 
@@ -78,7 +79,7 @@ public class TileMovement : MonoBehaviour
         if (!isInCorrectPosition)
         {
             float dist = (transform.position - GetCorrectPosition()).magnitude;
-            if (dist < 20.0f)  // 정확한 위치에 가까운지 확인
+            if (dist < 20.0f)  // 정확한 위치에 가까운지 확인 (얘가 버그일 확률이 높음)
             {
                 // 타일이 올바른 위치에 놓이면
                 transform.position = GetCorrectPosition();

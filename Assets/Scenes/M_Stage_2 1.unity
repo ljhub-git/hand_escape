@@ -1339,6 +1339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 1909176616}
+  position: {fileID: 0}
 --- !u!4 &269333184
 Transform:
   m_ObjectHideFlags: 0
@@ -12246,6 +12247,7 @@ MonoBehaviour:
   m_MinDistance: 0.5
   distance: 0.5
   verticalOffset: -0.3
+  positionSource: {fileID: 0}
 --- !u!65 &1909176617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14071,8 +14073,8 @@ MonoBehaviour:
   puzzleManager: {fileID: 815518757}
   numRandomTiles: 2
   randomTilePositions:
-  - {x: 20, y: 2, z: -17.8}
-  - {x: -2, y: 3, z: 0}
+  - {x: 1, y: 0.5, z: 0}
+  - {x: 1.5, y: 1, z: 0}
 --- !u!4 &2138317297
 Transform:
   m_ObjectHideFlags: 0
