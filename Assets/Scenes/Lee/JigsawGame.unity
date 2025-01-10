@@ -271,13 +271,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageFilename: images/imagetest3
   ghostTransparency: 0.1
-  puzzle_Scale_Instance: 0.2
+  puzzle_Scale_Instance: 0.001
   parentForTiles: {fileID: 1525335357}
   puzzleManager: {fileID: 2118946608}
   numRandomTiles: 2
   randomTilePositions:
-  - {x: -20, y: 10, z: 0}
-  - {x: -40, y: 20, z: 0}
+  - {x: 1, y: 1.5, z: 0}
+  - {x: 1.5, y: 1, z: 0}
 --- !u!4 &786294618
 Transform:
   m_ObjectHideFlags: 0

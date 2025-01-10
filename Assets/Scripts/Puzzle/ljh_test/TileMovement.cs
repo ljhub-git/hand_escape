@@ -79,7 +79,7 @@ public class TileMovement : MonoBehaviour
         if (!isInCorrectPosition)
         {
             float dist = (transform.position - GetCorrectPosition()).magnitude;
-            if (dist < 20.0f)  // 정확한 위치에 가까운지 확인 (얘가 버그일 확률이 높음)
+            if (dist < (20.0f* BoardGen.puzzle_Scale))  // 정확한 위치에 가까운지 확인
             {
                 // 타일이 올바른 위치에 놓이면
                 transform.position = GetCorrectPosition();

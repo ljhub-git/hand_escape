@@ -343,6 +343,9 @@ public class BoardGen : MonoBehaviour
                 tileMovement.tile = mTiles[i, j];
                 tileMovement.SetPuzzleManager(puzzleManager); // PuzzleManager 설정
 
+                //XRGrabInteractable 추가
+                XRGrabInteractable test = puzzle_Tile_3D.AddComponent<XRGrabInteractable>();
+
                 // 랜덤하게 선택된 타일은 인스펙터에서 지정한 위치로 배치
                 if (randomTileIndices.Contains(new Vector2Int(i, j)))
                 {
@@ -361,25 +364,6 @@ public class BoardGen : MonoBehaviour
                     // 비활성화된 타일은 이동 불가능
                     tileMovement.DisableTileCollider();
                 }
-
-                ////랜덤하게 선택된 타일은 인스펙터에서 지정한 위치로 배치
-                //if (randomTileIndices.Contains(new Vector2Int(i, j)))
-                //{
-                //    int randomIndex = randomTileIndices.IndexOf(new Vector2Int(i, j));
-                //    if (randomIndex < randomTilePositions.Length)
-                //    {
-                //        puzzle_Tile_3D.transform.position = randomTilePositions[randomIndex];
-                //    }
-                //    else
-                //    {
-                //        Debug.LogError("randomTilePositions 배열의 길이가 충분하지 않습니다.");
-                //    }
-                //}
-                //else
-                //{
-                ////    비활성화된 타일은 이동 불가능
-                //    tileMovement.DisableTileCollider();
-                //}
 
                 yield return null;
             }
