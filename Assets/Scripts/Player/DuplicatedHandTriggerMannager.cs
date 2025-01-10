@@ -9,9 +9,9 @@ using Photon.Pun;
 public class DuplicatedTriggerHandMannager : MonoBehaviour
 {
     [SerializeField]
-    private HandCorrectCheck leftHandPuzzleObj = null;
+    private PuzzleObject leftHandPuzzleObj = null;
     [SerializeField]
-    private HandCorrectCheck rightHandPuzzleObj = null;
+    private PuzzleObject rightHandPuzzleObj = null;
     [SerializeField]
     private LightOnOffReact lightOnOff = null;
 

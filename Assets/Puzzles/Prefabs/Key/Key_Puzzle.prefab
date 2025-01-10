@@ -554,6 +554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 350782619085055465}
   - component: {fileID: 6469972707017822488}
+  - component: {fileID: 6386649969624583963}
   m_Layer: 0
   m_Name: Key_Puzzle
   m_TagString: Untagged
@@ -595,6 +596,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numOfComplete: 0
+--- !u!114 &6386649969624583963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7000975521331308082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7826960027386421981
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +678,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350782619085055465}
     m_Modifications:
+    - target: {fileID: 1214137769883260574, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
+      propertyPath: m_SelectMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3339158590877479358, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.016
@@ -716,8 +733,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3709866184805094282, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5616646088314940895}
   m_SourcePrefab: {fileID: 100100000, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
+--- !u!1 &2446533214912907324 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3709866184805094282, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
+  m_PrefabInstance: {fileID: 1337502416599161782}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5616646088314940895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446533214912907324}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf1681f13070324c9ea0fcc08a02b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  twoHandDistance: 1
+  minSpeedForDuplication: 2
+  grayColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  spawnDistanceFromCamera: 1
 --- !u!4 &4384483311245634056 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3339158590877479358, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
@@ -731,6 +772,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350782619085055465}
     m_Modifications:
+    - target: {fileID: 1214137769883260574, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
+      propertyPath: m_SelectMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3339158590877479358, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -789,7 +834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3709866184805094282, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3914218105164565958, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
       propertyPath: sceneViewId
@@ -833,6 +878,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350782619085055465}
     m_Modifications:
+    - target: {fileID: 1214137769883260574, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
+      propertyPath: m_SelectMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3339158590877479358, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.496
@@ -879,7 +928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3709866184805094282, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3914218105164565958, guid: 9d534022d68bb5e41a0b9c3b2bfd54e9, type: 3}
       propertyPath: sceneViewId

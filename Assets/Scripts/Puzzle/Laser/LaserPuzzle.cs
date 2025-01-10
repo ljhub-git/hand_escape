@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserPuzzle : PuzzleObject
+public class LaserPuzzle : MonoBehaviour
 {
     [SerializeField]
     private Transform startPoint = null;
+
+    private PuzzleObject puzzleObj = null;
 
     private LineRenderer lr = null;
     private LaserMirror[] laserMirrors = null;
@@ -24,14 +26,9 @@ public class LaserPuzzle : PuzzleObject
         StartCoroutine(LaserCoroutine());
     }
 
-    public override void SolvePuzzle()
+    private void Awake()
     {
-        foreach(var laserMirror in laserMirrors)
-        {
-            laserMirror.BlockRotate();
-        }
-
-        base.SolvePuzzle();
+        puzzleObj = GetComponent<PuzzleObject>();
     }
 
     private void Start()
@@ -79,7 +76,12 @@ public class LaserPuzzle : PuzzleObject
                             lr.SetPosition(j, pos);
                         }
 
-                        SolvePuzzle();
+                        foreach (var laserMirror in laserMirrors)
+                        {
+                            laserMirror.BlockRotate();
+                        }
+
+                        puzzleObj.SolvePuzzle();
                         break;
                     }
 

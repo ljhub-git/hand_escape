@@ -11,7 +11,7 @@ public class Slide_puzzle : MonoBehaviour
 
     private GameObject puzzleParent;
 
-    public Slide_Puzzle_Manager slide_Puzzle_Manager;
+    public PuzzleObject puzzleObj;
 
     private bool isMoving = false;
 
@@ -255,7 +255,7 @@ public class Slide_puzzle : MonoBehaviour
             if(count == 16)
             {
                 Debug.Log("정답입니다");
-                slide_Puzzle_Manager.SolvePuzzle();
+                puzzleObj.SolvePuzzle();
                 OnDestroy();
             }
         }
@@ -263,7 +263,7 @@ public class Slide_puzzle : MonoBehaviour
 
     private void cheatkey()
     {
-        slide_Puzzle_Manager.SolvePuzzle();
+        puzzleObj.SolvePuzzle();
         OnDestroy();
     }
 

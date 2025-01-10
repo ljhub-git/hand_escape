@@ -891,6 +891,7 @@ GameObject:
   - component: {fileID: 1570140907078673180}
   - component: {fileID: 6790774606666527847}
   - component: {fileID: 6017592779247153839}
+  - component: {fileID: 3790005837288297413}
   m_Layer: 0
   m_Name: P_LaserTest
   m_TagString: Untagged
@@ -908,7 +909,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.04999999, y: 0.05, z: 0.04999999}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4038888735732581451}
@@ -1053,6 +1054,18 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &3790005837288297413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954531815512505354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8978553588923417339
 GameObject:
   m_ObjectHideFlags: 0

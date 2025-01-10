@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class PuzzleObject : MonoBehaviour
+public class PuzzleObject : MonoBehaviour
 {
     protected PuzzleManager puzzleMng = null;
 
@@ -9,7 +9,7 @@ public abstract class PuzzleObject : MonoBehaviour
         puzzleMng = FindAnyObjectByType<PuzzleManager>();
     }
 
-    public virtual void ResetPuzzle()
+    public void ResetPuzzle()
     {
         if (puzzleMng == null)
         {
@@ -20,7 +20,7 @@ public abstract class PuzzleObject : MonoBehaviour
         puzzleMng.OnResetPuzzle(this);
     }
 
-    public virtual void SolvePuzzle()
+    public void SolvePuzzle()
     {
         if(puzzleMng == null)
         {
