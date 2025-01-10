@@ -28,6 +28,11 @@ public class Slide_puzzle : MonoBehaviour
     [SerializeField]
     private float puzzleRotate_z = 0f;
 
+    private void Awake()
+    {
+        puzzleObj = GetComponent<PuzzleObject>();
+    }
+
     private void Start()
     {
         Init();
