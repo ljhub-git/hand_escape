@@ -40,7 +40,9 @@ public class NetworkObjectManager : MonoBehaviourPun
     public void CallOnPuzzleSolvedToOthers(PhotonView _view)
     {
         if (!IsViewValid(_view) || _view.GetComponent<PuzzleReactObject>() == null)
+        {
             return;
+        }
 
         int id = _view.ViewID;
 

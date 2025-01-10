@@ -26,9 +26,11 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
-        menuPosition = FindAnyObjectByType<MenuUI>().transform;
-
         menuUIParent = FindAnyObjectByType<MenuUI>();
+
+        if(menuUIParent != null)
+            menuPosition = FindAnyObjectByType<MenuUI>().transform;
+            
         menuUI = menuUIParent._menuUI;
         optionUI = menuUIParent._optionUI;
         checkUI = menuUIParent._checkUI;
