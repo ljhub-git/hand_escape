@@ -5,6 +5,9 @@ public class MazeBoxBall : MonoBehaviour
 {
     private PuzzleObject puzzleObj = null;
 
+    public enum CubeType { Type99, Type55, Type333 }
+    public CubeType cubeType;
+
     public float maxDelta = 0.01f;
     private Vector3 previousPosition;
     private Rigidbody rb;
@@ -55,11 +58,36 @@ public class MazeBoxBall : MonoBehaviour
 
     private Vector3 ApplyPositionLimits(Vector3 localPosition)
     {
-        float xMin = -0.23f, xMax = 0.23f;
-        float yMin = -0.01f, yMax = 0.01f;
-        
-        float zMin = Mathf.Abs(localPosition.x) < 0.0075f ? -0.3f : -0.23f;
-        float zMax = 0.23f;
+        float xMin, xMax, yMin, yMax, zMin, zMax;
+
+        // Cube type별 제한값 설정
+        switch (cubeType)
+        {
+            case CubeType.Type99:
+                xMin = -0.23f; xMax = 0.23f;
+                yMin = -0.01f; yMax = 0.01f;
+                zMin = Mathf.Abs(localPosition.x) < 0.0075f ? -0.3f : -0.23f;
+                zMax = 0.23f;
+                break;
+
+            case CubeType.Type55:
+                xMin = -0.145f; xMax = 0.145f;
+                yMin = -0.025f; yMax = 0.025f;
+                zMin = -0.145f; zMax = 0.145f;
+                break;
+
+            case CubeType.Type333:
+                xMin = -0.15f; xMax = 0.15f;
+                yMin = -0.03f; yMax = 0.03f;
+                zMin = -0.2f; zMax = 0.2f;
+                break;
+
+            default:
+                xMin = -0.23f; xMax = 0.23f;
+                yMin = -0.01f; yMax = 0.01f;
+                zMin = -0.23f; zMax = 0.23f;
+                break;
+        }
 
         localPosition.x = Mathf.Clamp(localPosition.x, xMin, xMax);
         localPosition.y = Mathf.Clamp(localPosition.y, yMin, yMax);

@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe38a09066f67e34ba7ffcf0c9c984c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cubeType: 0
   maxDelta: 0.01
 --- !u!114 &7650109329131997927
 MonoBehaviour:
@@ -366,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 469886688024873991, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_Name
-      value: MazeBox_Ver1
+      value: MazeBox99_Ver1
       objectReference: {fileID: 0}
     - target: {fileID: 479504516864035179, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_Layer
@@ -638,15 +639,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.568
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2797898638344587455, guid: 67dbe489668bec64289698982e25c34c, type: 3}
       propertyPath: m_LocalRotation.w
