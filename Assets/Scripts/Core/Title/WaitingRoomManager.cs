@@ -6,6 +6,9 @@ using Photon.Pun;
 public class WaitingRoomManager : MonoBehaviourPun
 {
     [SerializeField]
+    private bool isDebugMode = false;
+
+    [SerializeField]
     private PlayerReadyUI[] ui_PlayerReadyArr;
 
     private bool[] isPlayersReadyArr = { false, false };
@@ -24,15 +27,16 @@ public class WaitingRoomManager : MonoBehaviourPun
     {
         photonView.RPC("RPC_PlayerReady", RpcTarget.All, _playerInd);
 
-        // photonView.RPC()
-
         isPlayersReadyArr[_playerInd] = !isPlayersReadyArr[_playerInd];
 
         // UI
         ui_PlayerReadyArr[_playerInd].ToggleReady();
 
-        // 모든 플레이어가 준비됐음. 레벨 1 씬으로 넘어감.
-        // networkMng.LoadScene("M_Stage_1");
+        if(isDebugMode && PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.DestroyAll();
+            networkMng.LoadScene("S_Stage1");
+        }
     }
 
     [PunRPC]
@@ -49,6 +53,7 @@ public class WaitingRoomManager : MonoBehaviourPun
                     return;
             }
 
+            PhotonNetwork.DestroyAll();
             networkMng.LoadScene("S_Stage1");
         }
     }
