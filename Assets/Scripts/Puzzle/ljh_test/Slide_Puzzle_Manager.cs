@@ -1,9 +1,5 @@
 using UnityEngine;
 
-public class Slide_Puzzle_Manager : PuzzleObject
+public class Slide_Puzzle_Manager : MonoBehaviour
 {
-    public override void SolvePuzzle()
-    {
-        base.SolvePuzzle();
-    }
 }

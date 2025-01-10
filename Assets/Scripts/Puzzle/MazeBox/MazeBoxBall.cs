@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class MazeBoxBall : MonoBehaviour
 {
-    private MazeBoxManager mazeBoxMng = null;
+    private PuzzleObject puzzleObj = null;
 
     public float maxDelta = 0.01f;
     private Vector3 previousPosition;
@@ -14,7 +14,7 @@ public class MazeBoxBall : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         previousPosition = transform.localPosition;
 
-        mazeBoxMng = transform.parent.GetComponent<MazeBoxManager>();
+        puzzleObj = transform.parent.GetComponent<PuzzleObject>();
     }
 
     private void Update()
@@ -49,7 +49,7 @@ public class MazeBoxBall : MonoBehaviour
             ////현재스크립트 비활성화
             //this.enabled = false
 
-            mazeBoxMng.SolvePuzzle();
+            puzzleObj.SolvePuzzle();
         }
     }
 

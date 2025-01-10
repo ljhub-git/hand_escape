@@ -1178,17 +1178,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 984603374}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &450503455 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6469972707017822488, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-  m_PrefabInstance: {fileID: 964108612}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bd148e5f3f726c47b117f75bc192a50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &464616569
 GameObject:
   m_ObjectHideFlags: 0
@@ -3938,6 +3927,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2014917350}
   m_SourcePrefab: {fileID: 100100000, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+--- !u!114 &964108613 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6386649969624583963, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+  m_PrefabInstance: {fileID: 964108612}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &984603373
 GameObject:
   m_ObjectHideFlags: 0
@@ -5362,14 +5362,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459206762}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1977108181}
   - {fileID: 1038586790}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1510645061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1483363444
 GameObject:
@@ -5505,6 +5505,7 @@ Transform:
   - {fileID: 1958995655}
   - {fileID: 897623569}
   - {fileID: 269333184}
+  - {fileID: 1459206763}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1523268291
@@ -6769,6 +6770,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+--- !u!114 &1837714020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6386649969624583963, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
+  m_PrefabInstance: {fileID: 1837714019}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1888065782 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8427221085146598678, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
@@ -7124,17 +7136,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91c8c6751f26bcc4a9425c9fc23fd227, type: 3}
---- !u!114 &1948738105 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6469972707017822488, guid: 44eee70ec13f1ee41ad7a810ed28db28, type: 3}
-  m_PrefabInstance: {fileID: 1837714019}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bd148e5f3f726c47b117f75bc192a50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1958995654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7194,7 +7195,7 @@ PrefabInstance:
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[0].puzzleObject
       value: 
-      objectReference: {fileID: 1948738105}
+      objectReference: {fileID: 1837714020}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[1].puzzleObject
       value: 
@@ -7202,7 +7203,7 @@ PrefabInstance:
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[2].puzzleObject
       value: 
-      objectReference: {fileID: 450503455}
+      objectReference: {fileID: 964108613}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[0].reactiveObjects.Array.size
       value: 2
@@ -8356,7 +8357,6 @@ SceneRoots:
   - {fileID: 485462135}
   - {fileID: 1510645061}
   - {fileID: 1070581656}
-  - {fileID: 1459206763}
   - {fileID: 1837714019}
   - {fileID: 1691263932382978764}
   - {fileID: 964108612}

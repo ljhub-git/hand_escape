@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Miniature : PuzzleObject
+public class Miniature : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private float snapThreshold = 30f;
@@ -20,15 +20,11 @@ public class Miniature : PuzzleObject
     private Coroutine currentCoroutine;
     private Coroutine rotationCoroutine;
 
+    private PuzzleObject puzzleObj = null;
+
     private Rigidbody rb;
 
     public bool isInteractable = true;
-
-    public override void SolvePuzzle()
-    {
-        MakeDisable();
-        base.SolvePuzzle();
-    }
 
     private void Start()
     {
@@ -119,7 +115,9 @@ public class Miniature : PuzzleObject
         if (Mathf.Approximately(targetYRotation, 90f))
         {
             // Coroutine syncCoroutine = miniature.StartCoroutine(MiniatureSync.SyncTransform(miniature, 90f));
-            SolvePuzzle();
+            // 이거 아마도 퍼즐에 반응하는 거로 가야 할 듯?
+            MakeDisable();
+            puzzleObj.SolvePuzzle();
         }
     }
 
