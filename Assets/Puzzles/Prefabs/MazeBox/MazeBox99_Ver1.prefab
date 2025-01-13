@@ -150,8 +150,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8732688381497047201}
-  - component: {fileID: 2981846749813799702}
-  m_Layer: 0
+  - component: {fileID: 2024610279773355199}
+  m_Layer: 22
   m_Name: Goal
   m_TagString: MazeGoal
   m_Icon: {fileID: 0}
@@ -173,8 +173,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2286240971035525930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2981846749813799702
-BoxCollider:
+--- !u!135 &2024610279773355199
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -192,7 +192,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8123021509922131422
 GameObject:
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 2387939907643752806}
   - component: {fileID: 7650109329131997927}
   - component: {fileID: 2887314938702177322}
-  m_Layer: 21
+  m_Layer: 23
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1994,7 +1994,7 @@ MonoBehaviour:
   m_StartingInteractionStrengthFilters: []
   m_AttachTransform: {fileID: 0}
   m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
+  m_UseDynamicAttach: 1
   m_MatchAttachPosition: 1
   m_MatchAttachRotation: 1
   m_SnapToColliderVolume: 1

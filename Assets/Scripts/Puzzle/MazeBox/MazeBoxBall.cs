@@ -8,12 +8,12 @@ public class MazeBoxBall : MonoBehaviour
     public enum CubeType { Type99, Type55, Type333 }
     public CubeType cubeType;
 
-    public float maxDelta = 0.01f;
+    public float maxDelta = 0.015f;
     private Vector3 previousPosition;
     private Rigidbody rb;
 
     private bool isSolved = false;
-    
+
     private const float BallOffset = 0.015f;
     private static readonly Vector3 Type99MinLimits = new Vector3(-0.245f, -0.025f, -0.245f);
     private static readonly Vector3 Type99MaxLimits = new Vector3(0.245f, 0.025f, 0.245f);
@@ -112,10 +112,11 @@ public class MazeBoxBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (CompareTag("Goal"))
+        Debug.Log("222");
+        if (other.CompareTag("MazeGoal"))
         {
+            Debug.Log("333");
             isSolved = true;
         }
     }
-
 }
