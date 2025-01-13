@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 using Photon.Pun;
+using Photon.Realtime;
 
-public class WaitingRoomManager : MonoBehaviourPun
+public class WaitingRoomManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private bool isDebugMode = false;
@@ -25,18 +26,13 @@ public class WaitingRoomManager : MonoBehaviourPun
 
     private void TogglePlayerReady(int _playerInd)
     {
-        isPlayersReadyArr[_playerInd] = !isPlayersReadyArr[_playerInd];
-
-        // UI
-        ui_PlayerReadyArr[_playerInd].ToggleReady();
-
         if(isDebugMode && PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.DestroyAll();
             networkMng.LoadScene("S_Stage1");
         }
 
-        photonView.RPC("RPC_PlayerReady", RpcTarget.Others, _playerInd);
+        photonView.RPC("RPC_PlayerReady", RpcTarget.All, _playerInd);
     }
 
     [PunRPC]
@@ -60,14 +56,16 @@ public class WaitingRoomManager : MonoBehaviourPun
 
     private void SetNicknameUIs()
     {
-        if(PhotonNetwork.IsMasterClient)
-        {
-            ui_PlayerReadyArr[0].SetNickName(networkMng.NickName);
-        }
-        else
-        {
-            ui_PlayerReadyArr[1].SetNickName(networkMng.NickName);
-        }
+        ui_PlayerReadyArr[0].SetNickName(PhotonNetwork.CurrentRoom.Players[1].NickName);
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
+            ui_PlayerReadyArr[1].SetNickName(PhotonNetwork.CurrentRoom.Players[2].NickName);
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+
+        SetNicknameUIs();
     }
 
     private void Awake()
