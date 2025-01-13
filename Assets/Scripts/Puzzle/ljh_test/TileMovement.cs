@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class TileMovement : MonoBehaviour
 {
@@ -17,10 +17,24 @@ public class TileMovement : MonoBehaviour
 
     private Jigsaw_PuzzleManager puzzleManager;  // PuzzleManager 참조
 
+    private XRGrabInteractable xrGrabInteractable;
+
+    // 오차 범위 설정
+    public float positionTolerance = 12f; // 위치 오차 범위
+    public float rotationTolerance = 13f; // 각도 오차 범위
+
+
     void Start()
     {
         mSpriteRenderer = GetComponent<MeshRenderer>();
 
+        xrGrabInteractable = GetComponent<XRGrabInteractable>();
+
+        // XRGrabInteractable 이벤트 핸들러 등록
+        if (xrGrabInteractable != null)
+        {
+            xrGrabInteractable.selectExited.AddListener(OnSelectExited);
+        }
     }
 
     // PuzzleManager 동적으로 설정
@@ -32,8 +46,7 @@ public class TileMovement : MonoBehaviour
 
     private Vector3 GetCorrectPosition()
     {
-        Debug.Log("tile.xIndex : " + tile.xIndex + "Tile.tileSize : " + Tile.tileSize + "BoardGen.puzzle_Scale : " + BoardGen.puzzle_Scale);
-        return new Vector3(tile.xIndex * Tile.tileSize * BoardGen.puzzle_Scale, tile.yIndex * Tile.tileSize * BoardGen.puzzle_Scale, 0f);
+        return new Vector3(tile.xIndex * Tile.tileSize * BoardGen.puzzle_Scale, tile.yIndex * Tile.tileSize * BoardGen.puzzle_Scale, 0.0f);
     }
 
     private void OnMouseDown()
@@ -45,9 +58,11 @@ public class TileMovement : MonoBehaviour
             return;
         }
 
+        //mOffset = transform.position - Camera.main.ScreenToWorldPoint(
+        //  new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z));
         mOffset = transform.position - Camera.main.ScreenToWorldPoint(
           new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
-            
+
 
         // For sorting of tiles.
         Tile.tilesSorting.BringToTop(mSpriteRenderer);
@@ -75,20 +90,57 @@ public class TileMovement : MonoBehaviour
         {
             return;
         }
+
+        CheckAndSetCorrectPosition();
+    }
+
+    private void OnSelectExited(SelectExitEventArgs args)
+    {
+        // 이벤트가 트리거될 때의 동작을 정의
+        CheckAndSetCorrectPosition();
+    }
+
+    private void CheckAndSetCorrectPosition()
+    {
         // 올바른 위치에 있는지 확인
         if (!isInCorrectPosition)
         {
             float dist = (transform.position - GetCorrectPosition()).magnitude;
-            if (dist < 20.0f)  // 정확한 위치에 가까운지 확인 (얘가 버그일 확률이 높음)
+            float angle = Quaternion.Angle(transform.localRotation, Quaternion.Euler(0, 0, 0));
+
+            Debug.Log($"Current Position: {transform.position}, Correct Position: {GetCorrectPosition()}, Distance: {dist}");
+            Debug.Log($"Current Rotation: {transform.localRotation.eulerAngles}, Correct Rotation: (0, 0, 0), Angle: {angle}");
+
+            if (dist <= positionTolerance && angle <= rotationTolerance)  // 정확한 위치에 가까운지 확인
             {
                 // 타일이 올바른 위치에 놓이면
-                transform.position = GetCorrectPosition();
+                transform.localPosition = GetCorrectPosition();
+                transform.localRotation = Quaternion.Euler(0, 0, 0); // 각도를 (0, 0, 0)으로 설정
                 isInCorrectPosition = true;  // 타일이 정확한 위치에 놓였다고 설정
 
                 puzzleManager.OnTilePlaced(this);  // 퍼즐 매니저에 알림
+                puzzleManager.Succes_Puzzle_Sound();
             }
         }
     }
+
+    //private void checkandsetcorrectposition()
+    //{
+    //    // 올바른 위치에 있는지 확인
+    //    if (!isincorrectposition)
+    //    {
+    //        float dist = (transform.position - getcorrectposition()).magnitude;
+    //        if (dist < 1f)  // 정확한 위치에 가까운지 확인
+    //        {
+    //            // 타일이 올바른 위치에 놓이면
+    //            transform.localposition = getcorrectposition();
+    //            isincorrectposition = true;  // 타일이 정확한 위치에 놓였다고 설정
+
+    //            puzzlemanager.ontileplaced(this);  // 퍼즐 매니저에 알림
+    //        }
+    //    }
+    //}
+
     // 타일이 정확한 위치에 있는지 여부를 반환
     public bool IsCorrectPosition()
     {
@@ -104,18 +156,8 @@ public class TileMovement : MonoBehaviour
         }
     }
 
-    //public void EnableTileCollider()
-    //{
-    //    BoxCollider2D collider = GetComponent<BoxCollider2D>();
-    //    if (collider != null)
-    //    {
-    //        collider.enabled = true;  // Collider 활성화
-    //    }
-    //}
-
     // Update is called once per frame
     void Update()
     {
-
     }
 }
