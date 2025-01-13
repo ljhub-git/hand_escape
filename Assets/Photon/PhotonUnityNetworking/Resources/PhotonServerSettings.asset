@@ -49,6 +49,7 @@ MonoBehaviour:
   - RPC_SetPosition
   - RPC_SetRotation
   - InitializeObject
+  - SyncTilePositionAndRotation
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

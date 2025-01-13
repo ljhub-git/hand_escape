@@ -326,7 +326,7 @@ public class BoardGen : MonoBehaviour
 
                 BoxCollider box = puzzle_Tile_3D.AddComponent<BoxCollider>();
                 PhotonView photonView = puzzle_Tile_3D.AddComponent<PhotonView>();
-                PhotonNetwork.AllocateViewID(photonView);
+                photonView.ViewID = PhotonNetwork.AllocateViewID(true);
 
                 // TileMovement 추가 및 설정
                 TileMovement tileMovement = puzzle_Tile_3D.AddComponent<TileMovement>();

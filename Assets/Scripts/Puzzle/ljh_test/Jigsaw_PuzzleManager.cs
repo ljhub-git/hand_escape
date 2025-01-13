@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Photon.Pun;
 
 public class Jigsaw_PuzzleManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
 
     public AudioClip succesSound; // 정답 사운드
     private AudioSource succesSource;
+    private PhotonView photonView;
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
     private void Start()
     {
         succesSource.clip = succesSound;
+        photonView = GetComponent<PhotonView>();
     }
 
     public void Succes_Puzzle_Sound()
@@ -69,5 +72,17 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
     public void SetTotalTiles(int total)
     {
         totalTiles = total;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) 
+    { 
+        if (stream.IsWriting) 
+        { 
+            stream.SendNext(correctTiles); 
+        } 
+        else
+        { 
+            correctTiles = (int)stream.ReceiveNext(); 
+        } 
     }
 }

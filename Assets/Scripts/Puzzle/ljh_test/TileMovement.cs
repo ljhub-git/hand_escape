@@ -1,8 +1,10 @@
 
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using Photon.Pun;
 
 public class TileMovement : MonoBehaviour
 {
@@ -23,12 +25,15 @@ public class TileMovement : MonoBehaviour
     public float positionTolerance = 12f; // 위치 오차 범위
     public float rotationTolerance = 13f; // 각도 오차 범위
 
+    private PhotonView photonView;
 
     void Start()
     {
         mSpriteRenderer = GetComponent<MeshRenderer>();
 
         xrGrabInteractable = GetComponent<XRGrabInteractable>();
+
+        photonView = GetComponent<PhotonView>();
 
         // XRGrabInteractable 이벤트 핸들러 등록
         if (xrGrabInteractable != null)
@@ -51,20 +56,14 @@ public class TileMovement : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("마우스질");
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("마우스질?");
             return;
         }
 
-        //mOffset = transform.position - Camera.main.ScreenToWorldPoint(
-        //  new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z));
         mOffset = transform.position - Camera.main.ScreenToWorldPoint(
           new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
 
-
-        // For sorting of tiles.
         Tile.tilesSorting.BringToTop(mSpriteRenderer);
     }
 
@@ -77,10 +76,8 @@ public class TileMovement : MonoBehaviour
         }
 
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
-        //Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + mOffset;
         transform.position = curPosition;
-        Debug.Log("마우스질!!");
     }
 
     private void OnMouseUp()
@@ -120,26 +117,17 @@ public class TileMovement : MonoBehaviour
 
                 puzzleManager.OnTilePlaced(this);  // 퍼즐 매니저에 알림
                 puzzleManager.Succes_Puzzle_Sound();
+
+                photonView.RPC("SyncTilePositionAndRotation", RpcTarget.Others, transform.position, transform.rotation); // 다른 플레이어에게 동기화
             }
         }
     }
 
-    //private void checkandsetcorrectposition()
-    //{
-    //    // 올바른 위치에 있는지 확인
-    //    if (!isincorrectposition)
-    //    {
-    //        float dist = (transform.position - getcorrectposition()).magnitude;
-    //        if (dist < 1f)  // 정확한 위치에 가까운지 확인
-    //        {
-    //            // 타일이 올바른 위치에 놓이면
-    //            transform.localposition = getcorrectposition();
-    //            isincorrectposition = true;  // 타일이 정확한 위치에 놓였다고 설정
-
-    //            puzzlemanager.ontileplaced(this);  // 퍼즐 매니저에 알림
-    //        }
-    //    }
-    //}
+    [PunRPC] public void SyncTilePositionAndRotation(Vector3 position, Quaternion rotation) 
+    { 
+        transform.position = position; 
+        transform.rotation = rotation; 
+    }
 
     // 타일이 정확한 위치에 있는지 여부를 반환
     public bool IsCorrectPosition()
@@ -154,6 +142,19 @@ public class TileMovement : MonoBehaviour
         {
             collider.enabled = false;  // Collider 비활성화
         }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) 
+    { 
+        if (stream.IsWriting) 
+        { 
+            stream.SendNext(transform.position); stream.SendNext(transform.rotation); 
+        }
+        else 
+        { 
+            transform.position = (Vector3)stream.ReceiveNext(); 
+            transform.rotation = (Quaternion)stream.ReceiveNext(); 
+        } 
     }
 
     // Update is called once per frame
