@@ -16,16 +16,20 @@ public class PuzzleReact_SetActive : PuzzleReactObject
         base.OnPuzzleSolved();
 
         // gameObject.SetActive(true);
-        meshRenderer.enabled = true;
-        col.enabled = true;
+        if(meshRenderer != null)
+            meshRenderer.enabled = true;
+        if(col != null)
+            col.enabled = true;
     }
 
     public override void OnPuzzleReset()
     {
-        base.OnPuzzleSolved();
+        base.OnPuzzleReset();
 
         // gameObject.SetActive(false);
-        meshRenderer.enabled = false;
-        col.enabled = false;
+        if(meshRenderer != null)
+            meshRenderer.enabled = false;
+        if(col != null)
+            col.enabled = false;
     }
 }
