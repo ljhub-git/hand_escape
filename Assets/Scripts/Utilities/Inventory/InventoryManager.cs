@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
 
     private NetworkObjectManager networkObjectMng = null;
 
-    public Transform position;
+    //public Transform position;
 
     // InventoryItem 리스트 추가
     private List<InventoryItem> inventoryItems = new List<InventoryItem>();
@@ -33,7 +33,7 @@ public class InventoryManager : MonoBehaviour
 
         inventoryUI = FindAnyObjectByType<InventoryUI>(FindObjectsInactive.Include);
 
-        inventoryUI.positionSource = position;
+        //inventoryUI.positionSource = position;
     }
 
     private void OnDestroy()

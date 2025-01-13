@@ -20,7 +20,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float distance = 0.5f;
     [SerializeField] private float verticalOffset = 0.2f;
 
-    public Transform menuPosition;
+    //public Transform menuUIPosition;
 
     private Transform positionSource;
 
@@ -28,8 +28,8 @@ public class MenuManager : MonoBehaviour
     {
         menuUIParent = FindAnyObjectByType<MenuUI>();
 
-        if(menuUIParent != null)
-            menuPosition = FindAnyObjectByType<MenuUI>().transform;
+        //if(menuUIParent != null)
+        //    menuUIPosition = FindAnyObjectByType<MenuUI>().transform;
             
         menuUI = menuUIParent._menuUI;
         optionUI = menuUIParent._optionUI;
@@ -111,8 +111,12 @@ public class MenuManager : MonoBehaviour
 
     public void RepositionMenu(Vector3 kbPos)
     {
-        menuPosition.transform.position = kbPos;
-        menuPosition.transform.LookAt(Camera.main.transform.position);
-        menuPosition.transform.Rotate(Vector3.up, 180.0f);
+        //menuUIPosition.transform.position = kbPos;
+        //menuUIPosition.transform.LookAt(Camera.main.transform.position);
+        //menuUIPosition.transform.Rotate(Vector3.up, 180.0f);
+
+        transform.position = kbPos;
+        transform.LookAt(Camera.main.transform.position);
+        transform.Rotate(Vector3.up, 180.0f);
     }
 }
