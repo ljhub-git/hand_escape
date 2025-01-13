@@ -18,7 +18,7 @@ public class PuzzleReact_SetActiveAndAudioPlay : PuzzleReactObject
 
     public override void OnPuzzleReset()
     {
-        base.OnPuzzleSolved();
+        base.OnPuzzleReset();
 
         gameObject.SetActive(false);
     }
