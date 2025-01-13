@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
+using Photon.Pun;
+
 public class BoardGen : MonoBehaviour
 {
     public string imageFilename;
@@ -323,6 +325,8 @@ public class BoardGen : MonoBehaviour
                 puzzle_Tile_3D.transform.localPosition = originalPosition;
 
                 BoxCollider box = puzzle_Tile_3D.AddComponent<BoxCollider>();
+                PhotonView photonView = puzzle_Tile_3D.AddComponent<PhotonView>();
+                PhotonNetwork.AllocateViewID(photonView);
 
                 // TileMovement 추가 및 설정
                 TileMovement tileMovement = puzzle_Tile_3D.AddComponent<TileMovement>();
