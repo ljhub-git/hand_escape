@@ -39,18 +39,15 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - RPC_SetGravity
-  - RPC_SetRotation
-  - RPC_PuzzleSolved
-  - RPC_TransformSync
-  - RPC_SetPosition
-  - RPC_ResetObjectMap
-  - RPC_SetActive
-  - RPC_AddObjectToMap
-  - RPC_PuzzleReset
-  - RPC_PlayerReady
   - RPC_OnPlayerEnterDest
   - RPC_OnPlayerExitDest
+  - RPC_PlayerReady
+  - RPC_PuzzleReset
+  - RPC_PuzzleSolved
+  - RPC_SetActive
+  - RPC_SetGravity
+  - RPC_SetPosition
+  - RPC_SetRotation
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
