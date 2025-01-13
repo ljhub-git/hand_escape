@@ -5373,9 +5373,9 @@ MonoBehaviour:
   loginUI: {fileID: 1909176609}
   menuUI: {fileID: 2037752370}
   optionUI: {fileID: 1728471814}
+  checkUI: {fileID: 0}
   distance: 0.5
   verticalOffset: 0.2
-  positionSource: {fileID: 0}
   menuPosition: {fileID: 0}
 --- !u!4 &2018774401
 Transform:

@@ -7,9 +7,11 @@ public class DatabaseManager : MonoBehaviour
 {
 
     #region URI Paths
-    private const string loginUri = "http://127.0.0.1/login.php";
+    private const string loginUri = "http://192.168.1.27/login.php";
 
-    private const string connectTestUri = "http://127.0.0.1/connectTest.php";
+    private const string connectTestUri = "http://192.168.1.27/connectTest.php";
+
+    private const string signUpUri = "http://192.168.1.27/singup.php";
     #endregion
 
     private void Start()
@@ -90,12 +92,39 @@ public class DatabaseManager : MonoBehaviour
                     Debug.Log("Login Try Succed");
                     FindAnyObjectByType<TitleSceneManager>()?.OnLoginSuccess();
                 }
-                // 로그인 실패
-                else
+                // 패스워드가 틀렸을 경우
+                else if(www.downloadHandler.text == "0")
                 {
-                    Debug.Log("Login Try Failed");
+                    Debug.Log("Password Incorrect");
                     FindAnyObjectByType<TitleSceneManager>()?.OnLoginFailed();
                 }
+                // 아이디가 테이블에 없을 경우
+                else if(www.downloadHandler.text == "2")
+                {
+                    StartCoroutine(SignUpCoroutine(_id, _pw));
+                }
+            }
+        }
+    }
+
+    private IEnumerator SignUpCoroutine(string _id, string _pw)
+    {
+        WWWForm form = new WWWForm();
+
+        form.AddField("signUpUser", _id);
+        form.AddField("signUpPass", _pw);
+
+        using (UnityWebRequest www = UnityWebRequest.Post(loginUri, form))
+        {
+            yield return www.SendWebRequest();
+
+            if (CheckConnectError(www))
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                FindAnyObjectByType<TitleSceneManager>()?.OnLoginSuccess();
             }
         }
     }

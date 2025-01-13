@@ -27,6 +27,12 @@ public class LoginManager : MonoBehaviour
         titleSceneMng?.TryLogin(enteredUsername, enteredPassword);
     }
 
+    public void OnLoginFailed()
+    {
+        loginStatus.color = Color.red;
+        loginStatus.text = "Password does not match!";
+    }
+
     private void Awake()
     {
         titleSceneMng = FindAnyObjectByType<TitleSceneManager>();

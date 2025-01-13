@@ -1277,7 +1277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &333943150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1392,7 +1392,7 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
@@ -1898,7 +1898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!59 &521253519
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -1923,7 +1923,7 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
@@ -2742,6 +2742,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6576987187099483876, guid: 51696a141c22dcb47911b6da78b9d2a1, type: 3}
   m_PrefabInstance: {fileID: 667275087}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &667275089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 36267500205522093, guid: 51696a141c22dcb47911b6da78b9d2a1, type: 3}
+  m_PrefabInstance: {fileID: 667275087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6959a9895aee14eba202c4dd370754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &668327929
 GameObject:
   m_ObjectHideFlags: 0
@@ -3579,7 +3590,7 @@ PrefabInstance:
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[2].puzzleObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1267770206}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[0].reactiveObjects.Array.size
       value: 1
@@ -3611,7 +3622,7 @@ PrefabInstance:
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: 'puzzleMapping.Array.data[2].reactiveObjects.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 667275089}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: 'puzzleMapping.Array.data[2].reactiveObjects.Array.data[1]'
       value: 
@@ -4906,6 +4917,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1734d31d5f0c2874fa31325752a9ee92, type: 3}
+--- !u!114 &1267770206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8507734583547971774, guid: 1734d31d5f0c2874fa31325752a9ee92, type: 3}
+  m_PrefabInstance: {fileID: 1267770205}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7542eee9bf8053f44986f7fcc419f04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1282241315
 GameObject:
   m_ObjectHideFlags: 0
