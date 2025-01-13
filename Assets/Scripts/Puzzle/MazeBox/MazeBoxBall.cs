@@ -12,6 +12,19 @@ public class MazeBoxBall : MonoBehaviour
     private Vector3 previousPosition;
     private Rigidbody rb;
 
+    private bool isSolved = false;
+    
+    private const float BallOffset = 0.015f;
+    private static readonly Vector3 Type99MinLimits = new Vector3(-0.245f, -0.025f, -0.245f);
+    private static readonly Vector3 Type99MaxLimits = new Vector3(0.245f, 0.025f, 0.245f);
+
+    private static readonly Vector3 Type55MinLimits = new Vector3(-0.145f, -0.025f, -0.145f);
+    private static readonly Vector3 Type55MaxLimits = new Vector3(0.145f, 0.025f, 0.145f);
+
+    private static readonly Vector3 Type333MinLimits = new Vector3(-0.095f, -0.095f, -0.095f);
+    private static readonly Vector3 Type333MaxLimits = new Vector3(0.095f, 0.095f, 0.095f);
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -26,7 +39,8 @@ public class MazeBoxBall : MonoBehaviour
         Vector3 delta = currentLocalPosition - previousPosition;
 
         // Check if the movement exceeds the threshold and adjust
-        if (delta.magnitude > maxDelta)
+        //if (delta.magnitude > maxDelta)
+        if (delta.sqrMagnitude > maxDelta * maxDelta)
         {
             // 큰 변화 감지 - 무시하거나 제한
             rb.linearVelocity = Vector3.zero;
@@ -42,7 +56,7 @@ public class MazeBoxBall : MonoBehaviour
         previousPosition = transform.localPosition;
 
         // 물체가 빠져나왔을 때 
-        if (transform.localPosition.z < -0.25f)
+        if (isSolved)
         {
             ////부모오브젝트제거
             //transform.SetParent(null);
@@ -58,41 +72,50 @@ public class MazeBoxBall : MonoBehaviour
 
     private Vector3 ApplyPositionLimits(Vector3 localPosition)
     {
-        float xMin, xMax, yMin, yMax, zMin, zMax;
+        Vector3 minLimits, maxLimits;
 
-        // Cube type별 제한값 설정
+        // CubeType에 따라 제한값 설정
         switch (cubeType)
         {
             case CubeType.Type99:
-                xMin = -0.23f; xMax = 0.23f;
-                yMin = -0.01f; yMax = 0.01f;
-                zMin = Mathf.Abs(localPosition.x) < 0.0075f ? -0.3f : -0.23f;
-                zMax = 0.23f;
+                minLimits = Type99MinLimits;
+                maxLimits = Type99MaxLimits;
                 break;
 
             case CubeType.Type55:
-                xMin = -0.145f; xMax = 0.145f;
-                yMin = -0.025f; yMax = 0.025f;
-                zMin = -0.145f; zMax = 0.145f;
+                minLimits = Type55MinLimits;
+                maxLimits = Type55MaxLimits;
                 break;
 
             case CubeType.Type333:
-                xMin = -0.15f; xMax = 0.15f;
-                yMin = -0.03f; yMax = 0.03f;
-                zMin = -0.2f; zMax = 0.2f;
+                minLimits = Type333MinLimits;
+                maxLimits = Type333MaxLimits;
                 break;
 
             default:
-                xMin = -0.23f; xMax = 0.23f;
-                yMin = -0.01f; yMax = 0.01f;
-                zMin = -0.23f; zMax = 0.23f;
+                minLimits = Type99MinLimits;
+                maxLimits = Type99MaxLimits;
                 break;
         }
 
-        localPosition.x = Mathf.Clamp(localPosition.x, xMin, xMax);
-        localPosition.y = Mathf.Clamp(localPosition.y, yMin, yMax);
-        localPosition.z = Mathf.Clamp(localPosition.z, zMin, zMax);
+        // 오프셋 적용
+        minLimits += Vector3.one * BallOffset;
+        maxLimits -= Vector3.one * BallOffset;
 
-        return localPosition;
+        // 위치 제한 적용
+        return new Vector3(
+            Mathf.Clamp(localPosition.x, minLimits.x, maxLimits.x),
+            Mathf.Clamp(localPosition.y, minLimits.y, maxLimits.y),
+            Mathf.Clamp(localPosition.z, minLimits.z, maxLimits.z)
+        );
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (CompareTag("Goal"))
+        {
+            isSolved = true;
+        }
+    }
+
 }

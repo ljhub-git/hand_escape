@@ -9,6 +9,7 @@ TagManager:
   - Items
   - Ubongo
   - UbongoCol
+  - MazeGoal
   layers:
   - Default
   - TransparentFX
@@ -31,8 +32,8 @@ TagManager:
   - MovablePuzzle
   - HandShadowTrigger
   - 
-  - 
-  - 
+  - MazeBox
+  - MazeBall
   - 
   - 
   - 
