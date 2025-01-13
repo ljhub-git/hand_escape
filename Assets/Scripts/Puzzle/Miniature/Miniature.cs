@@ -120,7 +120,6 @@ public class Miniature : MonoBehaviour
         if (Mathf.Approximately(targetYRotation, 90f))
         {
             // Coroutine syncCoroutine = miniature.StartCoroutine(MiniatureSync.SyncTransform(miniature, 90f));
-            // 이거 아마도 퍼즐에 반응하는 거로 가야 할 듯?
             MakeDisable();
             puzzleObj.SolvePuzzle();
         }

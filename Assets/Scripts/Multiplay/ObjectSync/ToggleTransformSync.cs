@@ -24,6 +24,8 @@ public class ToggleTransformSync : MonoBehaviourPun
     public void TurnOffTransformSync()
     {
         StopAllCoroutines();
+
+        _networkObjectMng.SetObjectTransform(photonView, transform);
     }
 
     private IEnumerator TransformSyncCoroutine()
@@ -41,4 +43,6 @@ public class ToggleTransformSync : MonoBehaviourPun
             yield return null;
         }
     }
+
+    
 }
