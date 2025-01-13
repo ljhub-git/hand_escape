@@ -96,7 +96,10 @@ public class InventoryManager : MonoBehaviour
 
             // 씬으로 아이템을 배치하고, UI에서 삭제
             itemInfo.gameObject.SetActive(true);
-            itemInfo.transform.position = transform.position;
+            
+            Vector3 iPosition = inventoryUI.positionSource.position;
+
+            itemInfo.transform.position = iPosition + Vector3.forward * 0.5f;
 
             // 만약 네트워크 오브젝트 매니저가 있다면 네트워크 오브젝트 매니저를 통해서 다른 클라이언트에게도 이에 대해서 알린다.
             if (networkObjectMng != null)
