@@ -20,22 +20,22 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float distance = 0.5f;
     [SerializeField] private float verticalOffset = 0.2f;
 
-    //public Transform menuUIPosition;
+    public Transform menuUIPosition;
 
-    private Transform positionSource;
+    public Transform positionSource;
 
     private void Awake()
     {
-        menuUIParent = FindAnyObjectByType<MenuUI>();
+        //menuUIParent = FindAnyObjectByType<MenuUI>();
 
-        //if(menuUIParent != null)
-        //    menuUIPosition = FindAnyObjectByType<MenuUI>().transform;
-            
-        menuUI = menuUIParent._menuUI;
-        optionUI = menuUIParent._optionUI;
-        checkUI = menuUIParent._checkUI;
+        ////if(menuUIParent != null)
+        ////    menuUIPosition = FindAnyObjectByType<MenuUI>().transform;
 
-        positionSource = transform;
+        //menuUI = menuUIParent._menuUI;
+        //optionUI = menuUIParent._optionUI;
+        //checkUI = menuUIParent._checkUI;
+
+        //positionSource = transform;
     }
 
 
@@ -69,11 +69,11 @@ public class MenuManager : MonoBehaviour
 
     public void Resume()
     {
-        if (!isLogin)
-        //if (!titleSceneManager.isLogin)
-        {
-            loginUI.SetActive(true);
-        }
+        //if (!isLogin)
+        ////if (!titleSceneManager.isLogin)
+        //{
+        //    loginUI.SetActive(true);
+        //}
         menuUI.SetActive(false);  // 메인 메뉴 비활성화
     }
 
@@ -94,6 +94,7 @@ public class MenuManager : MonoBehaviour
         //ShowMainMenu();
         menuUI.SetActive(true);   // 메인 메뉴 활성화
         optionUI.SetActive(false); // 옵션 메뉴 비활성화
+        checkUI.SetActive(false);
     }
 
     public void OpenMenuIngame()
@@ -111,12 +112,12 @@ public class MenuManager : MonoBehaviour
 
     public void RepositionMenu(Vector3 kbPos)
     {
-        //menuUIPosition.transform.position = kbPos;
-        //menuUIPosition.transform.LookAt(Camera.main.transform.position);
-        //menuUIPosition.transform.Rotate(Vector3.up, 180.0f);
+        menuUIPosition.transform.position = kbPos;
+        menuUIPosition.transform.LookAt(Camera.main.transform.position);
+        menuUIPosition.transform.Rotate(Vector3.up, 180.0f);
 
-        transform.position = kbPos;
-        transform.LookAt(Camera.main.transform.position);
-        transform.Rotate(Vector3.up, 180.0f);
+        //transform.position = kbPos;
+        //transform.LookAt(Camera.main.transform.position);
+        //transform.Rotate(Vector3.up, 180.0f);
     }
 }

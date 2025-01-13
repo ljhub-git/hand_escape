@@ -5848,6 +5848,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 168449575972596167, guid: abe5d658144cb444faa4a7c35c8f505e, type: 3}
   m_PrefabInstance: {fileID: 4011753456901947475}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5076055281549131237 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8204812922831846838, guid: abe5d658144cb444faa4a7c35c8f505e, type: 3}
+  m_PrefabInstance: {fileID: 4011753456901947475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4552709839527647515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5908,6 +5913,14 @@ PrefabInstance:
       propertyPath: optionUI
       value: 
       objectReference: {fileID: 3889684547255626132}
+    - target: {fileID: 2128242878966813876, guid: 9581b2d93ad96db4a8aa4bddfafc9806, type: 3}
+      propertyPath: menuUIPosition
+      value: 
+      objectReference: {fileID: 5076055281549131237}
+    - target: {fileID: 2128242878966813876, guid: 9581b2d93ad96db4a8aa4bddfafc9806, type: 3}
+      propertyPath: positionSource
+      value: 
+      objectReference: {fileID: 2649240131146062758}
     - target: {fileID: 2876508206047880206, guid: 9581b2d93ad96db4a8aa4bddfafc9806, type: 3}
       propertyPath: m_Name
       value: MenuManager
