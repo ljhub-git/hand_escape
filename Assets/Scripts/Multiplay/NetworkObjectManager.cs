@@ -154,6 +154,11 @@ public class NetworkObjectManager : MonoBehaviourPun
         return obj;
     }
 
+    public void RequestOwnership(PhotonView _view)
+    {
+        _view.RequestOwnership();
+    }
+
     // 매개변수로 들어온 뷰가 유효한 뷰인지 체크.
     private bool IsViewValid(PhotonView _view)
     {
