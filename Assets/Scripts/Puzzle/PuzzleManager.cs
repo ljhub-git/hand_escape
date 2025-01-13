@@ -82,6 +82,11 @@ public class PuzzleManager : MonoBehaviour
             }
 
             reactToReset.OnPuzzleReset();
+
+            if (networkObjectManager != null)
+            {
+                networkObjectManager.CallOnPuzzleResetToOthers(reactToReset.GetComponent<PhotonView>());
+            }
         }
     }
 
