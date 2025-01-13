@@ -452,6 +452,14 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 4208890007836737442, guid: be724d0f46b41274b9de5d131ba5aa4a, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208890007836737442, guid: be724d0f46b41274b9de5d131ba5aa4a, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4222460028645077378, guid: be724d0f46b41274b9de5d131ba5aa4a, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.875

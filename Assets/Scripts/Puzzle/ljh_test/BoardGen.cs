@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class BoardGen : MonoBehaviour
 {
@@ -18,7 +19,6 @@ public class BoardGen : MonoBehaviour
     [SerializeField] 
     private float puzzle_Scale_Instance = 0.5f;
 
-
     public int numTileX { get; private set; }
     public int numTileY { get; private set; }
 
@@ -33,6 +33,7 @@ public class BoardGen : MonoBehaviour
     public int numRandomTiles = 2;  // 랜덤 배치할 타일의 개수를 설정
 
     public Vector3[] randomTilePositions;
+
 
     Sprite LoadBaseTexture()
     {
@@ -277,21 +278,6 @@ public class BoardGen : MonoBehaviour
             }
         }
 
-        //List<Vector2Int> randomTilePositions = new List<Vector2Int>();
-
-        //// 랜덤으로 배치할 타일들의 위치를 저장
-        //while (randomTilePositions.Count < numRandomTiles)
-        //{
-        //    int randomX = UnityEngine.Random.Range(0, numTileX);
-        //    int randomY = UnityEngine.Random.Range(0, numTileY);
-
-        //    Vector2Int randomPosition = new Vector2Int(randomX, randomY);
-        //    if (!randomTilePositions.Contains(randomPosition)) // 중복되지 않도록 확인
-        //    {
-        //        randomTilePositions.Add(randomPosition);
-        //    }
-        //}
-
         for (int i = 0; i < numTileX; i++) 
         {
             for (int j = 0; j < numTileY; j++) 
@@ -318,7 +304,7 @@ public class BoardGen : MonoBehaviour
 
                     if (z == 0) 
                     { 
-                        originalPosition = mTileGameObjects[i, j].transform.localPosition; 
+                        originalPosition = mTileGameObjects[i, j].transform.localPosition; //원래 위치 저장
                     }
 
                     mTileGameObjects[i, j].transform.localPosition =
@@ -343,6 +329,13 @@ public class BoardGen : MonoBehaviour
                 tileMovement.tile = mTiles[i, j];
                 tileMovement.SetPuzzleManager(puzzleManager); // PuzzleManager 설정
 
+                Rigidbody rigidbody = puzzle_Tile_3D.AddComponent<Rigidbody>();
+                rigidbody.useGravity = false;
+                rigidbody.isKinematic = true;
+
+                XRGrabInteractable xrGrabInteractable = puzzle_Tile_3D.AddComponent<XRGrabInteractable>();
+                xrGrabInteractable.useDynamicAttach = true;
+
                 // 랜덤하게 선택된 타일은 인스펙터에서 지정한 위치로 배치
                 if (randomTileIndices.Contains(new Vector2Int(i, j)))
                 {
@@ -362,24 +355,7 @@ public class BoardGen : MonoBehaviour
                     tileMovement.DisableTileCollider();
                 }
 
-                ////랜덤하게 선택된 타일은 인스펙터에서 지정한 위치로 배치
-                //if (randomTileIndices.Contains(new Vector2Int(i, j)))
-                //{
-                //    int randomIndex = randomTileIndices.IndexOf(new Vector2Int(i, j));
-                //    if (randomIndex < randomTilePositions.Length)
-                //    {
-                //        puzzle_Tile_3D.transform.position = randomTilePositions[randomIndex];
-                //    }
-                //    else
-                //    {
-                //        Debug.LogError("randomTilePositions 배열의 길이가 충분하지 않습니다.");
-                //    }
-                //}
-                //else
-                //{
-                ////    비활성화된 타일은 이동 불가능
-                //    tileMovement.DisableTileCollider();
-                //}
+                
 
                 yield return null;
             }
