@@ -34,8 +34,8 @@ public class TilesSorting
     private void SetRenderOrder(MeshRenderer renderer, int index)
     {
         renderer.sortingOrder = index;
-        Vector3 p = renderer.transform.position;
-        p.z = -index / 10.0f;
-        renderer.transform.position = p;
+        //Vector3 p = renderer.transform.position;
+        //p.z = -index / 10.0f;
+        //renderer.transform.position = p;
     }
 }
