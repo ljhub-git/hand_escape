@@ -32,8 +32,13 @@ public class NetworkPlayerManager : MonoBehaviourPun
         {
             LocalPlayerObject.SetActive(true);
             multiHandMng.HiddenHandMesh();
-
             StartCoroutine(SetMultiModelTransformCoroutine());
+            HeadSync head = GetComponentInChildren<HeadSync>();
+            if (head != null)
+            {
+                head.StartFollowTransformCoroutine();
+                head.transform.GetChild(0).gameObject.SetActive(false);
+            }
         }
     }
 

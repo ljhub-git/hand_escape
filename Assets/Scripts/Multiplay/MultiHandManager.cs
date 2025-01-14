@@ -57,7 +57,8 @@ public class MultiHandManager : MonoBehaviour
         }
 
         var headTrackedPoseDriver = GetComponentInChildren<TrackedPoseDriver>();
-        headTrackedPoseDriver.enabled = false;
+        if(headTrackedPoseDriver != null)
+            headTrackedPoseDriver.enabled = false;
     }
 
     public void HiddenHandMesh()
