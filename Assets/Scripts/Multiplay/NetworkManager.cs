@@ -15,7 +15,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private NetworkPlayerSpawner playerSpawner = null;
     private NetworkObjectManager networkObjectMng = null;
-    private ScreenUIManager screenUIManager = null;
 
     public bool IsMaster
     {
@@ -76,8 +75,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
 
         networkObjectMng.InitPrefabPool();
-
-        screenUIManager = FindAnyObjectByType<ScreenUIManager>();
     }
 
     private void Start()
@@ -95,7 +92,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         base.OnPlayerLeftRoom(otherPlayer);
 
-        if(screenUIManager != null)
+        var screenUIManager = FindAnyObjectByType<ScreenUIManager>();
+
+        if (screenUIManager != null)
             screenUIManager.ShowPlayerLeaveConfirm();
 
         // SceneManager.LoadScene("S_Title");
