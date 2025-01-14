@@ -110,6 +110,7 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
                     return;
             }
 
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.DestroyAll();
             networkMng.LoadScene("M_Stage_1");
         }

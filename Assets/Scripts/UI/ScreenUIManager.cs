@@ -10,7 +10,6 @@ public class ScreenUIManager : MonoBehaviour
     public void ShowPlayerLeaveConfirm()
     {
         playerLeaveConfirm.SetActive(true);
-        Time.timeScale = 1f;
     }
 
     public void OnClickedLeaveRoom()

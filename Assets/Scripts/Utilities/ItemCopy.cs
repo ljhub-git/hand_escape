@@ -1,6 +1,9 @@
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class ItemCopy : MonoBehaviour
@@ -101,8 +104,40 @@ public class ItemCopy : MonoBehaviour
         Transform cameraTransform = Camera.main.transform;
         Vector3 spawnPosition = cameraTransform.position + cameraTransform.forward * spawnDistanceFromCamera;
 
-        //GameObject duplicatedObject = Instantiate(gameObject, spawnPosition, transform.rotation);
-        GameObject duplicatedObject = networkObjectMng.InstantiateObject(name, spawnPosition, transform.rotation);
+        GameObject duplicatedObject = Instantiate(gameObject, spawnPosition, transform.rotation);
+        //GameObject duplicatedObject = networkObjectMng.InstantiateObject(name, spawnPosition, transform.rotation);
+
+        {
+            PhotonView photonView = duplicatedObject.GetComponent<PhotonView>();
+            photonView.ViewID = 6000;
+            if (PhotonNetwork.AllocateViewID(photonView))
+            {
+                object[] data = new object[]
+                {
+                    duplicatedObject.transform.position, duplicatedObject.transform.rotation, photonView.ViewID
+                };
+
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+                {
+                    Receivers = ReceiverGroup.Others,
+                    CachingOption = EventCaching.AddToRoomCache
+                };
+
+                SendOptions sendOptions = new SendOptions
+                {
+                    Reliability = true
+                };
+
+                PhotonNetwork.RaiseEvent(1, data, raiseEventOptions, sendOptions);
+            }
+            else
+            {
+                Debug.LogError("Failed to allocate a ViewId.");
+
+                Destroy(duplicatedObject);
+            }
+        }
+        
 
         yield return new WaitForSeconds(0.75f);
 
