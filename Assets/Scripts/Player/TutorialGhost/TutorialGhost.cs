@@ -10,6 +10,7 @@ public class TutorialGhost : MonoBehaviour
     private int currentPoseIndex = 0;
     private TextMeshPro explainText = null;
     private float next = 0;
+    private const float nextTime = 5f; 
     private void Awake()
     {
         explainText = GetComponentInChildren<TextMeshPro>();
@@ -20,7 +21,7 @@ public class TutorialGhost : MonoBehaviour
         next += Time.deltaTime;
 
         // 일정 시간이 지난 후 포즈를 변경하고, 활성화된 오브젝트를 curActivatedObject에 할당
-        if (next > 3)
+        if (next > nextTime)
         {
             // 이전에 활성화된 오브젝트를 비활성화
             if (curActivatedObject != null)
