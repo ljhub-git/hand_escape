@@ -8141,6 +8141,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3567855215757024420, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567855215757024420, guid: d4282371afd931543afa8871bb40a2eb, type: 3}
       propertyPath: ObservedComponents.Array.size
       value: 1
       objectReference: {fileID: 0}

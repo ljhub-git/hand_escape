@@ -3436,6 +3436,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1381178114}
     m_Modifications:
+    - target: {fileID: 853504034211646281, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488312159499396938, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1983916382215326365, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
       propertyPath: sceneViewId
       value: 8
@@ -3511,6 +3519,18 @@ PrefabInstance:
     - target: {fileID: 4605812994414741394, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
       propertyPath: m_Name
       value: MazeBox_Ver1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6467311670462571591, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6467311670462571591, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393015898970266810, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7650109329131997927, guid: 8756b0c33ab1f464bad2965d6b89ce34, type: 3}
       propertyPath: sceneViewId
@@ -7697,11 +7717,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[1].reactiveObjects.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[2].reactiveObjects.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[3].reactiveObjects.Array.size
@@ -9413,6 +9433,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7842645896826204343, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7842645896826204343, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: ObservedComponents.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -9458,6 +9482,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8598027819806822913, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
       propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8598027819806822913, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
+      propertyPath: OwnershipTransfer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8598027819806822913, guid: 095c9eb7162e5ab45993c04863b01690, type: 3}
@@ -10131,7 +10159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5378961395691600886, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: isLightOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5516788609892810535, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: m_LocalScale.z
