@@ -1,10 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
-using System.Collections;
 
 public class NetworkObjectManager : MonoBehaviourPun
 {
@@ -24,7 +24,7 @@ public class NetworkObjectManager : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient == false)
         {
-            throw new System.Exception("Only Master CLient can send sync manager view ID event.");
+            throw new System.Exception("Only Master Client can send sync manager view ID event.");
         }
 
         foreach(var obj in viewErrorObjects)
