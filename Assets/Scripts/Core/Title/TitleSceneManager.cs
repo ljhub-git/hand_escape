@@ -13,7 +13,7 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
 
     private LoginManager loginManager = null;
 
-    private const int MaxPlayerPerRoom = 5;
+    private const int MaxPlayerPerRoom = 2;
 
     public bool isLogin = false;
 

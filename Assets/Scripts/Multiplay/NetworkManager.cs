@@ -43,7 +43,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         SceneManager.LoadScene("S_Title");
-        Time.timeScale = 1f;
         PhotonNetwork.Disconnect();
     }
 

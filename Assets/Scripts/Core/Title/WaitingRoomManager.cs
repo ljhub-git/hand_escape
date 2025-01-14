@@ -37,7 +37,7 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
             networkMng.LoadScene("S_Stage1");
         }
 
-        photonView.RPC("RPC_PlayerReady", RpcTarget.All, _playerInd);
+        photonView.RPC("RPC_PlayerReady", RpcTarget.All, _playerInd, !isPlayersReadyArr[_playerInd]);
     }
 
     private void SetNicknameUIs()
