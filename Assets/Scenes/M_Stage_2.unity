@@ -10057,137 +10057,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1312652737}
     m_Modifications:
-    - target: {fileID: 376325340718853300, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.19617458
-      objectReference: {fileID: 0}
-    - target: {fileID: 376325340718853300, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 376325340718853300, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.0041
-      objectReference: {fileID: 0}
-    - target: {fileID: 376325340718853300, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.0344
-      objectReference: {fileID: 0}
-    - target: {fileID: 1219118942098984210, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020372031056704746, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701652434406406944, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701652434406406944, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 3676139095107586199, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_Background
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3676139095107586199, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3676139095107586199, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3676139095107586199, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2089165931}
-    - target: {fileID: 3676139095107586199, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3676139095107586199, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResetRightHand
-      objectReference: {fileID: 0}
-    - target: {fileID: 3676139095107586199, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DuplicatedTriggerHandMannager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3676139095107586199, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3719070536712523744, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: m_Name
       value: P_HandShadowLight Variant Q1
       objectReference: {fileID: 0}
-    - target: {fileID: 3891663700909735600, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_Background
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891663700909735600, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891663700909735600, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891663700909735600, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2089165931}
-    - target: {fileID: 3891663700909735600, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891663700909735600, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResetLeftHand
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891663700909735600, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DuplicatedTriggerHandMannager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891663700909735600, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4686281816670516449, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: sceneViewId
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5239056889725007927, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: sceneViewId
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5239056889725007927, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: OwnershipTransfer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5378961395691600886, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: isLightOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516788609892810535, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.19057877
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516788609892810535, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516788609892810535, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516788609892810535, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.0196
       objectReference: {fileID: 0}
     - target: {fileID: 6078729998041961529, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10229,20 +10105,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6504633314713029750, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: sceneViewId
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6504633314713029750, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-      propertyPath: OwnershipTransfer
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2663902026224023345, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-    - {fileID: 4018920077934976244, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-    - {fileID: 3181107006744567241, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-    - {fileID: 6138698814574128560, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
@@ -12871,17 +12735,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2110927162044622150, guid: 20f1a6484c73d5047b33770a3bb7d6b6, type: 3}
   m_PrefabInstance: {fileID: 2064704153}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2089165931 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6913751949224772331, guid: 6509ce2eef7412e4eb2334d2f9042f5b, type: 3}
-  m_PrefabInstance: {fileID: 1750335800}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f015275f2ed734987657e518dd10e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2119532801
 PrefabInstance:
   m_ObjectHideFlags: 0
