@@ -1052,6 +1052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 236362038}
   - component: {fileID: 236362039}
+  - component: {fileID: 236362040}
   m_Layer: 0
   m_Name: 'BoardGen '
   m_TagString: Untagged
@@ -1091,11 +1092,33 @@ MonoBehaviour:
   ghostTransparency: 0.1
   puzzle_Scale_Instance: 0.001
   parentForTiles: {fileID: 426993380}
-  puzzleManager: {fileID: 0}
+  puzzleManager: {fileID: 1938516086}
   numRandomTiles: 2
   randomTilePositions:
-  - {x: 20, y: 0.5, z: 0}
-  - {x: 1.5, y: 1, z: 0}
+  - {x: -1, y: 1, z: 0}
+  - {x: -0.5, y: 1, z: 0}
+--- !u!114 &236362040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236362037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 1
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 19
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &246535326
 PrefabInstance:
   m_ObjectHideFlags: 0

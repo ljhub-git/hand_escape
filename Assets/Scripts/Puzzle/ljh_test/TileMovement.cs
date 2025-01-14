@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using Photon.Pun;
 
-public class TileMovement : MonoBehaviour
+public class TileMovement : MonoBehaviourPunCallbacks
 {
     public Tile tile { get; set; }
     private Vector3 mOffset = new Vector3(0.0f, 0.0f, 0.0f);
@@ -41,6 +41,13 @@ public class TileMovement : MonoBehaviour
             xrGrabInteractable.selectExited.AddListener(OnSelectExited);
         }
     }
+
+    [PunRPC] void SyncTilePosition(Vector3 position) 
+    { 
+        Debug.Log($"SyncTilePosition 호출: {position}"); 
+        transform.position = position; 
+    }
+
 
     // PuzzleManager 동적으로 설정
     public void SetPuzzleManager(Jigsaw_PuzzleManager manager)

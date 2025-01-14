@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 using Photon.Pun;
+using Unity.VisualScripting;
+using static Photon.Pun.PhotonView;
 
 public class BoardGen : MonoBehaviour
 {
@@ -35,6 +37,8 @@ public class BoardGen : MonoBehaviour
     public int numRandomTiles = 2;  // 랜덤 배치할 타일의 개수를 설정
 
     public Vector3[] randomTilePositions;
+    private Vector3[] initialTilePositions;
+    private PhotonView photonView;
 
 
     Sprite LoadBaseTexture()
@@ -85,13 +89,27 @@ public class BoardGen : MonoBehaviour
     }
 
     void OnValidate()
-    { // 인스턴스 변수의 값을 static 변수에 동기화
-      puzzle_Scale = puzzle_Scale_Instance; 
+    { 
+        // 인스턴스 변수의 값을 static 변수에 동기화
+        //puzzle_Scale = puzzle_Scale_Instance; 
+    }
+
+    private void Awake()
+    {
+        puzzle_Scale = puzzle_Scale_Instance;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
+
+        if (photonView == null)
+        {
+            Debug.LogError("photonView가 null입니다.");
+            return; // 이후 코드 실행 방지
+        }
+
 
         mBaseSpriteOpaque = LoadBaseTexture();
         //완성그림(비활성화 시킬것)
@@ -117,13 +135,82 @@ public class BoardGen : MonoBehaviour
 
         mGameObjectQpaque.gameObject.SetActive(false);
 
-        //SetCameraPosition();
-
         puzzleManager.SetTotalTiles(numRandomTiles);
 
-        //CreateJigsawTiles();
-        StartCoroutine(Coroutine_CreateJigsawTiles());
+        // MasterClient 여부 확인
+        if (PhotonNetwork.IsMasterClient)
+        {
+            // 배경 그림 및 타일 초기 위치 설정
+            //photonView.RPC("InitializeTiles", RpcTarget.AllBuffered, initialTilePositions);
+            StartCoroutine(Coroutine_CreateJigsawTiles());
+        }
+        else 
+        {
+            Debug.LogWarning("photonView.IsMine이 false이며, MasterClient가 아닙니다. 타일을 생성하지 않습니다.");
+        }
     }
+    void SetInitialTilePositions()
+    {
+        initialTilePositions = new Vector3[numTileX * numTileY];
+
+        for (int i = 0; i < numTileX; i++)
+        {
+            for (int j = 0; j < numTileY; j++)
+            {
+                initialTilePositions[i * numTileY + j] = new Vector3(
+                    i * Tile.tileSize * BoardGen.puzzle_Scale,
+                    j * Tile.tileSize * BoardGen.puzzle_Scale,
+                    0.0f
+                );
+            }
+        }
+    }
+
+    //[PunRPC]
+    //void InitializeTiles(Vector3[] positions)
+    //{
+    //    if (positions == null)
+    //    {
+    //        Debug.LogError("positions 배열이 null입니다."); 
+    //        return; // 이후 코드 실행 방지
+    //    }
+
+    //    Debug.Log("InitializeTiles 호출");
+    //    int index = 0;
+    //    for (int i = 0; i < numTileX; i++)
+    //    {
+    //        for (int j = 0; j < numTileY; j++)
+    //        {
+    //            if (mTileGameObjects[i, j] == null) 
+    //            { 
+    //                Debug.LogError($"mTileGameObjects[{i},{j}]가 null입니다."); 
+    //                continue; 
+    //            }
+
+    //            GameObject tileObject = new GameObject($"TileGroup_{i}_{j}");
+    //            mTileGameObjects[i, j] = tileObject;
+    //            tileObject.transform.position = positions[index];
+
+    //            // PhotonView 설정
+    //            PhotonView view = tileObject.AddComponent<PhotonView>();
+
+    //            // 추가 컴포넌트 설정
+    //            tileObject.AddComponent<BoxCollider>();
+    //            Rigidbody rigidbody = tileObject.AddComponent<Rigidbody>();
+    //            rigidbody.useGravity = false;
+    //            rigidbody.isKinematic = true;
+
+    //            XRGrabInteractable xrGrabInteractable = tileObject.AddComponent<XRGrabInteractable>();
+    //            xrGrabInteractable.useDynamicAttach = true;
+
+    //            TileMovement tileMovement = tileObject.AddComponent<TileMovement>();
+    //            tileMovement.tile = mTiles[i, j];
+    //            tileMovement.SetPuzzleManager(puzzleManager);
+
+    //            index++;
+    //        }
+    //    }
+    //}
 
     Sprite CreateTransparentView(Texture2D tex)
     {
@@ -252,119 +339,175 @@ public class BoardGen : MonoBehaviour
 
     IEnumerator Coroutine_CreateJigsawTiles()
     {
+        Debug.Log("Coroutine_CreateJigsawTiles 시작");
+
+        if (mBaseSpriteOpaque == null)
+        {
+            Debug.LogError("mBaseSpriteOpaque가 null입니다.");
+            yield break;
+        }
+
         Texture2D baseTexture = mBaseSpriteOpaque.texture;
+        Debug.Log($"baseTexture.width: {baseTexture.width}, baseTexture.height: {baseTexture.height}");
+
         numTileX = baseTexture.width / Tile.tileSize;
         numTileY = baseTexture.height / Tile.tileSize;
+
+        Debug.Log($"numTileX: {numTileX}, numTileY: {numTileY}");
 
         if (numTileX <= 0 || numTileY <= 0)
         {
             Debug.LogError("Invalid tile size calculation. numTileX or numTileY is less than or equal to zero.");
-            yield break; // or handle the error as needed
+            yield break;
         }
+
+        // 초기 타일 위치 설정
+        SetInitialTilePositions();
+
+        Debug.Log("타일 배열 초기화");
 
         mTiles = new Tile[numTileX, numTileY];
         mTileGameObjects = new GameObject[numTileX, numTileY];
+        List<Vector3> randomTileIndices = new List<Vector3>();
+        //List<Vector3> initialPositions = new List<Vector3>();
 
-        List<Vector2Int> randomTileIndices = new List<Vector2Int>();
+        
 
-        // 랜덤으로 배치할 타일들의 위치를 저장
-        while (randomTileIndices.Count < numRandomTiles)
+        Debug.Log("타일 생성 시작");
+
+        for (int i = 0; i < numTileX; i++)
         {
-            int randomX = UnityEngine.Random.Range(0, numTileX);
-            int randomY = UnityEngine.Random.Range(0, numTileY);
-
-            Vector2Int randomIndex = new Vector2Int(randomX, randomY);
-            if (!randomTileIndices.Contains(randomIndex)) // 중복되지 않도록 확인
+            for (int j = 0; j < numTileY; j++)
             {
-                randomTileIndices.Add(randomIndex);
-            }
-        }
-
-        for (int i = 0; i < numTileX; i++) 
-        {
-            for (int j = 0; j < numTileY; j++) 
-            {
+                Debug.Log($"타일 생성 중: {i}, {j}");
 
                 mTiles[i, j] = CreateTile(i, j, baseTexture);
-                // 새로운 오브젝트 생성(3D퍼즐화)
-                GameObject puzzle_Tile_3D = new GameObject($"TileGroup_{i}_{j}");
+                GameObject puzzle_Tile_3D = new GameObject($"TileGameObe_{i}_{j}");
                 Vector3 originalPosition = new Vector3();
 
-                for (int z = 0; z<20; ++z)
+                for (int z = 0; z < 20; ++z)
                 {
                     mTileGameObjects[i, j] = CreateGameObjectFromTile(mTiles[i, j]);
-
-                    mTileGameObjects[i, j].transform.localPosition =
-                        new Vector3(mTileGameObjects[i, j].transform.localPosition.x * puzzle_Scale,
+                    mTileGameObjects[i, j].transform.localPosition = new Vector3(
+                        mTileGameObjects[i, j].transform.localPosition.x * puzzle_Scale,
                         mTileGameObjects[i, j].transform.localPosition.y * puzzle_Scale,
-                        mTileGameObjects[i, j].transform.localPosition.z -(z * 0.1f));
-
-                    mTileGameObjects[i, j].transform.localScale =
-                        new Vector3(mTileGameObjects[i, j].transform.localScale.x * puzzle_Scale,
+                        mTileGameObjects[i, j].transform.localPosition.z - (z * 0.1f));
+                    mTileGameObjects[i, j].transform.localScale = new Vector3(
+                        mTileGameObjects[i, j].transform.localScale.x * puzzle_Scale,
                         mTileGameObjects[i, j].transform.localScale.y * puzzle_Scale,
                         mTileGameObjects[i, j].transform.localScale.z);
 
-                    if (z == 0) 
-                    { 
-                        originalPosition = mTileGameObjects[i, j].transform.localPosition; //원래 위치 저장
+                    if (z == 0)
+                    {
+                        originalPosition = mTileGameObjects[i, j].transform.localPosition;
                     }
 
-                    mTileGameObjects[i, j].transform.localPosition =
-                        new Vector3(0,0,0 - (z * puzzle_Scale_Instance/2));
-                    // 3D 타일 오브젝트의 자식으로 설정
+                    mTileGameObjects[i, j].transform.localPosition = new Vector3(0, 0, 0 - (z * puzzle_Scale_Instance / 2));
                     mTileGameObjects[i, j].transform.SetParent(puzzle_Tile_3D.transform);
                 }
-                // 3D 타일로 자식들의 메쉬 병합
-                CombineMeshes(puzzle_Tile_3D);
 
-                puzzle_Tile_3D.name = "TileGameObe_" + i + "_" + j;
+                CombineMeshes(puzzle_Tile_3D);
+                puzzle_Tile_3D.name = $"TileGameObe_{i}_{j}";
+
                 if (parentForTiles != null)
                 {
                     puzzle_Tile_3D.transform.SetParent(parentForTiles);
                 }
                 puzzle_Tile_3D.transform.localPosition = originalPosition;
 
-                BoxCollider box = puzzle_Tile_3D.AddComponent<BoxCollider>();
+                // PhotonView 및 ViewID 설정
                 PhotonView photonView = puzzle_Tile_3D.AddComponent<PhotonView>();
-                photonView.ViewID = PhotonNetwork.AllocateViewID(true);
+                PhotonTransformView photonTransformView = puzzle_Tile_3D.AddComponent<PhotonTransformView>();
+                photonView.observableSearch = ObservableSearch.AutoFindAll;
+                photonTransformView.m_SynchronizePosition = true;
+                photonTransformView.m_SynchronizeRotation = true;
+                photonTransformView.m_SynchronizeScale = true;
+                photonView.OwnershipTransfer = OwnershipOption.Takeover; // Ownership 설정 추가
+                photonView.ObservedComponents = new List<Component> { photonTransformView }; // Observed Components 설정
+                int viewID = PhotonNetwork.AllocateViewID(true);
+                photonView.ViewID = viewID;
+                Debug.Log($"PhotonView ID 할당: {viewID}");
 
-                // TileMovement 추가 및 설정
-                TileMovement tileMovement = puzzle_Tile_3D.AddComponent<TileMovement>();
-                tileMovement.tile = mTiles[i, j];
-                tileMovement.SetPuzzleManager(puzzleManager); // PuzzleManager 설정
-
+                // 추가 컴포넌트 설정
+                BoxCollider box = puzzle_Tile_3D.AddComponent<BoxCollider>();
                 Rigidbody rigidbody = puzzle_Tile_3D.AddComponent<Rigidbody>();
                 rigidbody.useGravity = false;
                 rigidbody.isKinematic = true;
 
                 XRGrabInteractable xrGrabInteractable = puzzle_Tile_3D.AddComponent<XRGrabInteractable>();
                 xrGrabInteractable.useDynamicAttach = true;
+                xrGrabInteractable.selectMode = InteractableSelectMode.Multiple;
 
-                // 랜덤하게 선택된 타일은 인스펙터에서 지정한 위치로 배치
-                if (randomTileIndices.Contains(new Vector2Int(i, j)))
-                {
-                    int randomIndex = randomTileIndices.IndexOf(new Vector2Int(i, j));
-                    if (randomIndex < randomTilePositions.Length)
-                    {
-                        puzzle_Tile_3D.transform.localPosition = randomTilePositions[randomIndex];
-                    }
-                    else
-                    {
-                        Debug.LogError("randomTilePositions 배열의 길이가 충분하지 않습니다.");
-                    }
-                }
-                else
-                {
-                    // 비활성화된 타일은 이동 불가능
-                    tileMovement.DisableTileCollider();
-                }
+                TileMovement tileMovement = puzzle_Tile_3D.AddComponent<TileMovement>();
+                tileMovement.tile = mTiles[i, j];
+                tileMovement.SetPuzzleManager(puzzleManager);
 
-                
+                //Debug.Log("랜덤 타일 위치 설정");
+
+                //while (randomTileIndices.Count < numRandomTiles)
+                //{
+                //    int randomX = UnityEngine.Random.Range(0, numTileX);
+                //    int randomY = UnityEngine.Random.Range(0, numTileY);
+
+                //    Vector3 randomIndex = new Vector3(randomX, randomY, 0);
+                //    if (!randomTileIndices.Contains(randomIndex))
+                //    {
+                //        randomTileIndices.Add(randomIndex);
+                //        Debug.Log($"RPC 호출 전: SyncRandomTilePosition - {randomIndex} - {randomTilePositions[randomTileIndices.Count - 1]}");
+                //        photonView.RPC("SyncRandomTilePosition", RpcTarget.AllBuffered, randomIndex, randomTilePositions[randomTileIndices.Count - 1]);
+                //        Debug.Log($"랜덤 타일 위치 설정: {randomIndex} - {randomTilePositions[randomTileIndices.Count - 1]}");
+                //    }
+                //}
+
+                //// 랜덤 타일 위치 설정
+                //if (randomTileIndices.Contains(new Vector3(i, j, 0)))
+                //{
+                //    int randomIndex = randomTileIndices.IndexOf(new Vector3(i, j, 0));
+                //    if (randomIndex < randomTilePositions.Length)
+                //    {
+                //        puzzle_Tile_3D.transform.localPosition = randomTilePositions[randomIndex];
+                //        Debug.Log($"타일 위치 설정: {puzzle_Tile_3D.name} - {randomTilePositions[randomIndex]}");
+                //    }
+                //    else
+                //    {
+                //        Debug.LogError("randomTilePositions 배열의 길이가 충분하지 않습니다.");
+                //    }
+                //}
+                //else
+                //{
+                //    tileMovement.DisableTileCollider();
+                //}
+
+                //initialPositions.Add(puzzle_Tile_3D.transform.position);
+                photonView.RPC("SyncTilePosition", RpcTarget.All, puzzle_Tile_3D.transform.position);
+                Debug.Log($"퍼즐 타일 생성 및 초기화 완료: {puzzle_Tile_3D.name}, ViewID: {viewID}");
 
                 yield return null;
             }
         }
     }
+    //[PunRPC]
+    //void SyncTilePosition(Vector3 position)
+    //{
+    //    transform.position = position;
+    //}
+
+    [PunRPC]
+    void SyncRandomTilePosition(Vector3 index, Vector3 position)
+    {
+        Debug.Log($"SyncRandomTilePosition 호출: {index} - {position}");
+
+        // mTileGameObjects 배열의 특정 요소가 null인지 확인
+        if (mTileGameObjects[(int)index.x, (int)index.y] != null)
+        {
+            mTileGameObjects[(int)index.x, (int)index.y].transform.position = position;
+        }
+        else
+        {
+            Debug.LogError($"mTileGameObjects[{(int)index.x},{(int)index.y}]가 null입니다.");
+        }
+    }
+
 
 
     private void CombineMeshes(GameObject parentObject)
@@ -388,7 +531,6 @@ public class BoardGen : MonoBehaviour
         MeshRenderer meshRenderer = parentObject.AddComponent<MeshRenderer>();
         meshRenderer.sharedMaterial = meshFilters[0].GetComponent<MeshRenderer>().sharedMaterial;
     }
-
 
     Tile CreateTile(int i, int j, Texture2D baseTexture)
     {
