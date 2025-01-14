@@ -44,10 +44,7 @@ public class RocketCube : MonoBehaviour
             Debug.Log("로켓펀치로 못 가져옵니다");
             return;
         }
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("RocketPunchAble"))
-        {
-            if (catchedObject == null && isFired) // 잡힌 오브젝트가 없고 로켓펀치를 했으면
+        if (catchedObject == null && isFired) // 잡힌 오브젝트가 없고 로켓펀치를 했으면
             {
                 Transform currentParent = other.transform; // 충돌 한 오브젝트 부모 정의
                 Transform finalParent = null; //최상위 부모 정의
@@ -96,12 +93,10 @@ public class RocketCube : MonoBehaviour
                 }
 
             }
-            if (catchedObject) // 잡힌 오브젝트가 있으면
+        if (catchedObject) // 잡힌 오브젝트가 있으면
             {
                 Debug.Log("두개 이상 못 가져옴");
             }
-        }
-
     }
     public void ParentNull() // 자식을 자식이 아닌 상태로 만들기
     {
