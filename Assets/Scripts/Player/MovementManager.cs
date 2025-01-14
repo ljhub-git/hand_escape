@@ -100,6 +100,10 @@ public class MovementManager : MonoBehaviour
     public void RocketPunchReadyR(float _rocketMoveSpeed)
     {
         preparedHandCntR++;
+        if (preparedHandCntR < 1) // 1 미만 경우가 생겼을 시
+        {
+            preparedHandCntR = 1; // 1 로 초기화
+        }
         if (preparedHandCntR > 1) // 1 초과 할 경우가 생겼을 시
         {
             preparedHandCntR = 1; // 1 로 초기화
@@ -109,6 +113,10 @@ public class MovementManager : MonoBehaviour
     public void RocketPunchReadyL(float _rocketMoveSpeed)
     {
         preparedHandCntL++;
+        if (preparedHandCntL < 1) // 1 미만 경우가 생겼을 시
+        {
+            preparedHandCntL = 1; // 1 로 초기화
+        }
         if (preparedHandCntL > 1) // 1 초과 할 경우가 생겼을 시
         {
             preparedHandCntL = 1; // 1 로 초기화
@@ -170,6 +178,10 @@ public class MovementManager : MonoBehaviour
         {
             preparedHandCntR = 0; // 0 으로 초기화
         }
+        if (preparedHandCntR > 0) // 0 초과 되는 경우
+        {
+            preparedHandCntR = 0; // 0 으로 초기화
+        }
 
     }    
     public void RocketPunchUnreadyL()
@@ -179,7 +191,10 @@ public class MovementManager : MonoBehaviour
         {
             preparedHandCntL = 0; // 0 으로 초기화
         }
-
+        if (preparedHandCntL > 0 ) // 0 초과 되는 경우
+        {
+            preparedHandCntL = 0; // 0 으로 초기화
+        }
     }
 
     public IEnumerator RocketMoveCo(float _rocketMoveSpeed)
