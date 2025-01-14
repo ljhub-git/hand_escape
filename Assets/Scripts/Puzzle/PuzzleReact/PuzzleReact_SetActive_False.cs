@@ -14,18 +14,11 @@ public class PuzzleReact_SetActive_False : PuzzleReactObject
     public override void OnPuzzleSolved()
     {
         base.OnPuzzleSolved();
-        if (meshRenderer != null)
-            meshRenderer.enabled = false;
-        if(col != null)
-            col.enabled = false;
+        gameObject.SetActive(false);
     }
 
     public override void OnPuzzleReset()
     {
         base.OnPuzzleReset();
-        if (meshRenderer != null)
-            meshRenderer.enabled = true;
-        if (col != null)
-            col.enabled = true;
     }
 }
