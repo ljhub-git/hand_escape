@@ -105,8 +105,8 @@ public class InventoryManager : MonoBehaviour
             if (networkObjectMng != null)
             {
                 PhotonView view = itemInfo.GetComponent<PhotonView>();
-                networkObjectMng.SetObjectPosition(view, transform.position);
                 networkObjectMng.SetObjectActive(view, true);
+                networkObjectMng.SetObjectPosition(view, transform.position);
             }
 
             //inventoryItem.ItemInfo.transform.position = new Vector3(0, 1, 0); // 원하는 위치에 배치

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -21,11 +22,18 @@ public class InventoryUI : MonoBehaviour
 
     private Vector3 m_StartingScale = Vector3.one * 0.01f;
 
+    private NetworkObjectManager networkObjectMng = null;
+
     public float distance = 0.3f;
     public float verticalOffset = -0.2f;
 
     public Transform positionSource;
 
+
+    private void Awake()
+    {
+        networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -39,7 +47,10 @@ public class InventoryUI : MonoBehaviour
             {
                 // 충돌한 객체가 Item_Test를 가지고 있으면 인벤토리에 아이템을 추가
                 InventoryManager.instance.AddItemToInventory(item);
+                
                 other.gameObject.SetActive(false);
+                if (networkObjectMng != null)
+                    networkObjectMng.SetObjectActive(other.GetComponent<PhotonView>(), false);
             }
         }
     }
