@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    private MenuUI menuUIParent = null;
     public GameObject loginUI;
     public GameObject menuUI;   // 메인 메뉴 (Resume, Option, Quit)
     public GameObject optionUI; // 옵션 메뉴 (슬라이더, 뒤로가기 버튼)
@@ -23,21 +22,6 @@ public class MenuManager : MonoBehaviour
     public Transform menuUIPosition;
 
     public Transform positionSource;
-
-    private void Awake()
-    {
-        //menuUIParent = FindAnyObjectByType<MenuUI>();
-
-        ////if(menuUIParent != null)
-        ////    menuUIPosition = FindAnyObjectByType<MenuUI>().transform;
-
-        //menuUI = menuUIParent._menuUI;
-        //optionUI = menuUIParent._optionUI;
-        //checkUI = menuUIParent._checkUI;
-
-        //positionSource = transform;
-    }
-
 
     // 메인 메뉴로 이동
     public void ShowMainMenu()
@@ -115,9 +99,5 @@ public class MenuManager : MonoBehaviour
         menuUIPosition.transform.position = kbPos;
         menuUIPosition.transform.LookAt(Camera.main.transform.position);
         menuUIPosition.transform.Rotate(Vector3.up, 180.0f);
-
-        //transform.position = kbPos;
-        //transform.LookAt(Camera.main.transform.position);
-        //transform.Rotate(Vector3.up, 180.0f);
     }
 }
