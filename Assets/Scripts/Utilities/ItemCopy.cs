@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
@@ -46,14 +47,13 @@ public class ItemCopy : MonoBehaviour
     void Update()
     {
         if (!grabInteractable.isSelected) return;
-
         if (IsHeldByBothHands())
         {
             UpdateSpeed();
 
             if (CanDuplicate() && !hasDuplicated)
             {
-                DuplicateObject();
+                StartCoroutine(DuplicateObject());
                 hasDuplicated = true; // 복사 완료
             }
         }
@@ -95,7 +95,7 @@ public class ItemCopy : MonoBehaviour
         playerMng.GetHandDistance() >= twoHandDistance && currentSpeed >= minSpeedForDuplication;
 
 
-    private void DuplicateObject()
+    private IEnumerator DuplicateObject()
     {
         // 카메라 기준으로 복제 위치 계산
         Transform cameraTransform = Camera.main.transform;
@@ -103,6 +103,8 @@ public class ItemCopy : MonoBehaviour
 
         //GameObject duplicatedObject = Instantiate(gameObject, spawnPosition, transform.rotation);
         GameObject duplicatedObject = networkObjectMng.InstantiateObject(name, spawnPosition, transform.rotation);
+
+        yield return new WaitForSeconds(0.75f);
 
         // 중복 방지를 위해 복사된 오브젝트에서 이 스크립트 제거
         Destroy(duplicatedObject.GetComponent<ItemCopy>());
