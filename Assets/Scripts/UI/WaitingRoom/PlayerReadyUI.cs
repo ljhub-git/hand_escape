@@ -17,8 +17,8 @@ public class PlayerReadyUI : MonoBehaviour
     /// <summary>
     /// Ready 텍스트를 토글한다.
     /// </summary>
-    public void ToggleReady()
+    public void SetPlayerReady(bool _isReady)
     {
-        text_Ready.gameObject.SetActive(!text_Ready.gameObject.activeInHierarchy);
+        text_Ready.gameObject.SetActive(_isReady);
     }
 }
