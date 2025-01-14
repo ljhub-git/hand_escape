@@ -17,7 +17,7 @@ public class PuzzleObject : MonoBehaviour
             return;
         }
 
-        Debug.Log("Reset Puzzle!");
+        Debug.LogFormat("{0} : Reset Puzzle!", gameObject.name);
 
         puzzleMng.OnResetPuzzle(this);
     }
@@ -30,7 +30,7 @@ public class PuzzleObject : MonoBehaviour
             return;
         }
 
-        Debug.Log("Solve Puzzle!");
+        Debug.LogFormat("{0} : Solve Puzzle!", gameObject.name);
 
         puzzleMng.OnSolvePuzzle(this);
     }
