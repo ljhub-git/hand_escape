@@ -16,6 +16,9 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
     public AudioClip succesSound; // Á¤´ä »ç¿îµå
     private AudioSource succesSource;
 
+    public PuzzleObject puzzleObj;
+    public BoardGen boardgen;
+
     private void Awake()
     {
         placedTiles = new HashSet<TileMovement>();
@@ -53,7 +56,20 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
             // ÆÛÁñ ¿Ï¼º
             OnPuzzleCompleted?.Invoke();
             Debug.Log("ÆÛÁñ¿Ï¼º");
+            puzzleObj.SolvePuzzle();
+            OnDestroy();
         }
+    }
+
+    private void cheatkey()
+    {
+        puzzleObj.SolvePuzzle();
+        OnDestroy();
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(boardgen.gameObject);
     }
 
     public void OnTilePlaced(TileMovement tileMovement)
@@ -69,5 +85,14 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
     public void SetTotalTiles(int total)
     {
         totalTiles = total;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("j"))
+        {
+            Debug.Log("¾å»ðÇÑ³ð");
+            cheatkey();
+        }
     }
 }

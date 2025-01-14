@@ -32,7 +32,7 @@ public class BoardGen : MonoBehaviour
 
     public int numRandomTiles = 2;  // 랜덤 배치할 타일의 개수를 설정
 
-    public Vector3[] randomTilePositions;
+    //public Vector3[] randomTilePositions; //랜덤으로 배치할 타일의 포지션을 직접 입력하는 용도
 
 
     Sprite LoadBaseTexture()
@@ -82,9 +82,10 @@ public class BoardGen : MonoBehaviour
         return sprite;
     }
 
-    void OnValidate()
-    { // 인스턴스 변수의 값을 static 변수에 동기화
-      puzzle_Scale = puzzle_Scale_Instance; 
+    private void Awake()
+    {
+        // 인스턴스 변수의 값을 static 변수에 동기화
+        puzzle_Scale = puzzle_Scale_Instance;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -265,7 +266,7 @@ public class BoardGen : MonoBehaviour
 
         List<Vector2Int> randomTileIndices = new List<Vector2Int>();
 
-        // 랜덤으로 배치할 타일들의 위치를 저장
+        // 랜덤 타일 인덱스 저장
         while (randomTileIndices.Count < numRandomTiles)
         {
             int randomX = UnityEngine.Random.Range(0, numTileX);
@@ -277,6 +278,9 @@ public class BoardGen : MonoBehaviour
                 randomTileIndices.Add(randomIndex);
             }
         }
+
+        // 랜덤 배치 위치 저장
+        List<Vector2> randomPositions = new List<Vector2>();
 
         for (int i = 0; i < numTileX; i++) 
         {
@@ -336,19 +340,27 @@ public class BoardGen : MonoBehaviour
                 XRGrabInteractable xrGrabInteractable = puzzle_Tile_3D.AddComponent<XRGrabInteractable>();
                 xrGrabInteractable.useDynamicAttach = true;
 
-                // 랜덤하게 선택된 타일은 인스펙터에서 지정한 위치로 배치
+                // 랜덤으로 선택된 타일만 랜덤 위치로 배치
                 if (randomTileIndices.Contains(new Vector2Int(i, j)))
                 {
-                    int randomIndex = randomTileIndices.IndexOf(new Vector2Int(i, j));
-                    if (randomIndex < randomTilePositions.Length)
-                    {
-                        puzzle_Tile_3D.transform.localPosition = randomTilePositions[randomIndex];
-                    }
-                    else
-                    {
-                        Debug.LogError("randomTilePositions 배열의 길이가 충분하지 않습니다.");
-                    }
+                    Vector2 randomPosition = GenerateRandomPosition(randomPositions);
+                    randomPositions.Add(randomPosition);
+                    puzzle_Tile_3D.transform.localPosition = new Vector3(randomPosition.x, randomPosition.y, 0);
                 }
+
+                // 랜덤하게 선택된 타일은 인스펙터에서 지정한 위치로 배치
+                //if (randomTileIndices.Contains(new Vector2Int(i, j)))
+                //{
+                //    int randomIndex = randomTileIndices.IndexOf(new Vector2Int(i, j));
+                //    if (randomIndex < randomTilePositions.Length)
+                //    {
+                //        puzzle_Tile_3D.transform.localPosition = randomTilePositions[randomIndex];
+                //    }
+                //    else
+                //    {
+                //        Debug.LogError("randomTilePositions 배열의 길이가 충분하지 않습니다.");
+                //    }
+                //}
                 else
                 {
                     // 비활성화된 타일은 이동 불가능
@@ -361,6 +373,48 @@ public class BoardGen : MonoBehaviour
             }
         }
     }
+
+    Vector2 GenerateRandomPosition(List<Vector2> existingPositions)
+    {
+        Vector2 randomPosition = Vector2.zero; // 기본값
+        bool positionValid = false;
+
+        while (!positionValid)
+        {
+            // X축 범위 생성
+            float x = UnityEngine.Random.Range(-1.0f, 1.5f);
+
+            // Y축 범위 생성
+            float y = UnityEngine.Random.Range(-0.55f, 1.2f);
+
+            randomPosition = new Vector2(x, y);
+
+            // 배치 조건 확인: X와 Y 모두 0~0.8 범위에 있으면 다시 생성
+            if (x >= 0 && x <= 0.8f && y >= 0 && y <= 0.8f)
+            {
+                continue; // 조건에 맞지 않으므로 다시 랜덤 생성
+            }
+
+            // 기존 위치와 겹침 여부 확인
+            positionValid = true; // 기본값: 유효
+            foreach (Vector2 existing in existingPositions)
+            {
+                // X, Y축의 거리 계산
+                float distanceX = Mathf.Abs(existing.x - randomPosition.x);
+                float distanceY = Mathf.Abs(existing.y - randomPosition.y);
+
+                // 겹침 여부 판단: 0.05보다 적게 겹치면 다시 생성
+                if (distanceX < 0.05f && distanceY < 0.05f)
+                {
+                    positionValid = false; // 중복 발생
+                    break; // 다른 기존 위치와도 확인하지 않고 다시 랜덤 생성
+                }
+            }
+        }
+
+        return randomPosition;
+    }
+
 
 
     private void CombineMeshes(GameObject parentObject)

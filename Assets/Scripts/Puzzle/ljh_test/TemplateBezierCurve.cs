@@ -21,6 +21,22 @@ public class TemplateBezierCurve : MonoBehaviour
         new Vector2(53, 13),
         new Vector2(65, 15),
         new Vector2(100, 0)
+        //new Vector2(0, 0),
+        //new Vector2(70, 30),
+        //new Vector2(98, 26),
+        //new Vector2(90, 10),
+        //new Vector2(96, 0),
+        //new Vector2(50, -10),
+        //new Vector2(30, -36),
+        //new Vector2(72, -40),
+        //new Vector2(128, -40),
+        //new Vector2(170, -36),
+        //new Vector2(150, -10),
+        //new Vector2(104, 0),
+        //new Vector2(110, 10),
+        //new Vector2(106, 26),
+        //new Vector2(130, 30),
+        //new Vector2(200, 0)
     };
 
     public GameObject PointPrefab;
