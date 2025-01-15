@@ -2663,7 +2663,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2018774400}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: LoadTitleScene
         m_Mode: 1
@@ -3019,34 +3019,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2018774401}
-  - component: {fileID: 2018774400}
+  - component: {fileID: 2018774402}
   m_Layer: 0
-  m_Name: MenuManager
+  m_Name: EndingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2018774400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2018774399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7361b196400e284eb4b467055af35dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loginUI: {fileID: 0}
-  menuUI: {fileID: 0}
-  optionUI: {fileID: 0}
-  checkUI: {fileID: 0}
-  distance: 0.5
-  verticalOffset: 0.2
-  menuUIPosition: {fileID: 0}
-  positionSource: {fileID: 0}
 --- !u!4 &2018774401
 Transform:
   m_ObjectHideFlags: 0
@@ -3062,6 +3042,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 361635552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2018774402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018774399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa9023e831eca4b870805aaf5356ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2086568876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4161245141115118, guid: b67b8c45390698d4dab3aad82e12f7ea, type: 3}

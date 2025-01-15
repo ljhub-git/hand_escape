@@ -126,9 +126,4 @@ public class MenuManager : MonoBehaviour
             heightSliderMng.OnValueChanged = AdjustHeight;
         }
     }
-
-    public void LoadTitleScene()
-    {
-        SceneManager.LoadScene("S_Title");
-    }
 }
