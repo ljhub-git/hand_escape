@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6189f58846828624aba788be95676d0c
+guid: e046e863d087ced4a93c3d3599541d63
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,11 +93,37 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: starlightnight_0
+      name: last_supper_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,21 +131,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1dea3e301da20e49a6402b80561f99d
-      internalID: 1586485148
+      spriteID: f5dcfda0a4525d84f827ee8b345f2de9
+      internalID: -1710718335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_1
+      name: last_supper_1
       rect:
         serializedVersion: 2
         x: 200
@@ -127,21 +153,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cde8a9cc7a86f64aa01eabaef5e1bfb
-      internalID: -1998725656
+      spriteID: 23d576544a9852145917e9363aa064ee
+      internalID: -874813500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_2
+      name: last_supper_2
       rect:
         serializedVersion: 2
         x: 400
@@ -149,21 +175,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70f14694dab434e459e2ddbc792d2829
-      internalID: -1486600840
+      spriteID: 594ab09292ca865478e355beb38b9299
+      internalID: 1538817640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_3
+      name: last_supper_3
       rect:
         serializedVersion: 2
         x: 600
@@ -171,21 +197,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d3be00b48b20894d8212f5968242708
-      internalID: -1616036946
+      spriteID: 05b2f7a8fdce10446907b7d9e8199dcc
+      internalID: 714289823
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_4
+      name: last_supper_4
       rect:
         serializedVersion: 2
         x: 0
@@ -193,21 +219,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae4773355f7e1814d92d46494add299b
-      internalID: 258271258
+      spriteID: 92c30b632b7ac19478b473d49774d05f
+      internalID: -1464689995
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_5
+      name: last_supper_5
       rect:
         serializedVersion: 2
         x: 200
@@ -215,21 +241,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ddc2f22c2d06b14f9cfc83477db893a
-      internalID: -548067736
+      spriteID: 115a1981466fd904083e23306e058968
+      internalID: 793251271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_6
+      name: last_supper_6
       rect:
         serializedVersion: 2
         x: 400
@@ -237,21 +263,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 981f191b84d260e458b4322b3525133e
-      internalID: -430601665
+      spriteID: 91e9102359d8b4548b1a3cd516f884cb
+      internalID: 604464105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_7
+      name: last_supper_7
       rect:
         serializedVersion: 2
         x: 600
@@ -259,21 +285,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68d40e96a15a2a245b9bc7098685fed8
-      internalID: 1235459925
+      spriteID: bdc1ffaa956d3424781f753a2016082e
+      internalID: -1822582665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_8
+      name: last_supper_8
       rect:
         serializedVersion: 2
         x: 0
@@ -281,21 +307,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21f7ad269af98ca4aa07da36ea696a02
-      internalID: -1544516153
+      spriteID: 59a798d76d09afe4da1ca30739e03f18
+      internalID: 1482855725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_9
+      name: last_supper_9
       rect:
         serializedVersion: 2
         x: 200
@@ -303,21 +329,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 577f83b25b460e64a9b159ac5dc326eb
-      internalID: 1700617795
+      spriteID: 04f469569e92bdd4082b7de68c70f4a4
+      internalID: 1388831193
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_10
+      name: last_supper_10
       rect:
         serializedVersion: 2
         x: 400
@@ -325,21 +351,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d03b2b10254f5fb43bc5a3e0ad14dcde
-      internalID: 27146822
+      spriteID: ba998e398ff462f468651f9e3f9168cb
+      internalID: 925340282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_11
+      name: last_supper_11
       rect:
         serializedVersion: 2
         x: 600
@@ -347,21 +373,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67a7e9974713f2c4486868bccca4b948
-      internalID: -1900166654
+      spriteID: a331e505eb8ac9c40944afb1cf4b2c79
+      internalID: -824074720
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_12
+      name: last_supper_12
       rect:
         serializedVersion: 2
         x: 0
@@ -369,21 +395,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 409d6ac1862f4954a80689ed2593ae2b
-      internalID: 1910819004
+      spriteID: 38acbc9186d12da4e91a573d25cfb2ae
+      internalID: -1770100821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_13
+      name: last_supper_13
       rect:
         serializedVersion: 2
         x: 200
@@ -391,21 +417,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efc17661da520504f9f78d4b179c5097
-      internalID: 1604045025
+      spriteID: e8f1afb28fca5314587d63bed0c4e243
+      internalID: -689997350
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_14
+      name: last_supper_14
       rect:
         serializedVersion: 2
         x: 400
@@ -413,21 +439,21 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd33e3e873322ef4b84215bb5a8e6bce
-      internalID: -980661316
+      spriteID: 4597d8c4d98451a40afa01a8898e3be0
+      internalID: 789417465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: starlightnight_15
+      name: last_supper_15
       rect:
         serializedVersion: 2
         x: 600
@@ -435,15 +461,15 @@ TextureImporter:
         width: 200
         height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ed7407981442a346b11c0fc86f594b1
-      internalID: -150489164
+      spriteID: fc0f88602b368014b979f403162f5e14
+      internalID: -1408982577
       vertices: []
       indices: 
       edges: []
@@ -452,7 +478,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e982a2a2954a0274eae3a5bcc0cae64f
+    spriteID: b88220f939fd2fb4a93d1205bcc93590
     internalID: 0
     vertices: []
     indices: 
@@ -462,22 +488,22 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      starlightnight_0: 1586485148
-      starlightnight_1: -1998725656
-      starlightnight_10: 27146822
-      starlightnight_11: -1900166654
-      starlightnight_12: 1910819004
-      starlightnight_13: 1604045025
-      starlightnight_14: -980661316
-      starlightnight_15: -150489164
-      starlightnight_2: -1486600840
-      starlightnight_3: -1616036946
-      starlightnight_4: 258271258
-      starlightnight_5: -548067736
-      starlightnight_6: -430601665
-      starlightnight_7: 1235459925
-      starlightnight_8: -1544516153
-      starlightnight_9: 1700617795
+      last_supper_0: -1710718335
+      last_supper_1: -874813500
+      last_supper_10: 925340282
+      last_supper_11: -824074720
+      last_supper_12: -1770100821
+      last_supper_13: -689997350
+      last_supper_14: 789417465
+      last_supper_15: -1408982577
+      last_supper_2: 1538817640
+      last_supper_3: 714289823
+      last_supper_4: -1464689995
+      last_supper_5: 793251271
+      last_supper_6: 604464105
+      last_supper_7: -1822582665
+      last_supper_8: 1482855725
+      last_supper_9: 1388831193
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

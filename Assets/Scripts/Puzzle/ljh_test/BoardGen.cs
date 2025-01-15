@@ -93,8 +93,8 @@ public class BoardGen : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (!PhotonNetwork.IsMasterClient)
-            return;
+        //if (!PhotonNetwork.IsMasterClient)
+        //    return;
 
         mBaseSpriteOpaque = LoadBaseTexture();
         //완성그림(비활성화 시킬것)

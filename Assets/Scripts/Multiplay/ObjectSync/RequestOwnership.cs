@@ -13,6 +13,7 @@ public class RequestOwnership : MonoBehaviour
 
     public void GetOwnership()
     {
-        networkObjectMng.RequestOwnership(GetComponent<PhotonView>());
+        if (networkObjectMng != null)
+            networkObjectMng.RequestOwnership(GetComponent<PhotonView>());
     }
 }

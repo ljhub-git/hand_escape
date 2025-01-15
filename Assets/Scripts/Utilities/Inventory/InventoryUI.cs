@@ -37,21 +37,22 @@ public class InventoryUI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Items"))
-        {
-            // 충돌한 객체에 Item_Test 컴포넌트가 있는지 확인
-            Item_Test item = other.GetComponent<Item_Test>();
+        // 충돌한 객체에 Item_Test 컴포넌트가 있는지 확인
+        Item_Test item = other.GetComponent<Item_Test>();
 
-            if (item != null &&
-                (item.XRGrabInteractable.isSelected || item.XRGrabInteractable.isHovered))
-            {
-                // 충돌한 객체가 Item_Test를 가지고 있으면 인벤토리에 아이템을 추가
-                InventoryManager.instance.AddItemToInventory(item);
-                
-                other.gameObject.SetActive(false);
-                if (networkObjectMng != null)
-                    networkObjectMng.SetObjectActive(other.GetComponent<PhotonView>(), false);
-            }
+        Debug.Log(other.name);
+
+        if (item != null &&
+            (item.XRGrabInteractable.isSelected || item.XRGrabInteractable.isHovered))
+        {
+
+            Debug.Log("Hello world!");
+            // 충돌한 객체가 Item_Test를 가지고 있으면 인벤토리에 아이템을 추가
+            InventoryManager.instance.AddItemToInventory(item);
+
+            other.gameObject.SetActive(false);
+            if (networkObjectMng != null)
+                networkObjectMng.SetObjectActive(other.GetComponent<PhotonView>(), false);
         }
     }
 
