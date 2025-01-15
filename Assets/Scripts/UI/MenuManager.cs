@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    static public float currentHeight = 170f;
+    static public float currentHeight = 1.36144f;
 
     public GameObject loginUI;
     public GameObject menuUI;   // 메인 메뉴 (Resume, Option, Quit)
