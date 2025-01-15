@@ -4854,7 +4854,7 @@ PrefabInstance:
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[2].puzzleObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785318451}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: puzzleMapping.Array.data[3].puzzleObject
       value: 
@@ -4926,11 +4926,11 @@ PrefabInstance:
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: 'puzzleMapping.Array.data[2].reactiveObjects.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785318452}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: 'puzzleMapping.Array.data[2].reactiveObjects.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1975172826}
     - target: {fileID: 5096186488962655737, guid: 313ef16bf3cc2254b9d3f0148b28451f, type: 3}
       propertyPath: 'puzzleMapping.Array.data[2].reactiveObjects.Array.data[2]'
       value: 
