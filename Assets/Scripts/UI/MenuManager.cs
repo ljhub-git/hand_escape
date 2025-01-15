@@ -66,11 +66,11 @@ public class MenuManager : MonoBehaviour
 
     public void Resume()
     {
-        //if (!isLogin)
-        ////if (!titleSceneManager.isLogin)
-        //{
-        //    loginUI.SetActive(true);
-        //}
+        if (isLogin)
+        //if (!titleSceneManager.isLogin)
+        {
+            loginUI.SetActive(true);
+        }
         menuUI.SetActive(false);  // 메인 메뉴 비활성화
     }
 
