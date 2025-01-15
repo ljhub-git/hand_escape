@@ -551,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6051141193062521404, guid: bb1d6330b8bb1124b99ab8e34a09bfc3, type: 3}
       propertyPath: nextLevelName
-      value: Ending
+      value: S_Ending
       objectReference: {fileID: 0}
     - target: {fileID: 6166838091317483824, guid: bb1d6330b8bb1124b99ab8e34a09bfc3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3220,7 +3220,7 @@ MonoBehaviour:
   puzzle_Scale_Instance: 0.001
   parentForTiles: {fileID: 479822084}
   puzzleManager: {fileID: 937180893}
-  numRandomTiles: 2
+  numRandomTiles: 5
 --- !u!4 &560357293
 Transform:
   m_ObjectHideFlags: 0
@@ -3230,7 +3230,7 @@ Transform:
   m_GameObject: {fileID: 560357291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.1, y: 1.5, z: -4.51}
+  m_LocalPosition: {x: 9.1, y: 0.7, z: -4.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
