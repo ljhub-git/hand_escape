@@ -11,7 +11,7 @@ public class DatabaseManager : MonoBehaviour
 
     private const string connectTestUri = "http://192.168.1.27/connectTest.php";
 
-    private const string signUpUri = "http://192.168.1.27/singup.php";
+    private const string signUpUri = "http://192.168.1.27/signup.php";
     #endregion
 
     private void Start()
@@ -101,6 +101,7 @@ public class DatabaseManager : MonoBehaviour
                 // 아이디가 테이블에 없을 경우
                 else if(www.downloadHandler.text == "2")
                 {
+                    Debug.Log("SignUp!");
                     StartCoroutine(SignUpCoroutine(_id, _pw));
                 }
             }
@@ -114,7 +115,7 @@ public class DatabaseManager : MonoBehaviour
         form.AddField("signUpUser", _id);
         form.AddField("signUpPass", _pw);
 
-        using (UnityWebRequest www = UnityWebRequest.Post(loginUri, form))
+        using (UnityWebRequest www = UnityWebRequest.Post(signUpUri, form))
         {
             yield return www.SendWebRequest();
 

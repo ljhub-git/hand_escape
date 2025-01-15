@@ -35,6 +35,7 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
     public void OnLoginFailed()
     {
         Debug.Log("Login Failed!");
+        loginManager.OnLoginFailed();
     }
     #endregion
 
