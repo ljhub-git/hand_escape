@@ -299,13 +299,10 @@ public class MovementManager : MonoBehaviour
     }
     #endregion
     #region 앉기서기모드
-    public void SittingMode()
+    public void characterControllerHeight(float _height)
     {
-        characterController.height = 1.85f;
-    }
-    public void StandingMode()
-    {
-        characterController.height = 1.35f;
+        _height = Mathf.Clamp(_height, 0.5f, 1.8f);
+        characterController.height = _height;
     }
     #endregion
 }
