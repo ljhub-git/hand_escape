@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class MenuManager : MonoBehaviour
@@ -99,5 +100,10 @@ public class MenuManager : MonoBehaviour
         menuUIPosition.transform.position = kbPos;
         menuUIPosition.transform.LookAt(Camera.main.transform.position);
         menuUIPosition.transform.Rotate(Vector3.up, 180.0f);
+    }
+
+    public void LoadTitleScene()
+    {
+        SceneManager.LoadScene("S_Title");
     }
 }
