@@ -126,6 +126,9 @@ public class BoardGen : MonoBehaviour
 
         //CreateJigsawTiles();
         StartCoroutine(Coroutine_CreateJigsawTiles());
+
+        mGameObjectQpaque.transform.SetParent(parentForTiles);
+        mGameObjectTransparent.transform.SetParent(parentForTiles);
     }
 
     Sprite CreateTransparentView(Texture2D tex)
@@ -343,7 +346,7 @@ public class BoardGen : MonoBehaviour
 
                 XRGrabInteractable xrGrabInteractable = puzzle_Tile_3D.AddComponent<XRGrabInteractable>();
                 xrGrabInteractable.useDynamicAttach = true;
-
+                xrGrabInteractable.selectMode = InteractableSelectMode.Multiple;
 
                 // 랜덤으로 선택된 타일만 랜덤 위치로 배치
                 if (randomTileIndices.Contains(new Vector2Int(i, j)))
