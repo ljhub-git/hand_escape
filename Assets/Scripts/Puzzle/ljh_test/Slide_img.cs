@@ -158,24 +158,26 @@ public class Slide_img : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("닿인object: " + gameObject.name);
+        swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
+        //Debug.Log("닿인object: " + gameObject.name);
 
-        Slide_puzzle moving = new Slide_puzzle();
-        isMoving = moving.GetMove();
+        //Slide_puzzle moving = new Slide_puzzle();
 
-        if ((other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics")) 
-            && (swapFunc != null) && (isMoving == false) && (firstCollider == null))
-        {
-            firstCollider = other;  // 첫 번째 충돌이 발생했을 때 저장
-            Debug.Log($"First Trigger Entered with {other.name}");
-            moving.SetMove(isMoving);
-            swapFunc((int)(x / (x_wid * vr_scale)), (int)(y / (y_hei * vr_scale)));
-        }
-        else
-        {
-            // 첫 번째 외의 다른 Collider가 충돌해도 무시
-            Debug.Log($"Ignoring Trigger with {other.name}");
-        }
+        //isMoving = moving.GetMove();
+
+        //if ((other.gameObject.layer == LayerMask.NameToLayer("Right Hand Physics") || other.gameObject.layer == LayerMask.NameToLayer("Left Hand Physics")) 
+        //    && (swapFunc != null) && (isMoving == false) && (firstCollider == null))
+        //{
+        //    firstCollider = other;  // 첫 번째 충돌이 발생했을 때 저장
+        //    Debug.Log($"First Trigger Entered with {other.name}");
+        //    moving.SetMove(isMoving);
+
+        //}
+        //else
+        //{
+        //    // 첫 번째 외의 다른 Collider가 충돌해도 무시
+        //    Debug.Log($"Ignoring Trigger with {other.name}");
+        //}
     }
 
     void OnTriggerExit(Collider other)
