@@ -4540,10 +4540,10 @@ MonoBehaviour:
   checkUI: {fileID: 0}
   playerMng: {fileID: 0}
   isLogin: 1
-  distance: 0.5
-  verticalOffset: 0.2
   menuUIPosition: {fileID: 0}
   positionSource: {fileID: 0}
+  distance: 0.5
+  verticalOffset: 0.2
   heightSliderMng: {fileID: 1734989194}
 --- !u!4 &2018774401
 Transform:
@@ -4821,7 +4821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameVersion: 0.0.1
-  isTestBuild: 1
+  isTestBuild: 0
   isLogin: 0
 --- !u!1 &2143405889
 GameObject:
