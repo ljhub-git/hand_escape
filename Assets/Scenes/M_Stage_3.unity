@@ -12222,6 +12222,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 4.234
       objectReference: {fileID: 0}
+    - target: {fileID: 2316890013862513777, guid: 4dfc7050f9c3f18408566ae4ec874920, type: 3}
+      propertyPath: m_UsePipelineSettings
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316890013862513777, guid: 4dfc7050f9c3f18408566ae4ec874920, type: 3}
+      propertyPath: m_AdditionalLightsShadowResolutionTier
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3835726806515788626, guid: 4dfc7050f9c3f18408566ae4ec874920, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.025
@@ -12233,6 +12241,22 @@ PrefabInstance:
     - target: {fileID: 6301014949874138501, guid: 4dfc7050f9c3f18408566ae4ec874920, type: 3}
       propertyPath: m_Range
       value: 22.024714
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301014949874138501, guid: 4dfc7050f9c3f18408566ae4ec874920, type: 3}
+      propertyPath: m_Shadows.m_Bias
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301014949874138501, guid: 4dfc7050f9c3f18408566ae4ec874920, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301014949874138501, guid: 4dfc7050f9c3f18408566ae4ec874920, type: 3}
+      propertyPath: m_Shadows.m_NormalBias
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301014949874138501, guid: 4dfc7050f9c3f18408566ae4ec874920, type: 3}
+      propertyPath: m_Shadows.m_Resolution
+      value: 2048
       objectReference: {fileID: 0}
     - target: {fileID: 7351653714297698264, guid: 4dfc7050f9c3f18408566ae4ec874920, type: 3}
       propertyPath: m_LocalPosition.x
