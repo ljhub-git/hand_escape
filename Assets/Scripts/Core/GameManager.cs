@@ -38,12 +38,7 @@ public class GameManager : MonoBehaviourPun
         if(PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.DestroyAll();
-            if(isNextEnding)
-            {
-                photonView.RPC("RPC_GoToEnding", RpcTarget.All);
-            }
-            else
-                networkMng.LoadScene(nextLevelName);
+            networkMng.LoadScene(nextLevelName);
         }
     }
 
@@ -89,13 +84,6 @@ public class GameManager : MonoBehaviourPun
     public void RPC_OnPlayerExitDest(int _idx)
     {
         playerReady[_idx] = false;
-    }
-
-    [PunRPC]
-    public void RPC_GoToEnding()
-    {
-        SceneManager.LoadScene(nextLevelName);
-        PhotonNetwork.Disconnect();
     }
 
     private void Awake()
