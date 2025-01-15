@@ -34,6 +34,7 @@ public class NetworkPlayerManager : MonoBehaviourPun
             multiHandMng.HiddenHandMesh();
             StartCoroutine(SetMultiModelTransformCoroutine());
             HeadSync head = GetComponentInChildren<HeadSync>();
+
             if (head != null)
             {
                 head.StartFollowTransformCoroutine();
