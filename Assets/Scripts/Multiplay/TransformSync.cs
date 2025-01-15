@@ -14,21 +14,21 @@ public class TransformSync : MonoBehaviourPun, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        // 데이터를 다른 클라이언트에게 전송할 때
         if (stream.IsWriting)
         {
-            // Send data to others
-            foreach (var t in syncTargetTransforms)
+            foreach (var tr in syncTargetTransforms)
             {
-                if (t != null)
+                if (tr != null)
                 {
-                    stream.SendNext(t.position);
-                    stream.SendNext(t.rotation);
+                    stream.SendNext(tr.position);
+                    stream.SendNext(tr.rotation);
                 }
             }
         }
+        // 데이터를 전송받았을 때
         else
         {
-            // Receive data
             foreach (var t in syncTargetTransforms)
             {
                 if (t != null)
