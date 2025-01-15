@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class MenuManager : MonoBehaviour
@@ -65,11 +66,11 @@ public class MenuManager : MonoBehaviour
 
     public void Resume()
     {
-        //if (!isLogin)
-        ////if (!titleSceneManager.isLogin)
-        //{
-        //    loginUI.SetActive(true);
-        //}
+        if (isLogin)
+        //if (!titleSceneManager.isLogin)
+        {
+            loginUI.SetActive(true);
+        }
         menuUI.SetActive(false);  // 메인 메뉴 비활성화
     }
 
@@ -124,5 +125,10 @@ public class MenuManager : MonoBehaviour
             heightSliderMng.Init(currentHeight);
             heightSliderMng.OnValueChanged = AdjustHeight;
         }
+    }
+
+    public void LoadTitleScene()
+    {
+        SceneManager.LoadScene("S_Title");
     }
 }

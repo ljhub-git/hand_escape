@@ -68,6 +68,11 @@ public class MazeBoxBall : MonoBehaviour
 
             puzzleObj.SolvePuzzle();
         }
+
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            puzzleObj.SolvePuzzle();
+        }
     }
 
     private Vector3 ApplyPositionLimits(Vector3 localPosition)
