@@ -3466,6 +3466,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1744609740034429334, guid: f7c1d134230c99d4981f7b3954a5744e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2018774400}
+    - target: {fileID: 1744609740034429334, guid: f7c1d134230c99d4981f7b3954a5744e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackToMainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 2230779353550135272, guid: f7c1d134230c99d4981f7b3954a5744e, type: 3}
       propertyPath: m_Name
       value: OptionUI
