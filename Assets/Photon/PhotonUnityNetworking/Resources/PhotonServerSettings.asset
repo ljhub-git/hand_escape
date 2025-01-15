@@ -48,6 +48,8 @@ MonoBehaviour:
   - RPC_SetGravity
   - RPC_SetPosition
   - RPC_SetRotation
+  - GoToEnding
+  - RPC_GoToEnding
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

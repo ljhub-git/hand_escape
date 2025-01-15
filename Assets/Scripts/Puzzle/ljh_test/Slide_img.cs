@@ -88,6 +88,7 @@ public class Slide_img : MonoBehaviour
         }
         else if (!IsInvoking("Move"))
         {
+            DisableTileCollider();
             // 코루틴으로 부드럽게 이동
             StartCoroutine(Move());
         }
@@ -115,6 +116,24 @@ public class Slide_img : MonoBehaviour
 
         this.gameObject.transform.localPosition = endpos;
         moving.SetMove(isMoving);
+        EnableColiider();
+    }
+
+    public void EnableColiider()
+    {
+        BoxCollider collider = GetComponent<BoxCollider>();
+        if (collider != null)
+        {
+            collider.enabled = true;  // Collider 비활성화
+        }
+    }
+    public void DisableTileCollider()
+    {
+        BoxCollider collider = GetComponent<BoxCollider>();
+        if (collider != null)
+        {
+            collider.enabled = false;  // Collider 비활성화
+        }
     }
 
     public bool IsEmpty()

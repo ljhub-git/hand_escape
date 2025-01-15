@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ public class BoardGen : MonoBehaviour
     [SerializeField]
     private Jigsaw_PuzzleManager puzzleManager;
 
+    [Range(0, 64)]
     public int numRandomTiles = 2;  // 랜덤 배치할 타일의 개수를 설정
 
     //public Vector3[] randomTilePositions; //랜덤으로 배치할 타일의 포지션을 직접 입력하는 용도
@@ -91,6 +93,8 @@ public class BoardGen : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (!PhotonNetwork.IsMasterClient)
+            return;
 
         mBaseSpriteOpaque = LoadBaseTexture();
         //완성그림(비활성화 시킬것)
@@ -122,6 +126,9 @@ public class BoardGen : MonoBehaviour
 
         //CreateJigsawTiles();
         StartCoroutine(Coroutine_CreateJigsawTiles());
+
+        mGameObjectQpaque.transform.SetParent(parentForTiles);
+        mGameObjectTransparent.transform.SetParent(parentForTiles);
     }
 
     Sprite CreateTransparentView(Texture2D tex)
@@ -339,6 +346,7 @@ public class BoardGen : MonoBehaviour
 
                 XRGrabInteractable xrGrabInteractable = puzzle_Tile_3D.AddComponent<XRGrabInteractable>();
                 xrGrabInteractable.useDynamicAttach = true;
+                xrGrabInteractable.selectMode = InteractableSelectMode.Multiple;
 
                 // 랜덤으로 선택된 타일만 랜덤 위치로 배치
                 if (randomTileIndices.Contains(new Vector2Int(i, j)))

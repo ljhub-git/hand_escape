@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPun
 {
@@ -9,6 +10,9 @@ public class GameManager : MonoBehaviourPun
 
     [SerializeField]
     private string nextLevelName = string.Empty;
+
+    [SerializeField]
+    private bool isNextEnding = false;
 
     private bool[] playerReady = { false, false };
 
@@ -34,7 +38,12 @@ public class GameManager : MonoBehaviourPun
         if(PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.DestroyAll();
-            networkMng.LoadScene(nextLevelName);
+            if(isNextEnding)
+            {
+                photonView.RPC("RPC_GoToEnding", RpcTarget.All);
+            }
+            else
+                networkMng.LoadScene(nextLevelName);
         }
     }
 
@@ -80,6 +89,13 @@ public class GameManager : MonoBehaviourPun
     public void RPC_OnPlayerExitDest(int _idx)
     {
         playerReady[_idx] = false;
+    }
+
+    [PunRPC]
+    public void RPC_GoToEnding()
+    {
+        SceneManager.LoadScene(nextLevelName);
+        PhotonNetwork.Disconnect();
     }
 
     private void Awake()

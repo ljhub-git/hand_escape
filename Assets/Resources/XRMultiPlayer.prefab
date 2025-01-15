@@ -249,6 +249,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -4.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2497088647567429039, guid: cfe06014ced6933438886babd60e1465, type: 3}
+      propertyPath: heightSliderMng
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2528771648941220364, guid: cfe06014ced6933438886babd60e1465, type: 3}
       propertyPath: m_fontSize
       value: 18.86
@@ -362,7 +366,8 @@ PrefabInstance:
       value: 5.67
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3115985542177078878, guid: cfe06014ced6933438886babd60e1465, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfe06014ced6933438886babd60e1465, type: 3}
