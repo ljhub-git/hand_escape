@@ -54,12 +54,12 @@ public class Slide_puzzle : MonoBehaviour
             for (int x = 0; x < 4; x++)
             {
                 Slide_img box = Instantiate(img_Prefab, new Vector2(x, y), Quaternion.identity);
-                box.Init(x, y, n + 1, sprites[n], HandleClick);
+                box.Init(x, y, n + 1, sprites[n], HandleClick, puzzleParent);
 
                 float vr_scale = box.vr_scale;
                 box.transform.localScale = new Vector3(vr_scale, vr_scale, vr_scale);
                 // 퍼즐 조각을 puzzleParent 오브젝트의 자식으로 설정
-                box.transform.SetParent(puzzleParent.transform);
+                //box.transform.SetParent(puzzleParent.transform);
                 // 각도 회전시 자식 초기화
                 box.transform.localRotation = Quaternion.identity;
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Threading;
 using TMPro.Examples;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Slide_img : MonoBehaviour
 {
@@ -33,10 +34,11 @@ public class Slide_img : MonoBehaviour
         boxCollider.size = new Vector3(x_wid / 2, y_hei / 2, 0.5f);
     }
 
-    public void Init(int i, int j, int index, Sprite sprite, Action<int, int> swapFunc)
+    public void Init(int i, int j, int index, Sprite sprite, Action<int, int> swapFunc, GameObject puzzleParent)
     {
         this.index = index;
         this.GetComponent<SpriteRenderer>().sprite = sprite;
+        transform.SetParent(puzzleParent.transform);
         UpdatePos(i, j, true);
         this.swapFunc = swapFunc;
 
@@ -83,8 +85,10 @@ public class Slide_img : MonoBehaviour
 
         if (immediate)
         {
+            Debug.Log($"i:{i}, j:{j}");
+            Debug.Log($"x:{x}, y:{y}");
             // 즉시 위치 갱신
-            this.transform.localPosition = new Vector2(x, y);
+            this.transform.localPosition = new Vector3(x, y);
         }
         else if (!IsInvoking("Move"))
         {
