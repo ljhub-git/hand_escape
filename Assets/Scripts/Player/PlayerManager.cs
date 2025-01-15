@@ -61,13 +61,9 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
     #region 앉기 서기 모드
-    public void OnSittingMode()
+    public void setPlayerHeight(float _height)
     {
-        movementManager.SittingMode();
-    }    
-    public void OnStandingMode()
-    {
-        movementManager.StandingMode();
+        movementManager.characterControllerHeight(_height);
     }
     #endregion
 
