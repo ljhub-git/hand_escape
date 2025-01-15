@@ -11,7 +11,17 @@ public class RespawnTrigger : MonoBehaviour
 
         if (respawnTr != null)
         {
-            other.transform.root.position = new Vector3(respawnTr.position.x, respawnTr.position.y, respawnTr.position.z);
+            if(other.GetComponent<NetworkPlayerManager>() != null)
+            {
+                other.transform.root.GetChild(0).position = 
+                    new Vector3(respawnTr.position.x, respawnTr.position.y, respawnTr.position.z);
+            }
+            else
+            {
+                other.transform.root.position =
+                    new Vector3(respawnTr.position.x, respawnTr.position.y, respawnTr.position.z);
+            }
+            
             Debug.Log(other.transform.root.name);
         }
     }
