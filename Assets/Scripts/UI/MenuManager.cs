@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class MenuManager : MonoBehaviour
@@ -124,5 +125,10 @@ public class MenuManager : MonoBehaviour
             heightSliderMng.Init(currentHeight);
             heightSliderMng.OnValueChanged = AdjustHeight;
         }
+    }
+
+    public void LoadTitleScene()
+    {
+        SceneManager.LoadScene("S_Title");
     }
 }
