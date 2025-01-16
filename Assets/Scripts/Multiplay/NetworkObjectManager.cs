@@ -20,37 +20,6 @@ public class NetworkObjectManager : MonoBehaviourPun
     [SerializeField]
     private GameObject[] viewErrorObjects;
 
-    public void SyncInGameManagerViewID()
-    {
-        if (PhotonNetwork.IsMasterClient == false)
-        {
-            throw new System.Exception("Only Master Client can send sync manager view ID event.");
-        }
-
-        foreach(var obj in viewErrorObjects)
-        {
-            PhotonView targetView = obj.GetComponent<PhotonView>();
-
-            if (targetView != null && PhotonNetwork.AllocateViewID(targetView))
-            {
-                object content = new object[] {
-                    targetView.ViewID,
-                };
-
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions()
-                {
-                    Receivers = ReceiverGroup.Others,
-                };
-
-                PhotonNetwork.RaiseEvent(6, content, raiseEventOptions, SendOptions.SendReliable);
-            }
-            else
-            {
-                throw new System.Exception("Failed allocate View ID");
-            }
-        }
-    }
-
     public void InitPrefabPool()
     {
         DefaultPool Pool = PhotonNetwork.PrefabPool as DefaultPool;
@@ -85,6 +54,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         photonView.RPC("RPC_PuzzleSolved", RpcTarget.Others, id);
     }
 
+    // 퍼즐이 리셋됐을 때 반응하는 오브젝트들을 다른 클라이언트에서도 반응하도록 한다.
     public void CallOnPuzzleResetToOthers(PhotonView _view)
     {
         if (!IsViewValid(_view) || _view.GetComponent<PuzzleReactObject>() == null)
@@ -95,6 +65,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         photonView.RPC("RPC_PuzzleReset", RpcTarget.Others, id);
     }
 
+    // 회전값과 포지션값을 동기화하는 RPC를 호출.
     public void SetObjectTransform(PhotonView _view, Transform _tr)
     {
         if (!IsViewValid(_view))
@@ -105,6 +76,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         SetObjectPosition(_view, _tr.position);
     }
 
+    // 회전값 동기화 RPC 호출.
     public void SetObjectRotation(PhotonView _view, Quaternion _rot)
     {
         if (!IsViewValid(_view))
@@ -115,6 +87,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         photonView.RPC("RPC_SetRotation", RpcTarget.Others, id, _rot);
     }
 
+    // 포지션값 동기화 RPC 호출.
     public void SetObjectPosition(PhotonView _view, Vector3 _pos)
     {
         if (!IsViewValid(_view))
@@ -125,6 +98,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         photonView.RPC("RPC_SetPosition", RpcTarget.Others, id, _pos);
     }
 
+    // 오브젝트를 활성화시키는 RPC 호출
     public void SetObjectActive(PhotonView _view, bool _active)
     {
         if (!IsViewValid(_view))
