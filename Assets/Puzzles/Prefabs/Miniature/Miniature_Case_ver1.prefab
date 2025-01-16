@@ -486,6 +486,8 @@ MonoBehaviour:
   targetAlpha: 0.3
   fadeDuration: 0.2
   isInteractable: 1
+  effectClip: {fileID: 8300000, guid: 94619f80dd09282429d4923bd1353207, type: 3}
+  effectClip2: {fileID: 8300000, guid: 67fa99bca07e2374b98309aa7b158914, type: 3}
 --- !u!114 &2879636746173679839
 MonoBehaviour:
   m_ObjectHideFlags: 0

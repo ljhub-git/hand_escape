@@ -26,6 +26,11 @@ public class Miniature : MonoBehaviour
 
     public bool isInteractable = true;
 
+    public AudioClip effectClip;  // 재생할 효과음
+    public AudioClip effectClip2;  // 재생할 효과음
+
+    private AudioSource audioSource;
+
     private void Awake()
     {
         puzzleObj = GetComponent<PuzzleObject>();
@@ -43,6 +48,10 @@ public class Miniature : MonoBehaviour
 
         // Rigidbody 컴포넌트 가져오기
         rb = GetComponent<Rigidbody>();
+
+
+        // AudioSource 컴포넌트를 가져옴
+        audioSource = FindAnyObjectByType<AudioSource>();
     }
 
     private void Update()
@@ -88,6 +97,8 @@ public class Miniature : MonoBehaviour
 
         rb.isKinematic = true;
         isInteractable = false;
+
+        audioSource.PlayOneShot(effectClip2);
     }
 
     public IEnumerator CaseRotation(Miniature miniature, float targetYRotation)
@@ -109,6 +120,7 @@ public class Miniature : MonoBehaviour
         }
 
         miniature.TriggerTransparency();
+        PlayEffect();
 
         yield return new WaitForSeconds(1f);
 
@@ -124,6 +136,20 @@ public class Miniature : MonoBehaviour
             puzzleObj.SolvePuzzle();
         }
     }
+
+    // 효과음을 재생하는 메서드
+    public void PlayEffect()
+    {
+        if (effectClip != null)
+        {
+            audioSource.PlayOneShot(effectClip);
+        }
+        else
+        {
+            Debug.LogWarning("효과음 클립이 설정되지 않았습니다!");
+        }
+    }
+
 
     public Transform GetTarget() => target;
     public Rigidbody GetRigidbody() => rb;
