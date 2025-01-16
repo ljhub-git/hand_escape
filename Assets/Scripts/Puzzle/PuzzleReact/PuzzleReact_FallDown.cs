@@ -15,10 +15,10 @@ public class PuzzleReact_FallDown : PuzzleReactObject
         Vector3 startPos = transform.position;
         while (t < 1)
         {
-            t += Time.deltaTime;
+            t += (Time.deltaTime / 2f);
             transform.position = Vector3.Lerp(transform.position, startPos + Vector3.up, t);
             yield return null;
         }
-        transform.position = startPos + Vector3.up;       
+        transform.position = startPos + Vector3.up;
     }
 }
