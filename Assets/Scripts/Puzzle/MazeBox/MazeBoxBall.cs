@@ -25,12 +25,20 @@ public class MazeBoxBall : MonoBehaviour
     private static readonly Vector3 Type333MaxLimits = new Vector3(0.095f, 0.095f, 0.095f);
 
 
+    public AudioClip effectClip;  // 재생할 효과음
+    public AudioClip effectClip2;  // 재생할 효과음
+
+    private AudioSource audioSource;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         previousPosition = transform.localPosition;
 
         puzzleObj = transform.parent.GetComponent<PuzzleObject>();
+
+        // AudioSource 컴포넌트를 가져옴
+        audioSource = FindAnyObjectByType<AudioSource>();
     }
 
     private void Update()
@@ -122,6 +130,24 @@ public class MazeBoxBall : MonoBehaviour
         {
             Debug.Log("333");
             isSolved = true;
+            audioSource.PlayOneShot(effectClip2);
+        }
+    }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    PlayEffect();
+    //}
+
+    public void PlayEffect()
+    {
+        if (effectClip != null)
+        {
+            audioSource.PlayOneShot(effectClip);
+        }
+        else
+        {
+            Debug.LogWarning("효과음 클립이 설정되지 않았습니다!");
         }
     }
 }
