@@ -3147,6 +3147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2441659804672987779}
   - component: {fileID: 3351276425905046997}
+  - component: {fileID: 4333090143169196683}
   m_Layer: 22
   m_Name: Goal
   m_TagString: MazeGoal
@@ -3190,6 +3191,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4333090143169196683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3467848607231609674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa7e1b61ce439e429e7196568d5d8af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffect: {fileID: 198564383874839292, guid: 811c6ad42d90d0f48ba5c3d94a0cacf7, type: 3}
 --- !u!1 &3741295027877326410
 GameObject:
   m_ObjectHideFlags: 0
@@ -5465,7 +5479,6 @@ MonoBehaviour:
   maxDelta: 0.01
   effectClip: {fileID: 8300000, guid: 00c6aca58d785ce41b7e5f77205818cd, type: 3}
   effectClip2: {fileID: 8300000, guid: 67fa99bca07e2374b98309aa7b158914, type: 3}
-  puzzleCompleteEffect: {fileID: 198564383874839292, guid: 811c6ad42d90d0f48ba5c3d94a0cacf7, type: 3}
 --- !u!1 &5982041427846147905
 GameObject:
   m_ObjectHideFlags: 0
