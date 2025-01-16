@@ -5,7 +5,14 @@ public class LightOnOffReact : PuzzleReactObject
     [SerializeField]
     private GameObject lightObj = null;
 
+    private AudioSource switchAudio = null;
+
     public bool isLightOn = false;
+
+    private void Awake()
+    {
+        switchAudio = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -18,7 +25,11 @@ public class LightOnOffReact : PuzzleReactObject
 
         isLightOn = true;
 
-        lightObj.SetActive(true);
+        if(lightObj != null)
+            lightObj.SetActive(true);
+
+        if (switchAudio != null)
+            switchAudio.PlayOneShot(switchAudio.clip);
     }
 
     public override void OnPuzzleReset()
@@ -27,7 +38,10 @@ public class LightOnOffReact : PuzzleReactObject
 
         isLightOn = false;
 
-        lightObj.SetActive(false);
+        if (lightObj != null)
+            lightObj.SetActive(false);
 
+        if (switchAudio != null)
+            switchAudio.PlayOneShot(switchAudio.clip);
     }
 }
