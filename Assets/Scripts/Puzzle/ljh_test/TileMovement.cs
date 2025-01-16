@@ -20,8 +20,8 @@ public class TileMovement : MonoBehaviour
     private XRGrabInteractable xrGrabInteractable;
 
     // 오차 범위 설정
-    public float positionTolerance = 12.1f; // 위치 오차 범위
-    public float rotationTolerance = 26f; // 각도 오차 범위
+    public float positionTolerance = 0.016f; // 위치 오차 범위
+    public float rotationTolerance = 14f; // 각도 오차 범위
 
 
     void Start()
@@ -105,10 +105,10 @@ public class TileMovement : MonoBehaviour
         // 올바른 위치에 있는지 확인
         if (!isInCorrectPosition)
         {
-            float dist = (transform.position - GetCorrectPosition()).magnitude;
+            float dist = (transform.localPosition - GetCorrectPosition()).magnitude;
             float angle = Quaternion.Angle(transform.localRotation, Quaternion.Euler(0, 0, 0));
 
-            Debug.Log($"Current Position: {transform.position}, Correct Position: {GetCorrectPosition()}, Distance: {dist}");
+            Debug.Log($"Current Position: {transform.localPosition}, Correct Position: {GetCorrectPosition()}, Distance: {dist}");
             Debug.Log($"Current Rotation: {transform.localRotation.eulerAngles}, Correct Rotation: (0, 0, 0), Angle: {angle}");
 
             if (dist <= positionTolerance && angle <= rotationTolerance)  // 정확한 위치에 가까운지 확인

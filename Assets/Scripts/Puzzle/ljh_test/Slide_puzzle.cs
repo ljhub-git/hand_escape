@@ -96,7 +96,7 @@ public class Slide_puzzle : MonoBehaviour
             }
         }
 
-        int shuffleSteps = 10; // ¼¯±â ¹Ýº¹ È½¼ö
+        int shuffleSteps = 7; // ¼¯±â ¹Ýº¹ È½¼ö
         for (int i = 0; i < shuffleSteps; i++)
         {
             Vector2 move = getValidMove(emptyX, emptyY);
