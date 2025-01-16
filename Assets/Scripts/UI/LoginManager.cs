@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using WebSocketSharp;
 
 public class LoginManager : MonoBehaviour
 {
@@ -24,7 +25,16 @@ public class LoginManager : MonoBehaviour
         string enteredUsername = idInput.text;
         string enteredPassword = passwordInput.text;
 
-        titleSceneMng?.TryLogin(enteredUsername, enteredPassword);
+        if(enteredUsername.IsNullOrEmpty() || enteredPassword.IsNullOrEmpty())
+        {
+            loginStatus.color = Color.red;
+            loginStatus.text = "Fill all inputs!";
+
+            return;
+        }
+
+        if(titleSceneMng != null)
+            titleSceneMng.TryLogin(enteredUsername, enteredPassword);
     }
 
     public void OnLoginFailed()
