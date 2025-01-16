@@ -20,8 +20,8 @@ public class TileMovement : MonoBehaviour
     private XRGrabInteractable xrGrabInteractable;
 
     // 오차 범위 설정
-    public float positionTolerance = 12f; // 위치 오차 범위
-    public float rotationTolerance = 13f; // 각도 오차 범위
+    public float positionTolerance = 12.1f; // 위치 오차 범위
+    public float rotationTolerance = 26f; // 각도 오차 범위
 
 
     void Start()

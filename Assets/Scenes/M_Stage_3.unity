@@ -3219,7 +3219,7 @@ MonoBehaviour:
   puzzle_Scale_Instance: 0.001
   parentForTiles: {fileID: 479822084}
   puzzleManager: {fileID: 937180893}
-  numRandomTiles: 5
+  numRandomTiles: 6
 --- !u!4 &560357293
 Transform:
   m_ObjectHideFlags: 0
