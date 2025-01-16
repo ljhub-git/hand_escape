@@ -5940,6 +5940,7 @@ MonoBehaviour:
   maxDelta: 0.01
   effectClip: {fileID: 8300000, guid: 00c6aca58d785ce41b7e5f77205818cd, type: 3}
   effectClip2: {fileID: 8300000, guid: 67fa99bca07e2374b98309aa7b158914, type: 3}
+  puzzleCompleteEffect: {fileID: 198309048691997504, guid: 8ee776d12204aa64c98094425ce23105, type: 3}
 --- !u!54 &8291374690316305415
 Rigidbody:
   m_ObjectHideFlags: 0
