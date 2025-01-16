@@ -7,11 +7,11 @@ public class DatabaseManager : MonoBehaviour
 {
 
     #region URI Paths
-    private const string loginUri = "http://192.168.1.27/login.php";
+    private const string loginUri = "http://192.168.2.109/login.php";
 
-    private const string connectTestUri = "http://192.168.1.27/connectTest.php";
+    private const string connectTestUri = "http://192.168.2.109/connectTest.php";
 
-    private const string signUpUri = "http://192.168.1.27/signup.php";
+    private const string signUpUri = "http://192.168.2.109/signup.php";
     #endregion
 
     private void Start()
