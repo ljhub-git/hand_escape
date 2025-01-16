@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private Transform rightHandTr = null;
 
-    private float moveSpeed = 120f; // 이동 속도
+    private float moveSpeed = 180f; // 이동 속도
     private float rocketMoveSpeed = 180f; // 로켓 이동 속도
     private MovementManager movementManager; // 하위 매니저 연결
     public bool isStitting = false;
