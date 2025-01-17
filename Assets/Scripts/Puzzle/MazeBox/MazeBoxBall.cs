@@ -30,8 +30,6 @@ public class MazeBoxBall : MonoBehaviour
 
     private AudioSource audioSource;
 
-    public ParticleSystem puzzleCompleteEffect;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -75,13 +73,12 @@ public class MazeBoxBall : MonoBehaviour
 
             ////현재스크립트 비활성화
             //this.enabled = false
-            PlayPuzzleCompleteEffect(); // 파티클 효과 실행
+
             puzzleObj.SolvePuzzle();
         }
 
         if (Input.GetKeyDown(KeyCode.F9))
         {
-            PlayPuzzleCompleteEffect(); // 파티클 효과 실행
             puzzleObj.SolvePuzzle();
         }
     }
@@ -151,19 +148,6 @@ public class MazeBoxBall : MonoBehaviour
         else
         {
             Debug.LogWarning("효과음 클립이 설정되지 않았습니다!");
-        }
-    }
-
-    public void PlayPuzzleCompleteEffect()
-    {
-        if (puzzleCompleteEffect != null)
-        {
-            puzzleCompleteEffect.transform.position = transform.position; // 파티클 위치 설정
-            puzzleCompleteEffect.Play();
-        }
-        else
-        {
-            Debug.LogWarning("Puzzle Complete Effect가 설정되지 않았습니다!");
         }
     }
 }
