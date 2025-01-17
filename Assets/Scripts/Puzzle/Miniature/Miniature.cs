@@ -69,6 +69,7 @@ public class Miniature : MonoBehaviour
         }
     }
 
+    //메테리얼 투명화 기능
     public void TriggerTransparency()
     {
         if (material == null) return;

@@ -77,7 +77,8 @@ public class InventoryUI : MonoBehaviour
         ScaleToSize();
         LookAtTargetOrigin();
     }
-
+    
+    //캐릭터와의 거리에 따라 스케일이 변화하는 함수
     private void ScaleToSize()
     {
         float distance = (transform.position - Camera.main.transform.position).magnitude;
@@ -90,6 +91,7 @@ public class InventoryUI : MonoBehaviour
         Debug.LogFormat("Setting scale: {0} for distance: {1}", scale, distance);
     }
 
+    //인벤토리를 캐릭터와 마주보도록 하는 함수
     private void LookAtTargetOrigin()
     {
         transform.LookAt(Camera.main.transform.position);

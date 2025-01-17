@@ -3,6 +3,7 @@ using UnityEngine;
 
 public static class MiniatureRotation
 {
+    //미니어처 회전
     public static IEnumerator CaseRotation(Miniature miniature, float targetYRotation)
     {
         Transform transform = miniature.transform;
@@ -28,8 +29,10 @@ public static class MiniatureRotation
         if (rb != null) rb.isKinematic = false;
         miniature.SetRotationCoroutine(null);
 
+        //정답일 때만 회전
         if (Mathf.Approximately(targetYRotation, 90f))
         {
+            //미니어처와 연결된 벽 회전
             Coroutine syncCoroutine = miniature.StartCoroutine(MiniatureSync.SyncTransform(miniature, 90f));
             miniature.MakeDisable();
         }
