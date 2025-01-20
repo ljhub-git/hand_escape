@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TemplateBezierCurve : MonoBehaviour
+public class TemplateBezierCurve : MonoBehaviour //직선과 곡선을 그림
 {
-    public static readonly List<Vector2> templateControlPoints = new List<Vector2>()
+    public static readonly List<Vector2> templateControlPoints = new List<Vector2>() //베지어 곡선 제어점 좌표
     {
         new Vector2(0, 0),
         new Vector2(35, 15),
@@ -21,29 +21,13 @@ public class TemplateBezierCurve : MonoBehaviour
         new Vector2(53, 13),
         new Vector2(65, 15),
         new Vector2(100, 0)
-        //new Vector2(0, 0),
-        //new Vector2(70, 30),
-        //new Vector2(98, 26),
-        //new Vector2(90, 10),
-        //new Vector2(96, 0),
-        //new Vector2(50, -10),
-        //new Vector2(30, -36),
-        //new Vector2(72, -40),
-        //new Vector2(128, -40),
-        //new Vector2(170, -36),
-        //new Vector2(150, -10),
-        //new Vector2(104, 0),
-        //new Vector2(110, 10),
-        //new Vector2(106, 26),
-        //new Vector2(130, 30),
-        //new Vector2(200, 0)
     };
 
     public GameObject PointPrefab;
 
-    LineRenderer[] mLineRenderers = null;
+    LineRenderer[] mLineRenderers = null; // 직선 및 곡선
 
-    List<GameObject> mPointGameObjects = new List<GameObject>();
+    List<GameObject> mPointGameObjects = new List<GameObject>(); 
 
     public float LineWidth;
     public float LineWidthBezier;
@@ -83,8 +67,8 @@ public class TemplateBezierCurve : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LineRenderer lineRenderer = mLineRenderers[0];
-        LineRenderer curveRenderer = mLineRenderers[1];
+        LineRenderer lineRenderer = mLineRenderers[0]; //점 연결 직선
+        LineRenderer curveRenderer = mLineRenderers[1]; // 곡선
 
         List<Vector2> pts = new List<Vector2>();
         for (int i = 0; i < mPointGameObjects.Count; i++)
@@ -92,13 +76,13 @@ public class TemplateBezierCurve : MonoBehaviour
             pts.Add(mPointGameObjects[i].transform.position);
         }
 
-        lineRenderer.positionCount = pts.Count;
+        lineRenderer.positionCount = pts.Count; 
         for (int i = 0; i < pts.Count; i++)
         {
-            lineRenderer.SetPosition(i, pts[i]);
+            lineRenderer.SetPosition(i, pts[i]); // 제어점 갯수 만큼의 직선
         }
 
-        List<Vector2> curve = BezierCurve.PointList2(pts, 0.01f);
+        List<Vector2> curve = BezierCurve.PointList2(pts, 0.01f); //베지어 곡선 계산 및 그리기
         curveRenderer.startColor = BezierCurveColor;
         curveRenderer.endColor = BezierCurveColor;
         curveRenderer.positionCount = curve.Count;

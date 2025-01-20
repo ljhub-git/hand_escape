@@ -43,7 +43,7 @@ public class TileMovement : MonoBehaviour
         puzzleManager = manager;
         puzzleManager.RegisterTile(this);
     }
-
+    //정답 위치 계산용
     private Vector3 GetCorrectPosition()
     {
         return new Vector3(tile.xIndex * Tile.tileSize * BoardGen.puzzle_Scale, tile.yIndex * Tile.tileSize * BoardGen.puzzle_Scale, 0.0f);
@@ -99,7 +99,7 @@ public class TileMovement : MonoBehaviour
         // 이벤트가 트리거될 때의 동작을 정의
         CheckAndSetCorrectPosition();
     }
-
+    //퍼즐을 놓을 때 정답체크용
     private void CheckAndSetCorrectPosition()
     {
         // 올바른 위치에 있는지 확인
@@ -146,7 +146,7 @@ public class TileMovement : MonoBehaviour
     {
         return isInCorrectPosition;
     }
-
+    //타일이 정확한 위치에 왔다면 콜라이더 비활성화
     public void DisableTileCollider()
     {
         BoxCollider collider = GetComponent<BoxCollider>();

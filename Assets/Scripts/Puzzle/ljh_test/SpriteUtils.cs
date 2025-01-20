@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public class SpriteUtils
+public class SpriteUtils //sprite 정보를 받아와서 읽고 만듬
 {
     public static Sprite CreateSpriteFromTexture2D(
         Texture2D spriteTexture,

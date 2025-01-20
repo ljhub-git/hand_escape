@@ -60,7 +60,7 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
             OnDestroy();
         }
     }
-
+    //치트키
     private void cheatkey()
     {
         puzzleObj.SolvePuzzle();
@@ -71,7 +71,7 @@ public class Jigsaw_PuzzleManager : MonoBehaviour
     {
         Destroy(boardgen.gameObject);
     }
-
+    //타일 전체 완성 체크용
     public void OnTilePlaced(TileMovement tileMovement)
     {
         if (tileMovement != null && tileMovement.IsCorrectPosition())

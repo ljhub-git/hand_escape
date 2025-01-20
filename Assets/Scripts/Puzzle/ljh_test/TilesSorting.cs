@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TilesSorting
+public class TilesSorting //MeshRenderer 랜더 순서 관리
 {
     private List<MeshRenderer> mSortIndices = new List<MeshRenderer>();
 
@@ -34,8 +34,5 @@ public class TilesSorting
     private void SetRenderOrder(MeshRenderer renderer, int index)
     {
         renderer.sortingOrder = index;
-        //Vector3 p = renderer.transform.position;
-        //p.z = -index / 10.0f;
-        //renderer.transform.position = p;
     }
 }

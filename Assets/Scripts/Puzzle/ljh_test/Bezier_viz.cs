@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bezier_viz : MonoBehaviour
 {
-    public List<Vector2> controlPoints = new List<Vector2>()
+    public List<Vector2> controlPoints = new List<Vector2>() //기본 포인트
     {
         new Vector2(-0.5f, -0.5f),
         new Vector2(0.0f, 2.0f),
@@ -34,7 +34,6 @@ public class Bezier_viz : MonoBehaviour
         return lr;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mLineRenderers = new LineRenderer[2];
@@ -52,7 +51,6 @@ public class Bezier_viz : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         LineRenderer lineRenderer = mLineRenderers[0];
@@ -83,7 +81,7 @@ public class Bezier_viz : MonoBehaviour
         }
     }
 
-    private void OnGUI()
+    private void OnGUI() // 더블 클릭 이벤트시 InsertNewControlPoint 실행
     {
         Event e = Event.current;
         if(e.isMouse)
@@ -99,7 +97,7 @@ public class Bezier_viz : MonoBehaviour
         }
     }
 
-    void InsertNewControlPoint(Vector2 p)
+    void InsertNewControlPoint(Vector2 p) //추가 포인트를 찍고 업데이트
     {
         if(mPointGameObjects.Count >= 18)
         {

@@ -11,37 +11,37 @@ public class Tile
     }
     public enum PosNegType
     {
-        POS,
-        NEG,
-        NONE,
+        POS,//볼록
+        NEG,//오목
+        NONE,//평평
     }
 
-    // The offset at which the curve will start.
-    // For an image of size 140 by 140 it will start at 20, 20.
-    //public Vector2Int mOffset = new Vector2Int(20, 20);
+    //여백 기본값 20
     public static int padding = 20;
 
-    // The size of our jigsaw tile.
+    //퍼즐 기본 크기 100
     public static int tileSize = 100;
 
+    //크기 조절용 변수
     public float tile_Scale = 1f;
 
-    // The line renderers for all directions and types.
+    // 방향과 곡선타입을 저장하는 라인랜더러
     private Dictionary<(Direction, PosNegType), LineRenderer> mLineRenderers
       = new Dictionary<(Direction, PosNegType), LineRenderer>();
 
-    // Lets store the list of bezier curve points created
-    // from the template bezier curve control points.
+    //베지어 곡선의 포인트 리스트 저장, 곡선 활용 템플릿
     public static List<Vector2> BezCurve =
       BezierCurve.PointList2(TemplateBezierCurve.templateControlPoints, 0.001f);
 
-    // The original texture used to create the jigsaw tile.
+    //원본 텍스쳐
     private Texture2D mOriginalTexture;
-
+    
+    //퍼즐 조각 모양 저장
     public Texture2D finalCut { get; private set; }
 
     public static readonly Color TransparentColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 
+    //방향과 곡선을 저장하는 배열
     private PosNegType[] mCurveTypes = new PosNegType[4]
     {
     PosNegType.NONE,
@@ -50,11 +50,10 @@ public class Tile
     PosNegType.NONE,
     };
 
-    // A 2d boolean array that stores whether a particular
-    // pixel is visited. We will need this array for the flood fill.
+    //Flood Fill 알고리즘 탐색 배열
     private bool[,] mVisited;
 
-    // A stack needed for the flood fill of the texture.
+    //Flood Fill 알고리즘의 스택
     private Stack<Vector2Int> mStack = new Stack<Vector2Int>();
 
     public int xIndex = 0;
@@ -71,17 +70,17 @@ public class Tile
 
     // For tiles sorting.
     public static TilesSorting tilesSorting = new TilesSorting();
-    public void SetCurveType(Direction dir, PosNegType type)
+    public void SetCurveType(Direction dir, PosNegType type) //곡선 유형 설정
     {
         mCurveTypes[(int)dir] = type;
     }
 
-    public PosNegType GetCurveType(Direction dir)
+    public PosNegType GetCurveType(Direction dir) // 곡선 유형 반환
     {
         return mCurveTypes[(int)dir];
     }
 
-    public Tile(Texture2D texture)
+    public Tile(Texture2D texture) // 원본 텍스쳐를 받아와서 여백 및 크기기준으로 초기화
     {
         mOriginalTexture = texture;
         //int padding = mOffset.x;
@@ -89,7 +88,6 @@ public class Tile
 
         finalCut = new Texture2D(tileSizeWithPadding, tileSizeWithPadding, TextureFormat.ARGB32, false);
 
-        // We initialise this newly created texture with transparent color.
         for (int i = 0; i < tileSizeWithPadding; ++i)
         {
             for (int j = 0; j < tileSizeWithPadding; ++j)
@@ -106,12 +104,12 @@ public class Tile
         finalCut.Apply();
     }
 
-    void FloodFillInit()
+    void FloodFillInit() //Flood Fill 초기화
     {
         //int padding = mOffset.x;
         int tileSizeWithPadding = 2 * padding + tileSize;
 
-        mVisited = new bool[tileSizeWithPadding, tileSizeWithPadding];
+        mVisited = new bool[tileSizeWithPadding, tileSizeWithPadding]; //좌표저장
         for (int i = 0; i < tileSizeWithPadding; ++i)
         {
             for (int j = 0; j < tileSizeWithPadding; ++j)
@@ -138,14 +136,14 @@ public class Tile
         mStack.Push(start);
     }
 
-    void Fill(int x, int y)
+    void Fill(int x, int y) // 좌표를 받아와서 finalCut 텍스처에 색상을 채워넣음
     {
         Color c = mOriginalTexture.GetPixel(x + xIndex * tileSize, y + yIndex * tileSize);
         c.a = 1.0f;
         finalCut.SetPixel(x, y, c);
     }
 
-    void FloodFill()
+    void FloodFill() //Flood Fill 알고리즘 실행, 상하좌우순 탐색, 스택에 좌표 추가
     {
         //int padding = mOffset.x;
         int width_height = padding * 2 + tileSize;
@@ -229,7 +227,7 @@ public class Tile
         return lr;
     }
 
-    public static void TranslatePoints(List<Vector2> iList, Vector2 offset)
+    public static void TranslatePoints(List<Vector2> iList, Vector2 offset) // 곡선 포인트 이동
     {
         for (int i = 0; i < iList.Count; i++)
         {
@@ -237,7 +235,7 @@ public class Tile
         }
     }
 
-    public static void InvertY(List<Vector2> iList)
+    public static void InvertY(List<Vector2> iList) // 포인트 반전
     {
         for (int i = 0; i < iList.Count; i++)
         {
@@ -245,7 +243,7 @@ public class Tile
         }
     }
 
-    public static void SwapXY(List<Vector2> iList)
+    public static void SwapXY(List<Vector2> iList) // 포인트 교체
     {
         for (int i = 0; i < iList.Count; ++i)
         {
@@ -253,7 +251,7 @@ public class Tile
         }
     }
 
-    public List<Vector2> CreateCurve(Direction dir, PosNegType type)
+    public List<Vector2> CreateCurve(Direction dir, PosNegType type) // 방향과 곡선유형을 받아와서 포인트 생성, NONE때는 직선
     {
         int padding_x = padding;// mOffset.x;
         int padding_y = padding;// mOffset.y;
@@ -347,7 +345,7 @@ public class Tile
         return pts;
     }
 
-    public void DrawCurve(Direction dir, PosNegType type, Color color)
+    public void DrawCurve(Direction dir, PosNegType type, Color color) // 곡선 포인트 설정, 라인 랜더러 추가
     {
         if (!mLineRenderers.ContainsKey((dir, type)))
         {
@@ -368,7 +366,7 @@ public class Tile
         }
     }
 
-    public void HideAllCurves()
+    public void HideAllCurves() // 곡선 숨김
     {
         foreach (var item in mLineRenderers)
         {
@@ -376,7 +374,7 @@ public class Tile
         }
     }
 
-    public void DestroyAllCurves()
+    public void DestroyAllCurves() // 곡선 제거
     {
         foreach (var item in mLineRenderers)
         {
