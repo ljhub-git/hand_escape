@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class BoardGen : MonoBehaviour
+public class BoardGen : MonoBehaviour //타일 생성 및 배치, 3D화, VR대응 진행, 배경 생성
 {
     public string imageFilename;
     Sprite mBaseSpriteOpaque;
@@ -34,10 +34,7 @@ public class BoardGen : MonoBehaviour
     [Range(0, 64)]
     public int numRandomTiles = 2;  // 랜덤 배치할 타일의 개수를 설정
 
-    //public Vector3[] randomTilePositions; //랜덤으로 배치할 타일의 포지션을 직접 입력하는 용도
-
-
-    Sprite LoadBaseTexture()
+    Sprite LoadBaseTexture() // 이미지 로드
     {
         Texture2D tex = SpriteUtils.LoadTexture(imageFilename);
         if(!tex.isReadable)
@@ -90,14 +87,13 @@ public class BoardGen : MonoBehaviour
         puzzle_Scale = puzzle_Scale_Instance;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (!PhotonNetwork.IsMasterClient)
             return;
 
         mBaseSpriteOpaque = LoadBaseTexture();
-        //완성그림(비활성화 시킬것)
+        //완성그림(비활성화 시킬것) - 완성그림 표시가 필요할땐 활성화 진행
         mGameObjectQpaque = new GameObject();
         mGameObjectQpaque.name = imageFilename + "_Opaque";
         mGameObjectQpaque.AddComponent<SpriteRenderer>().sprite = mBaseSpriteOpaque;
@@ -120,11 +116,11 @@ public class BoardGen : MonoBehaviour
 
         mGameObjectQpaque.gameObject.SetActive(false);
 
-        //SetCameraPosition();
+        //SetCameraPosition(); - vr이 아닌 테스트 씬때 카메라용으로 만든 메서드
 
         puzzleManager.SetTotalTiles(numRandomTiles);
 
-        //CreateJigsawTiles();
+        
         StartCoroutine(Coroutine_CreateJigsawTiles());
 
         mGameObjectQpaque.transform.SetParent(parentForTiles);
@@ -165,12 +161,13 @@ public class BoardGen : MonoBehaviour
         return sprite;
     }
 
-    void SetCameraPosition()
+    void SetCameraPosition() //테스트씬에서 카메라가 필요할때 활성화
     {
         Camera.main.transform.position = new Vector3(mBaseSpriteOpaque.texture.width / 2, mBaseSpriteOpaque.texture.height / 2, -650.0f);
         Camera.main.orthographicSize = mBaseSpriteOpaque.texture.width / 2;
     }
 
+    //스프라이트 -> 메쉬
     public static Mesh CreateMeshFromSprite(Sprite sprite)
     {
 
@@ -221,6 +218,7 @@ public class BoardGen : MonoBehaviour
         return mesh;
     }
 
+    //타일(퍼즐) 생성
     public static GameObject CreateGameObjectFromTile(Tile tile)
     {
         GameObject obj = new GameObject();
@@ -255,7 +253,7 @@ public class BoardGen : MonoBehaviour
 
 
 
-
+    //타일 배치 및 필요 컴포넌트 추가
     IEnumerator Coroutine_CreateJigsawTiles()
     {
         Texture2D baseTexture = mBaseSpriteOpaque.texture;
@@ -381,7 +379,7 @@ public class BoardGen : MonoBehaviour
             }
         }
     }
-
+    //랜덤 위치 관리
     Vector2 GenerateRandomPosition(List<Vector2> existingPositions)
     {
         Vector2 randomPosition = Vector2.zero; // 기본값
@@ -424,7 +422,7 @@ public class BoardGen : MonoBehaviour
     }
 
 
-
+    //퍼즐 다량 생산 후 3d화를 위한 메쉬 묶음
     private void CombineMeshes(GameObject parentObject)
     {
         MeshFilter[] meshFilters = parentObject.GetComponentsInChildren<MeshFilter>();
@@ -447,14 +445,13 @@ public class BoardGen : MonoBehaviour
         meshRenderer.sharedMaterial = meshFilters[0].GetComponent<MeshRenderer>().sharedMaterial;
     }
 
-
+    //타일 모양 생성
     Tile CreateTile(int i, int j, Texture2D baseTexture)
     {
         Tile tile = new Tile(baseTexture);
         tile.xIndex = i;
         tile.yIndex = j;
 
-        // Left side tiles.
         if (i == 0)
         {
             tile.SetCurveType(Tile.Direction.LEFT, Tile.PosNegType.NONE);
@@ -468,7 +465,6 @@ public class BoardGen : MonoBehaviour
               Tile.PosNegType.POS : Tile.PosNegType.NEG);
         }
 
-        // Bottom side tiles
         if (j == 0)
         {
             tile.SetCurveType(Tile.Direction.DOWN, Tile.PosNegType.NONE);
@@ -481,7 +477,6 @@ public class BoardGen : MonoBehaviour
               Tile.PosNegType.POS : Tile.PosNegType.NEG);
         }
 
-        // Right side tiles.
         if (i == numTileX - 1)
         {
             tile.SetCurveType(Tile.Direction.RIGHT, Tile.PosNegType.NONE);
@@ -499,7 +494,6 @@ public class BoardGen : MonoBehaviour
             }
         }
 
-        // Up side tile.
         if (j == numTileY - 1)
         {
             tile.SetCurveType(Tile.Direction.UP, Tile.PosNegType.NONE);

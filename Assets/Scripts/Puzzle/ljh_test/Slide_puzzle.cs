@@ -3,18 +3,17 @@ using UnityEngine;
 
 public class Slide_puzzle : MonoBehaviour
 {
-    public Slide_img img_Prefab;  
-    public Slide_img[,] boxes = new Slide_img[4, 4]; 
-    public Sprite[] sprites; 
+    public Slide_img img_Prefab; 
+    public Slide_img[,] boxes = new Slide_img[4, 4];
+    public Sprite[] sprites; //스프라이트 배열
 
-    private Vector2Int dragStartPos;
+    private GameObject puzzleParent; //퍼즐조각의 부모 오브젝트
 
-    private GameObject puzzleParent;
-
-    public PuzzleObject puzzleObj;
+    public PuzzleObject puzzleObj; 
 
     private bool isMoving = false;
 
+    //퍼즐 배치 포지션 지정
     [SerializeField]
     private float puzzlePotion_x = 0f;
     [SerializeField]
@@ -38,7 +37,7 @@ public class Slide_puzzle : MonoBehaviour
         Init();
         Shuffle();
     }
-
+    //초기화
     private void Init()
     {
         // 빈 오브젝트 생성하여 부모로 설정
@@ -67,7 +66,7 @@ public class Slide_puzzle : MonoBehaviour
                 n++;
             }
     }
-
+    
     public void SetMove(bool isMoving)
     {
         this.isMoving = !isMoving;
@@ -77,7 +76,7 @@ public class Slide_puzzle : MonoBehaviour
     {
         return isMoving;
     }
-
+    //셔플
     private void Shuffle()
     {
         int emptyX = -1, emptyY = -1;
@@ -96,7 +95,7 @@ public class Slide_puzzle : MonoBehaviour
             }
         }
 
-        int shuffleSteps = 10; // 섞기 반복 횟수
+        int shuffleSteps = 10; // 섞기 반복 횟수 - 많을수록 복잡해짐
         for (int i = 0; i < shuffleSteps; i++)
         {
             Vector2 move = getValidMove(emptyX, emptyY);
@@ -127,7 +126,7 @@ public class Slide_puzzle : MonoBehaviour
         from.UpdatePos(x + dx, y + dy, true);
         target.UpdatePos(x, y, true);
     }
-
+    //빈칸 여부 체크 및 퍼즐 조각 이동처리
     private void HandleClick(int clickedX, int clickedY)
     {
         
@@ -152,7 +151,6 @@ public class Slide_puzzle : MonoBehaviour
 
         if (rowDirection != 0 && columnDirection != 0)
         {
-            Debug.Log("Invalid move: not in the same row or column.");
             return;
         }
 
@@ -167,6 +165,7 @@ public class Slide_puzzle : MonoBehaviour
 
         CheckIfSolved();// 정답확인
     }
+    //퍼즐 조각의 가로 이동
     private void MoveTilesHorizontally(int clickedX, int emptyX, int y)
     {
         int direction = (clickedX > emptyX) ? 1 : -1;
@@ -183,7 +182,7 @@ public class Slide_puzzle : MonoBehaviour
         boxes[clickedX, y] = emptyTile;
         emptyTile.UpdatePos(clickedX, y);
     }
-
+    //퍼즐 조각의 세로 이동
     private void MoveTilesVertically(int clickedY, int emptyY, int x)
     {
         int direction = (clickedY > emptyY) ? 1 : -1;
@@ -259,13 +258,12 @@ public class Slide_puzzle : MonoBehaviour
             if (!isSolved) break;
             if(count == 16)
             {
-                Debug.Log("정답입니다");
                 puzzleObj.SolvePuzzle();
                 OnDestroy();
             }
         }
     }
-
+    //치트키
     private void cheatkey()
     {
         puzzleObj.SolvePuzzle();

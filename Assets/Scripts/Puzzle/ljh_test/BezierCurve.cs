@@ -2,9 +2,9 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BezierCurve
+public class BezierCurve //베지어 곡선
 {
-    private static float[] Factorial = new float[]
+    private static float[] Factorial = new float[] //0부터 18까지의 팩토리얼 값을 미리 계산
     {
         1.0f,
         1.0f,
@@ -26,7 +26,7 @@ public class BezierCurve
         355687428096000.0f,
         6402373705728000.0f,
     };
-    private static float Binomial(int n, int i)
+    private static float Binomial(int n, int i) //이항계수
     {
         float ni;
         float a1 = Factorial[n];
@@ -36,7 +36,7 @@ public class BezierCurve
         return ni;
     }
 
-    private static float Bernstein(int n, int i, float t)
+    private static float Bernstein(int n, int i, float t) //베른슈타인 다항식
     {
         float t_i = Mathf.Pow(t, i);
         float t_n_minus_i = Mathf.Pow((1 - t), (n - i));
@@ -45,7 +45,7 @@ public class BezierCurve
         return basis;
     }
 
-    public static Vector3 Point2(float t, List<Vector2> controlPoints)
+    public static Vector3 Point2(float t, List<Vector2> controlPoints) //베지어 곡선 계산
     {
         int N = controlPoints.Count - 1;
 
@@ -69,7 +69,7 @@ public class BezierCurve
         return p;
     }
 
-    public static List<Vector2> PointList2(List<Vector2> controlPoints, float interval = 0.01f) 
+    public static List<Vector2> PointList2(List<Vector2> controlPoints, float interval = 0.01f) //곡선의 모든 점 계산 및 반환
     {
         int N = controlPoints.Count - 1;
         if (N > 18)

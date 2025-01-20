@@ -33,11 +33,11 @@ public class Slide_img : MonoBehaviour
 
         boxCollider.size = new Vector3(x_wid / 2, y_hei / 2, 0.5f);
     }
-
+    //퍼즐조각 초기화
     public void Init(int i, int j, int index, Sprite sprite, Action<int, int> swapFunc, GameObject puzzleParent)
     {
         this.index = index;
-        this.GetComponent<SpriteRenderer>().sprite = sprite;
+        this.GetComponent<SpriteRenderer>().sprite = sprite; 
         transform.SetParent(puzzleParent.transform);
         UpdatePos(i, j, true);
         this.swapFunc = swapFunc;
@@ -77,7 +77,7 @@ public class Slide_img : MonoBehaviour
             }
         }
     }
-
+    //퍼즐조각 위치 업데이트
     public void UpdatePos(int i, int j, bool immediate = false)
     {
         x = i * x_wid * vr_scale;
@@ -92,8 +92,8 @@ public class Slide_img : MonoBehaviour
         }
         else if (!IsInvoking("Move"))
         {
-            DisableTileCollider();
-            // 코루틴으로 부드럽게 이동
+            DisableTileCollider(); // 이동시작시 콜라이더 비활성화
+            // 부드럽게 이동
             StartCoroutine(Move());
         }
     }
@@ -120,7 +120,7 @@ public class Slide_img : MonoBehaviour
 
         this.gameObject.transform.localPosition = endpos;
         moving.SetMove(isMoving);
-        EnableColiider();
+        EnableColiider(); // 이동 완료시 콜라이더 활성화
     }
 
     public void EnableColiider()
@@ -128,7 +128,7 @@ public class Slide_img : MonoBehaviour
         BoxCollider collider = GetComponent<BoxCollider>();
         if (collider != null)
         {
-            collider.enabled = true;  // Collider 비활성화
+            collider.enabled = true;
         }
     }
     public void DisableTileCollider()
@@ -136,7 +136,7 @@ public class Slide_img : MonoBehaviour
         BoxCollider collider = GetComponent<BoxCollider>();
         if (collider != null)
         {
-            collider.enabled = false;  // Collider 비활성화
+            collider.enabled = false;
         }
     }
 
