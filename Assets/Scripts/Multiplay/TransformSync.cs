@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+// 여러 트랜스폼들을 일괄적으로 동기화하는 스크립트.
 public class TransformSync : MonoBehaviourPun, IPunObservable
 {
     private List<Transform> syncTargetTransforms = new List<Transform>(); // Array of transforms to sync

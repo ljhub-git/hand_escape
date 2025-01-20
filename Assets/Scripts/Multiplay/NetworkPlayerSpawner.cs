@@ -1,7 +1,6 @@
 using UnityEngine;
 
 using Photon.Pun;
-using System.Collections;
 
 public class NetworkPlayerSpawner : MonoBehaviourPun
 {

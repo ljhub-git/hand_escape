@@ -8,7 +8,6 @@ public class CustomTransformView : MonoBehaviour, IPunObservable
     {
         if (stream.IsWriting)
         {
-            // Send data to others
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
         }

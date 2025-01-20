@@ -38,21 +38,18 @@ public class MultiHandManager : MonoBehaviour
         var XRHandMeshConts = GetComponentsInChildren<XRHandMeshController>();
         foreach (var component in XRHandMeshConts)
         {
-            //Destroy(component);
             component.enabled = false;
         }
 
         var XRHandSkeletonDrivers = GetComponentsInChildren<XRHandSkeletonDriver>();
         foreach (var component in XRHandSkeletonDrivers)
         {
-            //Destroy(component);
             component.enabled = false;
         }
 
         var XRHandTrackingEventsComps = GetComponentsInChildren<XRHandTrackingEvents>();
         foreach(var component in XRHandTrackingEventsComps)
         {
-            //Destroy(component);
             component.enabled = false;
         }
     }

@@ -73,8 +73,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         playerSpawner = GetComponent<NetworkPlayerSpawner>();
 
         networkObjectMng = FindAnyObjectByType<NetworkObjectManager>();
-
-        networkObjectMng.InitPrefabPool();
     }
 
     private void Start()
@@ -96,8 +94,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         if (screenUIManager != null)
             screenUIManager.ShowPlayerLeaveConfirm();
-
-        // SceneManager.LoadScene("S_Title");
     }
 
     public override void OnLeftRoom()

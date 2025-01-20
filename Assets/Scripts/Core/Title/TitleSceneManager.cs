@@ -86,18 +86,6 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
 
         Debug.Log("Connected To Master");
 
-        //// 같은 닉네임의 플레이어가 이미 접속했다면 접속을 못 하게 막는다.
-        //foreach(var player in PhotonNetwork.PlayerListOthers)
-        //{
-        //    Debug.Log(player.NickName);
-
-        //    if(player.NickName == PhotonNetwork.NickName)
-        //    {
-        //        Debug.Log("Same Id is current Login! Go back!");
-        //        return;
-        //    }
-        //}
-
         if(isTestBuild && PhotonNetwork.CountOfPlayers > 1)
         {
             PhotonNetwork.NickName = "Jason";
@@ -132,8 +120,6 @@ public class TitleSceneManager : MonoBehaviourPunCallbacks
 
         // 방에 입장하면 바로 대기실 씬으로 간다.
         PhotonNetwork.LoadLevel("S_WaitingRoom");
-        // 잠깐 테스트 용으로 퍼즐 테스트 씬으로 감!! 나중에 본게임 때 반드시 수정할 것!!
-        //PhotonNetwork.LoadLevel("Jeon_PuzzleMultiTest");
     }
 
     // 방 입장이 실패했을 때
