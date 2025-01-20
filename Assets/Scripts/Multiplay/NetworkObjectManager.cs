@@ -1,36 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using Photon.Pun;
-using Photon.Realtime;
-using ExitGames.Client.Photon;
 
+/// <summary>
+/// 네트워크 상에서 오브젝트의 동기화 처리를 담당하는 매니저 클래스
+/// </summary>
 public class NetworkObjectManager : MonoBehaviourPun
 {
-    /// <summary>
-    /// 상호작용이 가능하면서 동기화하도록 설정된 오브젝트 딕셔너리.
-    /// 키값은 포톤 뷰의 아이디.
-    /// </summary>
-    /// 
-
-    [SerializeField]
-    private GameObject[] runtimeInstantiatePrefabs;
-
-    [SerializeField]
-    private GameObject[] viewErrorObjects;
-
-    public void InitPrefabPool()
-    {
-        DefaultPool Pool = PhotonNetwork.PrefabPool as DefaultPool;
-
-        foreach (var prefab in runtimeInstantiatePrefabs)
-        {
-            Pool.ResourceCache.TryAdd(prefab.name, prefab);
-        }
-    }
-
-    // 해당 물체의 중력 사용여부를 다른 클라이언트에서 설정하도록 한다.
+    // 해당 물체의 중력 사용여부 RPC 호출
     public void SetNetworkObjectGravityUsable(PhotonView _view, bool _usable)
     {
         if (!IsViewValid(_view))
@@ -41,7 +18,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         photonView.RPC("RPC_SetGravity", RpcTarget.Others, id, _usable);
     }
 
-    // 퍼즐이 풀렸을 때 반응하는 오브젝트들을 다른 클라이언트에서도 반응하도록 한다.
+    // 퍼즐 해결 RPC 호출
     public void CallOnPuzzleSolvedToOthers(PhotonView _view)
     {
         if (!IsViewValid(_view) || _view.GetComponent<PuzzleReactObject>() == null)
@@ -54,7 +31,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         photonView.RPC("RPC_PuzzleSolved", RpcTarget.Others, id);
     }
 
-    // 퍼즐이 리셋됐을 때 반응하는 오브젝트들을 다른 클라이언트에서도 반응하도록 한다.
+    // 퍼즐 리셋 RPC 호출
     public void CallOnPuzzleResetToOthers(PhotonView _view)
     {
         if (!IsViewValid(_view) || _view.GetComponent<PuzzleReactObject>() == null)
@@ -109,6 +86,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         photonView.RPC("RPC_SetActive", RpcTarget.Others, id, _active);
     }
 
+    // 네트워크 상에서 오브젝트를 파괴.
     public void DestroyObject(PhotonView _view)
     {
         if (!IsViewValid(_view))
@@ -121,6 +99,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         PhotonNetwork.Destroy(_view);
     }
 
+    // 네트워크 상에서 오브젝트를 생성.
     public GameObject InstantiateObject(string _name, Vector3 _pos, Quaternion _rot)
     {
         GameObject obj = PhotonNetwork.Instantiate(_name, _pos, _rot);
@@ -128,6 +107,7 @@ public class NetworkObjectManager : MonoBehaviourPun
         return obj;
     }
 
+    // 이 오브젝트의 네트워크 보유 주체를 설정함.
     public void RequestOwnership(PhotonView _view)
     {
         _view.RequestOwnership();

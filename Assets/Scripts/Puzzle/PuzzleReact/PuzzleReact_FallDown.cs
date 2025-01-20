@@ -7,7 +7,6 @@ public class PuzzleReact_FallDown : PuzzleReactObject
     {
         base.OnPuzzleSolved();
         StartCoroutine(MoveUp());
-        //transform.position += Vector3.up;
     }
     private IEnumerator MoveUp()
     {

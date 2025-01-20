@@ -30,7 +30,7 @@ public class DatabaseManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Login
+    /// Login 시도를 함.
     /// </summary>
     public void LoginCheck(string _id, string _pw)
     {
@@ -49,6 +49,10 @@ public class DatabaseManager : MonoBehaviour
     }
 
     #region SQL Coroutine
+    /// <summary>
+    /// DB와의 연결 여부를 로그로 찍어주는 코루틴.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ConnectToDBTestCoroutine()
     {
         WWWForm form = new WWWForm();
@@ -69,6 +73,12 @@ public class DatabaseManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// DB에게 로그인 명령을 보내는 코루틴
+    /// </summary>
+    /// <param name="_id">아이디</param>
+    /// <param name="_pw">비밀번호</param>
+    /// <returns></returns>
     private IEnumerator LoginCoroutine(string _id, string _pw)
     {
         WWWForm form = new WWWForm();
